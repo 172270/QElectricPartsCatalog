@@ -32,7 +32,7 @@ message Add{
   optional bytes phonenumber = 8;
 }
 
-message AddUserReplay{
+message AddReplay{
   required uint32 msgType = 1 [default=4];
   required QueryStats stats = 2;
   required Replay replay = 3;

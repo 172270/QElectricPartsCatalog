@@ -32,9 +32,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Add_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Add_reflection_ = NULL;
-const ::google::protobuf::Descriptor* AddUserReplay_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* AddReplay_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  AddUserReplay_reflection_ = NULL;
+  AddReplay_reflection_ = NULL;
 const ::google::protobuf::Descriptor* UserActivityStatistics_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   UserActivityStatistics_reflection_ = NULL;
@@ -120,23 +120,23 @@ void protobuf_AssignDesc_user_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Add));
-  AddUserReplay_descriptor_ = file->message_type(4);
-  static const int AddUserReplay_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddUserReplay, msgtype_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddUserReplay, stats_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddUserReplay, replay_),
+  AddReplay_descriptor_ = file->message_type(4);
+  static const int AddReplay_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddReplay, msgtype_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddReplay, stats_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddReplay, replay_),
   };
-  AddUserReplay_reflection_ =
+  AddReplay_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      AddUserReplay_descriptor_,
-      AddUserReplay::default_instance_,
-      AddUserReplay_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddUserReplay, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddUserReplay, _unknown_fields_),
+      AddReplay_descriptor_,
+      AddReplay::default_instance_,
+      AddReplay_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddReplay, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddReplay, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(AddUserReplay));
+      sizeof(AddReplay));
   UserActivityStatistics_descriptor_ = file->message_type(5);
   static const int UserActivityStatistics_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserActivityStatistics, magazinecount_),
@@ -201,7 +201,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Add_descriptor_, &Add::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    AddUserReplay_descriptor_, &AddUserReplay::default_instance());
+    AddReplay_descriptor_, &AddReplay::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     UserActivityStatistics_descriptor_, &UserActivityStatistics::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -219,8 +219,8 @@ void protobuf_ShutdownFile_user_2eproto() {
   delete LoginReplay_reflection_;
   delete Add::default_instance_;
   delete Add_reflection_;
-  delete AddUserReplay::default_instance_;
-  delete AddUserReplay_reflection_;
+  delete AddReplay::default_instance_;
+  delete AddReplay_reflection_;
   delete UserActivityStatistics::default_instance_;
   delete UserActivityStatistics_reflection_;
   delete UserData::default_instance_;
@@ -242,35 +242,35 @@ void protobuf_AddDesc_user_2eproto() {
     "\n\006replay\030\002 \002(\0162\014.user.Replay\"n\n\003Add\022\022\n\007m"
     "sgType\030\001 \002(\r:\0013\022\014\n\004name\030\002 \002(\t\022\020\n\010passwor"
     "d\030\003 \002(\t\022\r\n\005email\030\004 \002(\t\022\017\n\007address\030\005 \001(\t\022"
-    "\023\n\013phonenumber\030\010 \001(\014\"]\n\rAddUserReplay\022\022\n"
-    "\007msgType\030\001 \002(\r:\0014\022\032\n\005stats\030\002 \002(\0132\013.Query"
-    "Stats\022\034\n\006replay\030\003 \002(\0162\014.user.Replay\"\340\001\n\026"
-    "UserActivityStatistics\022\025\n\rmagazineCount\030"
-    "\001 \002(\r\022\032\n\022totalNumOfElements\030\002 \002(\r\022!\n\031tot"
-    "alNumOfGroupedElements\030\003 \002(\r\022!\n\031totalNum"
-    "OfExecutedQueries\030\004 \002(\r\022\032\n\022totalNumOfReq"
-    "uests\030\005 \002(\r\022\032\n\022totalModifiedItems\030\006 \002(\r\022"
-    "\025\n\rtotalAddItems\030\007 \002(\r\"\241\001\n\010UserData\022\014\n\004n"
-    "ame\030\001 \002(\t\022\r\n\005email\030\002 \002(\t\022\017\n\007address\030\003 \002("
-    "\t\022\023\n\013phoneNumber\030\004 \002(\014\022\021\n\tlastLogin\030\006 \002("
-    "\004\022\022\n\nfirstLogin\030\007 \002(\004\022+\n\005stats\030\005 \001(\0132\034.u"
-    "ser.UserActivityStatistics*J\n\006Replay\022\014\n\010"
-    "LOGIN_OK\020\001\022\026\n\022BAD_USER_OR_PASSWD\020\n\022\032\n\026US"
-    "ER_ALREADY_LOGGED_IN\020\013P\000", 864);
+    "\023\n\013phonenumber\030\010 \001(\014\"Y\n\tAddReplay\022\022\n\007msg"
+    "Type\030\001 \002(\r:\0014\022\032\n\005stats\030\002 \002(\0132\013.QueryStat"
+    "s\022\034\n\006replay\030\003 \002(\0162\014.user.Replay\"\340\001\n\026User"
+    "ActivityStatistics\022\025\n\rmagazineCount\030\001 \002("
+    "\r\022\032\n\022totalNumOfElements\030\002 \002(\r\022!\n\031totalNu"
+    "mOfGroupedElements\030\003 \002(\r\022!\n\031totalNumOfEx"
+    "ecutedQueries\030\004 \002(\r\022\032\n\022totalNumOfRequest"
+    "s\030\005 \002(\r\022\032\n\022totalModifiedItems\030\006 \002(\r\022\025\n\rt"
+    "otalAddItems\030\007 \002(\r\"\241\001\n\010UserData\022\014\n\004name\030"
+    "\001 \002(\t\022\r\n\005email\030\002 \002(\t\022\017\n\007address\030\003 \002(\t\022\023\n"
+    "\013phoneNumber\030\004 \002(\014\022\021\n\tlastLogin\030\006 \002(\004\022\022\n"
+    "\nfirstLogin\030\007 \002(\004\022+\n\005stats\030\005 \001(\0132\034.user."
+    "UserActivityStatistics*J\n\006Replay\022\014\n\010LOGI"
+    "N_OK\020\001\022\026\n\022BAD_USER_OR_PASSWD\020\n\022\032\n\026USER_A"
+    "LREADY_LOGGED_IN\020\013P\000", 860);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "user.proto", &protobuf_RegisterTypes);
   Login::default_instance_ = new Login();
   Logout::default_instance_ = new Logout();
   LoginReplay::default_instance_ = new LoginReplay();
   Add::default_instance_ = new Add();
-  AddUserReplay::default_instance_ = new AddUserReplay();
+  AddReplay::default_instance_ = new AddReplay();
   UserActivityStatistics::default_instance_ = new UserActivityStatistics();
   UserData::default_instance_ = new UserData();
   Login::default_instance_->InitAsDefaultInstance();
   Logout::default_instance_->InitAsDefaultInstance();
   LoginReplay::default_instance_->InitAsDefaultInstance();
   Add::default_instance_->InitAsDefaultInstance();
-  AddUserReplay::default_instance_->InitAsDefaultInstance();
+  AddReplay::default_instance_->InitAsDefaultInstance();
   UserActivityStatistics::default_instance_->InitAsDefaultInstance();
   UserData::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_user_2eproto);
@@ -1573,27 +1573,27 @@ void Add::Swap(Add* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int AddUserReplay::kMsgTypeFieldNumber;
-const int AddUserReplay::kStatsFieldNumber;
-const int AddUserReplay::kReplayFieldNumber;
+const int AddReplay::kMsgTypeFieldNumber;
+const int AddReplay::kStatsFieldNumber;
+const int AddReplay::kReplayFieldNumber;
 #endif  // !_MSC_VER
 
-AddUserReplay::AddUserReplay()
+AddReplay::AddReplay()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void AddUserReplay::InitAsDefaultInstance() {
+void AddReplay::InitAsDefaultInstance() {
   stats_ = const_cast< ::QueryStats*>(&::QueryStats::default_instance());
 }
 
-AddUserReplay::AddUserReplay(const AddUserReplay& from)
+AddReplay::AddReplay(const AddReplay& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void AddUserReplay::SharedCtor() {
+void AddReplay::SharedCtor() {
   _cached_size_ = 0;
   msgtype_ = 4u;
   stats_ = NULL;
@@ -1601,38 +1601,38 @@ void AddUserReplay::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-AddUserReplay::~AddUserReplay() {
+AddReplay::~AddReplay() {
   SharedDtor();
 }
 
-void AddUserReplay::SharedDtor() {
+void AddReplay::SharedDtor() {
   if (this != default_instance_) {
     delete stats_;
   }
 }
 
-void AddUserReplay::SetCachedSize(int size) const {
+void AddReplay::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* AddUserReplay::descriptor() {
+const ::google::protobuf::Descriptor* AddReplay::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return AddUserReplay_descriptor_;
+  return AddReplay_descriptor_;
 }
 
-const AddUserReplay& AddUserReplay::default_instance() {
+const AddReplay& AddReplay::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_user_2eproto();
   return *default_instance_;
 }
 
-AddUserReplay* AddUserReplay::default_instance_ = NULL;
+AddReplay* AddReplay::default_instance_ = NULL;
 
-AddUserReplay* AddUserReplay::New() const {
-  return new AddUserReplay;
+AddReplay* AddReplay::New() const {
+  return new AddReplay;
 }
 
-void AddUserReplay::Clear() {
+void AddReplay::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     msgtype_ = 4u;
     if (has_stats()) {
@@ -1644,7 +1644,7 @@ void AddUserReplay::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool AddUserReplay::MergePartialFromCodedStream(
+bool AddReplay::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -1716,7 +1716,7 @@ bool AddUserReplay::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void AddUserReplay::SerializeWithCachedSizes(
+void AddReplay::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required uint32 msgType = 1 [default = 4];
   if (has_msgtype()) {
@@ -1741,7 +1741,7 @@ void AddUserReplay::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* AddUserReplay::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* AddReplay::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // required uint32 msgType = 1 [default = 4];
   if (has_msgtype()) {
@@ -1768,7 +1768,7 @@ void AddUserReplay::SerializeWithCachedSizes(
   return target;
 }
 
-int AddUserReplay::ByteSize() const {
+int AddReplay::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -1804,10 +1804,10 @@ int AddUserReplay::ByteSize() const {
   return total_size;
 }
 
-void AddUserReplay::MergeFrom(const ::google::protobuf::Message& from) {
+void AddReplay::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const AddUserReplay* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const AddUserReplay*>(
+  const AddReplay* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const AddReplay*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1816,7 +1816,7 @@ void AddUserReplay::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void AddUserReplay::MergeFrom(const AddUserReplay& from) {
+void AddReplay::MergeFrom(const AddReplay& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_msgtype()) {
@@ -1832,19 +1832,19 @@ void AddUserReplay::MergeFrom(const AddUserReplay& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void AddUserReplay::CopyFrom(const ::google::protobuf::Message& from) {
+void AddReplay::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void AddUserReplay::CopyFrom(const AddUserReplay& from) {
+void AddReplay::CopyFrom(const AddReplay& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool AddUserReplay::IsInitialized() const {
+bool AddReplay::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   if (has_stats()) {
@@ -1853,7 +1853,7 @@ bool AddUserReplay::IsInitialized() const {
   return true;
 }
 
-void AddUserReplay::Swap(AddUserReplay* other) {
+void AddReplay::Swap(AddReplay* other) {
   if (other != this) {
     std::swap(msgtype_, other->msgtype_);
     std::swap(stats_, other->stats_);
@@ -1864,11 +1864,11 @@ void AddUserReplay::Swap(AddUserReplay* other) {
   }
 }
 
-::google::protobuf::Metadata AddUserReplay::GetMetadata() const {
+::google::protobuf::Metadata AddReplay::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = AddUserReplay_descriptor_;
-  metadata.reflection = AddUserReplay_reflection_;
+  metadata.descriptor = AddReplay_descriptor_;
+  metadata.reflection = AddReplay_reflection_;
   return metadata;
 }
 

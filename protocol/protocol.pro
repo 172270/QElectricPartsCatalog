@@ -19,9 +19,10 @@ SOURCES += protocol.cpp \
 
 HEADERS += protocol.h\
     user.pb.h \
-    msgConstc.h \
     stats.pb.h \
-    ecatalogsocket.h
+    ecatalogsocket.h \
+    messagetype.h \
+    datastreamsource.h
 
 unix {
     target.path = /usr/lib

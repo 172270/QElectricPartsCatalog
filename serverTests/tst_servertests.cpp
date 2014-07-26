@@ -60,7 +60,7 @@ void ServerTests::loginToServer()
     QVERIFY(socket.state() == QAbstractSocket::ConnectedState );
 
     socket.write(data);
-    QVERIFY2( socket.waitForBytesWritten(100)!= -1, "can't write data to server");
+    QVERIFY2( socket.waitForBytesWritten(100)!= 0, "can't write data to server");
     QVERIFY2( socket.waitForReadyRead(1000), "No replay from server");
 
     data.clear();
@@ -74,7 +74,7 @@ void ServerTests::loginToServer()
 void ServerTests::logoutFromServer()
 {
     socket.write(Protocol::getLogoutPB());
-    QVERIFY2( socket.waitForBytesWritten(100)!= -1, "can't write data to server");
+    QVERIFY2( socket.waitForBytesWritten(100)!= 0, "can't write data to server");
     QVERIFY2( socket.waitForDisconnected(250), "server don't want to disconnect");
 }
 

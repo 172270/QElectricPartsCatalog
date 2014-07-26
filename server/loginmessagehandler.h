@@ -1,13 +1,14 @@
 #ifndef LOGINMESSAGEHANDLER_H
 #define LOGINMESSAGEHANDLER_H
 
-#include "abstractprotocolhandler.h"
+#include "qcatalogserverthread.h"
 
 #include "user.pb.h"
 
 
-class LoginMessageHandler : public AbstractProtocolHandler
+class LoginMessageHandler : QObject
 {
+    Q_OBJECT
 public:
     LoginMessageHandler();
 
@@ -18,7 +19,13 @@ public:
 
 
     QByteArray *data;
-    user::Login extractPBMessage();
+    void extractPBMessage();
+
+private:
+
+    user::Login userLoginMsg;
+    user::LoginReplay userLoginReplayMsg;
+
 };
 
 #endif // LOGINMESSAGEHANDLER_H

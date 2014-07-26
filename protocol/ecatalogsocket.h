@@ -11,7 +11,7 @@ class ECatalogSocket : public QTcpSocket
 {
     Q_OBJECT
 public:
-    explicit ECatalogSocket(QObject *parent = 0);
+    explicit ECatalogSocket(QTcpSocket *parent = 0);
 
 signals:
 

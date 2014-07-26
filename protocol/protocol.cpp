@@ -3,28 +3,6 @@
 #include "boost/iostreams/stream.hpp"
 #include <QDataStream>
 
-#include "msgConstc.h"
-
-namespace boost {
-namespace iostreams {
-
-class DataStreamSource
-{
-public:
-    typedef char char_type;
-    typedef source_tag  category;
-
-    DataStreamSource( QDataStream *const source ) : m_source(source){
-    }
-    std::streamsize read(char* buffer, std::streamsize n) {
-        return m_source ? m_source->readRawData(buffer, n) : -1;
-    }
-
-private:
-    QDataStream *const m_source;
-};
-}
-}
 
 Protocol::Protocol(QTcpSocket *s)
 {
@@ -33,45 +11,45 @@ Protocol::Protocol(QTcpSocket *s)
 
 QByteArray Protocol::getLoginPB(QString name, QString pass)
 {
-    user::Login package;
-    package.set_msgtype(MSG_LOGIN_ID);
-    package.set_name(name.toStdString());
-    package.set_password(pass.toStdString());
+//    user::Login package;
+//    package.set_msgtype(MSG_LOGIN_ID);
+//    package.set_name(name.toStdString());
+//    package.set_password(pass.toStdString());
 
-    QByteArray data = QByteArray(package.ByteSize(),'\0' );
-    package.SerializeToArray(data.data(),data.size());
+//    QByteArray data = QByteArray(package.ByteSize(),'\0' );
+//    package.SerializeToArray(data.data(),data.size());
 
-    return data;
+//    return data;
 }
 
 QByteArray Protocol::getLogoutPB()
 {
-    user::Logout package;
-    package.set_msgtype(MSG_LOGOUT_ID);
+//    user::Logout package;
+//    package.set_msgtype(MSG_LOGOUT_ID);
 
-    QByteArray data = QByteArray(package.ByteSize(),'\0' );
-    package.SerializeToArray(data.data(),data.size());
-    return data;
+//    QByteArray data = QByteArray(package.ByteSize(),'\0' );
+//    package.SerializeToArray(data.data(),data.size());
+//    return data;
 }
 
 QByteArray Protocol::getUserAddPB(QString name, QString passwd, QString email, QString address, QString phoneNum)
 {
-    user::Add package;
-    package.set_msgtype(MSG_USERADD_ID);
-    package.set_name(name.toStdString());
-    package.set_password(passwd.toStdString());
-    package.set_email(email.toStdString());
+//    user::Add package;
+//    package.set_msgtype(MSG_USERADD_ID);
+//    package.set_name(name.toStdString());
+//    package.set_password(passwd.toStdString());
+//    package.set_email(email.toStdString());
 
-    if(!address.isEmpty()){
-        package.set_address(address.toStdString());
-    }
-    if(!phoneNum.isEmpty()){
-        package.set_phonenumber(phoneNum.toStdString());
-    }
+//    if(!address.isEmpty()){
+//        package.set_address(address.toStdString());
+//    }
+//    if(!phoneNum.isEmpty()){
+//        package.set_phonenumber(phoneNum.toStdString());
+//    }
 
-    QByteArray data = QByteArray(package.ByteSize(),'\0' );
-    package.SerializeToArray(data.data(),data.size());
-    return data;
+//    QByteArray data = QByteArray(package.ByteSize(),'\0' );
+//    package.SerializeToArray(data.data(),data.size());
+//    return data;
 }
 
 QByteArray Protocol::getLoginMessagePB(bool login_ok, quint64)
@@ -101,29 +79,29 @@ QByteArray Protocol::getLoginMessagePB(bool login_ok, quint64)
 
 user::Login Protocol::extractUserActrionPB(QByteArray &data)
 {
-    QDataStream *ds = new QDataStream(data);
-    user::Login ua;
-    boost::iostreams::stream <boost::iostreams::DataStreamSource > dataStream ( ds );
-    ua.ParseFromIstream(&dataStream);
-    return ua;
+//    QDataStream *ds = new QDataStream(data);
+//    user::Login ua;
+//    boost::iostreams::stream <boost::iostreams::DataStreamSource > dataStream ( ds );
+//    ua.ParseFromIstream(&dataStream);
+//    return ua;
 }
 
 user::LoginReplay Protocol::extractUserActrionReplayPB(QByteArray &data)
 {
-    QDataStream *ds = new QDataStream(data);
-    user::LoginReplay ua;
-    boost::iostreams::stream <boost::iostreams::DataStreamSource > dataStream ( ds );
-    ua.ParseFromIstream(&dataStream);
-    return ua;
+//    QDataStream *ds = new QDataStream(data);
+//    user::LoginReplay ua;
+//    boost::iostreams::stream <boost::iostreams::DataStreamSource > dataStream ( ds );
+//    ua.ParseFromIstream(&dataStream);
+//    return ua;
 }
 
 user::Add Protocol::extractUserAddPB(QByteArray &data)
 {
-    QDataStream *ds = new QDataStream(data);
-    user::Add ua;
-    boost::iostreams::stream <boost::iostreams::DataStreamSource > dataStream ( ds );
-    ua.ParseFromIstream(&dataStream);
-    return ua;
+//    QDataStream *ds = new QDataStream(data);
+//    user::Add ua;
+//    boost::iostreams::stream <boost::iostreams::DataStreamSource > dataStream ( ds );
+//    ua.ParseFromIstream(&dataStream);
+//    return ua;
 }
 
 user::LoginReplay Protocol::login(QString name, QString pass)

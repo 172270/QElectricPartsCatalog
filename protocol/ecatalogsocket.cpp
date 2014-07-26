@@ -1,6 +1,6 @@
 #include "ecatalogsocket.h"
 
-ECatalogSocket::ECatalogSocket(QObject *parent) :
+ECatalogSocket::ECatalogSocket(QTcpSocket *parent) :
     QTcpSocket(parent)
 {
 }

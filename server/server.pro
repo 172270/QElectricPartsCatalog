@@ -22,7 +22,6 @@ SOURCES += main.cpp \
 HEADERS += \
     qcatalogserver.h \
     qcatalogserverthread.h \
-    abstractprotocolhandler.h \
     loginmessagehandler.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"

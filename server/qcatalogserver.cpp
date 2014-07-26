@@ -25,13 +25,6 @@ void QCatalogServer::startServer()
 }
 
 
-//bool EC_Server::hasPendingConnections() const
-//{
-//}
-//QTcpSocket *EC_Server::nextPendingConnection()
-//{
-//}
-
 void QCatalogServer::incomingConnection(qintptr socketDescriptor)
 {
     // We have a new connection

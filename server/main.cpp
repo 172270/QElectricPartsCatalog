@@ -2,7 +2,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QTcpSocket>
-#include "ec_server.h"
+#include "qcatalogserver.h"
 
 int main(int argc, char *argv[])
 {

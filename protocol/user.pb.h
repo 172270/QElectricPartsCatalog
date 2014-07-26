@@ -39,7 +39,7 @@ class Login;
 class Logout;
 class LoginReplay;
 class Add;
-class AddUserReplay;
+class AddReplay;
 class UserActivityStatistics;
 class UserData;
 
@@ -508,14 +508,14 @@ class Add : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AddUserReplay : public ::google::protobuf::Message {
+class AddReplay : public ::google::protobuf::Message {
  public:
-  AddUserReplay();
-  virtual ~AddUserReplay();
+  AddReplay();
+  virtual ~AddReplay();
 
-  AddUserReplay(const AddUserReplay& from);
+  AddReplay(const AddReplay& from);
 
-  inline AddUserReplay& operator=(const AddUserReplay& from) {
+  inline AddReplay& operator=(const AddReplay& from) {
     CopyFrom(from);
     return *this;
   }
@@ -529,17 +529,17 @@ class AddUserReplay : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const AddUserReplay& default_instance();
+  static const AddReplay& default_instance();
 
-  void Swap(AddUserReplay* other);
+  void Swap(AddReplay* other);
 
   // implements Message ----------------------------------------------
 
-  AddUserReplay* New() const;
+  AddReplay* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AddUserReplay& from);
-  void MergeFrom(const AddUserReplay& from);
+  void CopyFrom(const AddReplay& from);
+  void MergeFrom(const AddReplay& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -585,7 +585,7 @@ class AddUserReplay : public ::google::protobuf::Message {
   inline ::user::Replay replay() const;
   inline void set_replay(::user::Replay value);
 
-  // @@protoc_insertion_point(class_scope:user.AddUserReplay)
+  // @@protoc_insertion_point(class_scope:user.AddReplay)
  private:
   inline void set_has_msgtype();
   inline void clear_has_msgtype();
@@ -608,7 +608,7 @@ class AddUserReplay : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_user_2eproto();
 
   void InitAsDefaultInstance();
-  static AddUserReplay* default_instance_;
+  static AddReplay* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1538,59 +1538,59 @@ inline void Add::set_allocated_phonenumber(::std::string* phonenumber) {
 
 // -------------------------------------------------------------------
 
-// AddUserReplay
+// AddReplay
 
 // required uint32 msgType = 1 [default = 4];
-inline bool AddUserReplay::has_msgtype() const {
+inline bool AddReplay::has_msgtype() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void AddUserReplay::set_has_msgtype() {
+inline void AddReplay::set_has_msgtype() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void AddUserReplay::clear_has_msgtype() {
+inline void AddReplay::clear_has_msgtype() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void AddUserReplay::clear_msgtype() {
+inline void AddReplay::clear_msgtype() {
   msgtype_ = 4u;
   clear_has_msgtype();
 }
-inline ::google::protobuf::uint32 AddUserReplay::msgtype() const {
+inline ::google::protobuf::uint32 AddReplay::msgtype() const {
   return msgtype_;
 }
-inline void AddUserReplay::set_msgtype(::google::protobuf::uint32 value) {
+inline void AddReplay::set_msgtype(::google::protobuf::uint32 value) {
   set_has_msgtype();
   msgtype_ = value;
 }
 
 // required .QueryStats stats = 2;
-inline bool AddUserReplay::has_stats() const {
+inline bool AddReplay::has_stats() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void AddUserReplay::set_has_stats() {
+inline void AddReplay::set_has_stats() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void AddUserReplay::clear_has_stats() {
+inline void AddReplay::clear_has_stats() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void AddUserReplay::clear_stats() {
+inline void AddReplay::clear_stats() {
   if (stats_ != NULL) stats_->::QueryStats::Clear();
   clear_has_stats();
 }
-inline const ::QueryStats& AddUserReplay::stats() const {
+inline const ::QueryStats& AddReplay::stats() const {
   return stats_ != NULL ? *stats_ : *default_instance_->stats_;
 }
-inline ::QueryStats* AddUserReplay::mutable_stats() {
+inline ::QueryStats* AddReplay::mutable_stats() {
   set_has_stats();
   if (stats_ == NULL) stats_ = new ::QueryStats;
   return stats_;
 }
-inline ::QueryStats* AddUserReplay::release_stats() {
+inline ::QueryStats* AddReplay::release_stats() {
   clear_has_stats();
   ::QueryStats* temp = stats_;
   stats_ = NULL;
   return temp;
 }
-inline void AddUserReplay::set_allocated_stats(::QueryStats* stats) {
+inline void AddReplay::set_allocated_stats(::QueryStats* stats) {
   delete stats_;
   stats_ = stats;
   if (stats) {
@@ -1601,23 +1601,23 @@ inline void AddUserReplay::set_allocated_stats(::QueryStats* stats) {
 }
 
 // required .user.Replay replay = 3;
-inline bool AddUserReplay::has_replay() const {
+inline bool AddReplay::has_replay() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void AddUserReplay::set_has_replay() {
+inline void AddReplay::set_has_replay() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void AddUserReplay::clear_has_replay() {
+inline void AddReplay::clear_has_replay() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void AddUserReplay::clear_replay() {
+inline void AddReplay::clear_replay() {
   replay_ = 1;
   clear_has_replay();
 }
-inline ::user::Replay AddUserReplay::replay() const {
+inline ::user::Replay AddReplay::replay() const {
   return static_cast< ::user::Replay >(replay_);
 }
-inline void AddUserReplay::set_replay(::user::Replay value) {
+inline void AddReplay::set_replay(::user::Replay value) {
   assert(::user::Replay_IsValid(value));
   set_has_replay();
   replay_ = value;
