@@ -6,7 +6,7 @@
 #include "user.pb.h"
 
 
-class LoginMessageHandler : QObject
+class LoginMessageHandler : public QObject
 {
     Q_OBJECT
 public:
@@ -22,6 +22,7 @@ public:
     void extractPBMessage();
 
 private:
+    void getWorker();
 
     user::Login userLoginMsg;
     user::LoginReplay userLoginReplayMsg;

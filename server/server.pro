@@ -17,12 +17,16 @@ TEMPLATE = app
 SOURCES += main.cpp \
     qcatalogserver.cpp \
     qcatalogserverthread.cpp \
-    loginmessagehandler.cpp
+    loginmessagehandler.cpp \
+    threadworker.cpp \
+    socket.cpp
 
 HEADERS += \
     qcatalogserver.h \
     qcatalogserverthread.h \
-    loginmessagehandler.h
+    loginmessagehandler.h \
+    threadworker.h \
+    socket.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
@@ -34,3 +38,5 @@ INCLUDEPATH += ../protocol
 DEPENDPATH += ../protocol
 
 LIBS += -lprotobuf
+
+OTHER_FILES +=

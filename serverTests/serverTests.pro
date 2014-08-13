@@ -4,9 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += network testlib
+QT       += network testlib gui
 
-QT       -= gui
 
 TARGET = tst_servertests
 CONFIG   += console
@@ -15,6 +14,8 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 SOURCES += tst_servertests.cpp \
+    main.cpp \
+    tst_serversockettests.cpp
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
@@ -26,3 +27,7 @@ INCLUDEPATH += ../protocol
 DEPENDPATH += ../protocol
 
 LIBS += -lprotobuf
+
+HEADERS += \
+    tst_servertests.h \
+    tst_serversockettests.h

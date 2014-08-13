@@ -32,7 +32,6 @@ public:
         return  static_cast<PBMsgType>(data->at(1));
     }
 
-
     ///TODO corrent implementation
     bool isValid(){
         if (typesList.contains( type ))

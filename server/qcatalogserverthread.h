@@ -25,31 +25,21 @@ class QCatalogServerThread : public QThread
 {
     Q_OBJECT
 public:
-//    QCatalogServerThread( QObject *parent = 0);
     explicit QCatalogServerThread(qintptr ID, QObject *parent = 0);
 
 signals:
+//    void requestLogin( QByteArray *data );
+//    void requestItem(QByteArray* data);
 
 
-public slots:
-    void readyRead();
-    void disconnected();
+//private slots:
+//    void readyRead();
+//    void disconnected();
 
     // QThread interface
 protected:
     void run();
-
-//    bool isLogged = false;
-//    UserInfo user;
-    QTcpSocket *socket;
-    QSqlQuery *query;
-    QSqlDatabase *db;
-    QByteArray *data;
 private:
-//    void req_login(QByteArray *data);
-//    void req_userAdd(QByteArray &data);
-//    void req_logout();
-
     qintptr socketDescriptor;
 };
 
