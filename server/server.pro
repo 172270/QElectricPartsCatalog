@@ -17,16 +17,12 @@ TEMPLATE = app
 SOURCES += main.cpp \
     qcatalogserver.cpp \
     qcatalogserverthread.cpp \
-    loginmessagehandler.cpp \
-    threadworker.cpp \
-    socket.cpp
+    loginmessagehandler.cpp
 
 HEADERS += \
     qcatalogserver.h \
     qcatalogserverthread.h \
-    loginmessagehandler.h \
-    threadworker.h \
-    socket.h
+    loginmessagehandler.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 

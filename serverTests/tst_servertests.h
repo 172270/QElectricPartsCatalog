@@ -32,7 +32,7 @@ private Q_SLOTS:
 
 private:
 
-//    QTcpSocket socket;
+    QTcpSocket socket;
 };
 
 #endif // TST_SERVERTESTS_H

@@ -1,5 +1,7 @@
 #include "qcatalogserver.h"
 
+#include <QPointer>
+
 QCatalogServer::QCatalogServer(QObject *parent) :
     QTcpServer(parent)
 {
@@ -31,11 +33,19 @@ void QCatalogServer::incomingConnection(qintptr socketDescriptor)
     qDebug() << socketDescriptor << " Connecting...";
 
     // Every new connection will be run in a newly created thread
-    QCatalogServerThread *thread = new QCatalogServerThread(socketDescriptor, this);
-
+    QPointer<QCatalogServerThread> thread;
+    try
+    {
+        thread = new QCatalogServerThread(socketDescriptor, this);
+    }
+    catch (QString e){
+        qDebug() << e;
+    }
     // connect signal/slot
     // once a thread is not needed, it will be beleted later
-    connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
 
-    thread->start();
+    if (thread){
+        connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+        thread->start();
+    }
 }

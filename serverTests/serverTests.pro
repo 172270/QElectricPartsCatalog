@@ -14,8 +14,7 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 SOURCES += tst_servertests.cpp \
-    main.cpp \
-    tst_serversockettests.cpp
+    main.cpp
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
@@ -29,5 +28,4 @@ DEPENDPATH += ../protocol
 LIBS += -lprotobuf
 
 HEADERS += \
-    tst_servertests.h \
-    tst_serversockettests.h
+    tst_servertests.h

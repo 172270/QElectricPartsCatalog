@@ -7,8 +7,8 @@ ServerTests::ServerTests()
 
 void ServerTests::initTestCase()
 {
-//    socket.connectToHost("127.0.0.1",2345);
-//    QVERIFY(socket.waitForConnected(150));
+    socket.connectToHost("127.0.0.1",2345);
+    QVERIFY(socket.waitForConnected(150));
 }
 
 void ServerTests::cleanupTestCase()
