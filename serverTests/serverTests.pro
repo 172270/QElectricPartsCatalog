@@ -33,12 +33,14 @@ DEPENDPATH += $$PWD/../server
 HEADERS += \
     tst_servertests.h \
     tst_loginhandler.h \
-    tst_user.h
+    tst_user.h \
+    tst_magazine.h
 
 SOURCES += tst_servertests.cpp \
     main.cpp \
     tst_loginhandler.cpp \
-    tst_user.cpp
+    tst_user.cpp \
+    tst_magazine.cpp
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../server/release/ -lserver
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../server/debug/ -lserver

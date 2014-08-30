@@ -16,14 +16,16 @@ SOURCES += main.cpp \
     qcatalogserverthread.cpp \
     loginmessagehandler.cpp \
     DB_schema/loginmessage.cpp \
-    DB_schema/user.cpp
+    DB_schema/user.cpp \
+    DB_schema/magazine.cpp
 
 HEADERS += \
     qcatalogserver.h \
     qcatalogserverthread.h \
     loginmessagehandler.h \
     DB_schema/loginmessage.h \
-    DB_schema/user.h
+    DB_schema/user.h \
+    DB_schema/magazine.h
 
 LIBS += -lprotobuf
 
