@@ -4,7 +4,8 @@
 #include <QTcpSocket>
 #include "qcatalogserver.h"
 
-int main(int argc, char *argv[])
+
+int keepassx_main_impl(int argc, char *argv[], int (*app_run)() )
 {
     QCoreApplication a(argc, argv);
 
@@ -38,5 +39,16 @@ int main(int argc, char *argv[])
     QCatalogServer server;
     server.startServer();
 
-    return a.exec();
+    return app_run();
 }
+
+int qApp_exec(){
+    return qApp->exec();
+}
+
+int keepassx_main(int argc, char** argv ){
+    return keepassx_main_impl(argc,argv,qApp_exec);
+}
+
+
+

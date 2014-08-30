@@ -9,6 +9,7 @@
 #include <QSqlDatabase>
 #include <QDateTime>
 
+#include "loginmessagehandler.h"
 
 class QCatalogServerThread : public QThread
 {

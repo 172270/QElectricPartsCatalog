@@ -12,15 +12,11 @@ class LoginMessageHandler : public QObject
 public:
     LoginMessageHandler();
 
-    // AbstractProtocolHandler interface
 public:
-    virtual void setData(QByteArray *data);
-    virtual void processData();
-
-
+    void setData(QByteArray *data);
+    void processData();
     QByteArray *data;
     void extractPBMessage();
-
 private:
     void getWorker();
 

@@ -7,8 +7,11 @@
 QT       -= gui
 QT       += network
 
-TARGET = protocol
+TARGET = ../lib/protocol
+
 TEMPLATE = lib
+
+CONFIG += staticlib
 
 DEFINES += PROTOCOL_LIBRARY
 

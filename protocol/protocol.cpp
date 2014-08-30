@@ -11,15 +11,15 @@ Protocol::Protocol(QTcpSocket *s)
 
 QByteArray Protocol::getLoginPB(QString name, QString pass)
 {
-//    user::Login package;
-//    package.set_msgtype(MSG_LOGIN_ID);
-//    package.set_name(name.toStdString());
-//    package.set_password(pass.toStdString());
+    user::Login package;
+    package.set_msgtype(1);
+    package.set_name(name.toStdString());
+    package.set_password(pass.toStdString());
 
-//    QByteArray data = QByteArray(package.ByteSize(),'\0' );
-//    package.SerializeToArray(data.data(),data.size());
+    QByteArray data = QByteArray(package.ByteSize(),'\0' );
+    package.SerializeToArray(data.data(),data.size());
 
-//    return data;
+    return data;
 }
 
 QByteArray Protocol::getLogoutPB()

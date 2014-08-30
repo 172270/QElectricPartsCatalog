@@ -1,6 +1,9 @@
 TEMPLATE = subdirs
-
+CONFIG += ordered
 SUBDIRS +=  protocol \
     server \
     client \
-    serverTests
+    serverTests \
+    server_app
+
+

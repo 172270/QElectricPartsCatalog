@@ -13,37 +13,37 @@ void ServerTests::initTestCase()
 
 void ServerTests::cleanupTestCase()
 {
-//    // socked should be opened
-//    QVERIFY(socket.state() == QAbstractSocket::ConnectedState );
-//    socket.disconnectFromHost();
-//    if (socket.state() == QAbstractSocket::UnconnectedState ||
-//            socket.waitForDisconnected(1000)){}
+    // socked should be opened
+    QVERIFY(socket.state() == QAbstractSocket::ConnectedState );
+    socket.disconnectFromHost();
+    if (socket.state() == QAbstractSocket::UnconnectedState ||
+            socket.waitForDisconnected(1000)){}
 }
 
 void ServerTests::loginToServer()
 {
-//    QByteArray data = Protocol::getLoginPB("admin", "passwd");
+    QByteArray data = Protocol::getLoginPB("admin", "passwd");
 
-//    // socked should be opened
-//    QVERIFY(socket.state() == QAbstractSocket::ConnectedState );
+//     socked should be opened
+    QVERIFY(socket.state() == QAbstractSocket::ConnectedState );
 
-//    socket.write(data);
-//    QVERIFY2( socket.waitForBytesWritten(100)!= 0, "can't write data to server");
-//    QVERIFY2( socket.waitForReadyRead(1000), "No replay from server");
+    socket.write(data);
+    QVERIFY2( socket.waitForBytesWritten(100)!= 0, "can't write data to server");
+    QVERIFY2( socket.waitForReadyRead(1000), "No replay from server");
 
-//    data.clear();
-//    data.append(socket.readAll());
-//    QVERIFY2( data.at(1) == 14, "Message type not corrent");
+    data.clear();
+    data.append(socket.readAll());
+    QVERIFY2( data.at(1) == 14, "Message type not corrent");
 
-//    user::LoginReplay ar = Protocol::extractUserActrionReplayPB( data );
-//    QVERIFY2(ar.replay() == user::LOGIN_OK, "Loggin should be OK");
+    user::LoginReplay ar = Protocol::extractUserActrionReplayPB( data );
+    QVERIFY2(ar.replay() == user::LOGIN_OK, "Loggin should be OK");
 }
 
 void ServerTests::logoutFromServer()
 {
-//    socket.write(Protocol::getLogoutPB());
-//    QVERIFY2( socket.waitForBytesWritten(100)!= 0, "can't write data to server");
-//    QVERIFY2( socket.waitForDisconnected(250), "server don't want to disconnect");
+    socket.write(Protocol::getLogoutPB());
+    QVERIFY2( socket.waitForBytesWritten(100)!= 0, "can't write data to server");
+    QVERIFY2( socket.waitForDisconnected(250), "server don't want to disconnect");
 }
 
 void ServerTests::loginWhileLogged()
