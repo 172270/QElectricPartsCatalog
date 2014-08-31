@@ -2,11 +2,12 @@
 #define MAGAZINE_H
 
 #include <QString>
+#include "storage.pb.h"
 
-class Magazine
+class Storage : public storage::Storage
 {
 public:
-    Magazine();
+    Storage();
 
     QString getName() const;
     void setName(const QString &value);
@@ -14,9 +15,6 @@ public:
     quint32 getID() const;
     void setID(const quint32 &value);
 
-private:
-    QString name;
-    quint32 ID;
 };
 
 #endif // MAGAZINE_H

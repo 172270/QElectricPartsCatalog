@@ -99,8 +99,33 @@ void tst_user::goodEmail_shoudNot_throwAnExeption()
 
 void tst_user::user_shoudContainDefaultMagazine()
 {
+    Storage s = user->getStorage();
+    QVERIFY( s.getID() == NULL );
 }
 
-void tst_user::user_shoudContainListOfMagazines()
+void tst_user::addStorage_ShoudAddStorage()
 {
+    Storage s;
+    s.setID(1);
+    s.setName("jakas nazwa");
+    QVERIFY( user->storagesNumber() == 0);
+    user->addStorage(s);
+    QVERIFY( user->storagesNumber()  == 1);
 }
+
+void tst_user::addStorage_ShoudThrowExeptionWhenStorageIsNotInitialized()
+{
+    Storage s;
+    QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
+}
+
+void tst_user::addStorage_ShoudThrowExeptionWhenStorageIspartiallyInitialized()
+{
+    Storage s;
+    s.setID(5);
+    QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
+    Storage s2;
+    s2.setName("assas");
+    QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
+}
+

@@ -4,6 +4,12 @@
 #
 #-------------------------------------------------
 
+
+
+PROTOS = stats.proto user.proto
+
+#include(protobuf.pri)
+
 QT       -= gui
 QT       += network
 
@@ -18,14 +24,22 @@ DEFINES += PROTOCOL_LIBRARY
 SOURCES += protocol.cpp \
     user.pb.cc \
     stats.pb.cc \
-    ecatalogsocket.cpp
+    ecatalogsocket.cpp \
+    storage.pb.cc
 
 HEADERS += protocol.h\
     user.pb.h \
     stats.pb.h \
     ecatalogsocket.h \
     messagetype.h \
-    datastreamsource.h
+    datastreamsource.h \
+    storage.pb.h
+
+OTHER_FILES += \
+    user.proto \
+    stats.proto \
+    protobuf.pri \
+    storage.proto
 
 unix {
     target.path = /usr/lib
@@ -34,6 +48,3 @@ unix {
 
 LIBS += -lprotobuf
 
-OTHER_FILES += \
-    user.proto \
-    stats.proto

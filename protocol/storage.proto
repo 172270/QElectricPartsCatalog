@@ -1,0 +1,7 @@
+package storage;
+
+message Storage{
+  required uint32 msgType = 1 [default =16 ];
+  required string name = 3;
+  required uint32 id = 4;
+}

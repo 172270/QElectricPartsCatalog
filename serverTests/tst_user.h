@@ -36,7 +36,9 @@ private slots:
     void goodEmail_shoudNot_throwAnExeption();
 
     void user_shoudContainDefaultMagazine();
-    void user_shoudContainListOfMagazines();
+    void addStorage_ShoudAddStorage();
+    void addStorage_ShoudThrowExeptionWhenStorageIsNotInitialized();
+    void addStorage_ShoudThrowExeptionWhenStorageIspartiallyInitialized();
 
 private:
 

@@ -40,8 +40,8 @@ class Logout;
 class LoginReplay;
 class Add;
 class AddReplay;
-class UserActivityStatistics;
 class UserData;
+class UserActivityStatistics;
 
 enum Replay {
   LOGIN_OK = 1,
@@ -612,6 +612,168 @@ class AddReplay : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class UserData : public ::google::protobuf::Message {
+ public:
+  UserData();
+  virtual ~UserData();
+
+  UserData(const UserData& from);
+
+  inline UserData& operator=(const UserData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserData& default_instance();
+
+  void Swap(UserData* other);
+
+  // implements Message ----------------------------------------------
+
+  UserData* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const UserData& from);
+  void MergeFrom(const UserData& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required uint32 msgType = 1 [default = 5];
+  inline bool has_msgtype() const;
+  inline void clear_msgtype();
+  static const int kMsgTypeFieldNumber = 1;
+  inline ::google::protobuf::uint32 msgtype() const;
+  inline void set_msgtype(::google::protobuf::uint32 value);
+
+  // required string name = 2;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 2;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const char* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
+
+  // required string email = 3;
+  inline bool has_email() const;
+  inline void clear_email();
+  static const int kEmailFieldNumber = 3;
+  inline const ::std::string& email() const;
+  inline void set_email(const ::std::string& value);
+  inline void set_email(const char* value);
+  inline void set_email(const char* value, size_t size);
+  inline ::std::string* mutable_email();
+  inline ::std::string* release_email();
+  inline void set_allocated_email(::std::string* email);
+
+  // optional string address = 4;
+  inline bool has_address() const;
+  inline void clear_address();
+  static const int kAddressFieldNumber = 4;
+  inline const ::std::string& address() const;
+  inline void set_address(const ::std::string& value);
+  inline void set_address(const char* value);
+  inline void set_address(const char* value, size_t size);
+  inline ::std::string* mutable_address();
+  inline ::std::string* release_address();
+  inline void set_allocated_address(::std::string* address);
+
+  // optional bytes phoneNumber = 5;
+  inline bool has_phonenumber() const;
+  inline void clear_phonenumber();
+  static const int kPhoneNumberFieldNumber = 5;
+  inline const ::std::string& phonenumber() const;
+  inline void set_phonenumber(const ::std::string& value);
+  inline void set_phonenumber(const char* value);
+  inline void set_phonenumber(const void* value, size_t size);
+  inline ::std::string* mutable_phonenumber();
+  inline ::std::string* release_phonenumber();
+  inline void set_allocated_phonenumber(::std::string* phonenumber);
+
+  // required uint64 lastLogin = 6;
+  inline bool has_lastlogin() const;
+  inline void clear_lastlogin();
+  static const int kLastLoginFieldNumber = 6;
+  inline ::google::protobuf::uint64 lastlogin() const;
+  inline void set_lastlogin(::google::protobuf::uint64 value);
+
+  // required uint64 firstLogin = 7;
+  inline bool has_firstlogin() const;
+  inline void clear_firstlogin();
+  static const int kFirstLoginFieldNumber = 7;
+  inline ::google::protobuf::uint64 firstlogin() const;
+  inline void set_firstlogin(::google::protobuf::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:user.UserData)
+ private:
+  inline void set_has_msgtype();
+  inline void clear_has_msgtype();
+  inline void set_has_name();
+  inline void clear_has_name();
+  inline void set_has_email();
+  inline void clear_has_email();
+  inline void set_has_address();
+  inline void clear_has_address();
+  inline void set_has_phonenumber();
+  inline void clear_has_phonenumber();
+  inline void set_has_lastlogin();
+  inline void clear_has_lastlogin();
+  inline void set_has_firstlogin();
+  inline void clear_has_firstlogin();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::std::string* name_;
+  ::std::string* email_;
+  ::std::string* address_;
+  ::std::string* phonenumber_;
+  ::google::protobuf::uint64 lastlogin_;
+  ::google::protobuf::uint64 firstlogin_;
+  ::google::protobuf::uint32 msgtype_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+
+  friend void  protobuf_AddDesc_user_2eproto();
+  friend void protobuf_AssignDesc_user_2eproto();
+  friend void protobuf_ShutdownFile_user_2eproto();
+
+  void InitAsDefaultInstance();
+  static UserData* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class UserActivityStatistics : public ::google::protobuf::Message {
  public:
   UserActivityStatistics();
@@ -751,170 +913,6 @@ class UserActivityStatistics : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static UserActivityStatistics* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class UserData : public ::google::protobuf::Message {
- public:
-  UserData();
-  virtual ~UserData();
-
-  UserData(const UserData& from);
-
-  inline UserData& operator=(const UserData& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const UserData& default_instance();
-
-  void Swap(UserData* other);
-
-  // implements Message ----------------------------------------------
-
-  UserData* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const UserData& from);
-  void MergeFrom(const UserData& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string name = 1;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 1;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
-  inline void set_allocated_name(::std::string* name);
-
-  // required string email = 2;
-  inline bool has_email() const;
-  inline void clear_email();
-  static const int kEmailFieldNumber = 2;
-  inline const ::std::string& email() const;
-  inline void set_email(const ::std::string& value);
-  inline void set_email(const char* value);
-  inline void set_email(const char* value, size_t size);
-  inline ::std::string* mutable_email();
-  inline ::std::string* release_email();
-  inline void set_allocated_email(::std::string* email);
-
-  // required string address = 3;
-  inline bool has_address() const;
-  inline void clear_address();
-  static const int kAddressFieldNumber = 3;
-  inline const ::std::string& address() const;
-  inline void set_address(const ::std::string& value);
-  inline void set_address(const char* value);
-  inline void set_address(const char* value, size_t size);
-  inline ::std::string* mutable_address();
-  inline ::std::string* release_address();
-  inline void set_allocated_address(::std::string* address);
-
-  // required bytes phoneNumber = 4;
-  inline bool has_phonenumber() const;
-  inline void clear_phonenumber();
-  static const int kPhoneNumberFieldNumber = 4;
-  inline const ::std::string& phonenumber() const;
-  inline void set_phonenumber(const ::std::string& value);
-  inline void set_phonenumber(const char* value);
-  inline void set_phonenumber(const void* value, size_t size);
-  inline ::std::string* mutable_phonenumber();
-  inline ::std::string* release_phonenumber();
-  inline void set_allocated_phonenumber(::std::string* phonenumber);
-
-  // required uint64 lastLogin = 6;
-  inline bool has_lastlogin() const;
-  inline void clear_lastlogin();
-  static const int kLastLoginFieldNumber = 6;
-  inline ::google::protobuf::uint64 lastlogin() const;
-  inline void set_lastlogin(::google::protobuf::uint64 value);
-
-  // required uint64 firstLogin = 7;
-  inline bool has_firstlogin() const;
-  inline void clear_firstlogin();
-  static const int kFirstLoginFieldNumber = 7;
-  inline ::google::protobuf::uint64 firstlogin() const;
-  inline void set_firstlogin(::google::protobuf::uint64 value);
-
-  // optional .user.UserActivityStatistics stats = 5;
-  inline bool has_stats() const;
-  inline void clear_stats();
-  static const int kStatsFieldNumber = 5;
-  inline const ::user::UserActivityStatistics& stats() const;
-  inline ::user::UserActivityStatistics* mutable_stats();
-  inline ::user::UserActivityStatistics* release_stats();
-  inline void set_allocated_stats(::user::UserActivityStatistics* stats);
-
-  // @@protoc_insertion_point(class_scope:user.UserData)
- private:
-  inline void set_has_name();
-  inline void clear_has_name();
-  inline void set_has_email();
-  inline void clear_has_email();
-  inline void set_has_address();
-  inline void clear_has_address();
-  inline void set_has_phonenumber();
-  inline void clear_has_phonenumber();
-  inline void set_has_lastlogin();
-  inline void clear_has_lastlogin();
-  inline void set_has_firstlogin();
-  inline void clear_has_firstlogin();
-  inline void set_has_stats();
-  inline void clear_has_stats();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::std::string* name_;
-  ::std::string* email_;
-  ::std::string* address_;
-  ::std::string* phonenumber_;
-  ::google::protobuf::uint64 lastlogin_;
-  ::google::protobuf::uint64 firstlogin_;
-  ::user::UserActivityStatistics* stats_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
-
-  friend void  protobuf_AddDesc_user_2eproto();
-  friend void protobuf_AssignDesc_user_2eproto();
-  friend void protobuf_ShutdownFile_user_2eproto();
-
-  void InitAsDefaultInstance();
-  static UserData* default_instance_;
 };
 // ===================================================================
 
@@ -1625,6 +1623,356 @@ inline void AddReplay::set_replay(::user::Replay value) {
 
 // -------------------------------------------------------------------
 
+// UserData
+
+// required uint32 msgType = 1 [default = 5];
+inline bool UserData::has_msgtype() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UserData::set_has_msgtype() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UserData::clear_has_msgtype() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UserData::clear_msgtype() {
+  msgtype_ = 5u;
+  clear_has_msgtype();
+}
+inline ::google::protobuf::uint32 UserData::msgtype() const {
+  return msgtype_;
+}
+inline void UserData::set_msgtype(::google::protobuf::uint32 value) {
+  set_has_msgtype();
+  msgtype_ = value;
+}
+
+// required string name = 2;
+inline bool UserData::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UserData::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UserData::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void UserData::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
+}
+inline const ::std::string& UserData::name() const {
+  return *name_;
+}
+inline void UserData::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void UserData::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void UserData::set_name(const char* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserData::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* UserData::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserData::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required string email = 3;
+inline bool UserData::has_email() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void UserData::set_has_email() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void UserData::clear_has_email() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void UserData::clear_email() {
+  if (email_ != &::google::protobuf::internal::kEmptyString) {
+    email_->clear();
+  }
+  clear_has_email();
+}
+inline const ::std::string& UserData::email() const {
+  return *email_;
+}
+inline void UserData::set_email(const ::std::string& value) {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
+  }
+  email_->assign(value);
+}
+inline void UserData::set_email(const char* value) {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
+  }
+  email_->assign(value);
+}
+inline void UserData::set_email(const char* value, size_t size) {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
+  }
+  email_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserData::mutable_email() {
+  set_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    email_ = new ::std::string;
+  }
+  return email_;
+}
+inline ::std::string* UserData::release_email() {
+  clear_has_email();
+  if (email_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = email_;
+    email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserData::set_allocated_email(::std::string* email) {
+  if (email_ != &::google::protobuf::internal::kEmptyString) {
+    delete email_;
+  }
+  if (email) {
+    set_has_email();
+    email_ = email;
+  } else {
+    clear_has_email();
+    email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string address = 4;
+inline bool UserData::has_address() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void UserData::set_has_address() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void UserData::clear_has_address() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void UserData::clear_address() {
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    address_->clear();
+  }
+  clear_has_address();
+}
+inline const ::std::string& UserData::address() const {
+  return *address_;
+}
+inline void UserData::set_address(const ::std::string& value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+}
+inline void UserData::set_address(const char* value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+}
+inline void UserData::set_address(const char* value, size_t size) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserData::mutable_address() {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  return address_;
+}
+inline ::std::string* UserData::release_address() {
+  clear_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = address_;
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserData::set_allocated_address(::std::string* address) {
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    delete address_;
+  }
+  if (address) {
+    set_has_address();
+    address_ = address;
+  } else {
+    clear_has_address();
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional bytes phoneNumber = 5;
+inline bool UserData::has_phonenumber() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void UserData::set_has_phonenumber() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void UserData::clear_has_phonenumber() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void UserData::clear_phonenumber() {
+  if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
+    phonenumber_->clear();
+  }
+  clear_has_phonenumber();
+}
+inline const ::std::string& UserData::phonenumber() const {
+  return *phonenumber_;
+}
+inline void UserData::set_phonenumber(const ::std::string& value) {
+  set_has_phonenumber();
+  if (phonenumber_ == &::google::protobuf::internal::kEmptyString) {
+    phonenumber_ = new ::std::string;
+  }
+  phonenumber_->assign(value);
+}
+inline void UserData::set_phonenumber(const char* value) {
+  set_has_phonenumber();
+  if (phonenumber_ == &::google::protobuf::internal::kEmptyString) {
+    phonenumber_ = new ::std::string;
+  }
+  phonenumber_->assign(value);
+}
+inline void UserData::set_phonenumber(const void* value, size_t size) {
+  set_has_phonenumber();
+  if (phonenumber_ == &::google::protobuf::internal::kEmptyString) {
+    phonenumber_ = new ::std::string;
+  }
+  phonenumber_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserData::mutable_phonenumber() {
+  set_has_phonenumber();
+  if (phonenumber_ == &::google::protobuf::internal::kEmptyString) {
+    phonenumber_ = new ::std::string;
+  }
+  return phonenumber_;
+}
+inline ::std::string* UserData::release_phonenumber() {
+  clear_has_phonenumber();
+  if (phonenumber_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = phonenumber_;
+    phonenumber_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserData::set_allocated_phonenumber(::std::string* phonenumber) {
+  if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
+    delete phonenumber_;
+  }
+  if (phonenumber) {
+    set_has_phonenumber();
+    phonenumber_ = phonenumber;
+  } else {
+    clear_has_phonenumber();
+    phonenumber_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required uint64 lastLogin = 6;
+inline bool UserData::has_lastlogin() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void UserData::set_has_lastlogin() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void UserData::clear_has_lastlogin() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void UserData::clear_lastlogin() {
+  lastlogin_ = GOOGLE_ULONGLONG(0);
+  clear_has_lastlogin();
+}
+inline ::google::protobuf::uint64 UserData::lastlogin() const {
+  return lastlogin_;
+}
+inline void UserData::set_lastlogin(::google::protobuf::uint64 value) {
+  set_has_lastlogin();
+  lastlogin_ = value;
+}
+
+// required uint64 firstLogin = 7;
+inline bool UserData::has_firstlogin() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void UserData::set_has_firstlogin() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void UserData::clear_has_firstlogin() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void UserData::clear_firstlogin() {
+  firstlogin_ = GOOGLE_ULONGLONG(0);
+  clear_has_firstlogin();
+}
+inline ::google::protobuf::uint64 UserData::firstlogin() const {
+  return firstlogin_;
+}
+inline void UserData::set_firstlogin(::google::protobuf::uint64 value) {
+  set_has_firstlogin();
+  firstlogin_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // UserActivityStatistics
 
 // required uint32 magazineCount = 1;
@@ -1779,372 +2127,6 @@ inline ::google::protobuf::uint32 UserActivityStatistics::totaladditems() const 
 inline void UserActivityStatistics::set_totaladditems(::google::protobuf::uint32 value) {
   set_has_totaladditems();
   totaladditems_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// UserData
-
-// required string name = 1;
-inline bool UserData::has_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void UserData::set_has_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void UserData::clear_has_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void UserData::clear_name() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    name_->clear();
-  }
-  clear_has_name();
-}
-inline const ::std::string& UserData::name() const {
-  return *name_;
-}
-inline void UserData::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void UserData::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void UserData::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* UserData::mutable_name() {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  return name_;
-}
-inline ::std::string* UserData::release_name() {
-  clear_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void UserData::set_allocated_name(::std::string* name) {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
-  if (name) {
-    set_has_name();
-    name_ = name;
-  } else {
-    clear_has_name();
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string email = 2;
-inline bool UserData::has_email() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void UserData::set_has_email() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void UserData::clear_has_email() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void UserData::clear_email() {
-  if (email_ != &::google::protobuf::internal::kEmptyString) {
-    email_->clear();
-  }
-  clear_has_email();
-}
-inline const ::std::string& UserData::email() const {
-  return *email_;
-}
-inline void UserData::set_email(const ::std::string& value) {
-  set_has_email();
-  if (email_ == &::google::protobuf::internal::kEmptyString) {
-    email_ = new ::std::string;
-  }
-  email_->assign(value);
-}
-inline void UserData::set_email(const char* value) {
-  set_has_email();
-  if (email_ == &::google::protobuf::internal::kEmptyString) {
-    email_ = new ::std::string;
-  }
-  email_->assign(value);
-}
-inline void UserData::set_email(const char* value, size_t size) {
-  set_has_email();
-  if (email_ == &::google::protobuf::internal::kEmptyString) {
-    email_ = new ::std::string;
-  }
-  email_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* UserData::mutable_email() {
-  set_has_email();
-  if (email_ == &::google::protobuf::internal::kEmptyString) {
-    email_ = new ::std::string;
-  }
-  return email_;
-}
-inline ::std::string* UserData::release_email() {
-  clear_has_email();
-  if (email_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = email_;
-    email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void UserData::set_allocated_email(::std::string* email) {
-  if (email_ != &::google::protobuf::internal::kEmptyString) {
-    delete email_;
-  }
-  if (email) {
-    set_has_email();
-    email_ = email;
-  } else {
-    clear_has_email();
-    email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required string address = 3;
-inline bool UserData::has_address() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void UserData::set_has_address() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void UserData::clear_has_address() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void UserData::clear_address() {
-  if (address_ != &::google::protobuf::internal::kEmptyString) {
-    address_->clear();
-  }
-  clear_has_address();
-}
-inline const ::std::string& UserData::address() const {
-  return *address_;
-}
-inline void UserData::set_address(const ::std::string& value) {
-  set_has_address();
-  if (address_ == &::google::protobuf::internal::kEmptyString) {
-    address_ = new ::std::string;
-  }
-  address_->assign(value);
-}
-inline void UserData::set_address(const char* value) {
-  set_has_address();
-  if (address_ == &::google::protobuf::internal::kEmptyString) {
-    address_ = new ::std::string;
-  }
-  address_->assign(value);
-}
-inline void UserData::set_address(const char* value, size_t size) {
-  set_has_address();
-  if (address_ == &::google::protobuf::internal::kEmptyString) {
-    address_ = new ::std::string;
-  }
-  address_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* UserData::mutable_address() {
-  set_has_address();
-  if (address_ == &::google::protobuf::internal::kEmptyString) {
-    address_ = new ::std::string;
-  }
-  return address_;
-}
-inline ::std::string* UserData::release_address() {
-  clear_has_address();
-  if (address_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = address_;
-    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void UserData::set_allocated_address(::std::string* address) {
-  if (address_ != &::google::protobuf::internal::kEmptyString) {
-    delete address_;
-  }
-  if (address) {
-    set_has_address();
-    address_ = address;
-  } else {
-    clear_has_address();
-    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required bytes phoneNumber = 4;
-inline bool UserData::has_phonenumber() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void UserData::set_has_phonenumber() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void UserData::clear_has_phonenumber() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void UserData::clear_phonenumber() {
-  if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
-    phonenumber_->clear();
-  }
-  clear_has_phonenumber();
-}
-inline const ::std::string& UserData::phonenumber() const {
-  return *phonenumber_;
-}
-inline void UserData::set_phonenumber(const ::std::string& value) {
-  set_has_phonenumber();
-  if (phonenumber_ == &::google::protobuf::internal::kEmptyString) {
-    phonenumber_ = new ::std::string;
-  }
-  phonenumber_->assign(value);
-}
-inline void UserData::set_phonenumber(const char* value) {
-  set_has_phonenumber();
-  if (phonenumber_ == &::google::protobuf::internal::kEmptyString) {
-    phonenumber_ = new ::std::string;
-  }
-  phonenumber_->assign(value);
-}
-inline void UserData::set_phonenumber(const void* value, size_t size) {
-  set_has_phonenumber();
-  if (phonenumber_ == &::google::protobuf::internal::kEmptyString) {
-    phonenumber_ = new ::std::string;
-  }
-  phonenumber_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* UserData::mutable_phonenumber() {
-  set_has_phonenumber();
-  if (phonenumber_ == &::google::protobuf::internal::kEmptyString) {
-    phonenumber_ = new ::std::string;
-  }
-  return phonenumber_;
-}
-inline ::std::string* UserData::release_phonenumber() {
-  clear_has_phonenumber();
-  if (phonenumber_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = phonenumber_;
-    phonenumber_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void UserData::set_allocated_phonenumber(::std::string* phonenumber) {
-  if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
-    delete phonenumber_;
-  }
-  if (phonenumber) {
-    set_has_phonenumber();
-    phonenumber_ = phonenumber;
-  } else {
-    clear_has_phonenumber();
-    phonenumber_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required uint64 lastLogin = 6;
-inline bool UserData::has_lastlogin() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void UserData::set_has_lastlogin() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void UserData::clear_has_lastlogin() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void UserData::clear_lastlogin() {
-  lastlogin_ = GOOGLE_ULONGLONG(0);
-  clear_has_lastlogin();
-}
-inline ::google::protobuf::uint64 UserData::lastlogin() const {
-  return lastlogin_;
-}
-inline void UserData::set_lastlogin(::google::protobuf::uint64 value) {
-  set_has_lastlogin();
-  lastlogin_ = value;
-}
-
-// required uint64 firstLogin = 7;
-inline bool UserData::has_firstlogin() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void UserData::set_has_firstlogin() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void UserData::clear_has_firstlogin() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void UserData::clear_firstlogin() {
-  firstlogin_ = GOOGLE_ULONGLONG(0);
-  clear_has_firstlogin();
-}
-inline ::google::protobuf::uint64 UserData::firstlogin() const {
-  return firstlogin_;
-}
-inline void UserData::set_firstlogin(::google::protobuf::uint64 value) {
-  set_has_firstlogin();
-  firstlogin_ = value;
-}
-
-// optional .user.UserActivityStatistics stats = 5;
-inline bool UserData::has_stats() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void UserData::set_has_stats() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void UserData::clear_has_stats() {
-  _has_bits_[0] &= ~0x00000040u;
-}
-inline void UserData::clear_stats() {
-  if (stats_ != NULL) stats_->::user::UserActivityStatistics::Clear();
-  clear_has_stats();
-}
-inline const ::user::UserActivityStatistics& UserData::stats() const {
-  return stats_ != NULL ? *stats_ : *default_instance_->stats_;
-}
-inline ::user::UserActivityStatistics* UserData::mutable_stats() {
-  set_has_stats();
-  if (stats_ == NULL) stats_ = new ::user::UserActivityStatistics;
-  return stats_;
-}
-inline ::user::UserActivityStatistics* UserData::release_stats() {
-  clear_has_stats();
-  ::user::UserActivityStatistics* temp = stats_;
-  stats_ = NULL;
-  return temp;
-}
-inline void UserData::set_allocated_stats(::user::UserActivityStatistics* stats) {
-  delete stats_;
-  stats_ = stats;
-  if (stats) {
-    set_has_stats();
-  } else {
-    clear_has_stats();
-  }
 }
 
 

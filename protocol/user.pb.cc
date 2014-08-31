@@ -35,12 +35,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* AddReplay_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AddReplay_reflection_ = NULL;
-const ::google::protobuf::Descriptor* UserActivityStatistics_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  UserActivityStatistics_reflection_ = NULL;
 const ::google::protobuf::Descriptor* UserData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   UserData_reflection_ = NULL;
+const ::google::protobuf::Descriptor* UserActivityStatistics_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  UserActivityStatistics_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* Replay_descriptor_ = NULL;
 
 }  // namespace
@@ -137,7 +137,28 @@ void protobuf_AssignDesc_user_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(AddReplay));
-  UserActivityStatistics_descriptor_ = file->message_type(5);
+  UserData_descriptor_ = file->message_type(5);
+  static const int UserData_offsets_[7] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, msgtype_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, email_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, address_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, phonenumber_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, lastlogin_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, firstlogin_),
+  };
+  UserData_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      UserData_descriptor_,
+      UserData::default_instance_,
+      UserData_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(UserData));
+  UserActivityStatistics_descriptor_ = file->message_type(6);
   static const int UserActivityStatistics_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserActivityStatistics, magazinecount_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserActivityStatistics, totalnumofelements_),
@@ -158,27 +179,6 @@ void protobuf_AssignDesc_user_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(UserActivityStatistics));
-  UserData_descriptor_ = file->message_type(6);
-  static const int UserData_offsets_[7] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, name_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, email_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, address_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, phonenumber_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, lastlogin_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, firstlogin_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, stats_),
-  };
-  UserData_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      UserData_descriptor_,
-      UserData::default_instance_,
-      UserData_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(UserData));
   Replay_descriptor_ = file->enum_type(0);
 }
 
@@ -203,9 +203,9 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     AddReplay_descriptor_, &AddReplay::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    UserActivityStatistics_descriptor_, &UserActivityStatistics::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     UserData_descriptor_, &UserData::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    UserActivityStatistics_descriptor_, &UserActivityStatistics::default_instance());
 }
 
 }  // namespace
@@ -221,10 +221,10 @@ void protobuf_ShutdownFile_user_2eproto() {
   delete Add_reflection_;
   delete AddReplay::default_instance_;
   delete AddReplay_reflection_;
-  delete UserActivityStatistics::default_instance_;
-  delete UserActivityStatistics_reflection_;
   delete UserData::default_instance_;
   delete UserData_reflection_;
+  delete UserActivityStatistics::default_instance_;
+  delete UserActivityStatistics_reflection_;
 }
 
 void protobuf_AddDesc_user_2eproto() {
@@ -244,19 +244,18 @@ void protobuf_AddDesc_user_2eproto() {
     "d\030\003 \002(\t\022\r\n\005email\030\004 \002(\t\022\017\n\007address\030\005 \001(\t\022"
     "\023\n\013phonenumber\030\010 \001(\014\"Y\n\tAddReplay\022\022\n\007msg"
     "Type\030\001 \002(\r:\0014\022\032\n\005stats\030\002 \002(\0132\013.QueryStat"
-    "s\022\034\n\006replay\030\003 \002(\0162\014.user.Replay\"\340\001\n\026User"
-    "ActivityStatistics\022\025\n\rmagazineCount\030\001 \002("
-    "\r\022\032\n\022totalNumOfElements\030\002 \002(\r\022!\n\031totalNu"
-    "mOfGroupedElements\030\003 \002(\r\022!\n\031totalNumOfEx"
-    "ecutedQueries\030\004 \002(\r\022\032\n\022totalNumOfRequest"
-    "s\030\005 \002(\r\022\032\n\022totalModifiedItems\030\006 \002(\r\022\025\n\rt"
-    "otalAddItems\030\007 \002(\r\"\241\001\n\010UserData\022\014\n\004name\030"
-    "\001 \002(\t\022\r\n\005email\030\002 \002(\t\022\017\n\007address\030\003 \002(\t\022\023\n"
-    "\013phoneNumber\030\004 \002(\014\022\021\n\tlastLogin\030\006 \002(\004\022\022\n"
-    "\nfirstLogin\030\007 \002(\004\022+\n\005stats\030\005 \001(\0132\034.user."
-    "UserActivityStatistics*J\n\006Replay\022\014\n\010LOGI"
-    "N_OK\020\001\022\026\n\022BAD_USER_OR_PASSWD\020\n\022\032\n\026USER_A"
-    "LREADY_LOGGED_IN\020\013P\000", 860);
+    "s\022\034\n\006replay\030\003 \002(\0162\014.user.Replay\"\210\001\n\010User"
+    "Data\022\022\n\007msgType\030\001 \002(\r:\0015\022\014\n\004name\030\002 \002(\t\022\r"
+    "\n\005email\030\003 \002(\t\022\017\n\007address\030\004 \001(\t\022\023\n\013phoneN"
+    "umber\030\005 \001(\014\022\021\n\tlastLogin\030\006 \002(\004\022\022\n\nfirstL"
+    "ogin\030\007 \002(\004\"\340\001\n\026UserActivityStatistics\022\025\n"
+    "\rmagazineCount\030\001 \002(\r\022\032\n\022totalNumOfElemen"
+    "ts\030\002 \002(\r\022!\n\031totalNumOfGroupedElements\030\003 "
+    "\002(\r\022!\n\031totalNumOfExecutedQueries\030\004 \002(\r\022\032"
+    "\n\022totalNumOfRequests\030\005 \002(\r\022\032\n\022totalModif"
+    "iedItems\030\006 \002(\r\022\025\n\rtotalAddItems\030\007 \002(\r*J\n"
+    "\006Replay\022\014\n\010LOGIN_OK\020\001\022\026\n\022BAD_USER_OR_PAS"
+    "SWD\020\n\022\032\n\026USER_ALREADY_LOGGED_IN\020\013P\000", 835);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "user.proto", &protobuf_RegisterTypes);
   Login::default_instance_ = new Login();
@@ -264,15 +263,15 @@ void protobuf_AddDesc_user_2eproto() {
   LoginReplay::default_instance_ = new LoginReplay();
   Add::default_instance_ = new Add();
   AddReplay::default_instance_ = new AddReplay();
-  UserActivityStatistics::default_instance_ = new UserActivityStatistics();
   UserData::default_instance_ = new UserData();
+  UserActivityStatistics::default_instance_ = new UserActivityStatistics();
   Login::default_instance_->InitAsDefaultInstance();
   Logout::default_instance_->InitAsDefaultInstance();
   LoginReplay::default_instance_->InitAsDefaultInstance();
   Add::default_instance_->InitAsDefaultInstance();
   AddReplay::default_instance_->InitAsDefaultInstance();
-  UserActivityStatistics::default_instance_->InitAsDefaultInstance();
   UserData::default_instance_->InitAsDefaultInstance();
+  UserActivityStatistics::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_user_2eproto);
 }
 
@@ -1876,6 +1875,514 @@ void AddReplay::Swap(AddReplay* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int UserData::kMsgTypeFieldNumber;
+const int UserData::kNameFieldNumber;
+const int UserData::kEmailFieldNumber;
+const int UserData::kAddressFieldNumber;
+const int UserData::kPhoneNumberFieldNumber;
+const int UserData::kLastLoginFieldNumber;
+const int UserData::kFirstLoginFieldNumber;
+#endif  // !_MSC_VER
+
+UserData::UserData()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void UserData::InitAsDefaultInstance() {
+}
+
+UserData::UserData(const UserData& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void UserData::SharedCtor() {
+  _cached_size_ = 0;
+  msgtype_ = 5u;
+  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  phonenumber_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  lastlogin_ = GOOGLE_ULONGLONG(0);
+  firstlogin_ = GOOGLE_ULONGLONG(0);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+UserData::~UserData() {
+  SharedDtor();
+}
+
+void UserData::SharedDtor() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (email_ != &::google::protobuf::internal::kEmptyString) {
+    delete email_;
+  }
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    delete address_;
+  }
+  if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
+    delete phonenumber_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void UserData::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* UserData::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return UserData_descriptor_;
+}
+
+const UserData& UserData::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_user_2eproto();
+  return *default_instance_;
+}
+
+UserData* UserData::default_instance_ = NULL;
+
+UserData* UserData::New() const {
+  return new UserData;
+}
+
+void UserData::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    msgtype_ = 5u;
+    if (has_name()) {
+      if (name_ != &::google::protobuf::internal::kEmptyString) {
+        name_->clear();
+      }
+    }
+    if (has_email()) {
+      if (email_ != &::google::protobuf::internal::kEmptyString) {
+        email_->clear();
+      }
+    }
+    if (has_address()) {
+      if (address_ != &::google::protobuf::internal::kEmptyString) {
+        address_->clear();
+      }
+    }
+    if (has_phonenumber()) {
+      if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
+        phonenumber_->clear();
+      }
+    }
+    lastlogin_ = GOOGLE_ULONGLONG(0);
+    firstlogin_ = GOOGLE_ULONGLONG(0);
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool UserData::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required uint32 msgType = 1 [default = 5];
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &msgtype_)));
+          set_has_msgtype();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_name;
+        break;
+      }
+
+      // required string name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->name().data(), this->name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_email;
+        break;
+      }
+
+      // required string email = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_email:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_email()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->email().data(), this->email().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(34)) goto parse_address;
+        break;
+      }
+
+      // optional string address = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_address:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_address()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->address().data(), this->address().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(42)) goto parse_phoneNumber;
+        break;
+      }
+
+      // optional bytes phoneNumber = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_phoneNumber:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_phonenumber()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(48)) goto parse_lastLogin;
+        break;
+      }
+
+      // required uint64 lastLogin = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_lastLogin:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &lastlogin_)));
+          set_has_lastlogin();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(56)) goto parse_firstLogin;
+        break;
+      }
+
+      // required uint64 firstLogin = 7;
+      case 7: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_firstLogin:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &firstlogin_)));
+          set_has_firstlogin();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void UserData::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required uint32 msgType = 1 [default = 5];
+  if (has_msgtype()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->msgtype(), output);
+  }
+
+  // required string name = 2;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->name(), output);
+  }
+
+  // required string email = 3;
+  if (has_email()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->email().data(), this->email().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->email(), output);
+  }
+
+  // optional string address = 4;
+  if (has_address()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->address().data(), this->address().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->address(), output);
+  }
+
+  // optional bytes phoneNumber = 5;
+  if (has_phonenumber()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      5, this->phonenumber(), output);
+  }
+
+  // required uint64 lastLogin = 6;
+  if (has_lastlogin()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(6, this->lastlogin(), output);
+  }
+
+  // required uint64 firstLogin = 7;
+  if (has_firstlogin()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(7, this->firstlogin(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* UserData::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required uint32 msgType = 1 [default = 5];
+  if (has_msgtype()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->msgtype(), target);
+  }
+
+  // required string name = 2;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->name(), target);
+  }
+
+  // required string email = 3;
+  if (has_email()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->email().data(), this->email().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->email(), target);
+  }
+
+  // optional string address = 4;
+  if (has_address()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->address().data(), this->address().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->address(), target);
+  }
+
+  // optional bytes phoneNumber = 5;
+  if (has_phonenumber()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        5, this->phonenumber(), target);
+  }
+
+  // required uint64 lastLogin = 6;
+  if (has_lastlogin()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(6, this->lastlogin(), target);
+  }
+
+  // required uint64 firstLogin = 7;
+  if (has_firstlogin()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(7, this->firstlogin(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int UserData::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required uint32 msgType = 1 [default = 5];
+    if (has_msgtype()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->msgtype());
+    }
+
+    // required string name = 2;
+    if (has_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->name());
+    }
+
+    // required string email = 3;
+    if (has_email()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->email());
+    }
+
+    // optional string address = 4;
+    if (has_address()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->address());
+    }
+
+    // optional bytes phoneNumber = 5;
+    if (has_phonenumber()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->phonenumber());
+    }
+
+    // required uint64 lastLogin = 6;
+    if (has_lastlogin()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->lastlogin());
+    }
+
+    // required uint64 firstLogin = 7;
+    if (has_firstlogin()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->firstlogin());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void UserData::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const UserData* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const UserData*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void UserData::MergeFrom(const UserData& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_msgtype()) {
+      set_msgtype(from.msgtype());
+    }
+    if (from.has_name()) {
+      set_name(from.name());
+    }
+    if (from.has_email()) {
+      set_email(from.email());
+    }
+    if (from.has_address()) {
+      set_address(from.address());
+    }
+    if (from.has_phonenumber()) {
+      set_phonenumber(from.phonenumber());
+    }
+    if (from.has_lastlogin()) {
+      set_lastlogin(from.lastlogin());
+    }
+    if (from.has_firstlogin()) {
+      set_firstlogin(from.firstlogin());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void UserData::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void UserData::CopyFrom(const UserData& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool UserData::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000067) != 0x00000067) return false;
+
+  return true;
+}
+
+void UserData::Swap(UserData* other) {
+  if (other != this) {
+    std::swap(msgtype_, other->msgtype_);
+    std::swap(name_, other->name_);
+    std::swap(email_, other->email_);
+    std::swap(address_, other->address_);
+    std::swap(phonenumber_, other->phonenumber_);
+    std::swap(lastlogin_, other->lastlogin_);
+    std::swap(firstlogin_, other->firstlogin_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata UserData::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = UserData_descriptor_;
+  metadata.reflection = UserData_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
 const int UserActivityStatistics::kMagazineCountFieldNumber;
 const int UserActivityStatistics::kTotalNumOfElementsFieldNumber;
 const int UserActivityStatistics::kTotalNumOfGroupedElementsFieldNumber;
@@ -2318,522 +2825,6 @@ void UserActivityStatistics::Swap(UserActivityStatistics* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = UserActivityStatistics_descriptor_;
   metadata.reflection = UserActivityStatistics_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int UserData::kNameFieldNumber;
-const int UserData::kEmailFieldNumber;
-const int UserData::kAddressFieldNumber;
-const int UserData::kPhoneNumberFieldNumber;
-const int UserData::kLastLoginFieldNumber;
-const int UserData::kFirstLoginFieldNumber;
-const int UserData::kStatsFieldNumber;
-#endif  // !_MSC_VER
-
-UserData::UserData()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void UserData::InitAsDefaultInstance() {
-  stats_ = const_cast< ::user::UserActivityStatistics*>(&::user::UserActivityStatistics::default_instance());
-}
-
-UserData::UserData(const UserData& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void UserData::SharedCtor() {
-  _cached_size_ = 0;
-  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  phonenumber_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  lastlogin_ = GOOGLE_ULONGLONG(0);
-  firstlogin_ = GOOGLE_ULONGLONG(0);
-  stats_ = NULL;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-UserData::~UserData() {
-  SharedDtor();
-}
-
-void UserData::SharedDtor() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
-  if (email_ != &::google::protobuf::internal::kEmptyString) {
-    delete email_;
-  }
-  if (address_ != &::google::protobuf::internal::kEmptyString) {
-    delete address_;
-  }
-  if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
-    delete phonenumber_;
-  }
-  if (this != default_instance_) {
-    delete stats_;
-  }
-}
-
-void UserData::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* UserData::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return UserData_descriptor_;
-}
-
-const UserData& UserData::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_user_2eproto();
-  return *default_instance_;
-}
-
-UserData* UserData::default_instance_ = NULL;
-
-UserData* UserData::New() const {
-  return new UserData;
-}
-
-void UserData::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_name()) {
-      if (name_ != &::google::protobuf::internal::kEmptyString) {
-        name_->clear();
-      }
-    }
-    if (has_email()) {
-      if (email_ != &::google::protobuf::internal::kEmptyString) {
-        email_->clear();
-      }
-    }
-    if (has_address()) {
-      if (address_ != &::google::protobuf::internal::kEmptyString) {
-        address_->clear();
-      }
-    }
-    if (has_phonenumber()) {
-      if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
-        phonenumber_->clear();
-      }
-    }
-    lastlogin_ = GOOGLE_ULONGLONG(0);
-    firstlogin_ = GOOGLE_ULONGLONG(0);
-    if (has_stats()) {
-      if (stats_ != NULL) stats_->::user::UserActivityStatistics::Clear();
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool UserData::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string name = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->name().data(), this->name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(18)) goto parse_email;
-        break;
-      }
-
-      // required string email = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_email:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_email()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->email().data(), this->email().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(26)) goto parse_address;
-        break;
-      }
-
-      // required string address = 3;
-      case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_address:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_address()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->address().data(), this->address().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(34)) goto parse_phoneNumber;
-        break;
-      }
-
-      // required bytes phoneNumber = 4;
-      case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_phoneNumber:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_phonenumber()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(42)) goto parse_stats;
-        break;
-      }
-
-      // optional .user.UserActivityStatistics stats = 5;
-      case 5: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_stats:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_stats()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(48)) goto parse_lastLogin;
-        break;
-      }
-
-      // required uint64 lastLogin = 6;
-      case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_lastLogin:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &lastlogin_)));
-          set_has_lastlogin();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(56)) goto parse_firstLogin;
-        break;
-      }
-
-      // required uint64 firstLogin = 7;
-      case 7: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_firstLogin:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &firstlogin_)));
-          set_has_firstlogin();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void UserData::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string name = 1;
-  if (has_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->name(), output);
-  }
-
-  // required string email = 2;
-  if (has_email()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->email().data(), this->email().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->email(), output);
-  }
-
-  // required string address = 3;
-  if (has_address()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->address().data(), this->address().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->address(), output);
-  }
-
-  // required bytes phoneNumber = 4;
-  if (has_phonenumber()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      4, this->phonenumber(), output);
-  }
-
-  // optional .user.UserActivityStatistics stats = 5;
-  if (has_stats()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, this->stats(), output);
-  }
-
-  // required uint64 lastLogin = 6;
-  if (has_lastlogin()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(6, this->lastlogin(), output);
-  }
-
-  // required uint64 firstLogin = 7;
-  if (has_firstlogin()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(7, this->firstlogin(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* UserData::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required string name = 1;
-  if (has_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
-  }
-
-  // required string email = 2;
-  if (has_email()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->email().data(), this->email().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->email(), target);
-  }
-
-  // required string address = 3;
-  if (has_address()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->address().data(), this->address().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->address(), target);
-  }
-
-  // required bytes phoneNumber = 4;
-  if (has_phonenumber()) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        4, this->phonenumber(), target);
-  }
-
-  // optional .user.UserActivityStatistics stats = 5;
-  if (has_stats()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        5, this->stats(), target);
-  }
-
-  // required uint64 lastLogin = 6;
-  if (has_lastlogin()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(6, this->lastlogin(), target);
-  }
-
-  // required uint64 firstLogin = 7;
-  if (has_firstlogin()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(7, this->firstlogin(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int UserData::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string name = 1;
-    if (has_name()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
-    }
-
-    // required string email = 2;
-    if (has_email()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->email());
-    }
-
-    // required string address = 3;
-    if (has_address()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->address());
-    }
-
-    // required bytes phoneNumber = 4;
-    if (has_phonenumber()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->phonenumber());
-    }
-
-    // required uint64 lastLogin = 6;
-    if (has_lastlogin()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt64Size(
-          this->lastlogin());
-    }
-
-    // required uint64 firstLogin = 7;
-    if (has_firstlogin()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt64Size(
-          this->firstlogin());
-    }
-
-    // optional .user.UserActivityStatistics stats = 5;
-    if (has_stats()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->stats());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void UserData::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const UserData* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const UserData*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void UserData::MergeFrom(const UserData& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_name()) {
-      set_name(from.name());
-    }
-    if (from.has_email()) {
-      set_email(from.email());
-    }
-    if (from.has_address()) {
-      set_address(from.address());
-    }
-    if (from.has_phonenumber()) {
-      set_phonenumber(from.phonenumber());
-    }
-    if (from.has_lastlogin()) {
-      set_lastlogin(from.lastlogin());
-    }
-    if (from.has_firstlogin()) {
-      set_firstlogin(from.firstlogin());
-    }
-    if (from.has_stats()) {
-      mutable_stats()->::user::UserActivityStatistics::MergeFrom(from.stats());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void UserData::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void UserData::CopyFrom(const UserData& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool UserData::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
-
-  if (has_stats()) {
-    if (!this->stats().IsInitialized()) return false;
-  }
-  return true;
-}
-
-void UserData::Swap(UserData* other) {
-  if (other != this) {
-    std::swap(name_, other->name_);
-    std::swap(email_, other->email_);
-    std::swap(address_, other->address_);
-    std::swap(phonenumber_, other->phonenumber_);
-    std::swap(lastlogin_, other->lastlogin_);
-    std::swap(firstlogin_, other->firstlogin_);
-    std::swap(stats_, other->stats_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata UserData::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = UserData_descriptor_;
-  metadata.reflection = UserData_reflection_;
   return metadata;
 }
 

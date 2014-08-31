@@ -7,7 +7,7 @@ tst_Magazine::tst_Magazine(QObject *parent):
 
 void tst_Magazine::init()
 {
-    mag = new Magazine();
+    mag = new Storage();
 }
 
 void tst_Magazine::cleanup()
@@ -15,12 +15,18 @@ void tst_Magazine::cleanup()
     delete mag;
 }
 
-void tst_Magazine::magazine_shoudHaveName()
+void tst_Magazine::storage_shoudHaveName()
 {
     QVERIFY (mag->getName() == "" );
 }
 
-void tst_Magazine::magazine_shoudHaveID()
+void tst_Magazine::setName_shoudSetName()
 {
-    QVERIFY (mag->getID() != 0 );
+    mag->setName("magazynek");
+    QVERIFY (mag->getName() == "magazynek");
+}
+
+void tst_Magazine::storage_shoudHaveID()
+{
+    QVERIFY (mag->getID() == 0 );
 }

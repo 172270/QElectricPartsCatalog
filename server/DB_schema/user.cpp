@@ -5,33 +5,50 @@ User::User()
 }
 QString User::getName() const
 {
-    return name;
+    return QString::fromStdString(name());
 }
 
 void User::setName(const QString &value)
 {
     if(!value.size())
         throw QString("Empty names not allowed!");
-    name = value.trimmed();
+    set_name(value.trimmed().toStdString());
 }
 QString User::getEmail() const
 {
-    return email;
+    return QString::fromStdString(email());
 }
 
 void User::setEmail(const QString &value)
 {
     if(!value.size())
         throw QString("Empty emails not allowed!");
-    email = value.trimmed().toLower();
     EmailValidator validator;
     int pos =0;
-    QValidator::State state = validator.validate(email,pos);
+    QString mail = value.trimmed().toLower();
+    QValidator::State state = validator.validate(mail,pos);
     if (state == QValidator::Invalid ||state ==  QValidator::Intermediate ){
         throw QString("Invalid email address!");
     }
+    else
+        set_email(mail.toStdString());
+}
+Storage User::getStorage() const
+{
+    return storages[defaultStorageId];
 }
 
+void User::setStorage(const quint32 &value)
+{
+    defaultStorageId = value;
+}
+
+void User::addStorage( Storage s )
+{
+    if (!s.IsInitialized() )
+        throw QString("storage is not initialized!");
+    storages.insert(s.getID(), s);
+}
 
 EmailValidator::EmailValidator(QObject *parent) :
     QValidator(parent),

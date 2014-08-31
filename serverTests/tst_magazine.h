@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTest>
 
-#include "DB_schema/magazine.h"
+#include "DB_schema/storage.h"
 
 class tst_Magazine :public QObject
 {
@@ -16,12 +16,14 @@ private slots:
     void init();
     void cleanup();
 
-    void magazine_shoudHaveName();
-    void magazine_shoudHaveID();
+    void storage_shoudHaveName();
+    void setName_shoudSetName();
+
+    void storage_shoudHaveID();
 
 private:
 
-    Magazine *mag;
+    Storage *mag;
 };
 
 #endif // TST_MAGAZINE_H

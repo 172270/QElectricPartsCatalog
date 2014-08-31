@@ -4,7 +4,10 @@
 #include <QString>
 #include <QValidator>
 
-class User
+#include "storage.h"
+#include "user.pb.h"
+
+class User : public user::UserData
 {
 public:
     User();
@@ -15,11 +18,16 @@ public:
     QString getEmail() const;
     void setEmail(const QString &value);
 
+    Storage getStorage() const;
+    void setStorage(const quint32 &value);
+
+    void addStorage(Storage s);
+
+    int storagesNumber(){ return storages.size(); }
+
 private:
-    QString name;
-    QString email;
-
-
+    QMap<quint32, Storage> storages;
+    quint32 defaultStorageId = 0;
 };
 
 

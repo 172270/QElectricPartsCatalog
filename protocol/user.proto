@@ -38,6 +38,16 @@ message AddReplay{
   required Replay replay = 3;
 }
 
+message UserData{
+        required uint32 msgType = 1 [default = 5];
+        required string name = 2;
+        required string email= 3;
+        optional string address=4;
+        optional bytes phoneNumber=5;
+        required uint64 lastLogin = 6;
+        required uint64 firstLogin = 7;
+}
+
 /// messages can't use as standalone
 
 message UserActivityStatistics{
@@ -50,12 +60,4 @@ message UserActivityStatistics{
 	required uint32 totalAddItems = 7; // total items that user add to group
 }
 
-message UserData{
-	required string name = 1;
-	required string email= 2;
-	required string address=3;
-	required bytes phoneNumber=4;
-	required uint64 lastLogin = 6;
-	required uint64 firstLogin = 7;
-	optional UserActivityStatistics stats = 5;
-}
+
