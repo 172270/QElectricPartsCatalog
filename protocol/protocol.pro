@@ -4,8 +4,6 @@
 #
 #-------------------------------------------------
 
-
-
 PROTOS = stats.proto user.proto
 
 #include(protobuf.pri)
@@ -25,7 +23,8 @@ SOURCES += protocol.cpp \
     user.pb.cc \
     stats.pb.cc \
     ecatalogsocket.cpp \
-    storage.pb.cc
+    storage.pb.cc \
+    message_conteiner.pb.cc
 
 HEADERS += protocol.h\
     user.pb.h \
@@ -33,7 +32,8 @@ HEADERS += protocol.h\
     ecatalogsocket.h \
     messagetype.h \
     datastreamsource.h \
-    storage.pb.h
+    storage.pb.h \
+    message_conteiner.pb.h
 
 OTHER_FILES += \
     user.proto \

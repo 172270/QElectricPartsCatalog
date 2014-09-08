@@ -1,5 +1,7 @@
 #include "user.h"
 
+#include "boost/iostreams/stream.hpp"
+
 User::User()
 {
     set_msgtype(5);
@@ -52,9 +54,14 @@ void User::addStorage( Storage s )
     storages.insert(s.getID(), s);
 }
 
-void User::extract(const QByteArray *ba)
+void User::setPhoneNumber(const QString &number)
 {
+    set_phonenumber(number.toStdString());
+}
 
+QString User::getPhoneNumber() const
+{
+    return QString::fromStdString(phonenumber());
 }
 
 QByteArray* User::toArray()
@@ -67,6 +74,10 @@ QByteArray* User::toArray()
     SerializeToArray(data->data(),data->size());
 
     return data;
+}
+
+void User::fromArray(const QByteArray *data){
+        this->ParseFromArray(data->data(), data->size());
 }
 
 EmailValidator::EmailValidator(QObject *parent) :
@@ -85,3 +96,4 @@ QValidator::State EmailValidator::validate(QString &text, int &pos) const
         return Intermediate;
     return Invalid;
 }
+

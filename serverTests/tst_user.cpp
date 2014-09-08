@@ -111,6 +111,18 @@ void tst_user::setId_setsID()
     QVERIFY( user->getID() == 5);
 }
 
+void tst_user::setAddress_setsAddress()
+{
+    user->setAddress("New York, 2/3");
+    QVERIFY(user->getAddress() == "New York, 2/3");
+}
+
+void tst_user::setPhoneNumber_setsPhoneNumber()
+{
+    user->setPhoneNumber( QString("123456789") );
+    QVERIFY(user->getPhoneNumber() == "123456789");
+}
+
 void tst_user::user_shoudContainDefaultMagazine()
 {
     Storage s = user->getStorage();
@@ -174,10 +186,26 @@ void tst_user::createMsgFromUserWithoutEmail_throwsException()
     QVERIFY_EXCEPTION_THROWN(user->toArray(), QString );
 }
 
-void tst_user::extractFromByteArray()
+void tst_user::toArray_createsAByteArray()
 {
-    User user;
-    QByteArray *ba = new QByteArray();
-    user.extract(ba);
-}
+    setRequiredFields();
+    user->setStorage(2);
+    user->setAddress("adress");
+    user->setPhoneNumber("123123123");
 
+    QByteArray *ba = user->toArray();
+
+    QVERIFY(ba->size() > 0);}
+
+void tst_user::toArray_createsAProperMessage()
+{
+    setRequiredFields();
+    user->setStorage(2);
+    user->setAddress("adress");
+    user->setPhoneNumber("123123123");
+    QByteArray *ba = user->toArray();
+
+    User decodedUser;
+    decodedUser.fromArray(ba);
+    QVERIFY(*ba == *decodedUser.toArray() );
+}

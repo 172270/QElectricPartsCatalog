@@ -11,7 +11,7 @@ Protocol::Protocol(QTcpSocket *s)
 
 QByteArray Protocol::getLoginPB(QString name, QString pass)
 {
-    user::Login package;
+    user::LoginRequest package;
     package.set_msgtype(1);
     package.set_name(name.toStdString());
     package.set_password(pass.toStdString());
@@ -54,7 +54,7 @@ QByteArray Protocol::getUserAddPB(QString name, QString passwd, QString email, Q
 
 QByteArray Protocol::getLoginMessagePB(bool login_ok, quint64)
 {
-    user::LoginReplay package;
+    user::LoginResponse package;
     package.set_msgtype(1);
 
 
@@ -77,7 +77,7 @@ QByteArray Protocol::getLoginMessagePB(bool login_ok, quint64)
     return data;
 }
 
-user::Login Protocol::extractUserActrionPB(QByteArray &data)
+user::LoginRequest Protocol::extractUserActrionPB(QByteArray &data)
 {
 //    QDataStream *ds = new QDataStream(data);
 //    user::Login ua;
@@ -86,7 +86,7 @@ user::Login Protocol::extractUserActrionPB(QByteArray &data)
 //    return ua;
 }
 
-user::LoginReplay Protocol::extractUserActrionReplayPB(QByteArray &data)
+user::LoginResponse Protocol::extractUserActrionReplayPB(QByteArray &data)
 {
 //    QDataStream *ds = new QDataStream(data);
 //    user::LoginReplay ua;
@@ -104,7 +104,7 @@ user::Add Protocol::extractUserAddPB(QByteArray &data)
 //    return ua;
 }
 
-user::LoginReplay Protocol::login(QString name, QString pass)
+user::LoginResponse Protocol::login(QString name, QString pass)
 {
     if (socket->state() != QAbstractSocket::ConnectedState ){
         // connect again
@@ -122,8 +122,7 @@ user::LoginReplay Protocol::login(QString name, QString pass)
     data.clear();
     data.append(socket->readAll());
 
-
-    user::LoginReplay ar = Protocol::extractUserActrionReplayPB( data );
+    user::LoginResponse ar = Protocol::extractUserActrionReplayPB( data );
     return ar;
 }
 

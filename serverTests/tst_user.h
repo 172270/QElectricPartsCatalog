@@ -37,6 +37,9 @@ private slots:
     void goodEmail_shoudNot_throwAnExeption();
     void setId_setsID();
 
+    void setAddress_setsAddress();
+    void setPhoneNumber_setsPhoneNumber();
+
     void user_shoudContainDefaultMagazine();
     void addStorage_ShoudAddStorage();
     void addStorage_ShoudThrowExeptionWhenStorageIsNotInitialized();
@@ -47,7 +50,8 @@ private slots:
     void createMsgFromUserWithoutId_throwsException();
     void createMsgFromUserWithoutEmail_throwsException();
 
-    void extractFromByteArray();
+    void toArray_createsAByteArray();
+    void toArray_createsAProperMessage();
 
 private:
     User *user;

@@ -20,10 +20,9 @@
 #endif
 
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message.h>
+#include <google/protobuf/message_lite.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
 // Internal implementation detail -- do not call these.
@@ -35,7 +34,7 @@ class QueryStats;
 
 // ===================================================================
 
-class QueryStats : public ::google::protobuf::Message {
+class QueryStats : public ::google::protobuf::MessageLite {
  public:
   QueryStats();
   virtual ~QueryStats();
@@ -47,24 +46,24 @@ class QueryStats : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const QueryStats& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const QueryStats* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(QueryStats* other);
 
   // implements Message ----------------------------------------------
 
   QueryStats* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const QueryStats& from);
   void MergeFrom(const QueryStats& from);
   void Clear();
@@ -75,7 +74,6 @@ class QueryStats : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -83,7 +81,7 @@ class QueryStats : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -119,8 +117,6 @@ class QueryStats : public ::google::protobuf::Message {
   inline void set_has_totaltime();
   inline void clear_has_totaltime();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
   ::google::protobuf::uint32 msgtype_;
   ::google::protobuf::uint32 count_;
   ::google::protobuf::uint32 totaltime_;
@@ -128,7 +124,11 @@ class QueryStats : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_stats_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_stats_2eproto();
+  #endif
   friend void protobuf_AssignDesc_stats_2eproto();
   friend void protobuf_ShutdownFile_stats_2eproto();
 
@@ -210,15 +210,6 @@ inline void QueryStats::set_totaltime(::google::protobuf::uint32 value) {
 
 
 // @@protoc_insertion_point(namespace_scope)
-
-#ifndef SWIG
-namespace google {
-namespace protobuf {
-
-
-}  // namespace google
-}  // namespace protobuf
-#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

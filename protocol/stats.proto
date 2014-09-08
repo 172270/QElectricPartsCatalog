@@ -1,4 +1,4 @@
-
+option optimize_for = LITE_RUNTIME;
 message QueryStats{
   required uint32 msgtype = 1 [default=20];
   required uint32 count = 2;

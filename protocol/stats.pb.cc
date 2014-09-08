@@ -10,90 +10,43 @@
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
-
-namespace {
-
-const ::google::protobuf::Descriptor* QueryStats_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  QueryStats_reflection_ = NULL;
-
-}  // namespace
-
-
-void protobuf_AssignDesc_stats_2eproto() {
-  protobuf_AddDesc_stats_2eproto();
-  const ::google::protobuf::FileDescriptor* file =
-    ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
-      "stats.proto");
-  GOOGLE_CHECK(file != NULL);
-  QueryStats_descriptor_ = file->message_type(0);
-  static const int QueryStats_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryStats, msgtype_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryStats, count_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryStats, totaltime_),
-  };
-  QueryStats_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      QueryStats_descriptor_,
-      QueryStats::default_instance_,
-      QueryStats_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryStats, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryStats, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(QueryStats));
-}
-
-namespace {
-
-GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AssignDescriptors_once_);
-inline void protobuf_AssignDescriptorsOnce() {
-  ::google::protobuf::GoogleOnceInit(&protobuf_AssignDescriptors_once_,
-                 &protobuf_AssignDesc_stats_2eproto);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    QueryStats_descriptor_, &QueryStats::default_instance());
-}
-
-}  // namespace
 
 void protobuf_ShutdownFile_stats_2eproto() {
   delete QueryStats::default_instance_;
-  delete QueryStats_reflection_;
 }
 
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+void protobuf_AddDesc_stats_2eproto_impl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#else
 void protobuf_AddDesc_stats_2eproto() {
   static bool already_here = false;
   if (already_here) return;
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\013stats.proto\"C\n\nQueryStats\022\023\n\007msgtype\030\001"
-    " \002(\r:\00220\022\r\n\005count\030\002 \002(\r\022\021\n\ttotalTime\030\003 \002"
-    "(\r", 82);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "stats.proto", &protobuf_RegisterTypes);
+#endif
   QueryStats::default_instance_ = new QueryStats();
   QueryStats::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_stats_2eproto);
 }
 
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AddDesc_stats_2eproto_once_);
+void protobuf_AddDesc_stats_2eproto() {
+  ::google::protobuf::::google::protobuf::GoogleOnceInit(&protobuf_AddDesc_stats_2eproto_once_,
+                 &protobuf_AddDesc_stats_2eproto_impl);
+}
+#else
 // Force AddDescriptors() to be called at static initialization time.
 struct StaticDescriptorInitializer_stats_2eproto {
   StaticDescriptorInitializer_stats_2eproto() {
     protobuf_AddDesc_stats_2eproto();
   }
 } static_descriptor_initializer_stats_2eproto_;
+#endif
 
 // ===================================================================
 
@@ -104,7 +57,7 @@ const int QueryStats::kTotalTimeFieldNumber;
 #endif  // !_MSC_VER
 
 QueryStats::QueryStats()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::MessageLite() {
   SharedCtor();
 }
 
@@ -112,7 +65,7 @@ void QueryStats::InitAsDefaultInstance() {
 }
 
 QueryStats::QueryStats(const QueryStats& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::MessageLite() {
   SharedCtor();
   MergeFrom(from);
 }
@@ -130,7 +83,11 @@ QueryStats::~QueryStats() {
 }
 
 void QueryStats::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
   if (this != default_instance_) {
+  #endif
   }
 }
 
@@ -139,13 +96,12 @@ void QueryStats::SetCachedSize(int size) const {
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* QueryStats::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return QueryStats_descriptor_;
-}
-
 const QueryStats& QueryStats::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_stats_2eproto();
+#else
   if (default_instance_ == NULL) protobuf_AddDesc_stats_2eproto();
+#endif
   return *default_instance_;
 }
 
@@ -162,7 +118,6 @@ void QueryStats::Clear() {
     totaltime_ = 0u;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
 }
 
 bool QueryStats::MergePartialFromCodedStream(
@@ -224,8 +179,7 @@ bool QueryStats::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           return true;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -251,34 +205,6 @@ void QueryStats::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->totaltime(), output);
   }
 
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* QueryStats::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required uint32 msgtype = 1 [default = 20];
-  if (has_msgtype()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->msgtype(), target);
-  }
-
-  // required uint32 count = 2;
-  if (has_count()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->count(), target);
-  }
-
-  // required uint32 totalTime = 3;
-  if (has_totaltime()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->totaltime(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
 }
 
 int QueryStats::ByteSize() const {
@@ -307,27 +233,15 @@ int QueryStats::ByteSize() const {
     }
 
   }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
   return total_size;
 }
 
-void QueryStats::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const QueryStats* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const QueryStats*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
+void QueryStats::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const QueryStats*>(&from));
 }
 
 void QueryStats::MergeFrom(const QueryStats& from) {
@@ -343,13 +257,6 @@ void QueryStats::MergeFrom(const QueryStats& from) {
       set_totaltime(from.totaltime());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void QueryStats::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
 }
 
 void QueryStats::CopyFrom(const QueryStats& from) {
@@ -370,17 +277,12 @@ void QueryStats::Swap(QueryStats* other) {
     std::swap(count_, other->count_);
     std::swap(totaltime_, other->totaltime_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata QueryStats::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = QueryStats_descriptor_;
-  metadata.reflection = QueryStats_reflection_;
-  return metadata;
+::std::string QueryStats::GetTypeName() const {
+  return "QueryStats";
 }
 
 

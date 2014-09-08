@@ -35,7 +35,7 @@ void ServerTests::loginToServer()
     data.append(socket.readAll());
     QVERIFY2( data.at(1) == 14, "Message type not corrent");
 
-    user::LoginReplay ar = Protocol::extractUserActrionReplayPB( data );
+    user::LoginResponse ar = Protocol::extractUserActrionReplayPB( data );
     QVERIFY2(ar.replay() == user::LOGIN_OK, "Loggin should be OK");
 }
 

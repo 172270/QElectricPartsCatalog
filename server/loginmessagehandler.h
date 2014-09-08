@@ -19,8 +19,8 @@ public:
 private:
     void getWorker();
 
-    user::Login userLoginMsg;
-    user::LoginReplay userLoginReplayMsg;
+    user::LoginRequest userLoginMsg;
+    user::LoginResponse userLoginReplayMsg;
 
 };
 

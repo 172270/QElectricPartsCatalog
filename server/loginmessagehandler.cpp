@@ -1,8 +1,6 @@
 #include "loginmessagehandler.h"
 
 #include "protocol.h"
-#include "datastreamsource.h"
-
 
 void LoginMessageHandler::setData(QByteArray *d)
 {
@@ -11,10 +9,10 @@ void LoginMessageHandler::setData(QByteArray *d)
 
 void LoginMessageHandler::extractPBMessage()
 {
-    QDataStream *ds = new QDataStream(*data);
-    boost::iostreams::stream < boost::iostreams::DataStreamSource > dataStream ( ds );
-    userLoginMsg.ParseFromIstream(&dataStream);
-    delete ds;
+//    QDataStream *ds = new QDataStream(*data);
+//    boost::iostreams::stream < boost::iostreams::DataStreamSource > dataStream ( ds );
+//    userLoginMsg.ParseFromIstream(&dataStream);
+//    delete ds;
 }
 
 void LoginMessageHandler::processData()

@@ -14,7 +14,7 @@ public:
     User();
 
     int getID(){ return id(); }
-    void setID(int id){ set_id(id);}
+    void setID(const int id){ set_id(id);}
     void clearID(){ clear_id(); }
 
     QString getName() const;
@@ -27,12 +27,14 @@ public:
 
     Storage getStorage() const;
     void setStorage(const quint32 &value);
-
     void addStorage(Storage s);
-
     int storagesNumber(){ return storages.size(); }
 
-    void extract(const QByteArray *ba);
+    void setAddress(const QString adr){ set_address(adr.toStdString() ); }
+    QString getAddress() const { return QString::fromStdString(address()); }
+
+    void setPhoneNumber(const QString &number);
+    QString getPhoneNumber() const;
 
     QByteArray* toArray();
 
@@ -40,10 +42,10 @@ private:
     QMap<quint32, Storage> storages;
     quint32 defaultStorageId = 0;
 
-    // MessageLite interface
 public:
-//    void Clear();
+    //    void Clear();
     //    bool IsInitialized() const;
+    void fromArray(const QByteArray *data);
 };
 
 
@@ -63,6 +65,5 @@ private:
     const QRegExp m_validMailRegExp;
     const QRegExp m_intermediateMailRegExp;
 };
-
 
 #endif // USER_H
