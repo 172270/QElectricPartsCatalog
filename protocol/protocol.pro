@@ -17,7 +17,7 @@ TARGET = ../lib/protocol
 
 TEMPLATE = lib
 
-CONFIG += staticlib
+CONFIG += staticlib c++11
 
 DEFINES += PROTOCOL_LIBRARY
 

@@ -673,10 +673,17 @@ class UserData : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 msgtype() const;
   inline void set_msgtype(::google::protobuf::uint32 value);
 
-  // required string name = 2;
+  // required uint32 ID = 2;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIDFieldNumber = 2;
+  inline ::google::protobuf::uint32 id() const;
+  inline void set_id(::google::protobuf::uint32 value);
+
+  // required string name = 3;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 2;
+  static const int kNameFieldNumber = 3;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -685,10 +692,10 @@ class UserData : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // required string email = 3;
+  // required string email = 4;
   inline bool has_email() const;
   inline void clear_email();
-  static const int kEmailFieldNumber = 3;
+  static const int kEmailFieldNumber = 4;
   inline const ::std::string& email() const;
   inline void set_email(const ::std::string& value);
   inline void set_email(const char* value);
@@ -697,10 +704,10 @@ class UserData : public ::google::protobuf::Message {
   inline ::std::string* release_email();
   inline void set_allocated_email(::std::string* email);
 
-  // optional string address = 4;
+  // optional string address = 5;
   inline bool has_address() const;
   inline void clear_address();
-  static const int kAddressFieldNumber = 4;
+  static const int kAddressFieldNumber = 5;
   inline const ::std::string& address() const;
   inline void set_address(const ::std::string& value);
   inline void set_address(const char* value);
@@ -709,10 +716,10 @@ class UserData : public ::google::protobuf::Message {
   inline ::std::string* release_address();
   inline void set_allocated_address(::std::string* address);
 
-  // optional bytes phoneNumber = 5;
+  // optional bytes phoneNumber = 6;
   inline bool has_phonenumber() const;
   inline void clear_phonenumber();
-  static const int kPhoneNumberFieldNumber = 5;
+  static const int kPhoneNumberFieldNumber = 6;
   inline const ::std::string& phonenumber() const;
   inline void set_phonenumber(const ::std::string& value);
   inline void set_phonenumber(const char* value);
@@ -721,24 +728,35 @@ class UserData : public ::google::protobuf::Message {
   inline ::std::string* release_phonenumber();
   inline void set_allocated_phonenumber(::std::string* phonenumber);
 
-  // required uint64 lastLogin = 6;
+  // optional uint64 lastLogin = 7;
   inline bool has_lastlogin() const;
   inline void clear_lastlogin();
-  static const int kLastLoginFieldNumber = 6;
+  static const int kLastLoginFieldNumber = 7;
   inline ::google::protobuf::uint64 lastlogin() const;
   inline void set_lastlogin(::google::protobuf::uint64 value);
 
-  // required uint64 firstLogin = 7;
+  // optional uint64 firstLogin = 8;
   inline bool has_firstlogin() const;
   inline void clear_firstlogin();
-  static const int kFirstLoginFieldNumber = 7;
+  static const int kFirstLoginFieldNumber = 8;
   inline ::google::protobuf::uint64 firstlogin() const;
   inline void set_firstlogin(::google::protobuf::uint64 value);
+
+  // optional .user.UserActivityStatistics stats = 10;
+  inline bool has_stats() const;
+  inline void clear_stats();
+  static const int kStatsFieldNumber = 10;
+  inline const ::user::UserActivityStatistics& stats() const;
+  inline ::user::UserActivityStatistics* mutable_stats();
+  inline ::user::UserActivityStatistics* release_stats();
+  inline void set_allocated_stats(::user::UserActivityStatistics* stats);
 
   // @@protoc_insertion_point(class_scope:user.UserData)
  private:
   inline void set_has_msgtype();
   inline void clear_has_msgtype();
+  inline void set_has_id();
+  inline void clear_has_id();
   inline void set_has_name();
   inline void clear_has_name();
   inline void set_has_email();
@@ -751,19 +769,23 @@ class UserData : public ::google::protobuf::Message {
   inline void clear_has_lastlogin();
   inline void set_has_firstlogin();
   inline void clear_has_firstlogin();
+  inline void set_has_stats();
+  inline void clear_has_stats();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
+  ::google::protobuf::uint32 msgtype_;
+  ::google::protobuf::uint32 id_;
   ::std::string* name_;
   ::std::string* email_;
   ::std::string* address_;
   ::std::string* phonenumber_;
   ::google::protobuf::uint64 lastlogin_;
   ::google::protobuf::uint64 firstlogin_;
-  ::google::protobuf::uint32 msgtype_;
+  ::user::UserActivityStatistics* stats_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
   friend void  protobuf_AddDesc_user_2eproto();
   friend void protobuf_AssignDesc_user_2eproto();
@@ -1647,15 +1669,37 @@ inline void UserData::set_msgtype(::google::protobuf::uint32 value) {
   msgtype_ = value;
 }
 
-// required string name = 2;
-inline bool UserData::has_name() const {
+// required uint32 ID = 2;
+inline bool UserData::has_id() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void UserData::set_has_name() {
+inline void UserData::set_has_id() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void UserData::clear_has_name() {
+inline void UserData::clear_has_id() {
   _has_bits_[0] &= ~0x00000002u;
+}
+inline void UserData::clear_id() {
+  id_ = 0u;
+  clear_has_id();
+}
+inline ::google::protobuf::uint32 UserData::id() const {
+  return id_;
+}
+inline void UserData::set_id(::google::protobuf::uint32 value) {
+  set_has_id();
+  id_ = value;
+}
+
+// required string name = 3;
+inline bool UserData::has_name() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void UserData::set_has_name() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void UserData::clear_has_name() {
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void UserData::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
@@ -1717,15 +1761,15 @@ inline void UserData::set_allocated_name(::std::string* name) {
   }
 }
 
-// required string email = 3;
+// required string email = 4;
 inline bool UserData::has_email() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void UserData::set_has_email() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void UserData::clear_has_email() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void UserData::clear_email() {
   if (email_ != &::google::protobuf::internal::kEmptyString) {
@@ -1787,15 +1831,15 @@ inline void UserData::set_allocated_email(::std::string* email) {
   }
 }
 
-// optional string address = 4;
+// optional string address = 5;
 inline bool UserData::has_address() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void UserData::set_has_address() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void UserData::clear_has_address() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void UserData::clear_address() {
   if (address_ != &::google::protobuf::internal::kEmptyString) {
@@ -1857,15 +1901,15 @@ inline void UserData::set_allocated_address(::std::string* address) {
   }
 }
 
-// optional bytes phoneNumber = 5;
+// optional bytes phoneNumber = 6;
 inline bool UserData::has_phonenumber() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void UserData::set_has_phonenumber() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void UserData::clear_has_phonenumber() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void UserData::clear_phonenumber() {
   if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
@@ -1927,15 +1971,15 @@ inline void UserData::set_allocated_phonenumber(::std::string* phonenumber) {
   }
 }
 
-// required uint64 lastLogin = 6;
+// optional uint64 lastLogin = 7;
 inline bool UserData::has_lastlogin() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void UserData::set_has_lastlogin() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000040u;
 }
 inline void UserData::clear_has_lastlogin() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void UserData::clear_lastlogin() {
   lastlogin_ = GOOGLE_ULONGLONG(0);
@@ -1949,15 +1993,15 @@ inline void UserData::set_lastlogin(::google::protobuf::uint64 value) {
   lastlogin_ = value;
 }
 
-// required uint64 firstLogin = 7;
+// optional uint64 firstLogin = 8;
 inline bool UserData::has_firstlogin() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void UserData::set_has_firstlogin() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void UserData::clear_has_firstlogin() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void UserData::clear_firstlogin() {
   firstlogin_ = GOOGLE_ULONGLONG(0);
@@ -1969,6 +2013,44 @@ inline ::google::protobuf::uint64 UserData::firstlogin() const {
 inline void UserData::set_firstlogin(::google::protobuf::uint64 value) {
   set_has_firstlogin();
   firstlogin_ = value;
+}
+
+// optional .user.UserActivityStatistics stats = 10;
+inline bool UserData::has_stats() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void UserData::set_has_stats() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void UserData::clear_has_stats() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void UserData::clear_stats() {
+  if (stats_ != NULL) stats_->::user::UserActivityStatistics::Clear();
+  clear_has_stats();
+}
+inline const ::user::UserActivityStatistics& UserData::stats() const {
+  return stats_ != NULL ? *stats_ : *default_instance_->stats_;
+}
+inline ::user::UserActivityStatistics* UserData::mutable_stats() {
+  set_has_stats();
+  if (stats_ == NULL) stats_ = new ::user::UserActivityStatistics;
+  return stats_;
+}
+inline ::user::UserActivityStatistics* UserData::release_stats() {
+  clear_has_stats();
+  ::user::UserActivityStatistics* temp = stats_;
+  stats_ = NULL;
+  return temp;
+}
+inline void UserData::set_allocated_stats(::user::UserActivityStatistics* stats) {
+  delete stats_;
+  stats_ = stats;
+  if (stats) {
+    set_has_stats();
+  } else {
+    clear_has_stats();
+  }
 }
 
 // -------------------------------------------------------------------

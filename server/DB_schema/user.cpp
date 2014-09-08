@@ -2,7 +2,9 @@
 
 User::User()
 {
+    set_msgtype(5);
 }
+
 QString User::getName() const
 {
     return QString::fromStdString(name());
@@ -48,6 +50,23 @@ void User::addStorage( Storage s )
     if (!s.IsInitialized() )
         throw QString("storage is not initialized!");
     storages.insert(s.getID(), s);
+}
+
+void User::extract(const QByteArray *ba)
+{
+
+}
+
+QByteArray* User::toArray()
+{
+    if (!IsInitialized()){
+        throw QString("Uninitialized message!");
+    }
+
+    QByteArray *data = new QByteArray(ByteSize(),'\0' );
+    SerializeToArray(data->data(),data->size());
+
+    return data;
 }
 
 EmailValidator::EmailValidator(QObject *parent) :

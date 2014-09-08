@@ -12,6 +12,7 @@ class tst_user : public QObject
 public:
     explicit tst_user(QObject *parent = 0);
 
+    void setRequiredFields();
 signals:
 
 public slots:
@@ -34,17 +35,22 @@ private slots:
     void setEmail_ShoudLowerTheLetters();
     void badEmail_ShoudThrowException();
     void goodEmail_shoudNot_throwAnExeption();
+    void setId_setsID();
 
     void user_shoudContainDefaultMagazine();
     void addStorage_ShoudAddStorage();
     void addStorage_ShoudThrowExeptionWhenStorageIsNotInitialized();
     void addStorage_ShoudThrowExeptionWhenStorageIspartiallyInitialized();
 
+    void user_ShoudCreatePbMessage();
+    void createMsgFromUserWithoutName_throwsException();
+    void createMsgFromUserWithoutId_throwsException();
+    void createMsgFromUserWithoutEmail_throwsException();
+
+    void extractFromByteArray();
+
 private:
-
     User *user;
-
-
 };
 
 #endif // TST_LOGINMESSAGE_H

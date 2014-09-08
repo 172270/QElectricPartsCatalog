@@ -3,8 +3,7 @@
 
 #include "qcatalogserverthread.h"
 
-#include "user.pb.h"
-
+#include "DB_schema/user.h"
 
 class LoginMessageHandler : public QObject
 {

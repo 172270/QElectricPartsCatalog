@@ -3,20 +3,27 @@
 
 #include <QString>
 #include <QValidator>
+#include <QDataStream>
 
 #include "storage.h"
 #include "user.pb.h"
 
-class User : public user::UserData
+class User : protected user::UserData
 {
 public:
     User();
 
+    int getID(){ return id(); }
+    void setID(int id){ set_id(id);}
+    void clearID(){ clear_id(); }
+
     QString getName() const;
     void setName(const QString &value);
+    void clearName(){ clear_name(); }
 
     QString getEmail() const;
     void setEmail(const QString &value);
+    void clearEmail(){ clear_email(); }
 
     Storage getStorage() const;
     void setStorage(const quint32 &value);
@@ -25,9 +32,18 @@ public:
 
     int storagesNumber(){ return storages.size(); }
 
+    void extract(const QByteArray *ba);
+
+    QByteArray* toArray();
+
 private:
     QMap<quint32, Storage> storages;
     quint32 defaultStorageId = 0;
+
+    // MessageLite interface
+public:
+//    void Clear();
+    //    bool IsInitialized() const;
 };
 
 

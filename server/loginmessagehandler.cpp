@@ -1,8 +1,6 @@
 #include "loginmessagehandler.h"
 
 #include "protocol.h"
-
-
 #include "datastreamsource.h"
 
 

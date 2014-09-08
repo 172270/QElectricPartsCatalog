@@ -5,6 +5,14 @@ tst_user::tst_user(QObject *parent) :
 {
 }
 
+void tst_user::user_ShoudCreatePbMessage()
+{
+    setRequiredFields();
+    QByteArray *ba = user->toArray();
+    QVERIFY( ba->size() > 0 );
+}
+
+
 void tst_user::initTestCase()
 {
 }
@@ -97,10 +105,16 @@ void tst_user::goodEmail_shoudNot_throwAnExeption()
     }
 }
 
+void tst_user::setId_setsID()
+{
+    user->setID(5);
+    QVERIFY( user->getID() == 5);
+}
+
 void tst_user::user_shoudContainDefaultMagazine()
 {
     Storage s = user->getStorage();
-    QVERIFY( s.getID() == NULL );
+    QVERIFY( s.getID() == 0 );
 }
 
 void tst_user::addStorage_ShoudAddStorage()
@@ -127,5 +141,43 @@ void tst_user::addStorage_ShoudThrowExeptionWhenStorageIspartiallyInitialized()
     Storage s2;
     s2.setName("assas");
     QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
+}
+
+void tst_user::createMsgFromUserWithoutName_throwsException()
+{
+    setRequiredFields();
+
+    user->clearName();
+    QVERIFY_EXCEPTION_THROWN(user->toArray(), QString );
+}
+
+void tst_user::createMsgFromUserWithoutId_throwsException()
+{
+    setRequiredFields();
+
+    user->clearID();
+    QVERIFY_EXCEPTION_THROWN(user->toArray(), QString );
+}
+
+void tst_user::setRequiredFields()
+{
+    user->setID(10);
+    user->setName("NAME");
+    user->setEmail("email@ww.ww");
+}
+
+void tst_user::createMsgFromUserWithoutEmail_throwsException()
+{
+    setRequiredFields();
+
+    user->clearEmail();
+    QVERIFY_EXCEPTION_THROWN(user->toArray(), QString );
+}
+
+void tst_user::extractFromByteArray()
+{
+    User user;
+    QByteArray *ba = new QByteArray();
+    user.extract(ba);
 }
 
