@@ -24,7 +24,8 @@ SOURCES += protocol.cpp \
     stats.pb.cc \
     ecatalogsocket.cpp \
     storage.pb.cc \
-    message_conteiner.pb.cc
+    message_conteiner.pb.cc \
+    group.pb.cc
 
 HEADERS += protocol.h\
     user.pb.h \
@@ -33,7 +34,8 @@ HEADERS += protocol.h\
     messagetype.h \
     datastreamsource.h \
     storage.pb.h \
-    message_conteiner.pb.h
+    message_conteiner.pb.h \
+    group.pb.h
 
 OTHER_FILES += \
     user.proto \
@@ -46,5 +48,5 @@ unix {
     INSTALLS += target
 }
 
-LIBS += -lprotobuf
+LIBS += -lprotobuf-lite
 

@@ -2,7 +2,8 @@
 
 #include "boost/iostreams/stream.hpp"
 
-User::User()
+User::User() :
+    defaultStorageId(0)
 {
     set_msgtype(5);
 }

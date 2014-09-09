@@ -1,7 +1,10 @@
+option optimize_for = LITE_RUNTIME; 
+
 package storage;
 
 message Storage{
   required uint32 msgType = 1 [default =16 ];
   required string name = 3;
   required uint32 id = 4;
+  optional fixed64 creationDate = 5;
 }

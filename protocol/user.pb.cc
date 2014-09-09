@@ -1340,6 +1340,7 @@ const int UserData::kAddressFieldNumber;
 const int UserData::kPhoneNumberFieldNumber;
 const int UserData::kLastLoginFieldNumber;
 const int UserData::kFirstLoginFieldNumber;
+const int UserData::kUserConfigFieldNumber;
 const int UserData::kStatsFieldNumber;
 #endif  // !_MSC_VER
 
@@ -1373,6 +1374,7 @@ void UserData::SharedCtor() {
   phonenumber_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   lastlogin_ = GOOGLE_ULONGLONG(0);
   firstlogin_ = GOOGLE_ULONGLONG(0);
+  userconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   stats_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1393,6 +1395,9 @@ void UserData::SharedDtor() {
   }
   if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
     delete phonenumber_;
+  }
+  if (userconfig_ != &::google::protobuf::internal::kEmptyString) {
+    delete userconfig_;
   }
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   if (this != &default_instance()) {
@@ -1451,6 +1456,11 @@ void UserData::Clear() {
     firstlogin_ = GOOGLE_ULONGLONG(0);
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (has_userconfig()) {
+      if (userconfig_ != &::google::protobuf::internal::kEmptyString) {
+        userconfig_->clear();
+      }
+    }
     if (has_stats()) {
       if (stats_ != NULL) stats_->::user::UserActivityStatistics::Clear();
     }
@@ -1579,6 +1589,20 @@ bool UserData::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(74)) goto parse_userConfig;
+        break;
+      }
+
+      // optional bytes userConfig = 9;
+      case 9: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_userConfig:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_userconfig()));
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectTag(82)) goto parse_stats;
         break;
       }
@@ -1658,6 +1682,12 @@ void UserData::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(8, this->firstlogin(), output);
   }
 
+  // optional bytes userConfig = 9;
+  if (has_userconfig()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      9, this->userconfig(), output);
+  }
+
   // optional .user.UserActivityStatistics stats = 10;
   if (has_stats()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
@@ -1728,6 +1758,13 @@ int UserData::ByteSize() const {
 
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // optional bytes userConfig = 9;
+    if (has_userconfig()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->userconfig());
+    }
+
     // optional .user.UserActivityStatistics stats = 10;
     if (has_stats()) {
       total_size += 1 +
@@ -1776,6 +1813,9 @@ void UserData::MergeFrom(const UserData& from) {
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_userconfig()) {
+      set_userconfig(from.userconfig());
+    }
     if (from.has_stats()) {
       mutable_stats()->::user::UserActivityStatistics::MergeFrom(from.stats());
     }
@@ -1807,6 +1847,7 @@ void UserData::Swap(UserData* other) {
     std::swap(phonenumber_, other->phonenumber_);
     std::swap(lastlogin_, other->lastlogin_);
     std::swap(firstlogin_, other->firstlogin_);
+    std::swap(userconfig_, other->userconfig_);
     std::swap(stats_, other->stats_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_cached_size_, other->_cached_size_);

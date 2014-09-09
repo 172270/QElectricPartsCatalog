@@ -40,7 +40,7 @@ public:
 
 private:
     QMap<quint32, Storage> storages;
-    quint32 defaultStorageId = 0;
+    quint32 defaultStorageId;
 
 public:
     //    void Clear();

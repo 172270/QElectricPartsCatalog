@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += network testlib gui
+QT       += network testlib gui sql
 
 
 TARGET = tst_servertests
@@ -34,13 +34,15 @@ HEADERS += \
     tst_servertests.h \
     tst_loginhandler.h \
     tst_user.h \
-    tst_magazine.h
+    tst_magazine.h \
+    tst_sbschema_user.h
 
 SOURCES += tst_servertests.cpp \
     main.cpp \
     tst_loginhandler.cpp \
     tst_user.cpp \
-    tst_magazine.cpp
+    tst_magazine.cpp \
+    tst_sbschema_user.cpp
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../server/release/ -lserver
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../server/debug/ -lserver

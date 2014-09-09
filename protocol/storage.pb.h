@@ -20,10 +20,9 @@
 #endif
 
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message.h>
+#include <google/protobuf/message_lite.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
 namespace storage {
@@ -37,7 +36,7 @@ class Storage;
 
 // ===================================================================
 
-class Storage : public ::google::protobuf::Message {
+class Storage : public ::google::protobuf::MessageLite {
  public:
   Storage();
   virtual ~Storage();
@@ -49,24 +48,24 @@ class Storage : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const Storage& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const Storage* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(Storage* other);
 
   // implements Message ----------------------------------------------
 
   Storage* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const Storage& from);
   void MergeFrom(const Storage& from);
   void Clear();
@@ -77,7 +76,6 @@ class Storage : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -85,7 +83,7 @@ class Storage : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -117,6 +115,13 @@ class Storage : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
+  // optional fixed64 creationDate = 5;
+  inline bool has_creationdate() const;
+  inline void clear_creationdate();
+  static const int kCreationDateFieldNumber = 5;
+  inline ::google::protobuf::uint64 creationdate() const;
+  inline void set_creationdate(::google::protobuf::uint64 value);
+
   // @@protoc_insertion_point(class_scope:storage.Storage)
  private:
   inline void set_has_msgtype();
@@ -125,17 +130,22 @@ class Storage : public ::google::protobuf::Message {
   inline void clear_has_name();
   inline void set_has_id();
   inline void clear_has_id();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  inline void set_has_creationdate();
+  inline void clear_has_creationdate();
 
   ::std::string* name_;
   ::google::protobuf::uint32 msgtype_;
   ::google::protobuf::uint32 id_;
+  ::google::protobuf::uint64 creationdate_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_storage_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_storage_2eproto();
+  #endif
   friend void protobuf_AssignDesc_storage_2eproto();
   friend void protobuf_ShutdownFile_storage_2eproto();
 
@@ -263,19 +273,32 @@ inline void Storage::set_id(::google::protobuf::uint32 value) {
   id_ = value;
 }
 
+// optional fixed64 creationDate = 5;
+inline bool Storage::has_creationdate() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Storage::set_has_creationdate() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Storage::clear_has_creationdate() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void Storage::clear_creationdate() {
+  creationdate_ = GOOGLE_ULONGLONG(0);
+  clear_has_creationdate();
+}
+inline ::google::protobuf::uint64 Storage::creationdate() const {
+  return creationdate_;
+}
+inline void Storage::set_creationdate(::google::protobuf::uint64 value) {
+  set_has_creationdate();
+  creationdate_ = value;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace storage
-
-#ifndef SWIG
-namespace google {
-namespace protobuf {
-
-
-}  // namespace google
-}  // namespace protobuf
-#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

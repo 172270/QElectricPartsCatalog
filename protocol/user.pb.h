@@ -734,6 +734,18 @@ class UserData : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::uint64 firstlogin() const;
   inline void set_firstlogin(::google::protobuf::uint64 value);
 
+  // optional bytes userConfig = 9;
+  inline bool has_userconfig() const;
+  inline void clear_userconfig();
+  static const int kUserConfigFieldNumber = 9;
+  inline const ::std::string& userconfig() const;
+  inline void set_userconfig(const ::std::string& value);
+  inline void set_userconfig(const char* value);
+  inline void set_userconfig(const void* value, size_t size);
+  inline ::std::string* mutable_userconfig();
+  inline ::std::string* release_userconfig();
+  inline void set_allocated_userconfig(::std::string* userconfig);
+
   // optional .user.UserActivityStatistics stats = 10;
   inline bool has_stats() const;
   inline void clear_stats();
@@ -761,6 +773,8 @@ class UserData : public ::google::protobuf::MessageLite {
   inline void clear_has_lastlogin();
   inline void set_has_firstlogin();
   inline void clear_has_firstlogin();
+  inline void set_has_userconfig();
+  inline void clear_has_userconfig();
   inline void set_has_stats();
   inline void clear_has_stats();
 
@@ -772,10 +786,11 @@ class UserData : public ::google::protobuf::MessageLite {
   ::std::string* phonenumber_;
   ::google::protobuf::uint64 lastlogin_;
   ::google::protobuf::uint64 firstlogin_;
+  ::std::string* userconfig_;
   ::user::UserActivityStatistics* stats_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_user_2eproto_impl();
@@ -2014,15 +2029,85 @@ inline void UserData::set_firstlogin(::google::protobuf::uint64 value) {
   firstlogin_ = value;
 }
 
-// optional .user.UserActivityStatistics stats = 10;
-inline bool UserData::has_stats() const {
+// optional bytes userConfig = 9;
+inline bool UserData::has_userconfig() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void UserData::set_has_stats() {
+inline void UserData::set_has_userconfig() {
   _has_bits_[0] |= 0x00000100u;
 }
-inline void UserData::clear_has_stats() {
+inline void UserData::clear_has_userconfig() {
   _has_bits_[0] &= ~0x00000100u;
+}
+inline void UserData::clear_userconfig() {
+  if (userconfig_ != &::google::protobuf::internal::kEmptyString) {
+    userconfig_->clear();
+  }
+  clear_has_userconfig();
+}
+inline const ::std::string& UserData::userconfig() const {
+  return *userconfig_;
+}
+inline void UserData::set_userconfig(const ::std::string& value) {
+  set_has_userconfig();
+  if (userconfig_ == &::google::protobuf::internal::kEmptyString) {
+    userconfig_ = new ::std::string;
+  }
+  userconfig_->assign(value);
+}
+inline void UserData::set_userconfig(const char* value) {
+  set_has_userconfig();
+  if (userconfig_ == &::google::protobuf::internal::kEmptyString) {
+    userconfig_ = new ::std::string;
+  }
+  userconfig_->assign(value);
+}
+inline void UserData::set_userconfig(const void* value, size_t size) {
+  set_has_userconfig();
+  if (userconfig_ == &::google::protobuf::internal::kEmptyString) {
+    userconfig_ = new ::std::string;
+  }
+  userconfig_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserData::mutable_userconfig() {
+  set_has_userconfig();
+  if (userconfig_ == &::google::protobuf::internal::kEmptyString) {
+    userconfig_ = new ::std::string;
+  }
+  return userconfig_;
+}
+inline ::std::string* UserData::release_userconfig() {
+  clear_has_userconfig();
+  if (userconfig_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = userconfig_;
+    userconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserData::set_allocated_userconfig(::std::string* userconfig) {
+  if (userconfig_ != &::google::protobuf::internal::kEmptyString) {
+    delete userconfig_;
+  }
+  if (userconfig) {
+    set_has_userconfig();
+    userconfig_ = userconfig;
+  } else {
+    clear_has_userconfig();
+    userconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional .user.UserActivityStatistics stats = 10;
+inline bool UserData::has_stats() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void UserData::set_has_stats() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void UserData::clear_has_stats() {
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void UserData::clear_stats() {
   if (stats_ != NULL) stats_->::user::UserActivityStatistics::Clear();
