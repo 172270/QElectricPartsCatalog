@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     loginmessagehandler.cpp \
     DB_schema/loginmessage.cpp \
     DB_schema/user.cpp \
-    DB_schema/storege.cpp
+    DB_schema/storege.cpp \
+    DB_schema/dbcreator.cpp
 
 HEADERS += \
     qcatalogserver.h \
@@ -25,7 +26,8 @@ HEADERS += \
     loginmessagehandler.h \
     DB_schema/loginmessage.h \
     DB_schema/user.h \
-    DB_schema/storage.h
+    DB_schema/storage.h \
+    DB_schema/dbcreator.h
 
 LIBS += -lprotobuf
 

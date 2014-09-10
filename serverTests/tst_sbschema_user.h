@@ -8,6 +8,10 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
+#include "DB_schema/dbcreator.h"
+
+#include "db_queries.h"
+
 class tst_dbschema_user : public QObject
 {
     Q_OBJECT
@@ -24,9 +28,16 @@ private slots:
     void cleanupTestCase();
     void cleanup();
 
+    void databaseContains_users_table();
+    void usersTable_containsColumns();
+    void typesAreCorrect();
+
 private:
     QSqlQuery *query;
     QSqlDatabase db;
+    DbCreator *creator;
+
+    db_information_schema_tester *tester;
 };
 
 #endif // TST_SBSCHEMA_USER_H

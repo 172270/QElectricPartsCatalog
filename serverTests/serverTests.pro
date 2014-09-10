@@ -35,7 +35,8 @@ HEADERS += \
     tst_loginhandler.h \
     tst_user.h \
     tst_magazine.h \
-    tst_sbschema_user.h
+    tst_sbschema_user.h \
+    db_queries.h
 
 SOURCES += tst_servertests.cpp \
     main.cpp \

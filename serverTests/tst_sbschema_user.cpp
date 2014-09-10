@@ -14,7 +14,6 @@ void tst_dbschema_user::initTestCase()
 {
     db = QSqlDatabase::addDatabase("QPSQL");
     db.setHostName("localhost");
-//    db.setDatabaseName("ekatalog_tests");
     db.setUserName("postgres");
     db.setPassword("postgres");
 
@@ -23,11 +22,26 @@ void tst_dbschema_user::initTestCase()
         qDebug()<<db.lastError().text();
     }
     query->exec("CREATE DATABASE ekatalog_tests;");
+
+    db.close();
+    db.setDatabaseName("ekatalog_tests");
+
+    if(!db.open()){
+        qDebug()<<db.lastError().text();
+    }
+
+    creator = new DbCreator(this);
+    creator->initialize_database();
+
+    tester = new db_information_schema_tester();
+    tester->setTable("users");
 }
 
 void tst_dbschema_user::cleanupTestCase()
 {
-    //query->exec("DROPDB \"ekatalog_tests\";");
+//    if(!query->exec("DROP table users;")){
+//        qDebug() << query->lastError().text();
+//    }
     if (db.isOpen()){
         db.close();
     }
@@ -37,4 +51,40 @@ void tst_dbschema_user::cleanupTestCase()
 void tst_dbschema_user::cleanup()
 {
 
+}
+
+void tst_dbschema_user::databaseContains_users_table()
+{
+    if( !query->exec ("SELECT EXISTS("
+                      "SELECT true "
+                      "FROM   pg_catalog.pg_class c "
+                      "JOIN   pg_catalog.pg_namespace n ON n.oid = c.relnamespace "
+                      "WHERE  c.relname = 'users' "
+                      "AND    c.relkind = 'r' "
+                      ");"))
+    {
+        qDebug() << query->lastError().text();
+    }
+    query->first();
+
+    QVERIFY(query->size()==1);
+    QVERIFY(query->value(0).toString() == "true" );
+}
+
+void tst_dbschema_user::usersTable_containsColumns()
+{
+    QVERIFY(tester->columnExists("name"));
+    QVERIFY(tester->columnExists("email"));
+    QVERIFY(tester->columnExists("id"));
+    QVERIFY(tester->columnExists("password"));
+    QVERIFY(tester->columnExists("name"));
+    QVERIFY(tester->columnExists("registrationDate"));
+}
+
+void tst_dbschema_user::typesAreCorrect()
+{
+    QVERIFY(tester->columnTypeCorrect("name", "varchar"));
+    QVERIFY(tester->columnTypeCorrect("email", "varchar"));
+    QVERIFY(tester->columnTypeCorrect("id", "int4"));
+    QVERIFY(tester->columnTypeCorrect("password", "bpchar"));
 }
