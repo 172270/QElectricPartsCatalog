@@ -98,3 +98,13 @@ QValidator::State EmailValidator::validate(QString &text, int &pos) const
     return Invalid;
 }
 
+
+QString UserError::text() const
+{
+    return m_text;
+}
+
+void UserError::setText(const QString &text)
+{
+    m_text = text;
+}

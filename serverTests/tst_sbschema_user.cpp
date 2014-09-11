@@ -1,5 +1,7 @@
 #include "tst_sbschema_user.h"
 
+#include "DB_schema/user.h"
+
 tst_dbschema_user::tst_dbschema_user(QObject *parent) :
     QObject(parent)
 {
@@ -35,6 +37,8 @@ void tst_dbschema_user::initTestCase()
 
     tester = new db_information_schema_tester();
     tester->setTable("users");
+
+    database = new PgInterface();
 }
 
 void tst_dbschema_user::cleanupTestCase()
@@ -79,6 +83,7 @@ void tst_dbschema_user::usersTable_containsColumns()
     QVERIFY(tester->columnExists("password"));
     QVERIFY(tester->columnExists("config"));
     QVERIFY(tester->columnExists("registrationDate"));
+    QVERIFY(tester->columnExists("lastlogin"));
     QVERIFY(tester->columnExists("phonenumber"));
 }
 
@@ -90,5 +95,30 @@ void tst_dbschema_user::typesAreCorrect()
     QVERIFY(tester->columnTypeCorrect("id", "int4"));
     QVERIFY(tester->columnTypeCorrect("password", "bpchar"));
     QVERIFY(tester->columnTypeCorrect("registrationDate","timestamp"));
+    QVERIFY(tester->columnTypeCorrect("lastlogin","timestamp"));
     QVERIFY(tester->columnTypeCorrect("config","json"));
 }
+
+void tst_dbschema_user::createUserShoudGiveNewId()
+{
+    User u;
+    u.setName("admin");
+    u.setEmail("cszawisza@gmail.com");
+
+    QVERIFY(database->addUserToDatabase(u,"MY NEW PASSWORD! FUCK YEAH") != 0 );
+}
+
+void tst_dbschema_user::createUserWithSameNameOrEmail_throwaException()
+{
+    User u;
+    u.setName("admin");
+    u.setEmail("sdfsdfsdfs@gmail.com");
+
+    QVERIFY_EXCEPTION_THROWN(database->addUserToDatabase(u,"passwordd"), UserError);
+
+    u.setName("noname");
+    u.setEmail("cszawisza@gmail.com");
+    QVERIFY_EXCEPTION_THROWN(database->addUserToDatabase(u,"passwordd"), UserError);
+}
+
+

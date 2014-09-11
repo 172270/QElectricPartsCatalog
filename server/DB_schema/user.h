@@ -8,6 +8,15 @@
 #include "storage.h"
 #include "user.pb.h"
 
+class UserError{
+public:
+    QString text() const;
+    void setText(const QString &text);
+
+private:
+    QString m_text;
+};
+
 class User : protected user::UserData
 {
 public:

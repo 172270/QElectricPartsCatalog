@@ -22,7 +22,6 @@ DEFINES += PROTOCOL_LIBRARY
 SOURCES += protocol.cpp \
     user.pb.cc \
     stats.pb.cc \
-    ecatalogsocket.cpp \
     storage.pb.cc \
     message_conteiner.pb.cc \
     group.pb.cc
@@ -30,7 +29,6 @@ SOURCES += protocol.cpp \
 HEADERS += protocol.h\
     user.pb.h \
     stats.pb.h \
-    ecatalogsocket.h \
     messagetype.h \
     datastreamsource.h \
     storage.pb.h \

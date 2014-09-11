@@ -11,6 +11,7 @@
 #include "DB_schema/dbcreator.h"
 
 #include "db_queries.h"
+#include "pginterface.h"
 
 class tst_dbschema_user : public QObject
 {
@@ -31,6 +32,8 @@ private slots:
     void databaseContains_users_table();
     void usersTable_containsColumns();
     void typesAreCorrect();
+    void createUserShoudGiveNewId();
+    void createUserWithSameNameOrEmail_throwaException();
 
 private:
     QSqlQuery *query;
@@ -38,6 +41,7 @@ private:
     DbCreator *creator;
 
     db_information_schema_tester *tester;
+    PgInterface *database;
 };
 
 #endif // TST_SBSCHEMA_USER_H

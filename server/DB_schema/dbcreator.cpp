@@ -11,15 +11,15 @@ DbCreator::DbCreator(QObject *parent) :
 
 void DbCreator::initialize_database()
 {
-    if (!query->exec("CREATE TABLE if not exists users ("
-                     "id SERIAL PRIMARY KEY, "
-                     "name  varchar(64) NOT NULL CHECK (name <> ''),"
-                     "password  char(32) NOT NULL CHECK (name <> ''),"
-                     "email  varchar(255),"
-                     "phonenumber char(10),"
-                     "registrationDate TIMESTAMP NOT NULL DEFAULT NOW(),"
-                     "config json"
-                     " );")){
-        qDebug()<<query->lastError().text();
-    }
+    query->exec("CREATE TABLE IF NOT EXISTS users ("
+                "id SERIAL PRIMARY KEY, "
+                "name  varchar(64) NOT NULL UNIQUE CHECK (name <> ''),"
+                "password  char(32) NOT NULL CHECK (name <> ''),"
+                "email  varchar(255) NOT NULL UNIQUE CHECK (name <> ''),"
+                "phonenumber char(10),"
+                "registrationDate TIMESTAMP NOT NULL DEFAULT NOW(),"
+                "lastlogin TIMESTAMP,"
+                "config json"
+                " );");
+
 }
