@@ -39,9 +39,9 @@ void tst_dbschema_user::initTestCase()
 
 void tst_dbschema_user::cleanupTestCase()
 {
-//    if(!query->exec("DROP table users;")){
-//        qDebug() << query->lastError().text();
-//    }
+    if(!query->exec("DROP table users;")){
+        qDebug() << query->lastError().text();
+    }
     if (db.isOpen()){
         db.close();
     }
@@ -77,14 +77,18 @@ void tst_dbschema_user::usersTable_containsColumns()
     QVERIFY(tester->columnExists("email"));
     QVERIFY(tester->columnExists("id"));
     QVERIFY(tester->columnExists("password"));
-    QVERIFY(tester->columnExists("name"));
+    QVERIFY(tester->columnExists("config"));
     QVERIFY(tester->columnExists("registrationDate"));
+    QVERIFY(tester->columnExists("phonenumber"));
 }
 
 void tst_dbschema_user::typesAreCorrect()
 {
     QVERIFY(tester->columnTypeCorrect("name", "varchar"));
     QVERIFY(tester->columnTypeCorrect("email", "varchar"));
+    QVERIFY(tester->columnTypeCorrect("phonenumber", "bpchar"));
     QVERIFY(tester->columnTypeCorrect("id", "int4"));
     QVERIFY(tester->columnTypeCorrect("password", "bpchar"));
+    QVERIFY(tester->columnTypeCorrect("registrationDate","timestamp"));
+    QVERIFY(tester->columnTypeCorrect("config","json"));
 }

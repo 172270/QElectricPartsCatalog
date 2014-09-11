@@ -16,7 +16,9 @@ void DbCreator::initialize_database()
                      "name  varchar(64) NOT NULL CHECK (name <> ''),"
                      "password  char(32) NOT NULL CHECK (name <> ''),"
                      "email  varchar(255),"
-                     "registrationDate TIMESTAMP NOT NULL DEFAULT NOW()"
+                     "phonenumber char(10),"
+                     "registrationDate TIMESTAMP NOT NULL DEFAULT NOW(),"
+                     "config json"
                      " );")){
         qDebug()<<query->lastError().text();
     }
