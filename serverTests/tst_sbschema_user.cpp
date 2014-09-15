@@ -35,9 +35,6 @@ void tst_dbschema_user::initTestCase()
     creator = new DbCreator(this);
     creator->initialize_database();
 
-    tester = new db_information_schema_tester();
-    tester->setTable("users");
-
     database = new PgInterface();
 }
 
@@ -55,48 +52,6 @@ void tst_dbschema_user::cleanupTestCase()
 void tst_dbschema_user::cleanup()
 {
 
-}
-
-void tst_dbschema_user::databaseContains_users_table()
-{
-    if( !query->exec ("SELECT EXISTS("
-                      "SELECT true "
-                      "FROM   pg_catalog.pg_class c "
-                      "JOIN   pg_catalog.pg_namespace n ON n.oid = c.relnamespace "
-                      "WHERE  c.relname = 'users' "
-                      "AND    c.relkind = 'r' "
-                      ");"))
-    {
-        qDebug() << query->lastError().text();
-    }
-    query->first();
-
-    QVERIFY(query->size()==1);
-    QVERIFY(query->value(0).toString() == "true" );
-}
-
-void tst_dbschema_user::usersTable_containsColumns()
-{
-    QVERIFY(tester->columnExists("name"));
-    QVERIFY(tester->columnExists("email"));
-    QVERIFY(tester->columnExists("id"));
-    QVERIFY(tester->columnExists("password"));
-    QVERIFY(tester->columnExists("config"));
-    QVERIFY(tester->columnExists("registrationDate"));
-    QVERIFY(tester->columnExists("lastlogin"));
-    QVERIFY(tester->columnExists("phonenumber"));
-}
-
-void tst_dbschema_user::typesAreCorrect()
-{
-    QVERIFY(tester->columnTypeCorrect("name", "varchar"));
-    QVERIFY(tester->columnTypeCorrect("email", "varchar"));
-    QVERIFY(tester->columnTypeCorrect("phonenumber", "bpchar"));
-    QVERIFY(tester->columnTypeCorrect("id", "int4"));
-    QVERIFY(tester->columnTypeCorrect("password", "bpchar"));
-    QVERIFY(tester->columnTypeCorrect("registrationDate","timestamp"));
-    QVERIFY(tester->columnTypeCorrect("lastlogin","timestamp"));
-    QVERIFY(tester->columnTypeCorrect("config","json"));
 }
 
 void tst_dbschema_user::createUserShoudGiveNewId()
@@ -120,5 +75,12 @@ void tst_dbschema_user::createUserWithSameNameOrEmail_throwaException()
     u.setEmail("cszawisza@gmail.com");
     QVERIFY_EXCEPTION_THROWN(database->addUserToDatabase(u,"passwordd"), UserError);
 }
+
+void tst_dbschema_user::createUserWithoutNeededFields_throwsException()
+{
+    
+}
+
+
 
 

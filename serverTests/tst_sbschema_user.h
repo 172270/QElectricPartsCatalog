@@ -34,6 +34,7 @@ private slots:
     void typesAreCorrect();
     void createUserShoudGiveNewId();
     void createUserWithSameNameOrEmail_throwaException();
+    void createUserWithoutNeededFields_throwsException();
 
 private:
     QSqlQuery *query;
