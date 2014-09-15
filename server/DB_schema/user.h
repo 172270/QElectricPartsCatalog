@@ -13,8 +13,12 @@ public:
     QString text() const;
     void setText(const QString &text);
 
+    int errorNumber() const;
+    void setErrorNumber(int errorNumber);
+
 private:
     QString m_text;
+    int m_errorNumber;
 };
 
 class User : protected user::UserData
@@ -27,7 +31,7 @@ public:
     void clearID(){ clear_id(); }
 
     QString getName() const;
-    void setName(const QString &value);
+    void setName(const QString &name);
     void clearName(){ clear_name(); }
 
     QString getEmail() const;

@@ -25,8 +25,11 @@ private slots:
 
     void userShoudContainName();
     void setName_shoudSetName();
-    void spacesShoudBeRemovedFromName();
+    void nameShoudBeTrimmed();
     void setName_shoudNotAllowEmptyStrings();
+    void nameMustBeLongerThen3Letters();
+    void nameMustBeShorterThen33Letters();
+    void nameCanHaveDotsAndDashes();
 
     void userShoudContainEMail();
     void setEmail_shoudSetEmail();
@@ -35,6 +38,7 @@ private slots:
     void setEmail_ShoudLowerTheLetters();
     void badEmail_ShoudThrowException();
     void goodEmail_shoudNot_throwAnExeption();
+    void defoultIdIsZero();
     void setId_setsID();
 
     void setAddress_setsAddress();

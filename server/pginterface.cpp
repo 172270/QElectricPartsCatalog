@@ -7,14 +7,14 @@ PgInterface::PgInterface()
         db.open();
 }
 
-int PgInterface::addUserToDatabase(User user, QString passwd)
+uint PgInterface::addUser(User user, QString passwd)
 {
     QString q;
     q.append("INSERT INTO USERS ");
     q.append("( name, password, email ) values(:name, :password, :email)");
     if( !query->prepare(q)){
-        qDebug() << query->lastError().text();
         UserError err;
+        err.setErrorNumber(query->lastError().number());
         err.setText(query->lastError().text());
         throw err;
     }
@@ -23,12 +23,18 @@ int PgInterface::addUserToDatabase(User user, QString passwd)
     query->bindValue(":email", user.getEmail() );
 
     if( !query->exec()){
-        qDebug() << query->lastError().text();
         UserError err;
+        err.setErrorNumber(query->lastError().number());
         err.setText(query->lastError().text());
         throw err;
     }
-    return 1;
+
+    return query->lastInsertId().toUInt();
+}
+
+void PgInterface::deleteUser(User user)
+{
+
 }
 
 bool PgInterface::checkUserPassword(User user, QString passwd)

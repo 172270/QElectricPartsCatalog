@@ -10,7 +10,6 @@
 
 #include "DB_schema/dbcreator.h"
 
-#include "db_queries.h"
 #include "pginterface.h"
 
 class tst_dbschema_user : public QObject
@@ -29,10 +28,10 @@ private slots:
     void cleanupTestCase();
     void cleanup();
 
-    void databaseContains_users_table();
-    void usersTable_containsColumns();
-    void typesAreCorrect();
     void createUserShoudGiveNewId();
+    void everyCreatedUser_shoudHaveUniqueId();
+    void getBadUser_returnsEmptyUser();
+    void createdUser_getsRegisterDate();
     void createUserWithSameNameOrEmail_throwaException();
     void createUserWithoutNeededFields_throwsException();
 
@@ -41,7 +40,6 @@ private:
     QSqlDatabase db;
     DbCreator *creator;
 
-    db_information_schema_tester *tester;
     PgInterface *database;
 };
 

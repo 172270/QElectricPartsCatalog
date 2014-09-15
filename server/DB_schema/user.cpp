@@ -13,12 +13,15 @@ QString User::getName() const
     return QString::fromStdString(name());
 }
 
-void User::setName(const QString &value)
+void User::setName(const QString &name)
 {
-    if(!value.size())
-        throw QString("Empty names not allowed!");
-    set_name(value.trimmed().toStdString());
+    // ^\w(?:\w*(?:[.-]\w+)?)*(?<=^.{4,32})$
+    if(name.size()<4)
+        throw QString("Name to short!");
+
+    set_name(name.trimmed().toStdString());
 }
+
 QString User::getEmail() const
 {
     return QString::fromStdString(email());
@@ -108,3 +111,13 @@ void UserError::setText(const QString &text)
 {
     m_text = text;
 }
+int UserError::errorNumber() const
+{
+    return m_errorNumber;
+}
+
+void UserError::setErrorNumber(int errorNumber)
+{
+    m_errorNumber = errorNumber;
+}
+

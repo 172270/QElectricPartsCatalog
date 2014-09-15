@@ -43,7 +43,7 @@ void tst_user::setName_shoudSetName()
     QVERIFY( user->getName() == "stefan" );
 }
 
-void tst_user::spacesShoudBeRemovedFromName()
+void tst_user::nameShoudBeTrimmed()
 {
     QVERIFY( user->getName() == "" );
     user->setName(" stefan");
@@ -53,6 +53,24 @@ void tst_user::spacesShoudBeRemovedFromName()
 void tst_user::setName_shoudNotAllowEmptyStrings()
 {
     QVERIFY_EXCEPTION_THROWN (user->setName(""), QString );
+}
+
+void tst_user::nameMustBeLongerThen3Letters()
+{
+    QVERIFY_EXCEPTION_THROWN (user->setName("aas"), QString );
+}
+
+void tst_user::nameMustBeShorterThen33Letters()
+{
+    QVERIFY_EXCEPTION_THROWN (user->setName("asdfghjklasdfghjklasdfghjklasdfgs"), QString );
+}
+
+void tst_user::nameCanHaveDotsAndDashes()
+{
+    user->setName("abc.def");
+    QVERIFY( user->getName() == "abc.def" );
+    user->setName("abc_def");
+    QVERIFY( user->getName() == "abc_def" );
 }
 
 void tst_user::userShoudContainEMail()
@@ -103,6 +121,11 @@ void tst_user::goodEmail_shoudNot_throwAnExeption()
     catch(QString e){
         QVERIFY(0);
     }
+}
+
+void tst_user::defoultIdIsZero()
+{
+    QVERIFY(user->getID() == 0);
 }
 
 void tst_user::setId_setsID()

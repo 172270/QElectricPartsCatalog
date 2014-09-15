@@ -13,7 +13,9 @@ class PgInterface
 public:
     PgInterface();
 
-    int addUserToDatabase(User user, QString passwd);
+    uint addUser(User user, QString passwd);
+    User getUser(QString uniqueId);
+    void deleteUser(User user);
     bool checkUserPassword(User user, QString passwd);
 private:
     QSqlDatabase db;
