@@ -34,6 +34,10 @@ private slots:
     void createdUser_getsRegisterDate();
     void createUserWithSameNameOrEmail_throwaException();
     void createUserWithoutNeededFields_throwsException();
+    void getUser_getsUser();
+    void getUser_getsUserWithRegistrationDate();
+    void addUserBenchmark();
+    void deleteUser_deletesUser();
 
 private:
     QSqlQuery *query;
@@ -41,6 +45,12 @@ private:
     DbCreator *creator;
 
     PgInterface *database;
+
+    int currentID;
+    int currentEmail;
+
+    QString getUniqueName();
+    QString getUniqueEmail();
 };
 
 #endif // TST_SBSCHEMA_USER_H

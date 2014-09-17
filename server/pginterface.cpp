@@ -10,17 +10,22 @@ PgInterface::PgInterface()
 uint PgInterface::addUser(User user, QString passwd)
 {
     QString q;
+
     q.append("INSERT INTO USERS ");
-    q.append("( name, password, email ) values(:name, :password, :email)");
-    if( !query->prepare(q)){
-        UserError err;
-        err.setErrorNumber(query->lastError().number());
-        err.setText(query->lastError().text());
-        throw err;
-    }
+    q.append("( name, password, email, config" +
+             (user.hasPhoneNumber()? QString(", phonenumber"): QString(""))+
+             (user.hasAddress()? QString(", address"): QString(""))+
+             ") values(:name, :password, :email, :config"+
+             (user.hasPhoneNumber()? QString(", :phonenumber"): QString(""))+
+             (user.hasAddress()? QString(", :address"): QString(""))+
+             +")");
+    query->prepare(q);
     query->bindValue(":name", user.getName() );
     query->bindValue(":password", passwd );
-    query->bindValue(":email", user.getEmail() );
+    query->bindValue(":email",user.hasEmail()?user.getEmail():QString() );
+    query->bindValue(":config", QString(user.getDefaultConfig()) );
+    query->bindValue(":phonenumber", user.getPhoneNumber());
+    query->bindValue(":address", user.getAddress());
 
     if( !query->exec()){
         UserError err;
@@ -32,9 +37,48 @@ uint PgInterface::addUser(User user, QString passwd)
     return query->lastInsertId().toUInt();
 }
 
+User PgInterface::getUserByName(QString name)
+{
+    User u;
+    QString q;
+
+    q.append("SELECT * FROM users WHERE name=:name");
+    query->prepare(q);
+    query->bindValue(":name", name );
+
+    if( !query->exec()){
+        UserError err;
+        err.setErrorNumber(query->lastError().number());
+        err.setText(query->lastError().text());
+        throw err;
+    }
+    u.setName(name);
+    if(query->size() == 1){
+        query->first();
+        u.setID(query->value("id").toUInt());
+        u.setEmail(query->value("email").toString());
+        u.setAddress(query->value("address").toString());
+        u.setPhoneNumber(query->value("phonenumber").toString().trimmed() ); // char field has constant size
+        u.setRegistrationDate(query->value("registrationdate").toDateTime());
+        u.setConfig(query->value("registrationdate").toByteArray() );
+    }
+    return u;
+}
+
 void PgInterface::deleteUser(User user)
 {
+    QString q;
 
+    q.append("delete from users WHERE name=:name");
+    query->prepare(q);
+    query->bindValue(":name", user.getName());
+
+    if( !query->exec()){
+        UserError err;
+        err.setErrorNumber(query->lastError().number());
+        err.setText(query->lastError().text());
+        throw err;
+    }
 }
 
 bool PgInterface::checkUserPassword(User user, QString passwd)

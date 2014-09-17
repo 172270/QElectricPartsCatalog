@@ -13,10 +13,11 @@ void DbCreator::initialize_database()
 {
     query->exec("CREATE TABLE IF NOT EXISTS users ("
                 "id SERIAL PRIMARY KEY, "
-                "name  varchar(64) NOT NULL UNIQUE CHECK (name <> ''),"
+                "name  varchar(34) NOT NULL UNIQUE CHECK (name <> ''),"
                 "password  char(32) NOT NULL CHECK (name <> ''),"
                 "email  varchar(255) NOT NULL UNIQUE CHECK (name <> ''),"
                 "phonenumber char(10),"
+                "address varchar(1024),"
                 "registrationDate TIMESTAMP NOT NULL DEFAULT NOW(),"
                 "lastlogin TIMESTAMP,"
                 "config json"

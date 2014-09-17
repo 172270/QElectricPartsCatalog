@@ -4,6 +4,9 @@
 #include <QString>
 #include <QValidator>
 #include <QDataStream>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QDateTime>
 
 #include "storage.h"
 #include "user.pb.h"
@@ -29,6 +32,7 @@ public:
     int getID(){ return id(); }
     void setID(const int id){ set_id(id);}
     void clearID(){ clear_id(); }
+    bool hasID(){return has_id();}
 
     QString getName() const;
     void setName(const QString &name);
@@ -37,17 +41,30 @@ public:
     QString getEmail() const;
     void setEmail(const QString &value);
     void clearEmail(){ clear_email(); }
+    bool hasEmail(){return has_email();}
 
     Storage getStorage() const;
     void setStorage(const quint32 &value);
     void addStorage(Storage s);
-    int storagesNumber(){ return storages.size(); }
+    int storagesNumber(){ return storages.size();}
 
     void setAddress(const QString adr){ set_address(adr.toStdString() ); }
     QString getAddress() const { return QString::fromStdString(address()); }
+    bool hasAddress() const {return has_address();}
+    void clearAddress();
 
     void setPhoneNumber(const QString &number);
     QString getPhoneNumber() const;
+    bool hasPhoneNumber() const;
+    void clearPhoneNumber();
+
+    void setRegistrationDate( QDateTime registrationDate );
+    QDateTime getRegistrationDate();
+    bool hasRegistrationDate(){return has_firstlogin(); }
+
+    void setConfig(QByteArray conf);
+    bool hasConfig();
+    QByteArray getDefaultConfig();
 
     QByteArray* toArray();
 

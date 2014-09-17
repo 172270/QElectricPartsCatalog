@@ -3,7 +3,7 @@
 #include "DB_schema/user.h"
 
 tst_dbschema_user::tst_dbschema_user(QObject *parent) :
-    QObject(parent)
+    QObject(parent), currentID(0), currentEmail(0)
 {
 }
 
@@ -23,6 +23,7 @@ void tst_dbschema_user::initTestCase()
     if(!db.open()){
         qDebug()<<db.lastError().text();
     }
+
     query->exec("CREATE DATABASE ekatalog_tests;");
 
     db.close();
@@ -31,7 +32,7 @@ void tst_dbschema_user::initTestCase()
     if(!db.open()){
         qDebug()<<db.lastError().text();
     }
-
+    query->exec("DROP table if exists users;");
     creator = new DbCreator(this);
     creator->initialize_database();
 
@@ -80,7 +81,8 @@ void tst_dbschema_user::everyCreatedUser_shoudHaveUniqueId()
 
 void tst_dbschema_user::getBadUser_returnsEmptyUser()
 {
-//    User u = database->getUser("bad_user_zse");
+    User u = database->getUserByName("bad_user_zse");
+    QVERIFY(u.hasID()==false);
 }
 
 void tst_dbschema_user::createdUser_getsRegisterDate()
@@ -105,13 +107,80 @@ void tst_dbschema_user::createUserWithSameNameOrEmail_throwaException()
     QVERIFY_EXCEPTION_THROWN(database->addUser(u2,"passwordd"), UserError);
 }
 
-
-
 void tst_dbschema_user::createUserWithoutNeededFields_throwsException()
 {
     User u;
-    u.setName("admin");
+    u.setName( getUniqueName() );
     QVERIFY_EXCEPTION_THROWN(database->addUser(u,"passwordd"), UserError);
+}
+
+void tst_dbschema_user::getUser_getsUser()
+{
+    User u;
+    u.setName(getUniqueName());
+    u.setEmail(getUniqueEmail());
+    u.setPhoneNumber("123123123");
+    u.setAddress("address USA");
+
+    database->addUser(u,"passwd");
+
+    User u2 = database->getUserByName( u.getName() );
+
+    QVERIFY(u.getName() == u2.getName());
+    QVERIFY(u.getEmail() == u2.getEmail());
+    QVERIFY(u.getPhoneNumber() == u2.getPhoneNumber());
+    QVERIFY(u.getAddress() == u2.getAddress());
+}
+
+void tst_dbschema_user::getUser_getsUserWithRegistrationDate()
+{
+    User u;
+    u.setName(getUniqueName());
+    u.setEmail(getUniqueEmail());
+    u.setPhoneNumber("123123123");
+    u.setAddress("address USA");
+    database->addUser(u,"passwd");
+    User u2 = database->getUserByName( u.getName() );
+
+    QVERIFY(u2.hasRegistrationDate());
+}
+
+void tst_dbschema_user::addUserBenchmark()
+{
+    QBENCHMARK{
+        User u;
+        u.setName(getUniqueName());
+        u.setEmail(getUniqueEmail());
+        u.setPhoneNumber("123123123");
+        u.setAddress("address USA");
+        database->addUser(u,"passwd");
+    }
+}
+
+void tst_dbschema_user::deleteUser_deletesUser()
+{
+    User u;
+    u.setName(getUniqueName());
+    u.setEmail(getUniqueEmail());
+    database->addUser(u,"passwd");
+    User u2 = database->getUserByName( u.getName() );
+    database->deleteUser( u );
+    User u3 = database->getUserByName( u.getName() );
+
+    QVERIFY(u2.hasID() );
+    QVERIFY(!u3.hasID() );
+}
+
+QString tst_dbschema_user::getUniqueName()
+{
+    return QString("exampleUniqueUser") + QString::number(currentID++);
+}
+
+QString tst_dbschema_user::getUniqueEmail()
+{
+    return QString("exampleUniqueEmail")
+            + QString::number(currentID++)
+            + QString("@aa.aa");
 }
 
 

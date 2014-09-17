@@ -6,6 +6,7 @@ User::User() :
     defaultStorageId(0)
 {
     set_msgtype(5);
+    set_userconfig(QString(getDefaultConfig()).toStdString() );
 }
 
 QString User::getName() const
@@ -16,8 +17,10 @@ QString User::getName() const
 void User::setName(const QString &name)
 {
     // ^\w(?:\w*(?:[.-]\w+)?)*(?<=^.{4,32})$
-    if(name.size()<4)
-        throw QString("Name to short!");
+
+    ///TODO name validator
+    if(name.trimmed().size()<4 || name.trimmed().size()> 32)
+        throw QString("Bad length!");
 
     set_name(name.trimmed().toStdString());
 }
@@ -58,6 +61,13 @@ void User::addStorage( Storage s )
     storages.insert(s.getID(), s);
 }
 
+
+
+void User::clearAddress()
+{
+    clear_address();
+}
+
 void User::setPhoneNumber(const QString &number)
 {
     set_phonenumber(number.toStdString());
@@ -66,6 +76,44 @@ void User::setPhoneNumber(const QString &number)
 QString User::getPhoneNumber() const
 {
     return QString::fromStdString(phonenumber());
+}
+
+bool User::hasPhoneNumber() const
+{
+    return has_phonenumber();
+}
+
+void User::clearPhoneNumber()
+{
+    clear_phonenumber();
+}
+
+void User::setRegistrationDate(QDateTime registrationDate)
+{
+    set_firstlogin(registrationDate.toMSecsSinceEpoch());
+}
+
+QDateTime User::getRegistrationDate()
+{
+    return QDateTime::fromMSecsSinceEpoch(firstlogin());
+}
+
+void User::setConfig(QByteArray conf)
+{
+    set_userconfig(QString(conf).toStdString());
+}
+
+bool User::hasConfig()
+{
+    return has_userconfig();
+}
+
+QByteArray User::getDefaultConfig()
+{
+    QJsonObject json;
+    json.insert("last_group", QJsonValue(0));
+
+    return QJsonDocument(json).toJson(QJsonDocument::Compact);
 }
 
 QByteArray* User::toArray()

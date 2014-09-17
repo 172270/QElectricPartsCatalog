@@ -42,7 +42,20 @@ private slots:
     void setId_setsID();
 
     void setAddress_setsAddress();
+    void userHasNoAddressByDefault();
+    void userHasAddressAfterSet();
+    void userHasNoAddressAfterClearingAddress();
+
     void setPhoneNumber_setsPhoneNumber();
+    void userHasNoPhonenumberByDefault();
+    void userHasPhonenumberAfterSet();
+    void userHasNoNumberAfterClearingNumber();
+
+    void userContainDefaultConfiguration();
+
+    void setRegistrationDate_setsRegistrationDate();
+    void userHasNoRegistrationDateByDefault();
+    void userHasRegistrationDateAfterSet();
 
     void user_shoudContainDefaultMagazine();
     void addStorage_ShoudAddStorage();

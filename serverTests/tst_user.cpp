@@ -140,10 +140,70 @@ void tst_user::setAddress_setsAddress()
     QVERIFY(user->getAddress() == "New York, 2/3");
 }
 
+void tst_user::userHasNoAddressByDefault()
+{
+    QVERIFY(user->hasAddress() == false);
+}
+
+void tst_user::userHasAddressAfterSet()
+{
+    user->setAddress("addressskjdfhlasdhfkjash");
+    QVERIFY(user->hasAddress() == true);
+}
+
+void tst_user::userHasNoAddressAfterClearingAddress()
+{
+    user->setAddress("addressskjdfhlasdhfkjash");
+    QVERIFY(user->hasAddress() == true);
+    user->clearAddress();
+    QVERIFY(user->hasAddress() == false);
+}
+
 void tst_user::setPhoneNumber_setsPhoneNumber()
 {
     user->setPhoneNumber( QString("123456789") );
     QVERIFY(user->getPhoneNumber() == "123456789");
+}
+
+void tst_user::userHasNoPhonenumberByDefault()
+{
+    QVERIFY(user->hasPhoneNumber() == false);
+}
+
+void tst_user::userHasPhonenumberAfterSet()
+{
+    user->setPhoneNumber("123456789");
+    QVERIFY(user->hasPhoneNumber() == true);
+}
+
+void tst_user::userHasNoNumberAfterClearingNumber()
+{
+    user->setPhoneNumber("123456789");
+    QVERIFY(user->hasPhoneNumber() == true);
+    user->clearPhoneNumber();
+    QVERIFY(user->hasPhoneNumber() == false);
+}
+
+void tst_user::userContainDefaultConfiguration()
+{
+    QVERIFY(user->hasConfig() == true);
+}
+
+void tst_user::setRegistrationDate_setsRegistrationDate()
+{
+    user->setRegistrationDate(QDateTime( QDate(1991,12,10) ) );
+    QVERIFY(user->getRegistrationDate()==QDateTime( QDate(1991,12,10) ));
+}
+
+void tst_user::userHasNoRegistrationDateByDefault()
+{
+    QVERIFY(user->hasRegistrationDate()==false);
+}
+
+void tst_user::userHasRegistrationDateAfterSet()
+{
+    user->setRegistrationDate(QDateTime( QDate(1991,12,10) ) );
+    QVERIFY(user->hasRegistrationDate()==true);
 }
 
 void tst_user::user_shoudContainDefaultMagazine()

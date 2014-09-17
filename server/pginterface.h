@@ -14,7 +14,7 @@ public:
     PgInterface();
 
     uint addUser(User user, QString passwd);
-    User getUser(QString uniqueId);
+    User getUserByName(QString name);
     void deleteUser(User user);
     bool checkUserPassword(User user, QString passwd);
 private:
