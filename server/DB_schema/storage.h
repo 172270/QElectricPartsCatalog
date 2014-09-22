@@ -2,6 +2,7 @@
 #define MAGAZINE_H
 
 #include <QString>
+#include <QList>
 #include "storage.pb.h"
 
 class Storage : public storage::Storage
@@ -14,7 +15,6 @@ public:
 
     quint32 getID() const;
     void setID(const quint32 &value);
-
 };
 
 #endif // MAGAZINE_H

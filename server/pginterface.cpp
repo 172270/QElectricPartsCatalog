@@ -7,7 +7,7 @@ PgInterface::PgInterface()
         db.open();
 }
 
-uint PgInterface::addUser(User user, QString passwd)
+uint PgInterface::addUser(User &user, QString passwd)
 {
     q.clear();
     q.append("INSERT INTO USERS ");
@@ -96,4 +96,21 @@ bool PgInterface::checkUserPassword(User user, QString passwd)
     query->first();
     QString result = query->value("password").toString().trimmed();
     return (result == passwd)? true : false;
+}
+
+uint PgInterface::addStorage(Storage &storage)
+{
+    q.clear();
+    q.append("INSERT INTO storage(name) VALUES (:name);");
+    query->prepare(q);
+    query->bindValue(":name", storage.getName() );
+    query->exec();
+
+    return query->lastInsertId().toUInt();
+}
+
+QList<Storage> PgInterface::getUserStorages(User user)
+{
+    QList<Storage> storages;
+    return storages;
 }

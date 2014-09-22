@@ -14,10 +14,7 @@ void tst_dbschema_user::init()
 
 void tst_dbschema_user::initTestCase()
 {
-    db = QSqlDatabase::addDatabase("QPSQL");
-    db.setHostName("localhost");
-    db.setUserName("postgres");
-    db.setPassword("postgres");
+    db = QSqlDatabase::database();
 
     query = new QSqlQuery(db);
     if(!db.open()){
@@ -53,7 +50,7 @@ void tst_dbschema_user::cleanupTestCase()
     if (db.isOpen()){
         db.close();
     }
-    delete query;
+
 }
 
 void tst_dbschema_user::cleanup()

@@ -17,7 +17,7 @@ class tst_dbschema_user : public QObject
     Q_OBJECT
 public:
     explicit tst_dbschema_user(QObject *parent = 0);
-
+    ~tst_dbschema_user(){delete query;}
 signals:
 
 public slots:
@@ -52,7 +52,6 @@ private:
 
     int currentID;
     int currentEmail;
-
     QString getUniqueName();
     QString getUniqueEmail();
 };
