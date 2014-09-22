@@ -1,4 +1,4 @@
-#include "tst_sbschema_user.h"
+#include "tst_dbschema_user.h"
 
 #include "DB_schema/user.h"
 
@@ -41,6 +41,12 @@ void tst_dbschema_user::initTestCase()
 
 void tst_dbschema_user::cleanupTestCase()
 {
+    if(!query->exec("DROP table user_magazines;")){
+        qDebug() << query->lastError().text();
+    }
+    if(!query->exec("DROP table storage;")){
+        qDebug() << query->lastError().text();
+    }
     if(!query->exec("DROP table users;")){
         qDebug() << query->lastError().text();
     }
@@ -67,12 +73,12 @@ void tst_dbschema_user::createUserShoudGiveNewId()
 void tst_dbschema_user::everyCreatedUser_shoudHaveUniqueId()
 {
     User u1, u2, u3;
-    u1.setName("exampleUser10");
-    u1.setEmail("exampleUser10@example.com");
-    u2.setName("exampleUser11");
-    u2.setEmail("exampleUser11@example.com");
-    u3.setName("exampleUser12");
-    u3.setEmail("exampleUser12@example.com");
+    u1.setName(getUniqueName());
+    u1.setEmail(getUniqueEmail());
+    u2.setName(getUniqueName());
+    u2.setEmail(getUniqueEmail());
+    u3.setName(getUniqueName());
+    u3.setEmail(getUniqueEmail());
 
     uint startId = database->addUser(u1,"passwd");
     QVERIFY(database->addUser(u2,"passwd") == startId+1);
@@ -87,11 +93,14 @@ void tst_dbschema_user::getBadUser_returnsEmptyUser()
 
 void tst_dbschema_user::createdUser_getsRegisterDate()
 {
-    User u;
-    u.setName("exampleUser1");
-    u.setEmail("exampleuser1@example.ex");
+    User u1, u2;
+    u1.setName("exampleUser1");
+    u1.setEmail("exampleuser1@example.ex");
 
-    QVERIFY(database->addUser(u,"examplePasswd") != 0 );
+    database->addUser(u1,"examplePasswd");
+    QVERIFY(u2.hasRegistrationDate()==false);
+    u2 = database->getUserByName(u1.getName());
+    QVERIFY(u2.hasRegistrationDate() );
 }
 
 void tst_dbschema_user::createUserWithSameNameOrEmail_throwaException()
@@ -169,6 +178,27 @@ void tst_dbschema_user::deleteUser_deletesUser()
 
     QVERIFY(u2.hasID() );
     QVERIFY(!u3.hasID() );
+}
+
+void tst_dbschema_user::checkPassword_returnFalseIfWrongPassword()
+{
+    User u;
+    u.setName(getUniqueName());
+    u.setEmail(getUniqueEmail());
+
+    database->addUser(u,"good");
+
+    QVERIFY(database->checkUserPassword(u,"BAD") == false);
+    QVERIFY(database->checkUserPassword(u,"good") == true);
+
+    u.setName(getUniqueName());
+    QVERIFY(database->checkUserPassword(u,"BAD") == false);
+    QVERIFY(database->checkUserPassword(u,"good") == false);
+}
+
+void tst_dbschema_user::createUser_createsDefaultMagazine()
+{
+
 }
 
 QString tst_dbschema_user::getUniqueName()

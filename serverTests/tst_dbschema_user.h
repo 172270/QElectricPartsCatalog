@@ -39,6 +39,10 @@ private slots:
     void addUserBenchmark();
     void deleteUser_deletesUser();
 
+    void checkPassword_returnFalseIfWrongPassword();
+
+    void createUser_createsDefaultMagazine();
+
 private:
     QSqlQuery *query;
     QSqlDatabase db;

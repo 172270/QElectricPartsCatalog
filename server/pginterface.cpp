@@ -9,8 +9,7 @@ PgInterface::PgInterface()
 
 uint PgInterface::addUser(User user, QString passwd)
 {
-    QString q;
-
+    q.clear();
     q.append("INSERT INTO USERS ");
     q.append("( name, password, email, config" +
              (user.hasPhoneNumber()? QString(", phonenumber"): QString(""))+
@@ -40,8 +39,7 @@ uint PgInterface::addUser(User user, QString passwd)
 User PgInterface::getUserByName(QString name)
 {
     User u;
-    QString q;
-
+    q.clear();
     q.append("SELECT * FROM users WHERE name=:name");
     query->prepare(q);
     query->bindValue(":name", name );
@@ -67,8 +65,7 @@ User PgInterface::getUserByName(QString name)
 
 void PgInterface::deleteUser(User user)
 {
-    QString q;
-
+    q.clear();
     q.append("delete from users WHERE name=:name");
     query->prepare(q);
     query->bindValue(":name", user.getName());
@@ -83,5 +80,20 @@ void PgInterface::deleteUser(User user)
 
 bool PgInterface::checkUserPassword(User user, QString passwd)
 {
-    return 2;
+    q.clear();
+    q.append("select password from users WHERE name=:name");
+    query->prepare(q);
+    query->bindValue(":name", user.getName());
+    if(!query->exec()){
+        UserError err;
+        err.setErrorNumber(query->lastError().number());
+        err.setText(query->lastError().text());
+        throw err;
+    }
+    if(query->size() != 1){
+        return false;
+    }
+    query->first();
+    QString result = query->value("password").toString().trimmed();
+    return (result == passwd)? true : false;
 }

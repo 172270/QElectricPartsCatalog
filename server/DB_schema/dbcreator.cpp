@@ -22,5 +22,17 @@ void DbCreator::initialize_database()
                 "lastlogin TIMESTAMP,"
                 "config json"
                 " );");
-
+    query->exec("CREATE TABLE \"public\".\"storage\" ("
+                "\"id\" serial NOT NULL , "
+                "\"name\" varchar(255) , "
+                "\"creationDate\" TIMESTAMP NOT NULL DEFAULT NOW() "
+                ");");
+    query->exec("ALTER TABLE \"public\".\"storage\" ADD PRIMARY KEY ( \"id\" );");
+    query->exec("ALTER TABLE \"public\".\"storage\" ADD CONSTRAINT \"storage_uk\" UNIQUE ( \"name\" );");
+    query->exec("CREATE TABLE \"public\".\"user_magazines\" ("
+                "\"storage_id\" integer NOT NULL , "
+                "\"users_id\" integer NOT NULL"
+                "); ");
+    query->exec("ALTER TABLE \"public\".\"user_magazines\" ADD FOREIGN KEY ( \"storage_id\" ) REFERENCES \"public\".\"storage\" ( \"id\" ) MATCH FULL  ON DELETE  NO ACTION  ON UPDATE  NO ACTION;");
+    query->exec("ALTER TABLE \"public\".\"user_magazines\" ADD FOREIGN KEY ( \"users_id\" ) REFERENCES \"public\".\"users\" ( \"id\" ) MATCH FULL  ON DELETE  NO ACTION  ON UPDATE  NO ACTION;");
 }

@@ -20,6 +20,7 @@ public:
 private:
     QSqlDatabase db;
     QSqlQuery *query;
+    QString q;
 };
 
 #endif // PGINTERFACE_H
