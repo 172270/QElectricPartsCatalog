@@ -10,6 +10,7 @@ void tst_user::user_ShoudCreatePbMessage()
     setRequiredFields();
     QByteArray *ba = user->toArray();
     QVERIFY( ba->size() > 0 );
+    delete ba;
 }
 
 
@@ -278,8 +279,9 @@ void tst_user::toArray_createsAByteArray()
 
     QByteArray *ba = user->toArray();
 
-    QVERIFY(ba->size() > 0);}
-
+    QVERIFY(ba->size() > 0);
+    delete ba;
+}
 void tst_user::toArray_createsAProperMessage()
 {
     setRequiredFields();
@@ -291,4 +293,5 @@ void tst_user::toArray_createsAProperMessage()
     User decodedUser;
     decodedUser.fromArray(ba);
     QVERIFY(*ba == *decodedUser.toArray() );
+    delete ba;
 }

@@ -46,6 +46,8 @@ public:
     Storage getStorage() const;
     void setStorage(const quint32 &value);
     void addStorage(Storage s);
+    void addStorages(QList<Storage> storages);
+    QList<Storage> getStoragesList();
     int storagesNumber(){ return storages.size();}
 
     void setAddress(const QString adr){ set_address(adr.toStdString() ); }

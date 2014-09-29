@@ -46,7 +46,10 @@ void User::setEmail(const QString &value)
 }
 Storage User::getStorage() const
 {
-    return storages[defaultStorageId];
+    if(storages.size() == 1){
+        return storages.first();
+    }
+    return storages.value(defaultStorageId, Storage());
 }
 
 void User::setStorage(const quint32 &value)
@@ -61,7 +64,22 @@ void User::addStorage( Storage s )
     storages.insert(s.getID(), s);
 }
 
+void User::addStorages(QList<Storage> st)
+{
+    foreach (Storage s, st){
+        storages.insert(s.getID(), s);
+    }
+}
 
+QList<Storage> User::getStoragesList()
+{
+    QList<quint32> kays = storages.keys();
+    QList<Storage> s;
+    foreach (int kay, kays) {
+        s.append(storages.value(kay));
+    }
+    return s;
+}
 
 void User::clearAddress()
 {

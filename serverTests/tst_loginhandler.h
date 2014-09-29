@@ -20,7 +20,6 @@ private slots:
 
 private:
 
-//    LoginMessage *msg;
 };
 
 #endif // TST_LOGINHANDLER_H

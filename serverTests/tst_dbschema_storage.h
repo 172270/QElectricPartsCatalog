@@ -33,6 +33,7 @@ private:
     QSqlDatabase db;
     DbCreator *creator;
     PgInterface *database;
+    void removeTable(QString tblName);
 };
 
 #endif // TST_DBSCHEMA_STORAGE_H

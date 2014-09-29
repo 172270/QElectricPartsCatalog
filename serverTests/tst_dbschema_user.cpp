@@ -29,28 +29,40 @@ void tst_dbschema_user::initTestCase()
     if(!db.open()){
         qDebug()<<db.lastError().text();
     }
-    query->exec("DROP table if exists users;");
+
+    if(!query->exec("DROP schema public cascade;")){
+        qDebug() << query->lastError().text();
+    }
+    QTest::qSleep(10);
+    if(!query->exec("create schema public;")){
+        qDebug() << query->lastError().text();
+    }
     creator = new DbCreator(this);
     creator->initialize_database();
 
     database = new PgInterface();
 }
 
+void tst_dbschema_user::removeTable(QString tblName)
+{
+    if(!query->exec("DROP table " + tblName + ";")){
+        qDebug() << query->lastError().text();
+    }
+}
+
 void tst_dbschema_user::cleanupTestCase()
 {
-    if(!query->exec("DROP table user_magazines;")){
+    if(!query->exec("DROP schema public cascade;")){
         qDebug() << query->lastError().text();
     }
-    if(!query->exec("DROP table storage;")){
+    if(!query->exec("create schema public;")){
         qDebug() << query->lastError().text();
     }
-    if(!query->exec("DROP table users;")){
-        qDebug() << query->lastError().text();
-    }
+
     if (db.isOpen()){
         db.close();
     }
-
+    delete query;
 }
 
 void tst_dbschema_user::cleanup()
@@ -136,32 +148,22 @@ void tst_dbschema_user::getUser_getsUser()
     QVERIFY(u.getEmail() == u2.getEmail());
     QVERIFY(u.getPhoneNumber() == u2.getPhoneNumber());
     QVERIFY(u.getAddress() == u2.getAddress());
-}
-
-void tst_dbschema_user::getUser_getsUserWithRegistrationDate()
-{
-    User u;
-    u.setName(getUniqueName());
-    u.setEmail(getUniqueEmail());
-    u.setPhoneNumber("123123123");
-    u.setAddress("address USA");
-    database->addUser(u,"passwd");
-    User u2 = database->getUserByName( u.getName() );
 
     QVERIFY(u2.hasRegistrationDate());
+    QVERIFY(u2.getStorage().getID() != 0);
 }
 
-void tst_dbschema_user::addUserBenchmark()
-{
-    QBENCHMARK{
-        User u;
-        u.setName(getUniqueName());
-        u.setEmail(getUniqueEmail());
-        u.setPhoneNumber("123123123");
-        u.setAddress("address USA");
-        database->addUser(u,"passwd");
-    }
-}
+//void tst_dbschema_user::addUserBenchmark()
+//{
+//    QBENCHMARK{
+//        User u;
+//        u.setName(getUniqueName());
+//        u.setEmail(getUniqueEmail());
+//        u.setPhoneNumber("123123123");
+//        u.setAddress("address USA");
+//        database->addUser(u,"passwd");
+//    }
+//}
 
 void tst_dbschema_user::deleteUser_deletesUser()
 {
@@ -193,10 +195,24 @@ void tst_dbschema_user::checkPassword_returnFalseIfWrongPassword()
     QVERIFY(database->checkUserPassword(u,"good") == false);
 }
 
-void tst_dbschema_user::createUser_createsDefaultMagazine()
+void tst_dbschema_user::addMagazineToUser()
 {
+    User u;
+    u.setName( getUniqueName() );
+    u.setEmail( getUniqueEmail() );
 
+    Storage s;
+    s.setName("someName");
+
+    u.setID(database->addUser(u,"asdadscf" ));
+    s.setID(database->addStorage( s ));
+    database->linkStorageToUser(u, s);
+
+    QVERIFY(u.getStoragesList().size() == 2 );
 }
+
+
+//void
 
 QString tst_dbschema_user::getUniqueName()
 {

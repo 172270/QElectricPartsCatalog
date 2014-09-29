@@ -27,24 +27,35 @@ void tst_dbschema_storage::initTestCase()
     if(!db.open()){
         qDebug()<<db.lastError().text();
     }
-    query->exec("DROP table if exists users;");
+    if(!query->exec("DROP schema public cascade;")){
+        qDebug() << query->lastError().text();
+    }
+    QTest::qSleep(10);
+    if(!query->exec("create schema public;")){
+        qDebug() << query->lastError().text();
+    }
+
     creator = new DbCreator(this);
     creator->initialize_database();
-
+    delete creator;
     database = new PgInterface();
 }
-
+void tst_dbschema_storage::removeTable(QString tblName)
+{
+    if(!query->exec("DROP table " + tblName + ";")){
+        qDebug() << query->lastError().text();
+    }
+}
 void tst_dbschema_storage::cleanupTestCase()
 {
-    if(!query->exec("DROP table user_magazines;")){
+
+    if(!query->exec("DROP schema public cascade;")){
         qDebug() << query->lastError().text();
     }
-    if(!query->exec("DROP table storage;")){
+    if(!query->exec("create schema public;")){
         qDebug() << query->lastError().text();
     }
-    if(!query->exec("DROP table users;")){
-        qDebug() << query->lastError().text();
-    }
+
     if (db.isOpen()){
         db.close();
     }
@@ -58,7 +69,7 @@ void tst_dbschema_storage::cleanup()
 
 void tst_dbschema_storage::createStorege_givesID()
 {
-    int id = 0;
+    uint id = 0;
     Storage s;
     s.setName("some");
     QVERIFY(database->addStorage(s) != id);

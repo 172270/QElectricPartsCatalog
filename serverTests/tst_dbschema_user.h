@@ -17,7 +17,9 @@ class tst_dbschema_user : public QObject
     Q_OBJECT
 public:
     explicit tst_dbschema_user(QObject *parent = 0);
-    ~tst_dbschema_user(){delete query;}
+    ~tst_dbschema_user(){
+    }
+    void removeTable(QString tblName);
 signals:
 
 public slots:
@@ -35,13 +37,13 @@ private slots:
     void createUserWithSameNameOrEmail_throwaException();
     void createUserWithoutNeededFields_throwsException();
     void getUser_getsUser();
-    void getUser_getsUserWithRegistrationDate();
-    void addUserBenchmark();
+
+//    void addUserBenchmark();
     void deleteUser_deletesUser();
 
     void checkPassword_returnFalseIfWrongPassword();
 
-    void createUser_createsDefaultMagazine();
+    void addMagazineToUser();
 
 private:
     QSqlQuery *query;
