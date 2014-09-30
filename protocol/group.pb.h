@@ -25,14 +25,130 @@
 #include <google/protobuf/extension_set.h>
 // @@protoc_insertion_point(includes)
 
+namespace groups {
+
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_group_2eproto();
 void protobuf_AssignDesc_group_2eproto();
 void protobuf_ShutdownFile_group_2eproto();
 
+class Parameter;
 class Group;
 
 // ===================================================================
+
+class Parameter : public ::google::protobuf::MessageLite {
+ public:
+  Parameter();
+  virtual ~Parameter();
+
+  Parameter(const Parameter& from);
+
+  inline Parameter& operator=(const Parameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const Parameter& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const Parameter* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(Parameter* other);
+
+  // implements Message ----------------------------------------------
+
+  Parameter* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const Parameter& from);
+  void MergeFrom(const Parameter& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string name = 1;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 1;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const char* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
+
+  // required int32 type = 2;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 2;
+  inline ::google::protobuf::int32 type() const;
+  inline void set_type(::google::protobuf::int32 value);
+
+  // required string parameterConfig = 3;
+  inline bool has_parameterconfig() const;
+  inline void clear_parameterconfig();
+  static const int kParameterConfigFieldNumber = 3;
+  inline const ::std::string& parameterconfig() const;
+  inline void set_parameterconfig(const ::std::string& value);
+  inline void set_parameterconfig(const char* value);
+  inline void set_parameterconfig(const char* value, size_t size);
+  inline ::std::string* mutable_parameterconfig();
+  inline ::std::string* release_parameterconfig();
+  inline void set_allocated_parameterconfig(::std::string* parameterconfig);
+
+  // @@protoc_insertion_point(class_scope:groups.Parameter)
+ private:
+  inline void set_has_name();
+  inline void clear_has_name();
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_parameterconfig();
+  inline void clear_has_parameterconfig();
+
+  ::std::string* name_;
+  ::std::string* parameterconfig_;
+  ::google::protobuf::int32 type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_group_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_group_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_group_2eproto();
+  friend void protobuf_ShutdownFile_group_2eproto();
+
+  void InitAsDefaultInstance();
+  static Parameter* default_instance_;
+};
+// -------------------------------------------------------------------
 
 class Group : public ::google::protobuf::MessageLite {
  public:
@@ -134,10 +250,22 @@ class Group : public ::google::protobuf::MessageLite {
   inline bool allowitems() const;
   inline void set_allowitems(bool value);
 
-  // optional string description = 8;
+  // repeated .groups.Parameter parameters = 8;
+  inline int parameters_size() const;
+  inline void clear_parameters();
+  static const int kParametersFieldNumber = 8;
+  inline const ::groups::Parameter& parameters(int index) const;
+  inline ::groups::Parameter* mutable_parameters(int index);
+  inline ::groups::Parameter* add_parameters();
+  inline const ::google::protobuf::RepeatedPtrField< ::groups::Parameter >&
+      parameters() const;
+  inline ::google::protobuf::RepeatedPtrField< ::groups::Parameter >*
+      mutable_parameters();
+
+  // optional string description = 9;
   inline bool has_description() const;
   inline void clear_description();
-  static const int kDescriptionFieldNumber = 8;
+  static const int kDescriptionFieldNumber = 9;
   inline const ::std::string& description() const;
   inline void set_description(const ::std::string& value);
   inline void set_description(const char* value);
@@ -146,7 +274,14 @@ class Group : public ::google::protobuf::MessageLite {
   inline ::std::string* release_description();
   inline void set_allocated_description(::std::string* description);
 
-  // @@protoc_insertion_point(class_scope:Group)
+  // optional uint64 creationDate = 10;
+  inline bool has_creationdate() const;
+  inline void clear_creationdate();
+  static const int kCreationDateFieldNumber = 10;
+  inline ::google::protobuf::uint64 creationdate() const;
+  inline void set_creationdate(::google::protobuf::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:groups.Group)
  private:
   inline void set_has_msgtype();
   inline void clear_has_msgtype();
@@ -162,6 +297,8 @@ class Group : public ::google::protobuf::MessageLite {
   inline void clear_has_allowitems();
   inline void set_has_description();
   inline void clear_has_description();
+  inline void set_has_creationdate();
+  inline void clear_has_creationdate();
 
   ::std::string* name_;
   ::google::protobuf::uint32 msgtype_;
@@ -169,10 +306,12 @@ class Group : public ::google::protobuf::MessageLite {
   ::google::protobuf::uint32 parentid_;
   bool allowsets_;
   bool allowitems_;
+  ::google::protobuf::RepeatedPtrField< ::groups::Parameter > parameters_;
   ::std::string* description_;
+  ::google::protobuf::uint64 creationdate_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_group_2eproto_impl();
@@ -189,6 +328,172 @@ class Group : public ::google::protobuf::MessageLite {
 
 
 // ===================================================================
+
+// Parameter
+
+// required string name = 1;
+inline bool Parameter::has_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Parameter::set_has_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Parameter::clear_has_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Parameter::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
+}
+inline const ::std::string& Parameter::name() const {
+  return *name_;
+}
+inline void Parameter::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void Parameter::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void Parameter::set_name(const char* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Parameter::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* Parameter::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Parameter::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required int32 type = 2;
+inline bool Parameter::has_type() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Parameter::set_has_type() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Parameter::clear_has_type() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Parameter::clear_type() {
+  type_ = 0;
+  clear_has_type();
+}
+inline ::google::protobuf::int32 Parameter::type() const {
+  return type_;
+}
+inline void Parameter::set_type(::google::protobuf::int32 value) {
+  set_has_type();
+  type_ = value;
+}
+
+// required string parameterConfig = 3;
+inline bool Parameter::has_parameterconfig() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Parameter::set_has_parameterconfig() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Parameter::clear_has_parameterconfig() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void Parameter::clear_parameterconfig() {
+  if (parameterconfig_ != &::google::protobuf::internal::kEmptyString) {
+    parameterconfig_->clear();
+  }
+  clear_has_parameterconfig();
+}
+inline const ::std::string& Parameter::parameterconfig() const {
+  return *parameterconfig_;
+}
+inline void Parameter::set_parameterconfig(const ::std::string& value) {
+  set_has_parameterconfig();
+  if (parameterconfig_ == &::google::protobuf::internal::kEmptyString) {
+    parameterconfig_ = new ::std::string;
+  }
+  parameterconfig_->assign(value);
+}
+inline void Parameter::set_parameterconfig(const char* value) {
+  set_has_parameterconfig();
+  if (parameterconfig_ == &::google::protobuf::internal::kEmptyString) {
+    parameterconfig_ = new ::std::string;
+  }
+  parameterconfig_->assign(value);
+}
+inline void Parameter::set_parameterconfig(const char* value, size_t size) {
+  set_has_parameterconfig();
+  if (parameterconfig_ == &::google::protobuf::internal::kEmptyString) {
+    parameterconfig_ = new ::std::string;
+  }
+  parameterconfig_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Parameter::mutable_parameterconfig() {
+  set_has_parameterconfig();
+  if (parameterconfig_ == &::google::protobuf::internal::kEmptyString) {
+    parameterconfig_ = new ::std::string;
+  }
+  return parameterconfig_;
+}
+inline ::std::string* Parameter::release_parameterconfig() {
+  clear_has_parameterconfig();
+  if (parameterconfig_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = parameterconfig_;
+    parameterconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Parameter::set_allocated_parameterconfig(::std::string* parameterconfig) {
+  if (parameterconfig_ != &::google::protobuf::internal::kEmptyString) {
+    delete parameterconfig_;
+  }
+  if (parameterconfig) {
+    set_has_parameterconfig();
+    parameterconfig_ = parameterconfig;
+  } else {
+    clear_has_parameterconfig();
+    parameterconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
 
 // Group
 
@@ -372,15 +677,40 @@ inline void Group::set_allowitems(bool value) {
   allowitems_ = value;
 }
 
-// optional string description = 8;
+// repeated .groups.Parameter parameters = 8;
+inline int Group::parameters_size() const {
+  return parameters_.size();
+}
+inline void Group::clear_parameters() {
+  parameters_.Clear();
+}
+inline const ::groups::Parameter& Group::parameters(int index) const {
+  return parameters_.Get(index);
+}
+inline ::groups::Parameter* Group::mutable_parameters(int index) {
+  return parameters_.Mutable(index);
+}
+inline ::groups::Parameter* Group::add_parameters() {
+  return parameters_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::groups::Parameter >&
+Group::parameters() const {
+  return parameters_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::groups::Parameter >*
+Group::mutable_parameters() {
+  return &parameters_;
+}
+
+// optional string description = 9;
 inline bool Group::has_description() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void Group::set_has_description() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void Group::clear_has_description() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void Group::clear_description() {
   if (description_ != &::google::protobuf::internal::kEmptyString) {
@@ -442,8 +772,32 @@ inline void Group::set_allocated_description(::std::string* description) {
   }
 }
 
+// optional uint64 creationDate = 10;
+inline bool Group::has_creationdate() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void Group::set_has_creationdate() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void Group::clear_has_creationdate() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void Group::clear_creationdate() {
+  creationdate_ = GOOGLE_ULONGLONG(0);
+  clear_has_creationdate();
+}
+inline ::google::protobuf::uint64 Group::creationdate() const {
+  return creationdate_;
+}
+inline void Group::set_creationdate(::google::protobuf::uint64 value) {
+  set_has_creationdate();
+  creationdate_ = value;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace groups
 
 // @@protoc_insertion_point(global_scope)
 

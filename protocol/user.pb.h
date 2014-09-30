@@ -23,6 +23,7 @@
 #include <google/protobuf/message_lite.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include "storage.pb.h"
 #include "stats.pb.h"
 // @@protoc_insertion_point(includes)
 
@@ -696,6 +697,18 @@ class UserData : public ::google::protobuf::MessageLite {
   inline ::std::string* release_email();
   inline void set_allocated_email(::std::string* email);
 
+  // repeated .storage.Storage storages = 11;
+  inline int storages_size() const;
+  inline void clear_storages();
+  static const int kStoragesFieldNumber = 11;
+  inline const ::storage::Storage& storages(int index) const;
+  inline ::storage::Storage* mutable_storages(int index);
+  inline ::storage::Storage* add_storages();
+  inline const ::google::protobuf::RepeatedPtrField< ::storage::Storage >&
+      storages() const;
+  inline ::google::protobuf::RepeatedPtrField< ::storage::Storage >*
+      mutable_storages();
+
   // optional string address = 5;
   inline bool has_address() const;
   inline void clear_address();
@@ -782,6 +795,7 @@ class UserData : public ::google::protobuf::MessageLite {
   ::google::protobuf::uint32 id_;
   ::std::string* name_;
   ::std::string* email_;
+  ::google::protobuf::RepeatedPtrField< ::storage::Storage > storages_;
   ::std::string* address_;
   ::std::string* phonenumber_;
   ::google::protobuf::uint64 lastlogin_;
@@ -790,7 +804,7 @@ class UserData : public ::google::protobuf::MessageLite {
   ::user::UserActivityStatistics* stats_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_user_2eproto_impl();
@@ -1845,15 +1859,40 @@ inline void UserData::set_allocated_email(::std::string* email) {
   }
 }
 
+// repeated .storage.Storage storages = 11;
+inline int UserData::storages_size() const {
+  return storages_.size();
+}
+inline void UserData::clear_storages() {
+  storages_.Clear();
+}
+inline const ::storage::Storage& UserData::storages(int index) const {
+  return storages_.Get(index);
+}
+inline ::storage::Storage* UserData::mutable_storages(int index) {
+  return storages_.Mutable(index);
+}
+inline ::storage::Storage* UserData::add_storages() {
+  return storages_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::storage::Storage >&
+UserData::storages() const {
+  return storages_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::storage::Storage >*
+UserData::mutable_storages() {
+  return &storages_;
+}
+
 // optional string address = 5;
 inline bool UserData::has_address() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void UserData::set_has_address() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void UserData::clear_has_address() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void UserData::clear_address() {
   if (address_ != &::google::protobuf::internal::kEmptyString) {
@@ -1917,13 +1956,13 @@ inline void UserData::set_allocated_address(::std::string* address) {
 
 // optional bytes phoneNumber = 6;
 inline bool UserData::has_phonenumber() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void UserData::set_has_phonenumber() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000040u;
 }
 inline void UserData::clear_has_phonenumber() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void UserData::clear_phonenumber() {
   if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
@@ -1987,13 +2026,13 @@ inline void UserData::set_allocated_phonenumber(::std::string* phonenumber) {
 
 // optional uint64 lastLogin = 7;
 inline bool UserData::has_lastlogin() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void UserData::set_has_lastlogin() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void UserData::clear_has_lastlogin() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void UserData::clear_lastlogin() {
   lastlogin_ = GOOGLE_ULONGLONG(0);
@@ -2009,13 +2048,13 @@ inline void UserData::set_lastlogin(::google::protobuf::uint64 value) {
 
 // optional uint64 firstLogin = 8;
 inline bool UserData::has_firstlogin() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void UserData::set_has_firstlogin() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000100u;
 }
 inline void UserData::clear_has_firstlogin() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void UserData::clear_firstlogin() {
   firstlogin_ = GOOGLE_ULONGLONG(0);
@@ -2031,13 +2070,13 @@ inline void UserData::set_firstlogin(::google::protobuf::uint64 value) {
 
 // optional bytes userConfig = 9;
 inline bool UserData::has_userconfig() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void UserData::set_has_userconfig() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void UserData::clear_has_userconfig() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void UserData::clear_userconfig() {
   if (userconfig_ != &::google::protobuf::internal::kEmptyString) {
@@ -2101,13 +2140,13 @@ inline void UserData::set_allocated_userconfig(::std::string* userconfig) {
 
 // optional .user.UserActivityStatistics stats = 10;
 inline bool UserData::has_stats() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void UserData::set_has_stats() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void UserData::clear_has_stats() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void UserData::clear_stats() {
   if (stats_ != NULL) stats_->::user::UserActivityStatistics::Clear();

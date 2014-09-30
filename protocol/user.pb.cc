@@ -36,6 +36,7 @@ void protobuf_AddDesc_user_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 #endif
+  ::storage::protobuf_AddDesc_storage_2eproto();
   ::protobuf_AddDesc_stats_2eproto();
   LoginRequest::default_instance_ = new LoginRequest();
   LogoutRequest::default_instance_ = new LogoutRequest();
@@ -1336,6 +1337,7 @@ const int UserData::kMsgTypeFieldNumber;
 const int UserData::kIDFieldNumber;
 const int UserData::kNameFieldNumber;
 const int UserData::kEmailFieldNumber;
+const int UserData::kStoragesFieldNumber;
 const int UserData::kAddressFieldNumber;
 const int UserData::kPhoneNumberFieldNumber;
 const int UserData::kLastLoginFieldNumber;
@@ -1453,9 +1455,9 @@ void UserData::Clear() {
       }
     }
     lastlogin_ = GOOGLE_ULONGLONG(0);
-    firstlogin_ = GOOGLE_ULONGLONG(0);
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    firstlogin_ = GOOGLE_ULONGLONG(0);
     if (has_userconfig()) {
       if (userconfig_ != &::google::protobuf::internal::kEmptyString) {
         userconfig_->clear();
@@ -1465,6 +1467,7 @@ void UserData::Clear() {
       if (stats_ != NULL) stats_->::user::UserActivityStatistics::Clear();
     }
   }
+  storages_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1617,6 +1620,21 @@ bool UserData::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(90)) goto parse_storages;
+        break;
+      }
+
+      // repeated .storage.Storage storages = 11;
+      case 11: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_storages:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_storages()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(90)) goto parse_storages;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -1694,6 +1712,12 @@ void UserData::SerializeWithCachedSizes(
       10, this->stats(), output);
   }
 
+  // repeated .storage.Storage storages = 11;
+  for (int i = 0; i < this->storages_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+      11, this->storages(i), output);
+  }
+
 }
 
 int UserData::ByteSize() const {
@@ -1749,6 +1773,8 @@ int UserData::ByteSize() const {
           this->lastlogin());
     }
 
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     // optional uint64 firstLogin = 8;
     if (has_firstlogin()) {
       total_size += 1 +
@@ -1756,8 +1782,6 @@ int UserData::ByteSize() const {
           this->firstlogin());
     }
 
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     // optional bytes userConfig = 9;
     if (has_userconfig()) {
       total_size += 1 +
@@ -1773,6 +1797,14 @@ int UserData::ByteSize() const {
     }
 
   }
+  // repeated .storage.Storage storages = 11;
+  total_size += 1 * this->storages_size();
+  for (int i = 0; i < this->storages_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->storages(i));
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -1786,6 +1818,7 @@ void UserData::CheckTypeAndMergeFrom(
 
 void UserData::MergeFrom(const UserData& from) {
   GOOGLE_CHECK_NE(&from, this);
+  storages_.MergeFrom(from.storages_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_msgtype()) {
       set_msgtype(from.msgtype());
@@ -1808,11 +1841,11 @@ void UserData::MergeFrom(const UserData& from) {
     if (from.has_lastlogin()) {
       set_lastlogin(from.lastlogin());
     }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_firstlogin()) {
       set_firstlogin(from.firstlogin());
     }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_userconfig()) {
       set_userconfig(from.userconfig());
     }
@@ -1831,6 +1864,9 @@ void UserData::CopyFrom(const UserData& from) {
 bool UserData::IsInitialized() const {
   if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
+  for (int i = 0; i < storages_size(); i++) {
+    if (!this->storages(i).IsInitialized()) return false;
+  }
   if (has_stats()) {
     if (!this->stats().IsInitialized()) return false;
   }
@@ -1843,6 +1879,7 @@ void UserData::Swap(UserData* other) {
     std::swap(id_, other->id_);
     std::swap(name_, other->name_);
     std::swap(email_, other->email_);
+    storages_.Swap(&other->storages_);
     std::swap(address_, other->address_);
     std::swap(phonenumber_, other->phonenumber_);
     std::swap(lastlogin_, other->lastlogin_);

@@ -46,10 +46,10 @@ void User::setEmail(const QString &value)
 }
 Storage User::getStorage() const
 {
-    if(storages.size() == 1){
-        return storages.first();
+    if( storagesNumber() == 1){
+        return storages_.Get(0);
     }
-    return storages.value(defaultStorageId, Storage());
+//    return storages.value(defaultStorageId, Storage());
 }
 
 void User::setStorage(const quint32 &value)
@@ -57,17 +57,19 @@ void User::setStorage(const quint32 &value)
     defaultStorageId = value;
 }
 
-void User::addStorage( Storage s )
+void User::addStorage(const Storage &s )
 {
-    if (!s.IsInitialized() )
-        throw QString("storage is not initialized!");
-    storages.insert(s.getID(), s);
+//    if (!s.IsInitialized() )
+//        throw QString("storage is not initialized!");
+//    storages.insert(s.getID(), s);
+    storage::Storage *store = add_storages();
+    store->CopyFrom(s);
 }
 
 void User::addStorages(QList<Storage> st)
 {
     foreach (Storage s, st){
-        storages.insert(s.getID(), s);
+        addStorage(s);
     }
 }
 
@@ -80,6 +82,8 @@ QList<Storage> User::getStoragesList()
     }
     return s;
 }
+
+int User::storagesNumber() const{ return storages_size();}
 
 void User::clearAddress()
 {

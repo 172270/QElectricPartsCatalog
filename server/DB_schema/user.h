@@ -45,10 +45,10 @@ public:
 
     Storage getStorage() const;
     void setStorage(const quint32 &value);
-    void addStorage(Storage s);
+    void addStorage(const Storage &s);
     void addStorages(QList<Storage> storages);
     QList<Storage> getStoragesList();
-    int storagesNumber(){ return storages.size();}
+    int storagesNumber() const;
 
     void setAddress(const QString adr){ set_address(adr.toStdString() ); }
     QString getAddress() const { return QString::fromStdString(address()); }

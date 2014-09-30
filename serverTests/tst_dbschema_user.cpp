@@ -211,9 +211,6 @@ void tst_dbschema_user::addMagazineToUser()
     QVERIFY(u.getStoragesList().size() == 2 );
 }
 
-
-//void
-
 QString tst_dbschema_user::getUniqueName()
 {
     return QString("exampleUniqueUser") + QString::number(currentID++);
