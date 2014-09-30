@@ -200,11 +200,14 @@ QList<File> PgInterface::getUserFiles(User &user)
 
 uint PgInterface::addStorage(Storage &storage)
 {
-    q.clear();
-    q.append("INSERT INTO storage(name) VALUES (:name);");
-    query->prepare(q);
-    query->bindValue(":name", storage.getName() );
-    query->exec();
+    if(storage.IsInitialized() ){
+        q.clear();
+        q.append("INSERT INTO storage(name) VALUES (:name);");
+        query->prepare(q);
+        query->bindValue(":name", storage.getName() );
+        query->exec();
 
-    return query->lastInsertId().toUInt();
+        return query->lastInsertId().toUInt();
+    }
+    return 0;
 }

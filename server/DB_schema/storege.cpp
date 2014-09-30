@@ -2,7 +2,6 @@
 
 Storage::Storage()
 {
-    set_msgtype(16);
     setID(0);
 }
 

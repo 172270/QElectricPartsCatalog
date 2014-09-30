@@ -1,0 +1,24 @@
+option optimize_for = LITE_RUNTIME;
+package groups;
+
+message Parameter{
+  required string name = 1;
+  required int32 type = 2;
+  required string parameterConfig = 3;
+}
+
+message GroupBasicData{
+    required string name = 1;
+    required uint32 id = 2;
+}
+
+message Group{
+  required string name = 3;
+  required uint32 ID = 4;
+  required uint32 parentID = 5;
+  required bool allowSets = 6;
+  required bool allowItems = 7;
+  repeated Parameter parameters= 8;
+  optional string description = 9;
+  optional uint64 creationDate = 10;
+}

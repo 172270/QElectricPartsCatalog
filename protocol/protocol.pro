@@ -24,7 +24,9 @@ SOURCES += protocol.cpp \
     stats.pb.cc \
     storage.pb.cc \
     message_conteiner.pb.cc \
-    group.pb.cc
+    group.pb.cc \
+    types.pb.cc \
+    item.pb.cc
 
 HEADERS += protocol.h\
     user.pb.h \
@@ -33,13 +35,19 @@ HEADERS += protocol.h\
     datastreamsource.h \
     storage.pb.h \
     message_conteiner.pb.h \
-    group.pb.h
+    group.pb.h \
+    types.pb.h \
+    item.pb.h
 
 OTHER_FILES += \
     user.proto \
     stats.proto \
     protobuf.pri \
-    storage.proto
+    storage.proto \
+    group.proto \
+    message_conteiner.proto \
+    item.proto \
+    types.proto
 
 unix {
     target.path = /usr/lib

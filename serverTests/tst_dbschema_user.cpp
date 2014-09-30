@@ -211,6 +211,21 @@ void tst_dbschema_user::addMagazineToUser()
     QVERIFY(u.getStoragesList().size() == 2 );
 }
 
+void tst_dbschema_user::addMeanyStoragesToUser()
+{
+    User u;
+    u.setName( getUniqueName() );
+    u.setEmail( getUniqueEmail() );
+    u.setID(database->addUser(u,"asdadscf" ));
+    for(int i=0;i<1000; i++){
+        Storage s;
+        s.setName( getUniqueStorage() );
+        s.setID(database->addStorage( s ));
+        database->linkStorageToUser(u, s);
+        QVERIFY(u.getStoragesList().size() == 2+i );
+    }
+}
+
 QString tst_dbschema_user::getUniqueName()
 {
     return QString("exampleUniqueUser") + QString::number(currentID++);
@@ -223,6 +238,10 @@ QString tst_dbschema_user::getUniqueEmail()
             + QString("@aa.aa");
 }
 
+QString tst_dbschema_user::getUniqueStorage()
+{
+    return QString("storage") + QString::number(currentID++);
+}
 
 
 

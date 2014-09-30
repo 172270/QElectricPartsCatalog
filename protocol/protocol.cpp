@@ -12,7 +12,6 @@ Protocol::Protocol(QTcpSocket *s)
 QByteArray Protocol::getLoginPB(QString name, QString pass)
 {
     user::LoginRequest package;
-    package.set_msgtype(1);
     package.set_name(name.toStdString());
     package.set_password(pass.toStdString());
 

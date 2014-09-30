@@ -273,7 +273,6 @@ void tst_user::createMsgFromUserWithoutEmail_throwsException()
 void tst_user::toArray_createsAByteArray()
 {
     setRequiredFields();
-    user->setStorage(2);
     user->setAddress("adress");
     user->setPhoneNumber("123123123");
 
@@ -285,7 +284,6 @@ void tst_user::toArray_createsAByteArray()
 void tst_user::toArray_createsAProperMessage()
 {
     setRequiredFields();
-    user->setStorage(2);
     user->setAddress("adress");
     user->setPhoneNumber("123123123");
     QByteArray *ba = user->toArray();

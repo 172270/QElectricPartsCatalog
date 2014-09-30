@@ -30,7 +30,6 @@ void tst_dbschema_storage::initTestCase()
     if(!query->exec("DROP schema public cascade;")){
         qDebug() << query->lastError().text();
     }
-    QTest::qSleep(10);
     if(!query->exec("create schema public;")){
         qDebug() << query->lastError().text();
     }

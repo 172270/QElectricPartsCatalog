@@ -51,7 +51,6 @@ struct StaticDescriptorInitializer_stats_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int QueryStats::kMsgtypeFieldNumber;
 const int QueryStats::kCountFieldNumber;
 const int QueryStats::kTotalTimeFieldNumber;
 #endif  // !_MSC_VER
@@ -72,7 +71,6 @@ QueryStats::QueryStats(const QueryStats& from)
 
 void QueryStats::SharedCtor() {
   _cached_size_ = 0;
-  msgtype_ = 20u;
   count_ = 0u;
   totaltime_ = 0u;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -113,7 +111,6 @@ QueryStats* QueryStats::New() const {
 
 void QueryStats::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    msgtype_ = 20u;
     count_ = 0u;
     totaltime_ = 0u;
   }
@@ -126,26 +123,10 @@ bool QueryStats::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 msgtype = 1 [default = 20];
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &msgtype_)));
-          set_has_msgtype();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(16)) goto parse_count;
-        break;
-      }
-
       // required uint32 count = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_count:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &count_)));
@@ -190,11 +171,6 @@ bool QueryStats::MergePartialFromCodedStream(
 
 void QueryStats::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 msgtype = 1 [default = 20];
-  if (has_msgtype()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->msgtype(), output);
-  }
-
   // required uint32 count = 2;
   if (has_count()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->count(), output);
@@ -211,13 +187,6 @@ int QueryStats::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 msgtype = 1 [default = 20];
-    if (has_msgtype()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
-          this->msgtype());
-    }
-
     // required uint32 count = 2;
     if (has_count()) {
       total_size += 1 +
@@ -247,9 +216,6 @@ void QueryStats::CheckTypeAndMergeFrom(
 void QueryStats::MergeFrom(const QueryStats& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_msgtype()) {
-      set_msgtype(from.msgtype());
-    }
     if (from.has_count()) {
       set_count(from.count());
     }
@@ -266,14 +232,13 @@ void QueryStats::CopyFrom(const QueryStats& from) {
 }
 
 bool QueryStats::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
 void QueryStats::Swap(QueryStats* other) {
   if (other != this) {
-    std::swap(msgtype_, other->msgtype_);
     std::swap(count_, other->count_);
     std::swap(totaltime_, other->totaltime_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);

@@ -2,10 +2,8 @@
 
 #include "boost/iostreams/stream.hpp"
 
-User::User() :
-    defaultStorageId(0)
+User::User()
 {
-    set_msgtype(5);
     set_userconfig(QString(getDefaultConfig()).toStdString() );
 }
 
@@ -46,22 +44,20 @@ void User::setEmail(const QString &value)
 }
 Storage User::getStorage() const
 {
-    if( storagesNumber() == 1){
-        return storages_.Get(0);
+    if (storagesNumber() == 0 ){
+        return Storage() ;
     }
-//    return storages.value(defaultStorageId, Storage());
-}
-
-void User::setStorage(const quint32 &value)
-{
-    defaultStorageId = value;
+    if( storagesNumber() == 1){
+        Storage s;
+        s.CopyFrom(storages(0));
+        return s;
+    }
 }
 
 void User::addStorage(const Storage &s )
 {
-//    if (!s.IsInitialized() )
-//        throw QString("storage is not initialized!");
-//    storages.insert(s.getID(), s);
+    if (!s.IsInitialized() )
+        throw QString("storage is not initialized!");
     storage::Storage *store = add_storages();
     store->CopyFrom(s);
 }
@@ -73,14 +69,13 @@ void User::addStorages(QList<Storage> st)
     }
 }
 
-QList<Storage> User::getStoragesList()
+QList<Storage*> User::getStoragesList()
 {
-    QList<quint32> kays = storages.keys();
-    QList<Storage> s;
-    foreach (int kay, kays) {
-        s.append(storages.value(kay));
+    QList<Storage*> store;
+    for(int i; i<storagesNumber();i++){
+        store.append( dynamic_cast<Storage*>(mutable_storages(i)));
     }
-    return s;
+    return store;
 }
 
 int User::storagesNumber() const{ return storages_size();}

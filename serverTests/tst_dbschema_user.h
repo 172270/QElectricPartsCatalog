@@ -45,6 +45,7 @@ private slots:
 
     void addMagazineToUser();
 
+    void addMeanyStoragesToUser();
 private:
     QSqlQuery *query;
     QSqlDatabase db;
@@ -56,6 +57,7 @@ private:
     int currentEmail;
     QString getUniqueName();
     QString getUniqueEmail();
+    QString getUniqueStorage();
 };
 
 #endif // TST_SBSCHEMA_USER_H

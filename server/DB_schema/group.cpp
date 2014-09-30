@@ -67,7 +67,6 @@ QList<Parameter> group::getParametersList() const
 
 group::group()
 {
-    set_msgtype(32);
 }
 
 

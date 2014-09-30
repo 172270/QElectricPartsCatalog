@@ -33,6 +33,7 @@ void protobuf_AssignDesc_group_2eproto();
 void protobuf_ShutdownFile_group_2eproto();
 
 class Parameter;
+class GroupBasicData;
 class Group;
 
 // ===================================================================
@@ -150,6 +151,104 @@ class Parameter : public ::google::protobuf::MessageLite {
 };
 // -------------------------------------------------------------------
 
+class GroupBasicData : public ::google::protobuf::MessageLite {
+ public:
+  GroupBasicData();
+  virtual ~GroupBasicData();
+
+  GroupBasicData(const GroupBasicData& from);
+
+  inline GroupBasicData& operator=(const GroupBasicData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const GroupBasicData& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const GroupBasicData* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(GroupBasicData* other);
+
+  // implements Message ----------------------------------------------
+
+  GroupBasicData* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const GroupBasicData& from);
+  void MergeFrom(const GroupBasicData& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string name = 1;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 1;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const char* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
+
+  // required uint32 id = 2;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 2;
+  inline ::google::protobuf::uint32 id() const;
+  inline void set_id(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:groups.GroupBasicData)
+ private:
+  inline void set_has_name();
+  inline void clear_has_name();
+  inline void set_has_id();
+  inline void clear_has_id();
+
+  ::std::string* name_;
+  ::google::protobuf::uint32 id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_group_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_group_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_group_2eproto();
+  friend void protobuf_ShutdownFile_group_2eproto();
+
+  void InitAsDefaultInstance();
+  static GroupBasicData* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class Group : public ::google::protobuf::MessageLite {
  public:
   Group();
@@ -202,13 +301,6 @@ class Group : public ::google::protobuf::MessageLite {
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
-
-  // required uint32 msgType = 1 [default = 32];
-  inline bool has_msgtype() const;
-  inline void clear_msgtype();
-  static const int kMsgTypeFieldNumber = 1;
-  inline ::google::protobuf::uint32 msgtype() const;
-  inline void set_msgtype(::google::protobuf::uint32 value);
 
   // required string name = 3;
   inline bool has_name() const;
@@ -283,8 +375,6 @@ class Group : public ::google::protobuf::MessageLite {
 
   // @@protoc_insertion_point(class_scope:groups.Group)
  private:
-  inline void set_has_msgtype();
-  inline void clear_has_msgtype();
   inline void set_has_name();
   inline void clear_has_name();
   inline void set_has_id();
@@ -301,17 +391,16 @@ class Group : public ::google::protobuf::MessageLite {
   inline void clear_has_creationdate();
 
   ::std::string* name_;
-  ::google::protobuf::uint32 msgtype_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 parentid_;
-  bool allowsets_;
-  bool allowitems_;
   ::google::protobuf::RepeatedPtrField< ::groups::Parameter > parameters_;
   ::std::string* description_;
   ::google::protobuf::uint64 creationdate_;
+  bool allowsets_;
+  bool allowitems_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_group_2eproto_impl();
@@ -495,39 +584,113 @@ inline void Parameter::set_allocated_parameterconfig(::std::string* parametercon
 
 // -------------------------------------------------------------------
 
-// Group
+// GroupBasicData
 
-// required uint32 msgType = 1 [default = 32];
-inline bool Group::has_msgtype() const {
+// required string name = 1;
+inline bool GroupBasicData::has_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Group::set_has_msgtype() {
+inline void GroupBasicData::set_has_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Group::clear_has_msgtype() {
+inline void GroupBasicData::clear_has_name() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Group::clear_msgtype() {
-  msgtype_ = 32u;
-  clear_has_msgtype();
+inline void GroupBasicData::clear_name() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    name_->clear();
+  }
+  clear_has_name();
 }
-inline ::google::protobuf::uint32 Group::msgtype() const {
-  return msgtype_;
+inline const ::std::string& GroupBasicData::name() const {
+  return *name_;
 }
-inline void Group::set_msgtype(::google::protobuf::uint32 value) {
-  set_has_msgtype();
-  msgtype_ = value;
+inline void GroupBasicData::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
 }
+inline void GroupBasicData::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void GroupBasicData::set_name(const char* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* GroupBasicData::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+inline ::std::string* GroupBasicData::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void GroupBasicData::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required uint32 id = 2;
+inline bool GroupBasicData::has_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GroupBasicData::set_has_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GroupBasicData::clear_has_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GroupBasicData::clear_id() {
+  id_ = 0u;
+  clear_has_id();
+}
+inline ::google::protobuf::uint32 GroupBasicData::id() const {
+  return id_;
+}
+inline void GroupBasicData::set_id(::google::protobuf::uint32 value) {
+  set_has_id();
+  id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// Group
 
 // required string name = 3;
 inline bool Group::has_name() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
 inline void Group::set_has_name() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
 }
 inline void Group::clear_has_name() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void Group::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
@@ -591,13 +754,13 @@ inline void Group::set_allocated_name(::std::string* name) {
 
 // required uint32 ID = 4;
 inline bool Group::has_id() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void Group::set_has_id() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void Group::clear_has_id() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void Group::clear_id() {
   id_ = 0u;
@@ -613,13 +776,13 @@ inline void Group::set_id(::google::protobuf::uint32 value) {
 
 // required uint32 parentID = 5;
 inline bool Group::has_parentid() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void Group::set_has_parentid() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void Group::clear_has_parentid() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void Group::clear_parentid() {
   parentid_ = 0u;
@@ -635,13 +798,13 @@ inline void Group::set_parentid(::google::protobuf::uint32 value) {
 
 // required bool allowSets = 6;
 inline bool Group::has_allowsets() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void Group::set_has_allowsets() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void Group::clear_has_allowsets() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void Group::clear_allowsets() {
   allowsets_ = false;
@@ -657,13 +820,13 @@ inline void Group::set_allowsets(bool value) {
 
 // required bool allowItems = 7;
 inline bool Group::has_allowitems() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void Group::set_has_allowitems() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void Group::clear_has_allowitems() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void Group::clear_allowitems() {
   allowitems_ = false;
@@ -704,13 +867,13 @@ Group::mutable_parameters() {
 
 // optional string description = 9;
 inline bool Group::has_description() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void Group::set_has_description() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000040u;
 }
 inline void Group::clear_has_description() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void Group::clear_description() {
   if (description_ != &::google::protobuf::internal::kEmptyString) {
@@ -774,13 +937,13 @@ inline void Group::set_allocated_description(::std::string* description) {
 
 // optional uint64 creationDate = 10;
 inline bool Group::has_creationdate() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void Group::set_has_creationdate() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void Group::clear_has_creationdate() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void Group::clear_creationdate() {
   creationdate_ = GOOGLE_ULONGLONG(0);

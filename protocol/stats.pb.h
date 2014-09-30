@@ -87,13 +87,6 @@ class QueryStats : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
-  // required uint32 msgtype = 1 [default = 20];
-  inline bool has_msgtype() const;
-  inline void clear_msgtype();
-  static const int kMsgtypeFieldNumber = 1;
-  inline ::google::protobuf::uint32 msgtype() const;
-  inline void set_msgtype(::google::protobuf::uint32 value);
-
   // required uint32 count = 2;
   inline bool has_count() const;
   inline void clear_count();
@@ -110,19 +103,16 @@ class QueryStats : public ::google::protobuf::MessageLite {
 
   // @@protoc_insertion_point(class_scope:QueryStats)
  private:
-  inline void set_has_msgtype();
-  inline void clear_has_msgtype();
   inline void set_has_count();
   inline void clear_has_count();
   inline void set_has_totaltime();
   inline void clear_has_totaltime();
 
-  ::google::protobuf::uint32 msgtype_;
   ::google::protobuf::uint32 count_;
   ::google::protobuf::uint32 totaltime_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_stats_2eproto_impl();
@@ -142,37 +132,15 @@ class QueryStats : public ::google::protobuf::MessageLite {
 
 // QueryStats
 
-// required uint32 msgtype = 1 [default = 20];
-inline bool QueryStats::has_msgtype() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void QueryStats::set_has_msgtype() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void QueryStats::clear_has_msgtype() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void QueryStats::clear_msgtype() {
-  msgtype_ = 20u;
-  clear_has_msgtype();
-}
-inline ::google::protobuf::uint32 QueryStats::msgtype() const {
-  return msgtype_;
-}
-inline void QueryStats::set_msgtype(::google::protobuf::uint32 value) {
-  set_has_msgtype();
-  msgtype_ = value;
-}
-
 // required uint32 count = 2;
 inline bool QueryStats::has_count() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
 inline void QueryStats::set_has_count() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
 }
 inline void QueryStats::clear_has_count() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void QueryStats::clear_count() {
   count_ = 0u;
@@ -188,13 +156,13 @@ inline void QueryStats::set_count(::google::protobuf::uint32 value) {
 
 // required uint32 totalTime = 3;
 inline bool QueryStats::has_totaltime() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void QueryStats::set_has_totaltime() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void QueryStats::clear_has_totaltime() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void QueryStats::clear_totaltime() {
   totaltime_ = 0u;

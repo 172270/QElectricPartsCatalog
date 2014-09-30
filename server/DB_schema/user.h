@@ -44,10 +44,9 @@ public:
     bool hasEmail(){return has_email();}
 
     Storage getStorage() const;
-    void setStorage(const quint32 &value);
     void addStorage(const Storage &s);
     void addStorages(QList<Storage> storages);
-    QList<Storage> getStoragesList();
+    QList<Storage *> getStoragesList();
     int storagesNumber() const;
 
     void setAddress(const QString adr){ set_address(adr.toStdString() ); }
@@ -70,13 +69,7 @@ public:
 
     QByteArray* toArray();
 
-private:
-    QMap<quint32, Storage> storages;
-    quint32 defaultStorageId;
-
 public:
-    //    void Clear();
-    //    bool IsInitialized() const;
     void fromArray(const QByteArray *data);
 };
 

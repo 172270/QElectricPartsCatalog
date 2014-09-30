@@ -16,6 +16,7 @@ namespace groups {
 
 void protobuf_ShutdownFile_group_2eproto() {
   delete Parameter::default_instance_;
+  delete GroupBasicData::default_instance_;
   delete Group::default_instance_;
 }
 
@@ -32,8 +33,10 @@ void protobuf_AddDesc_group_2eproto() {
 
 #endif
   Parameter::default_instance_ = new Parameter();
+  GroupBasicData::default_instance_ = new GroupBasicData();
   Group::default_instance_ = new Group();
   Parameter::default_instance_->InitAsDefaultInstance();
+  GroupBasicData::default_instance_->InitAsDefaultInstance();
   Group::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_group_2eproto);
 }
@@ -306,7 +309,215 @@ void Parameter::Swap(Parameter* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int Group::kMsgTypeFieldNumber;
+const int GroupBasicData::kNameFieldNumber;
+const int GroupBasicData::kIdFieldNumber;
+#endif  // !_MSC_VER
+
+GroupBasicData::GroupBasicData()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void GroupBasicData::InitAsDefaultInstance() {
+}
+
+GroupBasicData::GroupBasicData(const GroupBasicData& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void GroupBasicData::SharedCtor() {
+  _cached_size_ = 0;
+  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  id_ = 0u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+GroupBasicData::~GroupBasicData() {
+  SharedDtor();
+}
+
+void GroupBasicData::SharedDtor() {
+  if (name_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_;
+  }
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void GroupBasicData::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const GroupBasicData& GroupBasicData::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_group_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_group_2eproto();
+#endif
+  return *default_instance_;
+}
+
+GroupBasicData* GroupBasicData::default_instance_ = NULL;
+
+GroupBasicData* GroupBasicData::New() const {
+  return new GroupBasicData;
+}
+
+void GroupBasicData::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_name()) {
+      if (name_ != &::google::protobuf::internal::kEmptyString) {
+        name_->clear();
+      }
+    }
+    id_ = 0u;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool GroupBasicData::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string name = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_id;
+        break;
+      }
+
+      // required uint32 id = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_id:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &id_)));
+          set_has_id();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void GroupBasicData::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required string name = 1;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->name(), output);
+  }
+
+  // required uint32 id = 2;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->id(), output);
+  }
+
+}
+
+int GroupBasicData::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string name = 1;
+    if (has_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->name());
+    }
+
+    // required uint32 id = 2;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->id());
+    }
+
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void GroupBasicData::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const GroupBasicData*>(&from));
+}
+
+void GroupBasicData::MergeFrom(const GroupBasicData& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_name()) {
+      set_name(from.name());
+    }
+    if (from.has_id()) {
+      set_id(from.id());
+    }
+  }
+}
+
+void GroupBasicData::CopyFrom(const GroupBasicData& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GroupBasicData::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void GroupBasicData::Swap(GroupBasicData* other) {
+  if (other != this) {
+    std::swap(name_, other->name_);
+    std::swap(id_, other->id_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string GroupBasicData::GetTypeName() const {
+  return "groups.GroupBasicData";
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
 const int Group::kNameFieldNumber;
 const int Group::kIDFieldNumber;
 const int Group::kParentIDFieldNumber;
@@ -333,7 +544,6 @@ Group::Group(const Group& from)
 
 void Group::SharedCtor() {
   _cached_size_ = 0;
-  msgtype_ = 32u;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   id_ = 0u;
   parentid_ = 0u;
@@ -385,7 +595,6 @@ Group* Group::New() const {
 
 void Group::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    msgtype_ = 32u;
     if (has_name()) {
       if (name_ != &::google::protobuf::internal::kEmptyString) {
         name_->clear();
@@ -400,8 +609,6 @@ void Group::Clear() {
         description_->clear();
       }
     }
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     creationdate_ = GOOGLE_ULONGLONG(0);
   }
   parameters_.Clear();
@@ -414,26 +621,10 @@ bool Group::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 msgType = 1 [default = 32];
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &msgtype_)));
-          set_has_msgtype();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(26)) goto parse_name;
-        break;
-      }
-
       // required string name = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_name()));
         } else {
@@ -569,11 +760,6 @@ bool Group::MergePartialFromCodedStream(
 
 void Group::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 msgType = 1 [default = 32];
-  if (has_msgtype()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->msgtype(), output);
-  }
-
   // required string name = 3;
   if (has_name()) {
     ::google::protobuf::internal::WireFormatLite::WriteString(
@@ -623,13 +809,6 @@ int Group::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 msgType = 1 [default = 32];
-    if (has_msgtype()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
-          this->msgtype());
-    }
-
     // required string name = 3;
     if (has_name()) {
       total_size += 1 +
@@ -668,8 +847,6 @@ int Group::ByteSize() const {
           this->description());
     }
 
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     // optional uint64 creationDate = 10;
     if (has_creationdate()) {
       total_size += 1 +
@@ -701,9 +878,6 @@ void Group::MergeFrom(const Group& from) {
   GOOGLE_CHECK_NE(&from, this);
   parameters_.MergeFrom(from.parameters_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_msgtype()) {
-      set_msgtype(from.msgtype());
-    }
     if (from.has_name()) {
       set_name(from.name());
     }
@@ -722,8 +896,6 @@ void Group::MergeFrom(const Group& from) {
     if (from.has_description()) {
       set_description(from.description());
     }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_creationdate()) {
       set_creationdate(from.creationdate());
     }
@@ -737,7 +909,7 @@ void Group::CopyFrom(const Group& from) {
 }
 
 bool Group::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
 
   for (int i = 0; i < parameters_size(); i++) {
     if (!this->parameters(i).IsInitialized()) return false;
@@ -747,7 +919,6 @@ bool Group::IsInitialized() const {
 
 void Group::Swap(Group* other) {
   if (other != this) {
-    std::swap(msgtype_, other->msgtype_);
     std::swap(name_, other->name_);
     std::swap(id_, other->id_);
     std::swap(parentid_, other->parentid_);
