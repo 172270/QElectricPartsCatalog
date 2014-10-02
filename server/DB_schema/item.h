@@ -11,7 +11,7 @@
 #include <QDateTime>
 #include <QString>
 
-class Item : protected item::Item
+class Item : public item::Item
 {
 public:
 
@@ -27,16 +27,21 @@ public:
     void setNamespace(const QString&space);
     QString getNamespace() const;
 
-    void setAddDate( QDateTime &dt );
+    void setAddDate(const QDateTime &dt );
     QDateTime getAddDate() const;
 
     void setIsPrivate( bool isPrivate );
     bool isPrivate();
 
-    void setPackage(const Package &package);
-//    Package
+    void setPackage(Package *package);
+    Package *getPackage();
+
+    void setUser(User *user);
+    void setGroup( Group *group);
 
     Item();
+
+    QByteArray* toArray();
 };
 
 #endif // ITEM_H

@@ -24,7 +24,7 @@ private:
     int m_errorNumber;
 };
 
-class User : protected user::UserData
+class User : public user::UserData
 {
 public:
     User();
@@ -69,6 +69,8 @@ public:
     QByteArray getDefaultConfig();
 
     QByteArray* toArray();
+
+    UserData* getPBPackage();
 
 public:
     void fromArray(const QByteArray *data);

@@ -20,9 +20,10 @@
 #endif
 
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message_lite.h>
+#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
 namespace package {
@@ -36,7 +37,7 @@ class Package;
 
 // ===================================================================
 
-class Package : public ::google::protobuf::MessageLite {
+class Package : public ::google::protobuf::Message {
  public:
   Package();
   virtual ~Package();
@@ -48,24 +49,24 @@ class Package : public ::google::protobuf::MessageLite {
     return *this;
   }
 
-  static const Package& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const Package* internal_default_instance() {
-    return default_instance_;
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
   }
-  #endif
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Package& default_instance();
 
   void Swap(Package* other);
 
   // implements Message ----------------------------------------------
 
   Package* New() const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const Package& from);
   void MergeFrom(const Package& from);
   void Clear();
@@ -76,6 +77,7 @@ class Package : public ::google::protobuf::MessageLite {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -83,7 +85,7 @@ class Package : public ::google::protobuf::MessageLite {
   void SetCachedSize(int size) const;
   public:
 
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -108,24 +110,47 @@ class Package : public ::google::protobuf::MessageLite {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
+  // optional uint32 pinNumber = 3;
+  inline bool has_pinnumber() const;
+  inline void clear_pinnumber();
+  static const int kPinNumberFieldNumber = 3;
+  inline ::google::protobuf::uint32 pinnumber() const;
+  inline void set_pinnumber(::google::protobuf::uint32 value);
+
+  // optional bytes otherData = 4;
+  inline bool has_otherdata() const;
+  inline void clear_otherdata();
+  static const int kOtherDataFieldNumber = 4;
+  inline const ::std::string& otherdata() const;
+  inline void set_otherdata(const ::std::string& value);
+  inline void set_otherdata(const char* value);
+  inline void set_otherdata(const void* value, size_t size);
+  inline ::std::string* mutable_otherdata();
+  inline ::std::string* release_otherdata();
+  inline void set_allocated_otherdata(::std::string* otherdata);
+
   // @@protoc_insertion_point(class_scope:package.Package)
  private:
   inline void set_has_id();
   inline void clear_has_id();
   inline void set_has_name();
   inline void clear_has_name();
+  inline void set_has_pinnumber();
+  inline void clear_has_pinnumber();
+  inline void set_has_otherdata();
+  inline void clear_has_otherdata();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::std::string* name_;
   ::google::protobuf::uint32 id_;
+  ::google::protobuf::uint32 pinnumber_;
+  ::std::string* otherdata_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_package_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_package_2eproto();
-  #endif
   friend void protobuf_AssignDesc_package_2eproto();
   friend void protobuf_ShutdownFile_package_2eproto();
 
@@ -231,10 +256,111 @@ inline void Package::set_allocated_name(::std::string* name) {
   }
 }
 
+// optional uint32 pinNumber = 3;
+inline bool Package::has_pinnumber() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Package::set_has_pinnumber() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Package::clear_has_pinnumber() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void Package::clear_pinnumber() {
+  pinnumber_ = 0u;
+  clear_has_pinnumber();
+}
+inline ::google::protobuf::uint32 Package::pinnumber() const {
+  return pinnumber_;
+}
+inline void Package::set_pinnumber(::google::protobuf::uint32 value) {
+  set_has_pinnumber();
+  pinnumber_ = value;
+}
+
+// optional bytes otherData = 4;
+inline bool Package::has_otherdata() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Package::set_has_otherdata() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Package::clear_has_otherdata() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void Package::clear_otherdata() {
+  if (otherdata_ != &::google::protobuf::internal::kEmptyString) {
+    otherdata_->clear();
+  }
+  clear_has_otherdata();
+}
+inline const ::std::string& Package::otherdata() const {
+  return *otherdata_;
+}
+inline void Package::set_otherdata(const ::std::string& value) {
+  set_has_otherdata();
+  if (otherdata_ == &::google::protobuf::internal::kEmptyString) {
+    otherdata_ = new ::std::string;
+  }
+  otherdata_->assign(value);
+}
+inline void Package::set_otherdata(const char* value) {
+  set_has_otherdata();
+  if (otherdata_ == &::google::protobuf::internal::kEmptyString) {
+    otherdata_ = new ::std::string;
+  }
+  otherdata_->assign(value);
+}
+inline void Package::set_otherdata(const void* value, size_t size) {
+  set_has_otherdata();
+  if (otherdata_ == &::google::protobuf::internal::kEmptyString) {
+    otherdata_ = new ::std::string;
+  }
+  otherdata_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Package::mutable_otherdata() {
+  set_has_otherdata();
+  if (otherdata_ == &::google::protobuf::internal::kEmptyString) {
+    otherdata_ = new ::std::string;
+  }
+  return otherdata_;
+}
+inline ::std::string* Package::release_otherdata() {
+  clear_has_otherdata();
+  if (otherdata_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = otherdata_;
+    otherdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Package::set_allocated_otherdata(::std::string* otherdata) {
+  if (otherdata_ != &::google::protobuf::internal::kEmptyString) {
+    delete otherdata_;
+  }
+  if (otherdata) {
+    set_has_otherdata();
+    otherdata_ = otherdata;
+  } else {
+    clear_has_otherdata();
+    otherdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace package
+
+#ifndef SWIG
+namespace google {
+namespace protobuf {
+
+
+}  // namespace google
+}  // namespace protobuf
+#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

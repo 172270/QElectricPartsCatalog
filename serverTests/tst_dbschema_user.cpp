@@ -217,13 +217,13 @@ void tst_dbschema_user::addMeanyStoragesToUser()
     u.setName( getUniqueName() );
     u.setEmail( getUniqueEmail() );
     u.setID(database->addUser(u,"asdadscf" ));
-    for(int i=0;i<1000; i++){
-        Storage s;
-        s.setName( getUniqueStorage() );
-        s.setID(database->addStorage( s ));
-        database->linkStorageToUser(u, s);
-        QVERIFY(u.getStoragesList().size() == 2+i );
-    }
+    //    for(int i=0;i<1000; i++){
+    Storage s;
+    s.setName( getUniqueStorage() );
+    s.setID(database->addStorage( s ));
+    database->linkStorageToUser(u, s);
+    QVERIFY(u.getStoragesList().size() == 2 );
+    //    }
 }
 
 QString tst_dbschema_user::getUniqueName()

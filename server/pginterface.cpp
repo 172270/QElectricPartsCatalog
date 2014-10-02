@@ -183,20 +183,20 @@ QList<Storage> PgInterface::getUserStorages(User &user)
     return storages;
 }
 
-QList<File> PgInterface::getUserFiles(User &user)
-{
-//    SELECT
-//      files.name,
-//      files.filesize,
-//      files.sha,
-//      files.mimetype
-//    FROM
-//      public.files,
-//      public.user_files
-//    WHERE
-//      user_files.file_id = files.file_id;
-    return QList<File>();
-}
+//QList<File> PgInterface::getUserFiles(User &user)
+//{
+////    SELECT
+////      files.name,
+////      files.filesize,
+////      files.sha,
+////      files.mimetype
+////    FROM
+////      public.files,
+////      public.user_files
+////    WHERE
+////      user_files.file_id = files.file_id;
+//    return QList<File>();
+//}
 
 uint PgInterface::addStorage(Storage &storage)
 {

@@ -104,6 +104,7 @@ user::LoginResponse Protocol::extractUserActrionReplayPB(QByteArray &data)
 user::Add Protocol::extractUserAddPB(QByteArray &data)
 {
         Q_UNUSED(data);
+
 //    QDataStream *ds = new QDataStream(data);
     user::Add ua;
 //    boost::iostreams::stream <boost::iostreams::DataStreamSource > dataStream ( ds );

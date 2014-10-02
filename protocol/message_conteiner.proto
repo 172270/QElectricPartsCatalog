@@ -1,4 +1,4 @@
-option optimize_for = LITE_RUNTIME;
+//option optimize_for = LITE_RUNTIME;
 
 message messagePackage{
    required fixed64 length = 1;

@@ -66,10 +66,73 @@ void tst_dbschema_storage::cleanup()
 
 }
 
-void tst_dbschema_storage::createStorege_givesID()
+void tst_dbschema_storage::createStorege_givesAddData()
 {
     uint id = 0;
     Storage s;
     s.setName("some");
-    QVERIFY(database->addStorage(s) != id);
+    s.setID(database->addStorage(s));
+    QVERIFY( s.getID() != id);
+    QVERIFY( s.has_name() );
+}
+
+void tst_dbschema_storage::createMessage_divesNotNullArray()
+{
+    Storage s;
+    s.setName("some2");
+    s.setID(1000);
+    s.setCreationDate(QDateTime::currentDateTime());
+
+    QByteArray *ba = s.toArray();
+    QVERIFY(ba->size()>0);
+    delete ba;
+}
+
+void tst_dbschema_storage::fromArray_formsProperStorage()
+{
+
+    QBENCHMARK{
+        Storage s;
+        QString str;
+        for(int i=0;i<1000;i++){
+            str.append("String");
+        }
+        s.setName(str);
+        s.setID(1000);
+        s.setCreationDate(QDateTime::currentDateTime());
+        QByteArray *ba = s.toArray();
+        QVERIFY(ba->size()>0);
+
+        Storage s2;
+        s2.fromArray(ba);
+
+        QVERIFY(s2.getName() == s.getName() );
+        QVERIFY(s2.getID() == s.getID() );
+        QVERIFY(s2.getCreationDate() == s.getCreationDate() );
+        delete ba;
+    }
+}
+
+void tst_dbschema_storage::fromArray_formsProperStorage2()
+{
+    QByteArray *ba = new QByteArray();
+    QBENCHMARK{
+        Storage s;
+        QString str;
+        for(int i=0;i<1000;i++){
+            str.append("String");
+        }
+        s.setName(str);
+        s.setID(1000);
+        s.setCreationDate(QDateTime::currentDateTime());
+        s.toArray(ba);
+        QVERIFY(ba->size()>0);
+
+        Storage s2;
+        s2.fromArray(ba);
+
+        QVERIFY(s2.getName() == s.getName() );
+        QVERIFY(s2.getID() == s.getID() );
+        QVERIFY(s2.getCreationDate() == s.getCreationDate() );
+    }
 }

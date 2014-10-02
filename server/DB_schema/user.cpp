@@ -155,6 +155,11 @@ QByteArray* User::toArray()
     return data;
 }
 
+user::UserData *User::getPBPackage()
+{
+    return static_cast<user::UserData*>(this);
+}
+
 void User::fromArray(const QByteArray *data){
     this->ParseFromArray(data->data(), data->size());
 }

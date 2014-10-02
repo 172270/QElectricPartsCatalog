@@ -40,7 +40,7 @@ QString Item::getNamespace() const
     return QString::fromStdString(namespace_());
 }
 
-void Item::setAddDate(QDateTime &dt)
+void Item::setAddDate(const QDateTime &dt)
 {
     set_adddate(dt.toMSecsSinceEpoch());
 }
@@ -60,11 +60,31 @@ bool Item::isPrivate()
     return privateitem();
 }
 
-void Item::setPackage(const Package &package)
+void Item::setPackage(Package *package)
 {
-//    package_
+    mutable_package()->CopyFrom(package->getPBPackage());
+}
+
+Package *Item::getPackage()
+{
+    return static_cast<Package*>( mutable_package() );
+}
+
+void Item::setUser(User *user)
+{
+    mutable_user()->CopyFrom( *user->getPBPackage() );
+}
+
+void Item::setGroup(Group *group)
+{
+    mutable_group()->CopyFrom(group->getPBPackage());
 }
 
 Item::Item()
 {
+}
+
+QByteArray *Item::toArray()
+{
+    new QByteArray();
 }

@@ -3,10 +3,12 @@
 
 #include "package.pb.h"
 
-class Package
+class Package : public package::Package
 {
 public:
     Package();
+
+    package::Package getPBPackage();
 };
 
 #endif // PACKAGE_H

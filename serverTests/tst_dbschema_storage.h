@@ -27,7 +27,10 @@ private slots:
     void cleanupTestCase();
     void cleanup();
 
-    void createStorege_givesID();
+    void createStorege_givesAddData();
+    void createMessage_divesNotNullArray();
+    void fromArray_formsProperStorage();
+    void fromArray_formsProperStorage2();
 private:
     QSqlQuery *query;
     QSqlDatabase db;

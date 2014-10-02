@@ -23,7 +23,7 @@ public:
     bool checkUserPassword(User &user, QString passwd);
     void linkStorageToUser(User &user, Storage &storage);
     QList<Storage> getUserStorages(User &user);
-    QList<File> getUserFiles(User &user);
+//    QList<File> getUserFiles(User &user);
 
     uint addStorage(Storage &storage);
 private:

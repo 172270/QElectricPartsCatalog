@@ -16,7 +16,7 @@ class Parameter : protected groups::Parameter
     void setName(const QString &name);
 };
 
-class group : protected groups::Group
+class Group : protected groups::Group
 {
 public:
     void setName(const QString &name);
@@ -31,7 +31,7 @@ public:
     bool setsAllowed() const;
     bool itemsAllowed() const;
 
-    void setAllowSets(bool allow);
+    void setAllowRecipe(bool allow);
     void setAllowItems(bool allow);
 
     void setDescription(const QString &desc);
@@ -39,7 +39,9 @@ public:
 
     QList<Parameter> getParametersList() const;
 
-    group();
+    groups::Group getPBPackage();
+
+    Group();
 
 private:
 };

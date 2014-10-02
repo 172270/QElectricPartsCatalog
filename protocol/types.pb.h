@@ -41,6 +41,15 @@ void protobuf_ShutdownFile_types_2eproto();
 
 // @@protoc_insertion_point(namespace_scope)
 
+#ifndef SWIG
+namespace google {
+namespace protobuf {
+
+
+}  // namespace google
+}  // namespace protobuf
+#endif  // SWIG
+
 // @@protoc_insertion_point(global_scope)
 
 #endif  // PROTOBUF_types_2eproto__INCLUDED
