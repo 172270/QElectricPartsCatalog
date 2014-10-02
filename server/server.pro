@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     pginterface.cpp \
     DB_schema/file.cpp \
     DB_schema/group.cpp \
-    DB_schema/item.cpp
+    DB_schema/item.cpp \
+    DB_schema/package.cpp
 
 HEADERS += \
     qcatalogserver.h \
@@ -35,7 +36,8 @@ HEADERS += \
     pginterface.h \
     DB_schema/file.h \
     DB_schema/group.h \
-    DB_schema/item.h
+    DB_schema/item.h \
+    DB_schema/package.h
 
 LIBS += -lprotobuf
 

@@ -1,0 +1,9 @@
+option optimize_for = LITE_RUNTIME;
+package package;
+
+message Package{
+    required uint32 ID = 1;
+    required string name =2;
+    optional uint32 pinNumber = 3;
+    optional bytes otherData = 4;
+}

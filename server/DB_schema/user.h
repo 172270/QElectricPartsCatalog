@@ -3,10 +3,10 @@
 
 #include <QString>
 #include <QValidator>
+#include <QDateTime>
 #include <QDataStream>
 #include <QJsonObject>
 #include <QJsonDocument>
-#include <QDateTime>
 
 #include "storage.h"
 #include "user.pb.h"
@@ -43,9 +43,10 @@ public:
     void clearEmail(){ clear_email(); }
     bool hasEmail(){return has_email();}
 
-    Storage getStorage() const;
+    Storage *getStorage();
     void addStorage(const Storage &s);
     void addStorages(QList<Storage> storages);
+    void setDefaultStorageId(quint32 id);
     QList<Storage *> getStoragesList();
     int storagesNumber() const;
 
@@ -71,6 +72,10 @@ public:
 
 public:
     void fromArray(const QByteArray *data);
+
+    quint32 getDefaultStorage();
+private:
+    quint32 defaultStorageID;
 };
 
 

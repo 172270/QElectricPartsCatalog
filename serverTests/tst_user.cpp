@@ -209,8 +209,8 @@ void tst_user::userHasRegistrationDateAfterSet()
 
 void tst_user::user_shoudContainDefaultMagazine()
 {
-    Storage s = user->getStorage();
-    QVERIFY( s.getID() == 0 );
+    Storage* s = user->getStorage();
+    QVERIFY( s->getID() == 0 );
 }
 
 void tst_user::addStorage_ShoudAddStorage()

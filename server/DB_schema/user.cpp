@@ -2,7 +2,8 @@
 
 #include "boost/iostreams/stream.hpp"
 
-User::User()
+User::User():
+    defaultStorageID(0)
 {
     set_userconfig(QString(getDefaultConfig()).toStdString() );
 }
@@ -42,16 +43,19 @@ void User::setEmail(const QString &value)
     else
         set_email(mail.toStdString());
 }
-Storage User::getStorage() const
+Storage* User::getStorage()
 {
-    if (storagesNumber() == 0 ){
-        return Storage() ;
-    }
     if( storagesNumber() == 1){
-        Storage s;
-        s.CopyFrom(storages(0));
-        return s;
+        return static_cast<Storage*>(mutable_storages(0));
     }
+    QList<Storage*> list = getStoragesList();
+    for(int i=0;i<storagesNumber();i++) {
+        if(list.at(i)->getID() == defaultStorageID ){
+            return list.at(i);
+        }
+    }
+    Storage *s = new Storage();
+    return s;
 }
 
 void User::addStorage(const Storage &s )
@@ -69,11 +73,16 @@ void User::addStorages(QList<Storage> st)
     }
 }
 
+void User::setDefaultStorageId(quint32 id)
+{
+    defaultStorageID = id;
+}
+
 QList<Storage*> User::getStoragesList()
 {
     QList<Storage*> store;
-    for(int i; i<storagesNumber();i++){
-        store.append( dynamic_cast<Storage*>(mutable_storages(i)));
+    for(int i = 0; i<storagesNumber();i++){
+        store.append( static_cast<Storage*>(mutable_storages(i)));
     }
     return store;
 }
@@ -129,6 +138,7 @@ QByteArray User::getDefaultConfig()
 {
     QJsonObject json;
     json.insert("last_group", QJsonValue(0));
+    json.insert("last_storage_id", QJsonValue(0));
 
     return QJsonDocument(json).toJson(QJsonDocument::Compact);
 }
@@ -146,7 +156,12 @@ QByteArray* User::toArray()
 }
 
 void User::fromArray(const QByteArray *data){
-        this->ParseFromArray(data->data(), data->size());
+    this->ParseFromArray(data->data(), data->size());
+}
+
+quint32 User::getDefaultStorage()
+{
+return 1;
 }
 
 EmailValidator::EmailValidator(QObject *parent) :

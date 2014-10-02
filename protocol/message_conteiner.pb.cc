@@ -13,7 +13,7 @@
 // @@protoc_insertion_point(includes)
 
 void protobuf_ShutdownFile_message_5fconteiner_2eproto() {
-  delete package::default_instance_;
+  delete messagePackage::default_instance_;
 }
 
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
@@ -28,8 +28,8 @@ void protobuf_AddDesc_message_5fconteiner_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 #endif
-  package::default_instance_ = new package();
-  package::default_instance_->InitAsDefaultInstance();
+  messagePackage::default_instance_ = new messagePackage();
+  messagePackage::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_message_5fconteiner_2eproto);
 }
 
@@ -51,35 +51,35 @@ struct StaticDescriptorInitializer_message_5fconteiner_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int package::kLengthFieldNumber;
-const int package::kDataFieldNumber;
+const int messagePackage::kLengthFieldNumber;
+const int messagePackage::kDataFieldNumber;
 #endif  // !_MSC_VER
 
-package::package()
+messagePackage::messagePackage()
   : ::google::protobuf::MessageLite() {
   SharedCtor();
 }
 
-void package::InitAsDefaultInstance() {
+void messagePackage::InitAsDefaultInstance() {
 }
 
-package::package(const package& from)
+messagePackage::messagePackage(const messagePackage& from)
   : ::google::protobuf::MessageLite() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void package::SharedCtor() {
+void messagePackage::SharedCtor() {
   _cached_size_ = 0;
   length_ = GOOGLE_ULONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-package::~package() {
+messagePackage::~messagePackage() {
   SharedDtor();
 }
 
-void package::SharedDtor() {
+void messagePackage::SharedDtor() {
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   if (this != &default_instance()) {
   #else
@@ -88,12 +88,12 @@ void package::SharedDtor() {
   }
 }
 
-void package::SetCachedSize(int size) const {
+void messagePackage::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const package& package::default_instance() {
+const messagePackage& messagePackage::default_instance() {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   protobuf_AddDesc_message_5fconteiner_2eproto();
 #else
@@ -102,13 +102,13 @@ const package& package::default_instance() {
   return *default_instance_;
 }
 
-package* package::default_instance_ = NULL;
+messagePackage* messagePackage::default_instance_ = NULL;
 
-package* package::New() const {
-  return new package;
+messagePackage* messagePackage::New() const {
+  return new messagePackage;
 }
 
-void package::Clear() {
+void messagePackage::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     length_ = GOOGLE_ULONGLONG(0);
   }
@@ -116,7 +116,7 @@ void package::Clear() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-bool package::MergePartialFromCodedStream(
+bool messagePackage::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -167,7 +167,7 @@ bool package::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void package::SerializeWithCachedSizes(
+void messagePackage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required fixed64 length = 1;
   if (has_length()) {
@@ -182,7 +182,7 @@ void package::SerializeWithCachedSizes(
 
 }
 
-int package::ByteSize() const {
+int messagePackage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -205,12 +205,12 @@ int package::ByteSize() const {
   return total_size;
 }
 
-void package::CheckTypeAndMergeFrom(
+void messagePackage::CheckTypeAndMergeFrom(
     const ::google::protobuf::MessageLite& from) {
-  MergeFrom(*::google::protobuf::down_cast<const package*>(&from));
+  MergeFrom(*::google::protobuf::down_cast<const messagePackage*>(&from));
 }
 
-void package::MergeFrom(const package& from) {
+void messagePackage::MergeFrom(const messagePackage& from) {
   GOOGLE_CHECK_NE(&from, this);
   data_.MergeFrom(from.data_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -220,19 +220,19 @@ void package::MergeFrom(const package& from) {
   }
 }
 
-void package::CopyFrom(const package& from) {
+void messagePackage::CopyFrom(const messagePackage& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool package::IsInitialized() const {
+bool messagePackage::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
-void package::Swap(package* other) {
+void messagePackage::Swap(messagePackage* other) {
   if (other != this) {
     std::swap(length_, other->length_);
     data_.Swap(&other->data_);
@@ -241,8 +241,8 @@ void package::Swap(package* other) {
   }
 }
 
-::std::string package::GetTypeName() const {
-  return "package";
+::std::string messagePackage::GetTypeName() const {
+  return "messagePackage";
 }
 
 

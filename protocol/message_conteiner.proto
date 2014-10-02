@@ -1,6 +1,6 @@
 option optimize_for = LITE_RUNTIME;
 
-message package{
+message messagePackage{
    required fixed64 length = 1;
    repeated bytes data = 2;
 }

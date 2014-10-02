@@ -15,7 +15,7 @@
 namespace item {
 
 void protobuf_ShutdownFile_item_2eproto() {
-  delete Case::default_instance_;
+  delete ItemParameters::default_instance_;
   delete Item::default_instance_;
 }
 
@@ -33,9 +33,10 @@ void protobuf_AddDesc_item_2eproto() {
 #endif
   ::user::protobuf_AddDesc_user_2eproto();
   ::groups::protobuf_AddDesc_group_2eproto();
-  Case::default_instance_ = new Case();
+  ::package::protobuf_AddDesc_package_2eproto();
+  ItemParameters::default_instance_ = new ItemParameters();
   Item::default_instance_ = new Item();
-  Case::default_instance_->InitAsDefaultInstance();
+  ItemParameters::default_instance_->InitAsDefaultInstance();
   Item::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_item_2eproto);
 }
@@ -58,34 +59,39 @@ struct StaticDescriptorInitializer_item_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int Case::kIDFieldNumber;
+const int ItemParameters::kIdFieldNumber;
+const int ItemParameters::kValueFieldNumber;
 #endif  // !_MSC_VER
 
-Case::Case()
+ItemParameters::ItemParameters()
   : ::google::protobuf::MessageLite() {
   SharedCtor();
 }
 
-void Case::InitAsDefaultInstance() {
+void ItemParameters::InitAsDefaultInstance() {
 }
 
-Case::Case(const Case& from)
+ItemParameters::ItemParameters(const ItemParameters& from)
   : ::google::protobuf::MessageLite() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void Case::SharedCtor() {
+void ItemParameters::SharedCtor() {
   _cached_size_ = 0;
   id_ = 0u;
+  value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Case::~Case() {
+ItemParameters::~ItemParameters() {
   SharedDtor();
 }
 
-void Case::SharedDtor() {
+void ItemParameters::SharedDtor() {
+  if (value_ != &::google::protobuf::internal::kEmptyString) {
+    delete value_;
+  }
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   if (this != &default_instance()) {
   #else
@@ -94,12 +100,12 @@ void Case::SharedDtor() {
   }
 }
 
-void Case::SetCachedSize(int size) const {
+void ItemParameters::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const Case& Case::default_instance() {
+const ItemParameters& ItemParameters::default_instance() {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   protobuf_AddDesc_item_2eproto();
 #else
@@ -108,26 +114,31 @@ const Case& Case::default_instance() {
   return *default_instance_;
 }
 
-Case* Case::default_instance_ = NULL;
+ItemParameters* ItemParameters::default_instance_ = NULL;
 
-Case* Case::New() const {
-  return new Case;
+ItemParameters* ItemParameters::New() const {
+  return new ItemParameters;
 }
 
-void Case::Clear() {
+void ItemParameters::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     id_ = 0u;
+    if (has_value()) {
+      if (value_ != &::google::protobuf::internal::kEmptyString) {
+        value_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-bool Case::MergePartialFromCodedStream(
+bool ItemParameters::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 ID = 1;
+      // required uint32 id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -135,6 +146,20 @@ bool Case::MergePartialFromCodedStream(
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &id_)));
           set_has_id();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_value;
+        break;
+      }
+
+      // required bytes value = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_value:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_value()));
         } else {
           goto handle_uninterpreted;
         }
@@ -157,24 +182,37 @@ bool Case::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void Case::SerializeWithCachedSizes(
+void ItemParameters::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 ID = 1;
+  // required uint32 id = 1;
   if (has_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
   }
 
+  // required bytes value = 2;
+  if (has_value()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      2, this->value(), output);
+  }
+
 }
 
-int Case::ByteSize() const {
+int ItemParameters::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 ID = 1;
+    // required uint32 id = 1;
     if (has_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt32Size(
           this->id());
+    }
+
+    // required bytes value = 2;
+    if (has_value()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->value());
     }
 
   }
@@ -184,42 +222,46 @@ int Case::ByteSize() const {
   return total_size;
 }
 
-void Case::CheckTypeAndMergeFrom(
+void ItemParameters::CheckTypeAndMergeFrom(
     const ::google::protobuf::MessageLite& from) {
-  MergeFrom(*::google::protobuf::down_cast<const Case*>(&from));
+  MergeFrom(*::google::protobuf::down_cast<const ItemParameters*>(&from));
 }
 
-void Case::MergeFrom(const Case& from) {
+void ItemParameters::MergeFrom(const ItemParameters& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
       set_id(from.id());
     }
+    if (from.has_value()) {
+      set_value(from.value());
+    }
   }
 }
 
-void Case::CopyFrom(const Case& from) {
+void ItemParameters::CopyFrom(const ItemParameters& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Case::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+bool ItemParameters::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
-void Case::Swap(Case* other) {
+void ItemParameters::Swap(ItemParameters* other) {
   if (other != this) {
     std::swap(id_, other->id_);
+    std::swap(value_, other->value_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::std::string Case::GetTypeName() const {
-  return "item.Case";
+::std::string ItemParameters::GetTypeName() const {
+  return "item.ItemParameters";
 }
 
 
@@ -227,15 +269,15 @@ void Case::Swap(Case* other) {
 
 #ifndef _MSC_VER
 const int Item::kIdFieldNumber;
-const int Item::kCaseFieldNumber;
+const int Item::kPackageFieldNumber;
 const int Item::kUserFieldNumber;
 const int Item::kGroupFieldNumber;
 const int Item::kNameFieldNumber;
 const int Item::kSymbolFieldNumber;
 const int Item::kNamespaceFieldNumber;
-const int Item::kIsPrivateFieldNumber;
-const int Item::kIsRecipeFieldNumber;
-const int Item::kIsItemFieldNumber;
+const int Item::kPrivateItemFieldNumber;
+const int Item::kAddDateFieldNumber;
+const int Item::kParametersFieldNumber;
 #endif  // !_MSC_VER
 
 Item::Item()
@@ -245,10 +287,10 @@ Item::Item()
 
 void Item::InitAsDefaultInstance() {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  case__ = const_cast< ::item::Case*>(
-      ::item::Case::internal_default_instance());
+  package_ = const_cast< ::package::Package*>(
+      ::package::Package::internal_default_instance());
 #else
-  case__ = const_cast< ::item::Case*>(&::item::Case::default_instance());
+  package_ = const_cast< ::package::Package*>(&::package::Package::default_instance());
 #endif
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   user_ = const_cast< ::user::UserBasicData*>(
@@ -273,15 +315,14 @@ Item::Item(const Item& from)
 void Item::SharedCtor() {
   _cached_size_ = 0;
   id_ = 0u;
-  case__ = NULL;
+  package_ = NULL;
   user_ = NULL;
   group_ = NULL;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   symbol_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   namespace__ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  isprivate_ = false;
-  isrecipe_ = false;
-  isitem_ = false;
+  privateitem_ = false;
+  adddate_ = GOOGLE_ULONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -304,7 +345,7 @@ void Item::SharedDtor() {
   #else
   if (this != default_instance_) {
   #endif
-    delete case__;
+    delete package_;
     delete user_;
     delete group_;
   }
@@ -333,8 +374,8 @@ Item* Item::New() const {
 void Item::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     id_ = 0u;
-    if (has_case_()) {
-      if (case__ != NULL) case__->::item::Case::Clear();
+    if (has_package()) {
+      if (package_ != NULL) package_->::package::Package::Clear();
     }
     if (has_user()) {
       if (user_ != NULL) user_->::user::UserBasicData::Clear();
@@ -357,12 +398,12 @@ void Item::Clear() {
         namespace__->clear();
       }
     }
-    isprivate_ = false;
+    privateitem_ = false;
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    isrecipe_ = false;
-    isitem_ = false;
+    adddate_ = GOOGLE_ULONGLONG(0);
   }
+  parameters_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -383,17 +424,17 @@ bool Item::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_case;
+        if (input->ExpectTag(18)) goto parse_package;
         break;
       }
 
-      // required .item.Case case = 2;
+      // required .package.Package package = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_case:
+         parse_package:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_case_()));
+               input, mutable_package()));
         } else {
           goto handle_uninterpreted;
         }
@@ -467,54 +508,53 @@ bool Item::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(64)) goto parse_isPrivate;
+        if (input->ExpectTag(64)) goto parse_privateItem;
         break;
       }
 
-      // required bool isPrivate = 8;
+      // required bool privateItem = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_isPrivate:
+         parse_privateItem:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &isprivate_)));
-          set_has_isprivate();
+                 input, &privateitem_)));
+          set_has_privateitem();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(72)) goto parse_isRecipe;
+        if (input->ExpectTag(88)) goto parse_addDate;
         break;
       }
 
-      // required bool isRecipe = 9;
-      case 9: {
+      // required uint64 addDate = 11;
+      case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_isRecipe:
+         parse_addDate:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &isrecipe_)));
-          set_has_isrecipe();
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &adddate_)));
+          set_has_adddate();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(80)) goto parse_isItem;
+        if (input->ExpectTag(162)) goto parse_parameters;
         break;
       }
 
-      // required bool isItem = 10;
-      case 10: {
+      // repeated .item.ItemParameters parameters = 20;
+      case 20: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_isItem:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &isitem_)));
-          set_has_isitem();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_parameters:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_parameters()));
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(162)) goto parse_parameters;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -541,10 +581,10 @@ void Item::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
   }
 
-  // required .item.Case case = 2;
-  if (has_case_()) {
+  // required .package.Package package = 2;
+  if (has_package()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
-      2, this->case_(), output);
+      2, this->package(), output);
   }
 
   // required .user.UserBasicData user = 3;
@@ -577,19 +617,20 @@ void Item::SerializeWithCachedSizes(
       7, this->namespace_(), output);
   }
 
-  // required bool isPrivate = 8;
-  if (has_isprivate()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(8, this->isprivate(), output);
+  // required bool privateItem = 8;
+  if (has_privateitem()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(8, this->privateitem(), output);
   }
 
-  // required bool isRecipe = 9;
-  if (has_isrecipe()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(9, this->isrecipe(), output);
+  // required uint64 addDate = 11;
+  if (has_adddate()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(11, this->adddate(), output);
   }
 
-  // required bool isItem = 10;
-  if (has_isitem()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(10, this->isitem(), output);
+  // repeated .item.ItemParameters parameters = 20;
+  for (int i = 0; i < this->parameters_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+      20, this->parameters(i), output);
   }
 
 }
@@ -605,11 +646,11 @@ int Item::ByteSize() const {
           this->id());
     }
 
-    // required .item.Case case = 2;
-    if (has_case_()) {
+    // required .package.Package package = 2;
+    if (has_package()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->case_());
+          this->package());
     }
 
     // required .user.UserBasicData user = 3;
@@ -647,24 +688,29 @@ int Item::ByteSize() const {
           this->namespace_());
     }
 
-    // required bool isPrivate = 8;
-    if (has_isprivate()) {
+    // required bool privateItem = 8;
+    if (has_privateitem()) {
       total_size += 1 + 1;
     }
 
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // required bool isRecipe = 9;
-    if (has_isrecipe()) {
-      total_size += 1 + 1;
-    }
-
-    // required bool isItem = 10;
-    if (has_isitem()) {
-      total_size += 1 + 1;
+    // required uint64 addDate = 11;
+    if (has_adddate()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->adddate());
     }
 
   }
+  // repeated .item.ItemParameters parameters = 20;
+  total_size += 2 * this->parameters_size();
+  for (int i = 0; i < this->parameters_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->parameters(i));
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -678,12 +724,13 @@ void Item::CheckTypeAndMergeFrom(
 
 void Item::MergeFrom(const Item& from) {
   GOOGLE_CHECK_NE(&from, this);
+  parameters_.MergeFrom(from.parameters_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
       set_id(from.id());
     }
-    if (from.has_case_()) {
-      mutable_case_()->::item::Case::MergeFrom(from.case_());
+    if (from.has_package()) {
+      mutable_package()->::package::Package::MergeFrom(from.package());
     }
     if (from.has_user()) {
       mutable_user()->::user::UserBasicData::MergeFrom(from.user());
@@ -700,16 +747,13 @@ void Item::MergeFrom(const Item& from) {
     if (from.has_namespace_()) {
       set_namespace_(from.namespace_());
     }
-    if (from.has_isprivate()) {
-      set_isprivate(from.isprivate());
+    if (from.has_privateitem()) {
+      set_privateitem(from.privateitem());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    if (from.has_isrecipe()) {
-      set_isrecipe(from.isrecipe());
-    }
-    if (from.has_isitem()) {
-      set_isitem(from.isitem());
+    if (from.has_adddate()) {
+      set_adddate(from.adddate());
     }
   }
 }
@@ -721,10 +765,10 @@ void Item::CopyFrom(const Item& from) {
 }
 
 bool Item::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000003ff) != 0x000003ff) return false;
+  if ((_has_bits_[0] & 0x000001ff) != 0x000001ff) return false;
 
-  if (has_case_()) {
-    if (!this->case_().IsInitialized()) return false;
+  if (has_package()) {
+    if (!this->package().IsInitialized()) return false;
   }
   if (has_user()) {
     if (!this->user().IsInitialized()) return false;
@@ -732,21 +776,24 @@ bool Item::IsInitialized() const {
   if (has_group()) {
     if (!this->group().IsInitialized()) return false;
   }
+  for (int i = 0; i < parameters_size(); i++) {
+    if (!this->parameters(i).IsInitialized()) return false;
+  }
   return true;
 }
 
 void Item::Swap(Item* other) {
   if (other != this) {
     std::swap(id_, other->id_);
-    std::swap(case__, other->case__);
+    std::swap(package_, other->package_);
     std::swap(user_, other->user_);
     std::swap(group_, other->group_);
     std::swap(name_, other->name_);
     std::swap(symbol_, other->symbol_);
     std::swap(namespace__, other->namespace__);
-    std::swap(isprivate_, other->isprivate_);
-    std::swap(isrecipe_, other->isrecipe_);
-    std::swap(isitem_, other->isitem_);
+    std::swap(privateitem_, other->privateitem_);
+    std::swap(adddate_, other->adddate_);
+    parameters_.Swap(&other->parameters_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_cached_size_, other->_cached_size_);
   }

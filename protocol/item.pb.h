@@ -25,6 +25,7 @@
 #include <google/protobuf/extension_set.h>
 #include "user.pb.h"
 #include "group.pb.h"
+#include "package.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace item {
@@ -34,43 +35,43 @@ void  protobuf_AddDesc_item_2eproto();
 void protobuf_AssignDesc_item_2eproto();
 void protobuf_ShutdownFile_item_2eproto();
 
-class Case;
+class ItemParameters;
 class Item;
 
 // ===================================================================
 
-class Case : public ::google::protobuf::MessageLite {
+class ItemParameters : public ::google::protobuf::MessageLite {
  public:
-  Case();
-  virtual ~Case();
+  ItemParameters();
+  virtual ~ItemParameters();
 
-  Case(const Case& from);
+  ItemParameters(const ItemParameters& from);
 
-  inline Case& operator=(const Case& from) {
+  inline ItemParameters& operator=(const ItemParameters& from) {
     CopyFrom(from);
     return *this;
   }
 
-  static const Case& default_instance();
+  static const ItemParameters& default_instance();
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   // Returns the internal default instance pointer. This function can
   // return NULL thus should not be used by the user. This is intended
   // for Protobuf internal code. Please use default_instance() declared
   // above instead.
-  static inline const Case* internal_default_instance() {
+  static inline const ItemParameters* internal_default_instance() {
     return default_instance_;
   }
   #endif
 
-  void Swap(Case* other);
+  void Swap(ItemParameters* other);
 
   // implements Message ----------------------------------------------
 
-  Case* New() const;
+  ItemParameters* New() const;
   void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
-  void CopyFrom(const Case& from);
-  void MergeFrom(const Case& from);
+  void CopyFrom(const ItemParameters& from);
+  void MergeFrom(const ItemParameters& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -92,22 +93,37 @@ class Case : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
-  // required uint32 ID = 1;
+  // required uint32 id = 1;
   inline bool has_id() const;
   inline void clear_id();
-  static const int kIDFieldNumber = 1;
+  static const int kIdFieldNumber = 1;
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // @@protoc_insertion_point(class_scope:item.Case)
+  // required bytes value = 2;
+  inline bool has_value() const;
+  inline void clear_value();
+  static const int kValueFieldNumber = 2;
+  inline const ::std::string& value() const;
+  inline void set_value(const ::std::string& value);
+  inline void set_value(const char* value);
+  inline void set_value(const void* value, size_t size);
+  inline ::std::string* mutable_value();
+  inline ::std::string* release_value();
+  inline void set_allocated_value(::std::string* value);
+
+  // @@protoc_insertion_point(class_scope:item.ItemParameters)
  private:
   inline void set_has_id();
   inline void clear_has_id();
+  inline void set_has_value();
+  inline void clear_has_value();
 
+  ::std::string* value_;
   ::google::protobuf::uint32 id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_item_2eproto_impl();
@@ -118,7 +134,7 @@ class Case : public ::google::protobuf::MessageLite {
   friend void protobuf_ShutdownFile_item_2eproto();
 
   void InitAsDefaultInstance();
-  static Case* default_instance_;
+  static ItemParameters* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -182,14 +198,14 @@ class Item : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // required .item.Case case = 2;
-  inline bool has_case_() const;
-  inline void clear_case_();
-  static const int kCaseFieldNumber = 2;
-  inline const ::item::Case& case_() const;
-  inline ::item::Case* mutable_case_();
-  inline ::item::Case* release_case_();
-  inline void set_allocated_case_(::item::Case* case_);
+  // required .package.Package package = 2;
+  inline bool has_package() const;
+  inline void clear_package();
+  static const int kPackageFieldNumber = 2;
+  inline const ::package::Package& package() const;
+  inline ::package::Package* mutable_package();
+  inline ::package::Package* release_package();
+  inline void set_allocated_package(::package::Package* package);
 
   // required .user.UserBasicData user = 3;
   inline bool has_user() const;
@@ -245,33 +261,38 @@ class Item : public ::google::protobuf::MessageLite {
   inline ::std::string* release_namespace_();
   inline void set_allocated_namespace_(::std::string* namespace_);
 
-  // required bool isPrivate = 8;
-  inline bool has_isprivate() const;
-  inline void clear_isprivate();
-  static const int kIsPrivateFieldNumber = 8;
-  inline bool isprivate() const;
-  inline void set_isprivate(bool value);
+  // required bool privateItem = 8;
+  inline bool has_privateitem() const;
+  inline void clear_privateitem();
+  static const int kPrivateItemFieldNumber = 8;
+  inline bool privateitem() const;
+  inline void set_privateitem(bool value);
 
-  // required bool isRecipe = 9;
-  inline bool has_isrecipe() const;
-  inline void clear_isrecipe();
-  static const int kIsRecipeFieldNumber = 9;
-  inline bool isrecipe() const;
-  inline void set_isrecipe(bool value);
+  // required uint64 addDate = 11;
+  inline bool has_adddate() const;
+  inline void clear_adddate();
+  static const int kAddDateFieldNumber = 11;
+  inline ::google::protobuf::uint64 adddate() const;
+  inline void set_adddate(::google::protobuf::uint64 value);
 
-  // required bool isItem = 10;
-  inline bool has_isitem() const;
-  inline void clear_isitem();
-  static const int kIsItemFieldNumber = 10;
-  inline bool isitem() const;
-  inline void set_isitem(bool value);
+  // repeated .item.ItemParameters parameters = 20;
+  inline int parameters_size() const;
+  inline void clear_parameters();
+  static const int kParametersFieldNumber = 20;
+  inline const ::item::ItemParameters& parameters(int index) const;
+  inline ::item::ItemParameters* mutable_parameters(int index);
+  inline ::item::ItemParameters* add_parameters();
+  inline const ::google::protobuf::RepeatedPtrField< ::item::ItemParameters >&
+      parameters() const;
+  inline ::google::protobuf::RepeatedPtrField< ::item::ItemParameters >*
+      mutable_parameters();
 
   // @@protoc_insertion_point(class_scope:item.Item)
  private:
   inline void set_has_id();
   inline void clear_has_id();
-  inline void set_has_case_();
-  inline void clear_has_case_();
+  inline void set_has_package();
+  inline void clear_has_package();
   inline void set_has_user();
   inline void clear_has_user();
   inline void set_has_group();
@@ -282,23 +303,21 @@ class Item : public ::google::protobuf::MessageLite {
   inline void clear_has_symbol();
   inline void set_has_namespace_();
   inline void clear_has_namespace_();
-  inline void set_has_isprivate();
-  inline void clear_has_isprivate();
-  inline void set_has_isrecipe();
-  inline void clear_has_isrecipe();
-  inline void set_has_isitem();
-  inline void clear_has_isitem();
+  inline void set_has_privateitem();
+  inline void clear_has_privateitem();
+  inline void set_has_adddate();
+  inline void clear_has_adddate();
 
-  ::item::Case* case__;
+  ::package::Package* package_;
   ::user::UserBasicData* user_;
   ::groups::GroupBasicData* group_;
+  ::google::protobuf::uint32 id_;
+  bool privateitem_;
   ::std::string* name_;
   ::std::string* symbol_;
   ::std::string* namespace__;
-  ::google::protobuf::uint32 id_;
-  bool isprivate_;
-  bool isrecipe_;
-  bool isitem_;
+  ::google::protobuf::uint64 adddate_;
+  ::google::protobuf::RepeatedPtrField< ::item::ItemParameters > parameters_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
@@ -319,28 +338,98 @@ class Item : public ::google::protobuf::MessageLite {
 
 // ===================================================================
 
-// Case
+// ItemParameters
 
-// required uint32 ID = 1;
-inline bool Case::has_id() const {
+// required uint32 id = 1;
+inline bool ItemParameters::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Case::set_has_id() {
+inline void ItemParameters::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Case::clear_has_id() {
+inline void ItemParameters::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Case::clear_id() {
+inline void ItemParameters::clear_id() {
   id_ = 0u;
   clear_has_id();
 }
-inline ::google::protobuf::uint32 Case::id() const {
+inline ::google::protobuf::uint32 ItemParameters::id() const {
   return id_;
 }
-inline void Case::set_id(::google::protobuf::uint32 value) {
+inline void ItemParameters::set_id(::google::protobuf::uint32 value) {
   set_has_id();
   id_ = value;
+}
+
+// required bytes value = 2;
+inline bool ItemParameters::has_value() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ItemParameters::set_has_value() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ItemParameters::clear_has_value() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ItemParameters::clear_value() {
+  if (value_ != &::google::protobuf::internal::kEmptyString) {
+    value_->clear();
+  }
+  clear_has_value();
+}
+inline const ::std::string& ItemParameters::value() const {
+  return *value_;
+}
+inline void ItemParameters::set_value(const ::std::string& value) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  value_->assign(value);
+}
+inline void ItemParameters::set_value(const char* value) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  value_->assign(value);
+}
+inline void ItemParameters::set_value(const void* value, size_t size) {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  value_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* ItemParameters::mutable_value() {
+  set_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    value_ = new ::std::string;
+  }
+  return value_;
+}
+inline ::std::string* ItemParameters::release_value() {
+  clear_has_value();
+  if (value_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = value_;
+    value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void ItemParameters::set_allocated_value(::std::string* value) {
+  if (value_ != &::google::protobuf::internal::kEmptyString) {
+    delete value_;
+  }
+  if (value) {
+    set_has_value();
+    value_ = value;
+  } else {
+    clear_has_value();
+    value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -369,45 +458,45 @@ inline void Item::set_id(::google::protobuf::uint32 value) {
   id_ = value;
 }
 
-// required .item.Case case = 2;
-inline bool Item::has_case_() const {
+// required .package.Package package = 2;
+inline bool Item::has_package() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Item::set_has_case_() {
+inline void Item::set_has_package() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Item::clear_has_case_() {
+inline void Item::clear_has_package() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Item::clear_case_() {
-  if (case__ != NULL) case__->::item::Case::Clear();
-  clear_has_case_();
+inline void Item::clear_package() {
+  if (package_ != NULL) package_->::package::Package::Clear();
+  clear_has_package();
 }
-inline const ::item::Case& Item::case_() const {
+inline const ::package::Package& Item::package() const {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  return case__ != NULL ? *case__ : *default_instance().case__;
+  return package_ != NULL ? *package_ : *default_instance().package_;
 #else
-  return case__ != NULL ? *case__ : *default_instance_->case__;
+  return package_ != NULL ? *package_ : *default_instance_->package_;
 #endif
 }
-inline ::item::Case* Item::mutable_case_() {
-  set_has_case_();
-  if (case__ == NULL) case__ = new ::item::Case;
-  return case__;
+inline ::package::Package* Item::mutable_package() {
+  set_has_package();
+  if (package_ == NULL) package_ = new ::package::Package;
+  return package_;
 }
-inline ::item::Case* Item::release_case_() {
-  clear_has_case_();
-  ::item::Case* temp = case__;
-  case__ = NULL;
+inline ::package::Package* Item::release_package() {
+  clear_has_package();
+  ::package::Package* temp = package_;
+  package_ = NULL;
   return temp;
 }
-inline void Item::set_allocated_case_(::item::Case* case_) {
-  delete case__;
-  case__ = case_;
-  if (case_) {
-    set_has_case_();
+inline void Item::set_allocated_package(::package::Package* package) {
+  delete package_;
+  package_ = package;
+  if (package) {
+    set_has_package();
   } else {
-    clear_has_case_();
+    clear_has_package();
   }
 }
 
@@ -705,70 +794,73 @@ inline void Item::set_allocated_namespace_(::std::string* namespace_) {
   }
 }
 
-// required bool isPrivate = 8;
-inline bool Item::has_isprivate() const {
+// required bool privateItem = 8;
+inline bool Item::has_privateitem() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void Item::set_has_isprivate() {
+inline void Item::set_has_privateitem() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void Item::clear_has_isprivate() {
+inline void Item::clear_has_privateitem() {
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void Item::clear_isprivate() {
-  isprivate_ = false;
-  clear_has_isprivate();
+inline void Item::clear_privateitem() {
+  privateitem_ = false;
+  clear_has_privateitem();
 }
-inline bool Item::isprivate() const {
-  return isprivate_;
+inline bool Item::privateitem() const {
+  return privateitem_;
 }
-inline void Item::set_isprivate(bool value) {
-  set_has_isprivate();
-  isprivate_ = value;
+inline void Item::set_privateitem(bool value) {
+  set_has_privateitem();
+  privateitem_ = value;
 }
 
-// required bool isRecipe = 9;
-inline bool Item::has_isrecipe() const {
+// required uint64 addDate = 11;
+inline bool Item::has_adddate() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void Item::set_has_isrecipe() {
+inline void Item::set_has_adddate() {
   _has_bits_[0] |= 0x00000100u;
 }
-inline void Item::clear_has_isrecipe() {
+inline void Item::clear_has_adddate() {
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void Item::clear_isrecipe() {
-  isrecipe_ = false;
-  clear_has_isrecipe();
+inline void Item::clear_adddate() {
+  adddate_ = GOOGLE_ULONGLONG(0);
+  clear_has_adddate();
 }
-inline bool Item::isrecipe() const {
-  return isrecipe_;
+inline ::google::protobuf::uint64 Item::adddate() const {
+  return adddate_;
 }
-inline void Item::set_isrecipe(bool value) {
-  set_has_isrecipe();
-  isrecipe_ = value;
+inline void Item::set_adddate(::google::protobuf::uint64 value) {
+  set_has_adddate();
+  adddate_ = value;
 }
 
-// required bool isItem = 10;
-inline bool Item::has_isitem() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+// repeated .item.ItemParameters parameters = 20;
+inline int Item::parameters_size() const {
+  return parameters_.size();
 }
-inline void Item::set_has_isitem() {
-  _has_bits_[0] |= 0x00000200u;
+inline void Item::clear_parameters() {
+  parameters_.Clear();
 }
-inline void Item::clear_has_isitem() {
-  _has_bits_[0] &= ~0x00000200u;
+inline const ::item::ItemParameters& Item::parameters(int index) const {
+  return parameters_.Get(index);
 }
-inline void Item::clear_isitem() {
-  isitem_ = false;
-  clear_has_isitem();
+inline ::item::ItemParameters* Item::mutable_parameters(int index) {
+  return parameters_.Mutable(index);
 }
-inline bool Item::isitem() const {
-  return isitem_;
+inline ::item::ItemParameters* Item::add_parameters() {
+  return parameters_.Add();
 }
-inline void Item::set_isitem(bool value) {
-  set_has_isitem();
-  isitem_ = value;
+inline const ::google::protobuf::RepeatedPtrField< ::item::ItemParameters >&
+Item::parameters() const {
+  return parameters_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::item::ItemParameters >*
+Item::mutable_parameters() {
+  return &parameters_;
 }
 
 

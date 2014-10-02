@@ -30,42 +30,42 @@ void  protobuf_AddDesc_message_5fconteiner_2eproto();
 void protobuf_AssignDesc_message_5fconteiner_2eproto();
 void protobuf_ShutdownFile_message_5fconteiner_2eproto();
 
-class package;
+class messagePackage;
 
 // ===================================================================
 
-class package : public ::google::protobuf::MessageLite {
+class messagePackage : public ::google::protobuf::MessageLite {
  public:
-  package();
-  virtual ~package();
+  messagePackage();
+  virtual ~messagePackage();
 
-  package(const package& from);
+  messagePackage(const messagePackage& from);
 
-  inline package& operator=(const package& from) {
+  inline messagePackage& operator=(const messagePackage& from) {
     CopyFrom(from);
     return *this;
   }
 
-  static const package& default_instance();
+  static const messagePackage& default_instance();
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   // Returns the internal default instance pointer. This function can
   // return NULL thus should not be used by the user. This is intended
   // for Protobuf internal code. Please use default_instance() declared
   // above instead.
-  static inline const package* internal_default_instance() {
+  static inline const messagePackage* internal_default_instance() {
     return default_instance_;
   }
   #endif
 
-  void Swap(package* other);
+  void Swap(messagePackage* other);
 
   // implements Message ----------------------------------------------
 
-  package* New() const;
+  messagePackage* New() const;
   void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
-  void CopyFrom(const package& from);
-  void MergeFrom(const package& from);
+  void CopyFrom(const messagePackage& from);
+  void MergeFrom(const messagePackage& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -110,7 +110,7 @@ class package : public ::google::protobuf::MessageLite {
   inline const ::google::protobuf::RepeatedPtrField< ::std::string>& data() const;
   inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_data();
 
-  // @@protoc_insertion_point(class_scope:package)
+  // @@protoc_insertion_point(class_scope:messagePackage)
  private:
   inline void set_has_length();
   inline void clear_has_length();
@@ -130,78 +130,78 @@ class package : public ::google::protobuf::MessageLite {
   friend void protobuf_ShutdownFile_message_5fconteiner_2eproto();
 
   void InitAsDefaultInstance();
-  static package* default_instance_;
+  static messagePackage* default_instance_;
 };
 // ===================================================================
 
 
 // ===================================================================
 
-// package
+// messagePackage
 
 // required fixed64 length = 1;
-inline bool package::has_length() const {
+inline bool messagePackage::has_length() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void package::set_has_length() {
+inline void messagePackage::set_has_length() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void package::clear_has_length() {
+inline void messagePackage::clear_has_length() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void package::clear_length() {
+inline void messagePackage::clear_length() {
   length_ = GOOGLE_ULONGLONG(0);
   clear_has_length();
 }
-inline ::google::protobuf::uint64 package::length() const {
+inline ::google::protobuf::uint64 messagePackage::length() const {
   return length_;
 }
-inline void package::set_length(::google::protobuf::uint64 value) {
+inline void messagePackage::set_length(::google::protobuf::uint64 value) {
   set_has_length();
   length_ = value;
 }
 
 // repeated bytes data = 2;
-inline int package::data_size() const {
+inline int messagePackage::data_size() const {
   return data_.size();
 }
-inline void package::clear_data() {
+inline void messagePackage::clear_data() {
   data_.Clear();
 }
-inline const ::std::string& package::data(int index) const {
+inline const ::std::string& messagePackage::data(int index) const {
   return data_.Get(index);
 }
-inline ::std::string* package::mutable_data(int index) {
+inline ::std::string* messagePackage::mutable_data(int index) {
   return data_.Mutable(index);
 }
-inline void package::set_data(int index, const ::std::string& value) {
+inline void messagePackage::set_data(int index, const ::std::string& value) {
   data_.Mutable(index)->assign(value);
 }
-inline void package::set_data(int index, const char* value) {
+inline void messagePackage::set_data(int index, const char* value) {
   data_.Mutable(index)->assign(value);
 }
-inline void package::set_data(int index, const void* value, size_t size) {
+inline void messagePackage::set_data(int index, const void* value, size_t size) {
   data_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* package::add_data() {
+inline ::std::string* messagePackage::add_data() {
   return data_.Add();
 }
-inline void package::add_data(const ::std::string& value) {
+inline void messagePackage::add_data(const ::std::string& value) {
   data_.Add()->assign(value);
 }
-inline void package::add_data(const char* value) {
+inline void messagePackage::add_data(const char* value) {
   data_.Add()->assign(value);
 }
-inline void package::add_data(const void* value, size_t size) {
+inline void messagePackage::add_data(const void* value, size_t size) {
   data_.Add()->assign(reinterpret_cast<const char*>(value), size);
 }
 inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-package::data() const {
+messagePackage::data() const {
   return data_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-package::mutable_data() {
+messagePackage::mutable_data() {
   return &data_;
 }
 

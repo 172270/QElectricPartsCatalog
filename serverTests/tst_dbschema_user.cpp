@@ -150,7 +150,7 @@ void tst_dbschema_user::getUser_getsUser()
     QVERIFY(u.getAddress() == u2.getAddress());
 
     QVERIFY(u2.hasRegistrationDate());
-    QVERIFY(u2.getStorage().getID() != 0);
+    QVERIFY(u2.getStorage()->getID() != 0);
 }
 
 //void tst_dbschema_user::addUserBenchmark()

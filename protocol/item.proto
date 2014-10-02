@@ -3,20 +3,23 @@ package item;
 
 import public "user.proto";
 import public "group.proto";
+import public "package.proto";
 
-message Case{
-    required uint32 ID = 1;
+
+message ItemParameters{
+  required uint32 id   = 1;
+  required bytes value = 2;
 }
 
 message Item{
     required uint32 id = 1;
-    required Case case = 2;
+    required package.Package package = 2;
     required user.UserBasicData user = 3;
     required groups.GroupBasicData group = 4;
     required string name = 5;
     required string symbol = 6;
     required string namespace = 7;
-    required bool isPrivate = 8;
-    required bool isRecipe = 9;
-    required bool isItem = 10;
+    required bool privateItem = 8;
+    required uint64 addDate = 11;
+    repeated ItemParameters parameters = 20;
 }
