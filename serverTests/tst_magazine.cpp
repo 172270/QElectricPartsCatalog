@@ -22,7 +22,7 @@ void tst_Magazine::storage_shoudHaveName()
 
 void tst_Magazine::setName_shoudSetName()
 {
-    mag->setName("magazynek");
+    mag->set_name("magazynek");
     QVERIFY (mag->getName() == "magazynek");
 }
 

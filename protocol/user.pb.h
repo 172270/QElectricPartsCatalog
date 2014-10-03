@@ -749,24 +749,24 @@ class UserData : public ::google::protobuf::Message {
   inline ::google::protobuf::uint64 lastlogin() const;
   inline void set_lastlogin(::google::protobuf::uint64 value);
 
-  // optional uint64 firstLogin = 8;
-  inline bool has_firstlogin() const;
-  inline void clear_firstlogin();
-  static const int kFirstLoginFieldNumber = 8;
-  inline ::google::protobuf::uint64 firstlogin() const;
-  inline void set_firstlogin(::google::protobuf::uint64 value);
+  // optional uint64 registrationdate = 8;
+  inline bool has_registrationdate() const;
+  inline void clear_registrationdate();
+  static const int kRegistrationdateFieldNumber = 8;
+  inline ::google::protobuf::uint64 registrationdate() const;
+  inline void set_registrationdate(::google::protobuf::uint64 value);
 
-  // optional bytes userConfig = 9;
-  inline bool has_userconfig() const;
-  inline void clear_userconfig();
-  static const int kUserConfigFieldNumber = 9;
-  inline const ::std::string& userconfig() const;
-  inline void set_userconfig(const ::std::string& value);
-  inline void set_userconfig(const char* value);
-  inline void set_userconfig(const void* value, size_t size);
-  inline ::std::string* mutable_userconfig();
-  inline ::std::string* release_userconfig();
-  inline void set_allocated_userconfig(::std::string* userconfig);
+  // optional bytes config = 9;
+  inline bool has_config() const;
+  inline void clear_config();
+  static const int kConfigFieldNumber = 9;
+  inline const ::std::string& config() const;
+  inline void set_config(const ::std::string& value);
+  inline void set_config(const char* value);
+  inline void set_config(const void* value, size_t size);
+  inline ::std::string* mutable_config();
+  inline ::std::string* release_config();
+  inline void set_allocated_config(::std::string* config);
 
   // optional .user.UserActivityStatistics stats = 10;
   inline bool has_stats() const;
@@ -791,10 +791,10 @@ class UserData : public ::google::protobuf::Message {
   inline void clear_has_phonenumber();
   inline void set_has_lastlogin();
   inline void clear_has_lastlogin();
-  inline void set_has_firstlogin();
-  inline void clear_has_firstlogin();
-  inline void set_has_userconfig();
-  inline void clear_has_userconfig();
+  inline void set_has_registrationdate();
+  inline void clear_has_registrationdate();
+  inline void set_has_config();
+  inline void clear_has_config();
   inline void set_has_stats();
   inline void clear_has_stats();
 
@@ -806,8 +806,8 @@ class UserData : public ::google::protobuf::Message {
   ::std::string* address_;
   ::std::string* phonenumber_;
   ::google::protobuf::uint64 lastlogin_;
-  ::google::protobuf::uint64 firstlogin_;
-  ::std::string* userconfig_;
+  ::google::protobuf::uint64 registrationdate_;
+  ::std::string* config_;
   ::user::UserActivityStatistics* stats_;
   ::google::protobuf::uint32 id_;
 
@@ -2065,95 +2065,95 @@ inline void UserData::set_lastlogin(::google::protobuf::uint64 value) {
   lastlogin_ = value;
 }
 
-// optional uint64 firstLogin = 8;
-inline bool UserData::has_firstlogin() const {
+// optional uint64 registrationdate = 8;
+inline bool UserData::has_registrationdate() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void UserData::set_has_firstlogin() {
+inline void UserData::set_has_registrationdate() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void UserData::clear_has_firstlogin() {
+inline void UserData::clear_has_registrationdate() {
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void UserData::clear_firstlogin() {
-  firstlogin_ = GOOGLE_ULONGLONG(0);
-  clear_has_firstlogin();
+inline void UserData::clear_registrationdate() {
+  registrationdate_ = GOOGLE_ULONGLONG(0);
+  clear_has_registrationdate();
 }
-inline ::google::protobuf::uint64 UserData::firstlogin() const {
-  return firstlogin_;
+inline ::google::protobuf::uint64 UserData::registrationdate() const {
+  return registrationdate_;
 }
-inline void UserData::set_firstlogin(::google::protobuf::uint64 value) {
-  set_has_firstlogin();
-  firstlogin_ = value;
+inline void UserData::set_registrationdate(::google::protobuf::uint64 value) {
+  set_has_registrationdate();
+  registrationdate_ = value;
 }
 
-// optional bytes userConfig = 9;
-inline bool UserData::has_userconfig() const {
+// optional bytes config = 9;
+inline bool UserData::has_config() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void UserData::set_has_userconfig() {
+inline void UserData::set_has_config() {
   _has_bits_[0] |= 0x00000100u;
 }
-inline void UserData::clear_has_userconfig() {
+inline void UserData::clear_has_config() {
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void UserData::clear_userconfig() {
-  if (userconfig_ != &::google::protobuf::internal::kEmptyString) {
-    userconfig_->clear();
+inline void UserData::clear_config() {
+  if (config_ != &::google::protobuf::internal::kEmptyString) {
+    config_->clear();
   }
-  clear_has_userconfig();
+  clear_has_config();
 }
-inline const ::std::string& UserData::userconfig() const {
-  return *userconfig_;
+inline const ::std::string& UserData::config() const {
+  return *config_;
 }
-inline void UserData::set_userconfig(const ::std::string& value) {
-  set_has_userconfig();
-  if (userconfig_ == &::google::protobuf::internal::kEmptyString) {
-    userconfig_ = new ::std::string;
+inline void UserData::set_config(const ::std::string& value) {
+  set_has_config();
+  if (config_ == &::google::protobuf::internal::kEmptyString) {
+    config_ = new ::std::string;
   }
-  userconfig_->assign(value);
+  config_->assign(value);
 }
-inline void UserData::set_userconfig(const char* value) {
-  set_has_userconfig();
-  if (userconfig_ == &::google::protobuf::internal::kEmptyString) {
-    userconfig_ = new ::std::string;
+inline void UserData::set_config(const char* value) {
+  set_has_config();
+  if (config_ == &::google::protobuf::internal::kEmptyString) {
+    config_ = new ::std::string;
   }
-  userconfig_->assign(value);
+  config_->assign(value);
 }
-inline void UserData::set_userconfig(const void* value, size_t size) {
-  set_has_userconfig();
-  if (userconfig_ == &::google::protobuf::internal::kEmptyString) {
-    userconfig_ = new ::std::string;
+inline void UserData::set_config(const void* value, size_t size) {
+  set_has_config();
+  if (config_ == &::google::protobuf::internal::kEmptyString) {
+    config_ = new ::std::string;
   }
-  userconfig_->assign(reinterpret_cast<const char*>(value), size);
+  config_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* UserData::mutable_userconfig() {
-  set_has_userconfig();
-  if (userconfig_ == &::google::protobuf::internal::kEmptyString) {
-    userconfig_ = new ::std::string;
+inline ::std::string* UserData::mutable_config() {
+  set_has_config();
+  if (config_ == &::google::protobuf::internal::kEmptyString) {
+    config_ = new ::std::string;
   }
-  return userconfig_;
+  return config_;
 }
-inline ::std::string* UserData::release_userconfig() {
-  clear_has_userconfig();
-  if (userconfig_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* UserData::release_config() {
+  clear_has_config();
+  if (config_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = userconfig_;
-    userconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = config_;
+    config_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void UserData::set_allocated_userconfig(::std::string* userconfig) {
-  if (userconfig_ != &::google::protobuf::internal::kEmptyString) {
-    delete userconfig_;
+inline void UserData::set_allocated_config(::std::string* config) {
+  if (config_ != &::google::protobuf::internal::kEmptyString) {
+    delete config_;
   }
-  if (userconfig) {
-    set_has_userconfig();
-    userconfig_ = userconfig;
+  if (config) {
+    set_has_config();
+    config_ = config;
   } else {
-    clear_has_userconfig();
-    userconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_config();
+    config_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 

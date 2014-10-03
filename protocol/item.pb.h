@@ -476,8 +476,7 @@ inline const ::package::Package& Item::package() const {
 }
 inline ::package::Package* Item::mutable_package() {
   set_has_package();
-  if (package_ == NULL)
-      package_ = new ::package::Package;
+  if (package_ == NULL) package_ = new ::package::Package;
   return package_;
 }
 inline ::package::Package* Item::release_package() {
@@ -515,8 +514,7 @@ inline const ::user::UserBasicData& Item::user() const {
 }
 inline ::user::UserBasicData* Item::mutable_user() {
   set_has_user();
-  if (user_ == NULL)
-      user_ = new ::user::UserBasicData;
+  if (user_ == NULL) user_ = new ::user::UserBasicData;
   return user_;
 }
 inline ::user::UserBasicData* Item::release_user() {

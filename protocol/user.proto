@@ -66,8 +66,8 @@ message UserData{
     optional string address = 5;
     optional bytes phoneNumber = 6;
     optional uint64 lastLogin = 7; // N/A
-    optional uint64 firstLogin = 8; // N/A
-    optional bytes userConfig = 9; // windows size, program settings, last group, etc.
+    optional uint64 registrationdate = 8; // N/A
+    optional bytes config = 9; // windows size, program settings, last group, etc.
     optional UserActivityStatistics stats = 10; // N/A
 }
 

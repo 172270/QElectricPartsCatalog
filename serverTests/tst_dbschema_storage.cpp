@@ -70,7 +70,7 @@ void tst_dbschema_storage::createStorege_givesAddData()
 {
     uint id = 0;
     Storage s;
-    s.setName("some");
+    s.set_name("some");
     s.setID(database->addStorage(s));
     QVERIFY( s.getID() != id);
     QVERIFY( s.has_name() );
@@ -79,7 +79,7 @@ void tst_dbschema_storage::createStorege_givesAddData()
 void tst_dbschema_storage::createMessage_divesNotNullArray()
 {
     Storage s;
-    s.setName("some2");
+    s.set_name("some2");
     s.setID(1000);
     s.setCreationDate(QDateTime::currentDateTime());
 
@@ -97,7 +97,7 @@ void tst_dbschema_storage::fromArray_formsProperStorage()
         for(int i=0;i<1000;i++){
             str.append("String");
         }
-        s.setName(str);
+        s.set_name(str);
         s.setID(1000);
         s.setCreationDate(QDateTime::currentDateTime());
         QByteArray *ba = s.toArray();
@@ -122,7 +122,7 @@ void tst_dbschema_storage::fromArray_formsProperStorage2()
         for(int i=0;i<1000;i++){
             str.append("String");
         }
-        s.setName(str);
+        s.set_name(str);
         s.setID(1000);
         s.setCreationDate(QDateTime::currentDateTime());
         s.toArray(ba);

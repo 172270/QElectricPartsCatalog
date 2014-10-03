@@ -21,14 +21,14 @@ User PgInterface::getUserById(uint id)
         err.setText(query->lastError().text());
         throw err;
     }
-    u.setID(id);
+    u.set_id(id);
     if(query->size() == 1){
         query->first();
-        u.setName(query->value("name").toString());
-        u.setEmail(query->value("email").toString());
-        u.setAddress(query->value("address").toString());
-        u.setPhoneNumber(query->value("phonenumber").toString().trimmed() ); // char field has constant size
-        u.setRegistrationDate(query->value("registrationdate").toDateTime());
+        u.set_name(query->value("name").toString());
+        u.set_email(query->value("email").toString());
+        u.set_address(query->value("address").toString());
+        u.set_phonenumber(query->value("phonenumber").toString().trimmed() ); // char field has constant size
+        u.set_registrationdate(query->value("registrationdate").toDateTime());
         u.setConfig(query->value("registrationdate").toByteArray() );
     }
     return u;
@@ -39,16 +39,16 @@ uint PgInterface::addUser(User &user, QString passwd)
     q.clear();
     q.append("INSERT INTO USERS ");
     q.append("( name, password, email, config" +
-             (user.hasPhoneNumber()? QString(", phonenumber"): QString(""))+
-             (user.hasAddress()? QString(", address"): QString(""))+
+             (user.has_phonenumber()? QString(", phonenumber"): QString(""))+
+             (user.has_address()? QString(", address"): QString(""))+
              ") values(:name, :password, :email, :config"+
-             (user.hasPhoneNumber()? QString(", :phonenumber"): QString(""))+
-             (user.hasAddress()? QString(", :address"): QString(""))+
+             (user.has_phonenumber()? QString(", :phonenumber"): QString(""))+
+             (user.has_address()? QString(", :address"): QString(""))+
              +")");
     query->prepare(q);
     query->bindValue(":name", user.getName() );
     query->bindValue(":password", passwd );
-    query->bindValue(":email",user.hasEmail()?user.getEmail():QString() );
+    query->bindValue(":email",user.has_email()?user.getEmail():QString() );
     query->bindValue(":config", QString(user.getDefaultConfig()) );
     query->bindValue(":phonenumber", user.getPhoneNumber());
     query->bindValue(":address", user.getAddress());
@@ -59,13 +59,13 @@ uint PgInterface::addUser(User &user, QString passwd)
         err.setText(query->lastError().text());
         throw err;
     }
-    user.setID( query->lastInsertId().toUInt() );
+    user.set_id( query->lastInsertId().toUInt() );
     Storage storage;
-    storage.setName(user.getName() + QString("_default"));
+    storage.set_name(user.getName() + QString("_default"));
     storage.setID(addStorage(storage));
     linkStorageToUser(user, storage);
 
-    return user.getID();
+    return user.id();
 }
 
 User PgInterface::getUserByName(const QString &name)
@@ -82,14 +82,14 @@ User PgInterface::getUserByName(const QString &name)
         err.setText(query->lastError().text());
         throw err;
     }
-    u.setName(name);
+    u.set_name(name);
     if(query->size() == 1){
         query->first();
-        u.setID(query->value("id").toUInt());
-        u.setEmail(query->value("email").toString());
-        u.setAddress(query->value("address").toString());
-        u.setPhoneNumber(query->value("phonenumber").toString().trimmed() ); // char field has constant size
-        u.setRegistrationDate(query->value("registrationdate").toDateTime());
+        u.set_id(query->value("id").toUInt());
+        u.set_email(query->value("email").toString());
+        u.set_address(query->value("address").toString());
+        u.set_phonenumber(query->value("phonenumber").toString().trimmed() ); // char field has constant size
+        u.set_registrationdate(query->value("registrationdate").toDateTime());
         u.setConfig(query->value("registrationdate").toByteArray() );
     }
 
@@ -138,7 +138,7 @@ void PgInterface::linkStorageToUser(User &user, Storage &storage)
     q.clear();
     q.append("insert into user_storage(storage_id, user_id) values (:sid, :uid)");
     query->prepare(q);
-    query->bindValue(":uid", user.getID() );
+    query->bindValue(":uid", user.id() );
     query->bindValue(":sid", storage.getID() );
 
     if(!query->exec()){
@@ -164,7 +164,7 @@ QList<Storage> PgInterface::getUserStorages(User &user)
              " public.storage "
              "WHERE "
              " user_storage.storage_id = storage.id AND "
-             " user_storage.user_id = "+ QString::number(user.getID()) + ";");
+             " user_storage.user_id = "+ QString::number(user.id()) + ";");
     if(!query->exec()){
         UserError err;
         err.setErrorNumber(query->lastError().number());
@@ -175,7 +175,7 @@ QList<Storage> PgInterface::getUserStorages(User &user)
     while(query->next() ){
         Storage s;
         s.setID(query->value(0).toUInt());
-        s.setName(query->value(1).toString() );
+        s.set_name(query->value(1).toString() );
         s.setCreationDate(query->value(2).toDateTime());
         storages.append(s);
     }

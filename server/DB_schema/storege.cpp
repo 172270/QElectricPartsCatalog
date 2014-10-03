@@ -4,23 +4,23 @@
 #include "boost/iostreams/stream.hpp"
 
 namespace boost {
-    namespace iostreams {
+namespace iostreams {
 
-        class DataStreamSource
-        {
-        public:
-            typedef char char_type;
-            typedef source_tag  category;
+class DataStreamSource
+{
+public:
+    typedef char char_type;
+    typedef source_tag  category;
 
-            DataStreamSource( QDataStream *const source ) : m_source(source){
-            }
-            std::streamsize read(char* buffer, std::streamsize n) {
-                return m_source ? m_source->readRawData(buffer, n) : -1;
-            }
-        private:
-            QDataStream *const m_source;
-        };
+    DataStreamSource( QDataStream *const source ) : m_source(source){
     }
+    std::streamsize read(char* buffer, std::streamsize n) {
+        return m_source ? m_source->readRawData(buffer, n) : -1;
+    }
+private:
+    QDataStream *const m_source;
+};
+}
 }
 
 Storage::Storage()
@@ -33,10 +33,11 @@ QString Storage::getName() const
     return QString::fromStdString(name() );
 }
 
-void Storage::setName(const QString &value)
+void Storage::set_name(const QString &value)
 {
-    set_name(value.toStdString());
+    storage::Storage::set_name(value.trimmed().toStdString());
 }
+
 quint32 Storage::getID() const
 {
     return id();
@@ -55,11 +56,6 @@ QDateTime Storage::getCreationDate() const
 void Storage::setCreationDate(const QDateTime &date)
 {
     set_creationdate(date.toMSecsSinceEpoch());
-}
-
-bool Storage::hasCreationDate() const
-{
-    return has_creationdate();
 }
 
 QByteArray *Storage::toArray()
@@ -88,10 +84,10 @@ QByteArray *Storage::toArray( QByteArray *data)
 
 void Storage::fromArray(QByteArray *ba)
 {
-//    QDataStream *ds = new QDataStream(ba,QIODevice::ReadWrite );
-//    boost::iostreams::stream <boost::iostreams::DataStreamSource > dataStream ( ds );
-//    ParseFromIstream(&dataStream);
-//    delete ds;
+    //    QDataStream *ds = new QDataStream(ba,QIODevice::ReadWrite );
+    //    boost::iostreams::stream <boost::iostreams::DataStreamSource > dataStream ( ds );
+    //    ParseFromIstream(&dataStream);
+    //    delete ds;
     ParseFromArray(ba->data(), ba->size());
 }
 

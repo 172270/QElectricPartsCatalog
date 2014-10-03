@@ -5,7 +5,12 @@
 User::User():
     defaultStorageID(0)
 {
-    set_userconfig(QString(getDefaultConfig()).toStdString() );
+    user::UserData::set_config(QString(getDefaultConfig()).toStdString() );
+}
+
+void User::set_name(const QString &name)
+{
+    user::UserData::set_name(name.trimmed().toStdString());
 }
 
 QString User::getName() const
@@ -13,15 +18,20 @@ QString User::getName() const
     return QString::fromStdString(name());
 }
 
-void User::setName(const QString &name)
+void User::set_email(const QString &value)
 {
-    // ^\w(?:\w*(?:[.-]\w+)?)*(?<=^.{4,32})$
+    //    if(!value.size())
+    //        throw QString("Empty emails not allowed!");
+    //    EmailValidator validator;
+    //    int pos =0;
+    //    QString mail = value.trimmed().toLower();
+    //    QValidator::State state = validator.validate(mail,pos);
+    //    if (state == QValidator::Invalid ||state ==  QValidator::Intermediate ){
+    //        throw QString("Invalid email address!");
+    //    }
+    //    else
+    user::UserData::set_email(value.trimmed().toStdString());
 
-    ///TODO name validator
-    if(name.trimmed().size()<4 || name.trimmed().size()> 32)
-        throw QString("Bad length!");
-
-    set_name(name.trimmed().toStdString());
 }
 
 QString User::getEmail() const
@@ -29,20 +39,6 @@ QString User::getEmail() const
     return QString::fromStdString(email());
 }
 
-void User::setEmail(const QString &value)
-{
-    if(!value.size())
-        throw QString("Empty emails not allowed!");
-    EmailValidator validator;
-    int pos =0;
-    QString mail = value.trimmed().toLower();
-    QValidator::State state = validator.validate(mail,pos);
-    if (state == QValidator::Invalid ||state ==  QValidator::Intermediate ){
-        throw QString("Invalid email address!");
-    }
-    else
-        set_email(mail.toStdString());
-}
 Storage* User::getStorage()
 {
     if( storagesNumber() == 1){
@@ -89,14 +85,9 @@ QList<Storage*> User::getStoragesList()
 
 int User::storagesNumber() const{ return storages_size();}
 
-void User::clearAddress()
+void User::set_phonenumber(const QString &number)
 {
-    clear_address();
-}
-
-void User::setPhoneNumber(const QString &number)
-{
-    set_phonenumber(number.toStdString());
+    user::UserData::set_phonenumber(number.toStdString());
 }
 
 QString User::getPhoneNumber() const
@@ -104,35 +95,22 @@ QString User::getPhoneNumber() const
     return QString::fromStdString(phonenumber());
 }
 
-bool User::hasPhoneNumber() const
+void User::set_registrationdate(QDateTime registrationDate)
 {
-    return has_phonenumber();
+    user::UserData::set_registrationdate(registrationDate.toMSecsSinceEpoch());
 }
 
-void User::clearPhoneNumber()
+QDateTime User::get_registrationdate()
 {
-    clear_phonenumber();
-}
-
-void User::setRegistrationDate(QDateTime registrationDate)
-{
-    set_firstlogin(registrationDate.toMSecsSinceEpoch());
-}
-
-QDateTime User::getRegistrationDate()
-{
-    return QDateTime::fromMSecsSinceEpoch(firstlogin());
+    return QDateTime::fromMSecsSinceEpoch(registrationdate());
 }
 
 void User::setConfig(QByteArray conf)
 {
-    set_userconfig(QString(conf).toStdString());
+    user::UserData::set_config(QString(conf).toStdString());
 }
 
-bool User::hasConfig()
-{
-    return has_userconfig();
-}
+
 
 QByteArray User::getDefaultConfig()
 {
@@ -162,11 +140,6 @@ user::UserData *User::getPBPackage()
 
 void User::fromArray(const QByteArray *data){
     this->ParseFromArray(data->data(), data->size());
-}
-
-quint32 User::getDefaultStorage()
-{
-return 1;
 }
 
 EmailValidator::EmailValidator(QObject *parent) :

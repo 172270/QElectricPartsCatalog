@@ -29,19 +29,11 @@ class User : public user::UserData
 public:
     User();
 
-    int getID(){ return id(); }
-    void setID(const int id){ set_id(id);}
-    void clearID(){ clear_id(); }
-    bool hasID(){return has_id();}
-
+    void set_name(const QString  &name);
     QString getName() const;
-    void setName(const QString &name);
-    void clearName(){ clear_name(); }
 
+    void set_email(const QString &value);
     QString getEmail() const;
-    void setEmail(const QString &value);
-    void clearEmail(){ clear_email(); }
-    bool hasEmail(){return has_email();}
 
     Storage *getStorage();
     void addStorage(const Storage &s);
@@ -50,32 +42,22 @@ public:
     QList<Storage *> getStoragesList();
     int storagesNumber() const;
 
-    void setAddress(const QString adr){ set_address(adr.toStdString() ); }
+    void set_address(const QString adr){  user::UserData::set_address(adr.toStdString() ); }
     QString getAddress() const { return QString::fromStdString(address()); }
-    bool hasAddress() const {return has_address();}
-    void clearAddress();
 
-    void setPhoneNumber(const QString &number);
+    void set_phonenumber(const QString &number);
     QString getPhoneNumber() const;
-    bool hasPhoneNumber() const;
-    void clearPhoneNumber();
 
-    void setRegistrationDate( QDateTime registrationDate );
-    QDateTime getRegistrationDate();
-    bool hasRegistrationDate(){return has_firstlogin(); }
+    void set_registrationdate( QDateTime registrationDate );
+    QDateTime get_registrationdate();
 
     void setConfig(QByteArray conf);
-    bool hasConfig();
     QByteArray getDefaultConfig();
 
     QByteArray* toArray();
-
     UserData* getPBPackage();
-
-public:
     void fromArray(const QByteArray *data);
 
-    quint32 getDefaultStorage();
 private:
     quint32 defaultStorageID;
 };

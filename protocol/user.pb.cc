@@ -145,8 +145,8 @@ void protobuf_AssignDesc_user_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, address_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, phonenumber_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, lastlogin_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, firstlogin_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, userconfig_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, registrationdate_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, config_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserData, stats_),
   };
   UserData_reflection_ =
@@ -247,20 +247,20 @@ void protobuf_AddDesc_user_2eproto() {
     "nenumber\030\010 \001(\014\"E\n\tAddReplay\022\032\n\005stats\030\002 \002"
     "(\0132\013.QueryStats\022\034\n\006replay\030\003 \002(\0162\014.user.R"
     "eplay\",\n\rUserBasicData\022\014\n\004name\030\003 \002(\t\022\r\n\005"
-    "email\030\004 \002(\t\"\345\001\n\010UserData\022\n\n\002ID\030\002 \002(\r\022\014\n\004"
+    "email\030\004 \002(\t\"\347\001\n\010UserData\022\n\n\002ID\030\002 \002(\r\022\014\n\004"
     "name\030\003 \002(\t\022\r\n\005email\030\004 \002(\t\022\"\n\010storages\030\013 "
     "\003(\0132\020.storage.Storage\022\017\n\007address\030\005 \001(\t\022\023"
-    "\n\013phoneNumber\030\006 \001(\014\022\021\n\tlastLogin\030\007 \001(\004\022\022"
-    "\n\nfirstLogin\030\010 \001(\004\022\022\n\nuserConfig\030\t \001(\014\022+"
-    "\n\005stats\030\n \001(\0132\034.user.UserActivityStatist"
-    "ics\"\274\001\n\026UserActivityStatistics\022\025\n\rmagazi"
-    "neCount\030\001 \002(\r\022\032\n\022totalNumOfElements\030\002 \002("
-    "\r\022 \n\030totalNumOfUniqueElements\030\003 \002(\r\022\032\n\022t"
-    "otalNumOfRequests\030\005 \002(\r\022\032\n\022totalModified"
-    "Items\030\006 \002(\r\022\025\n\rtotalAddItems\030\007 \002(\r*\033\n\013Me"
-    "ssageType\022\014\n\010reqLogin\020\001*J\n\006Replay\022\014\n\010LOG"
-    "IN_OK\020\001\022\026\n\022BAD_USER_OR_PASSWD\020\n\022\032\n\026USER_"
-    "ALREADY_LOGGED_IN\020\013P\000P\001", 903);
+    "\n\013phoneNumber\030\006 \001(\014\022\021\n\tlastLogin\030\007 \001(\004\022\030"
+    "\n\020registrationdate\030\010 \001(\004\022\016\n\006config\030\t \001(\014"
+    "\022+\n\005stats\030\n \001(\0132\034.user.UserActivityStati"
+    "stics\"\274\001\n\026UserActivityStatistics\022\025\n\rmaga"
+    "zineCount\030\001 \002(\r\022\032\n\022totalNumOfElements\030\002 "
+    "\002(\r\022 \n\030totalNumOfUniqueElements\030\003 \002(\r\022\032\n"
+    "\022totalNumOfRequests\030\005 \002(\r\022\032\n\022totalModifi"
+    "edItems\030\006 \002(\r\022\025\n\rtotalAddItems\030\007 \002(\r*\033\n\013"
+    "MessageType\022\014\n\010reqLogin\020\001*J\n\006Replay\022\014\n\010L"
+    "OGIN_OK\020\001\022\026\n\022BAD_USER_OR_PASSWD\020\n\022\032\n\026USE"
+    "R_ALREADY_LOGGED_IN\020\013P\000P\001", 905);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "user.proto", &protobuf_RegisterTypes);
   LoginRequest::default_instance_ = new LoginRequest();
@@ -1854,8 +1854,8 @@ const int UserData::kStoragesFieldNumber;
 const int UserData::kAddressFieldNumber;
 const int UserData::kPhoneNumberFieldNumber;
 const int UserData::kLastLoginFieldNumber;
-const int UserData::kFirstLoginFieldNumber;
-const int UserData::kUserConfigFieldNumber;
+const int UserData::kRegistrationdateFieldNumber;
+const int UserData::kConfigFieldNumber;
 const int UserData::kStatsFieldNumber;
 #endif  // !_MSC_VER
 
@@ -1882,8 +1882,8 @@ void UserData::SharedCtor() {
   address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   phonenumber_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   lastlogin_ = GOOGLE_ULONGLONG(0);
-  firstlogin_ = GOOGLE_ULONGLONG(0);
-  userconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  registrationdate_ = GOOGLE_ULONGLONG(0);
+  config_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   stats_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1905,8 +1905,8 @@ void UserData::SharedDtor() {
   if (phonenumber_ != &::google::protobuf::internal::kEmptyString) {
     delete phonenumber_;
   }
-  if (userconfig_ != &::google::protobuf::internal::kEmptyString) {
-    delete userconfig_;
+  if (config_ != &::google::protobuf::internal::kEmptyString) {
+    delete config_;
   }
   if (this != default_instance_) {
     delete stats_;
@@ -1958,12 +1958,12 @@ void UserData::Clear() {
       }
     }
     lastlogin_ = GOOGLE_ULONGLONG(0);
-    firstlogin_ = GOOGLE_ULONGLONG(0);
+    registrationdate_ = GOOGLE_ULONGLONG(0);
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    if (has_userconfig()) {
-      if (userconfig_ != &::google::protobuf::internal::kEmptyString) {
-        userconfig_->clear();
+    if (has_config()) {
+      if (config_ != &::google::protobuf::internal::kEmptyString) {
+        config_->clear();
       }
     }
     if (has_stats()) {
@@ -2073,33 +2073,33 @@ bool UserData::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(64)) goto parse_firstLogin;
+        if (input->ExpectTag(64)) goto parse_registrationdate;
         break;
       }
 
-      // optional uint64 firstLogin = 8;
+      // optional uint64 registrationdate = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_firstLogin:
+         parse_registrationdate:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &firstlogin_)));
-          set_has_firstlogin();
+                 input, &registrationdate_)));
+          set_has_registrationdate();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(74)) goto parse_userConfig;
+        if (input->ExpectTag(74)) goto parse_config;
         break;
       }
 
-      // optional bytes userConfig = 9;
+      // optional bytes config = 9;
       case 9: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_userConfig:
+         parse_config:
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_userconfig()));
+                input, this->mutable_config()));
         } else {
           goto handle_uninterpreted;
         }
@@ -2197,15 +2197,15 @@ void UserData::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(7, this->lastlogin(), output);
   }
 
-  // optional uint64 firstLogin = 8;
-  if (has_firstlogin()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(8, this->firstlogin(), output);
+  // optional uint64 registrationdate = 8;
+  if (has_registrationdate()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(8, this->registrationdate(), output);
   }
 
-  // optional bytes userConfig = 9;
-  if (has_userconfig()) {
+  // optional bytes config = 9;
+  if (has_config()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      9, this->userconfig(), output);
+      9, this->config(), output);
   }
 
   // optional .user.UserActivityStatistics stats = 10;
@@ -2275,16 +2275,16 @@ void UserData::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(7, this->lastlogin(), target);
   }
 
-  // optional uint64 firstLogin = 8;
-  if (has_firstlogin()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(8, this->firstlogin(), target);
+  // optional uint64 registrationdate = 8;
+  if (has_registrationdate()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(8, this->registrationdate(), target);
   }
 
-  // optional bytes userConfig = 9;
-  if (has_userconfig()) {
+  // optional bytes config = 9;
+  if (has_config()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        9, this->userconfig(), target);
+        9, this->config(), target);
   }
 
   // optional .user.UserActivityStatistics stats = 10;
@@ -2354,20 +2354,20 @@ int UserData::ByteSize() const {
           this->lastlogin());
     }
 
-    // optional uint64 firstLogin = 8;
-    if (has_firstlogin()) {
+    // optional uint64 registrationdate = 8;
+    if (has_registrationdate()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt64Size(
-          this->firstlogin());
+          this->registrationdate());
     }
 
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional bytes userConfig = 9;
-    if (has_userconfig()) {
+    // optional bytes config = 9;
+    if (has_config()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->userconfig());
+          this->config());
     }
 
     // optional .user.UserActivityStatistics stats = 10;
@@ -2431,13 +2431,13 @@ void UserData::MergeFrom(const UserData& from) {
     if (from.has_lastlogin()) {
       set_lastlogin(from.lastlogin());
     }
-    if (from.has_firstlogin()) {
-      set_firstlogin(from.firstlogin());
+    if (from.has_registrationdate()) {
+      set_registrationdate(from.registrationdate());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    if (from.has_userconfig()) {
-      set_userconfig(from.userconfig());
+    if (from.has_config()) {
+      set_config(from.config());
     }
     if (from.has_stats()) {
       mutable_stats()->::user::UserActivityStatistics::MergeFrom(from.stats());
@@ -2479,8 +2479,8 @@ void UserData::Swap(UserData* other) {
     std::swap(address_, other->address_);
     std::swap(phonenumber_, other->phonenumber_);
     std::swap(lastlogin_, other->lastlogin_);
-    std::swap(firstlogin_, other->firstlogin_);
-    std::swap(userconfig_, other->userconfig_);
+    std::swap(registrationdate_, other->registrationdate_);
+    std::swap(config_, other->config_);
     std::swap(stats_, other->stats_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
