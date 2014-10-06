@@ -91,48 +91,45 @@ void tst_dbschema_storage::createMessage_divesNotNullArray()
 void tst_dbschema_storage::fromArray_formsProperStorage()
 {
 
-    QBENCHMARK{
-        Storage s;
-        QString str;
-        for(int i=0;i<1000;i++){
-            str.append("String");
-        }
-        s.set_name(str);
-        s.setID(1000);
-        s.setCreationDate(QDateTime::currentDateTime());
-        QByteArray *ba = s.toArray();
-        QVERIFY(ba->size()>0);
-
-        Storage s2;
-        s2.fromArray(ba);
-
-        QVERIFY(s2.getName() == s.getName() );
-        QVERIFY(s2.getID() == s.getID() );
-        QVERIFY(s2.getCreationDate() == s.getCreationDate() );
-        delete ba;
+    Storage s;
+    QString str;
+    for(int i=0;i<1000;i++){
+        str.append("String");
     }
+    s.set_name(str);
+    s.setID(1000);
+    s.setCreationDate(QDateTime::currentDateTime());
+    QByteArray *ba = s.toArray();
+    QVERIFY(ba->size()>0);
+
+    Storage s2;
+    s2.fromArray(ba);
+
+    QVERIFY(s2.getName() == s.getName() );
+    QVERIFY(s2.getID() == s.getID() );
+    QVERIFY(s2.getCreationDate() == s.getCreationDate() );
+    delete ba;
 }
 
 void tst_dbschema_storage::fromArray_formsProperStorage2()
 {
     QByteArray *ba = new QByteArray();
-    QBENCHMARK{
-        Storage s;
-        QString str;
-        for(int i=0;i<1000;i++){
-            str.append("String");
-        }
-        s.set_name(str);
-        s.setID(1000);
-        s.setCreationDate(QDateTime::currentDateTime());
-        s.toArray(ba);
-        QVERIFY(ba->size()>0);
-
-        Storage s2;
-        s2.fromArray(ba);
-
-        QVERIFY(s2.getName() == s.getName() );
-        QVERIFY(s2.getID() == s.getID() );
-        QVERIFY(s2.getCreationDate() == s.getCreationDate() );
+    Storage s;
+    QString str;
+    for(int i=0;i<1000;i++){
+        str.append("String");
     }
+    s.set_name(str);
+    s.setID(1000);
+    s.setCreationDate(QDateTime::currentDateTime());
+    s.toArray(ba);
+    QVERIFY(ba->size()>0);
+
+    Storage s2;
+    s2.fromArray(ba);
+
+    QVERIFY(s2.getName() == s.getName() );
+    QVERIFY(s2.getID() == s.getID() );
+    QVERIFY(s2.getCreationDate() == s.getCreationDate() );
+    delete ba;
 }

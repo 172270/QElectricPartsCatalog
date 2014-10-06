@@ -198,7 +198,7 @@ QList<Storage> PgInterface::getUserStorages(User &user)
 //    return QList<File>();
 //}
 
-uint PgInterface::addStorage(Storage &storage)
+uint PgInterface::addStorage(const Storage &storage)
 {
     if(storage.IsInitialized() ){
         q.clear();
@@ -210,4 +210,14 @@ uint PgInterface::addStorage(Storage &storage)
         return query->lastInsertId().toUInt();
     }
     return 0;
+}
+
+quint32 PgInterface::addGroup(const Group &group)
+{
+
+}
+
+quint32 PgInterface::addItem(const Item &item)
+{
+
 }

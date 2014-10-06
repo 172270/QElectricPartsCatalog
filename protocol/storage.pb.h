@@ -286,7 +286,7 @@ class Storage : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // required uint32 ownerId = 5;
+  // optional uint32 ownerId = 5;
   inline bool has_ownerid() const;
   inline void clear_ownerid();
   static const int kOwnerIdFieldNumber = 5;
@@ -530,7 +530,7 @@ inline void Storage::set_id(::google::protobuf::uint32 value) {
   id_ = value;
 }
 
-// required uint32 ownerId = 5;
+// optional uint32 ownerId = 5;
 inline bool Storage::has_ownerid() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }

@@ -566,7 +566,7 @@ bool Storage::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint32 ownerId = 5;
+      // optional uint32 ownerId = 5;
       case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -654,7 +654,7 @@ void Storage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->id(), output);
   }
 
-  // required uint32 ownerId = 5;
+  // optional uint32 ownerId = 5;
   if (has_ownerid()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->ownerid(), output);
   }
@@ -696,7 +696,7 @@ int Storage::ByteSize() const {
           this->id());
     }
 
-    // required uint32 ownerId = 5;
+    // optional uint32 ownerId = 5;
     if (has_ownerid()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt32Size(
@@ -765,7 +765,7 @@ void Storage::CopyFrom(const Storage& from) {
 }
 
 bool Storage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   if (has_stats()) {
     if (!this->stats().IsInitialized()) return false;

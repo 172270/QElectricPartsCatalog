@@ -7,8 +7,10 @@
 #include <QSqlError>
 
 #include "DB_schema/user.h"
+#include "DB_schema/group.h"
 #include "DB_schema/storage.h"
 #include "DB_schema/file.h"
+#include "DB_schema/item.h"
 
 class PgInterface
 {
@@ -23,9 +25,12 @@ public:
     bool checkUserPassword(User &user, QString passwd);
     void linkStorageToUser(User &user, Storage &storage);
     QList<Storage> getUserStorages(User &user);
-//    QList<File> getUserFiles(User &user);
 
-    uint addStorage(Storage &storage);
+    uint addStorage(const Storage &storage);
+
+    quint32 addGroup(const Group &group);
+
+    quint32 addItem(const Item &item);
 private:
     QSqlDatabase db;
     QSqlQuery *query;

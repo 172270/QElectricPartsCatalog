@@ -5,6 +5,7 @@
 User::User():
     defaultStorageID(0)
 {
+    set_id(0);
     user::UserData::set_config(QString(getDefaultConfig()).toStdString() );
 }
 
@@ -31,7 +32,6 @@ void User::set_email(const QString &value)
     //    }
     //    else
     user::UserData::set_email(value.trimmed().toStdString());
-
 }
 
 QString User::getEmail() const

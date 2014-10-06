@@ -19,14 +19,14 @@ int main(int argc, char *argv[])
     db.setPassword("postgres");
     tst_user test2;
     tst_Magazine test3;
-//    tst_dbschema_user test4;
-//    tst_dbschema_storage test5;
+    tst_dbschema_user test4;
+    tst_dbschema_storage test5;
     tst_item test6;
 
     int t2 = QTest::qExec(&test2, qApp->arguments() );
     int t3 = QTest::qExec(&test3, qApp->arguments() );
-    int t4 = 0;//QTest::qExec(&test4, qApp->arguments() );
-    int t5 = 0;//QTest::qExec(&test5, qApp->arguments() );
+    int t4 = QTest::qExec(&test4, qApp->arguments() );
+    int t5 = QTest::qExec(&test5, qApp->arguments() );
     int t6 = QTest::qExec(&test6, qApp->arguments() );
 
     QTimer::singleShot(1,&a,SLOT(quit()));

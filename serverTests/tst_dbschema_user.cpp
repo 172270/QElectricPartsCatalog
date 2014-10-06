@@ -97,7 +97,8 @@ void tst_dbschema_user::everyCreatedUser_shoudHaveUniqueId()
 void tst_dbschema_user::getBadUser_returnsEmptyUser()
 {
     User u = database->getUserByName("bad_user_zse");
-    QVERIFY(u.has_id()==false);
+    QVERIFY(u.has_id()==true);
+    QVERIFY(u.id() == 0);
 }
 
 void tst_dbschema_user::createdUser_getsRegisterDate()
@@ -175,8 +176,8 @@ void tst_dbschema_user::deleteUser_deletesUser()
     database->deleteUser( u );
     User u3 = database->getUserByName( u.getName() );
 
-    QVERIFY(u2.has_id() );
-    QVERIFY(!u3.has_id() );
+    QVERIFY(u2.id() != 0 );
+    QVERIFY(u3.id() == 0 );
 }
 
 void tst_dbschema_user::checkPassword_returnFalseIfWrongPassword()
