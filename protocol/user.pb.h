@@ -20,11 +20,9 @@
 #endif
 
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message.h>
+#include <google/protobuf/message_lite.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/generated_enum_reflection.h>
-#include <google/protobuf/unknown_field_set.h>
 #include "storage.pb.h"
 #include "stats.pb.h"
 // @@protoc_insertion_point(includes)
@@ -40,28 +38,10 @@ class LoginRequest;
 class LoginResponse;
 class Add;
 class AddReplay;
-class UserBasicData;
+class UserBasicInformation;
 class UserData;
 class UserActivityStatistics;
 
-enum MessageType {
-  reqLogin = 1
-};
-bool MessageType_IsValid(int value);
-const MessageType MessageType_MIN = reqLogin;
-const MessageType MessageType_MAX = reqLogin;
-const int MessageType_ARRAYSIZE = MessageType_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* MessageType_descriptor();
-inline const ::std::string& MessageType_Name(MessageType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    MessageType_descriptor(), value);
-}
-inline bool MessageType_Parse(
-    const ::std::string& name, MessageType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<MessageType>(
-    MessageType_descriptor(), name, value);
-}
 enum Replay {
   LOGIN_OK = 1,
   BAD_USER_OR_PASSWD = 10,
@@ -72,19 +52,9 @@ const Replay Replay_MIN = LOGIN_OK;
 const Replay Replay_MAX = USER_ALREADY_LOGGED_IN;
 const int Replay_ARRAYSIZE = Replay_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* Replay_descriptor();
-inline const ::std::string& Replay_Name(Replay value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Replay_descriptor(), value);
-}
-inline bool Replay_Parse(
-    const ::std::string& name, Replay* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Replay>(
-    Replay_descriptor(), name, value);
-}
 // ===================================================================
 
-class LoginRequest : public ::google::protobuf::Message {
+class LoginRequest : public ::google::protobuf::MessageLite {
  public:
   LoginRequest();
   virtual ~LoginRequest();
@@ -96,24 +66,24 @@ class LoginRequest : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const LoginRequest& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const LoginRequest* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(LoginRequest* other);
 
   // implements Message ----------------------------------------------
 
   LoginRequest* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const LoginRequest& from);
   void MergeFrom(const LoginRequest& from);
   void Clear();
@@ -124,7 +94,6 @@ class LoginRequest : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -132,7 +101,7 @@ class LoginRequest : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -169,15 +138,17 @@ class LoginRequest : public ::google::protobuf::Message {
   inline void set_has_password();
   inline void clear_has_password();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
   ::std::string* name_;
   ::std::string* password_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_user_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_user_2eproto();
+  #endif
   friend void protobuf_AssignDesc_user_2eproto();
   friend void protobuf_ShutdownFile_user_2eproto();
 
@@ -186,7 +157,7 @@ class LoginRequest : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class LoginResponse : public ::google::protobuf::Message {
+class LoginResponse : public ::google::protobuf::MessageLite {
  public:
   LoginResponse();
   virtual ~LoginResponse();
@@ -198,24 +169,24 @@ class LoginResponse : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const LoginResponse& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const LoginResponse* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(LoginResponse* other);
 
   // implements Message ----------------------------------------------
 
   LoginResponse* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const LoginResponse& from);
   void MergeFrom(const LoginResponse& from);
   void Clear();
@@ -226,7 +197,6 @@ class LoginResponse : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -234,7 +204,7 @@ class LoginResponse : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -261,15 +231,17 @@ class LoginResponse : public ::google::protobuf::Message {
   inline void set_has_replay();
   inline void clear_has_replay();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
   ::google::protobuf::uint32 msgtype_;
   int replay_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_user_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_user_2eproto();
+  #endif
   friend void protobuf_AssignDesc_user_2eproto();
   friend void protobuf_ShutdownFile_user_2eproto();
 
@@ -278,7 +250,7 @@ class LoginResponse : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class Add : public ::google::protobuf::Message {
+class Add : public ::google::protobuf::MessageLite {
  public:
   Add();
   virtual ~Add();
@@ -290,24 +262,24 @@ class Add : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const Add& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const Add* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(Add* other);
 
   // implements Message ----------------------------------------------
 
   Add* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const Add& from);
   void MergeFrom(const Add& from);
   void Clear();
@@ -318,7 +290,6 @@ class Add : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -326,7 +297,7 @@ class Add : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -405,8 +376,6 @@ class Add : public ::google::protobuf::Message {
   inline void set_has_phonenumber();
   inline void clear_has_phonenumber();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
   ::std::string* name_;
   ::std::string* password_;
   ::std::string* email_;
@@ -416,7 +385,11 @@ class Add : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_user_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_user_2eproto();
+  #endif
   friend void protobuf_AssignDesc_user_2eproto();
   friend void protobuf_ShutdownFile_user_2eproto();
 
@@ -425,7 +398,7 @@ class Add : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class AddReplay : public ::google::protobuf::Message {
+class AddReplay : public ::google::protobuf::MessageLite {
  public:
   AddReplay();
   virtual ~AddReplay();
@@ -437,24 +410,24 @@ class AddReplay : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const AddReplay& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const AddReplay* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(AddReplay* other);
 
   // implements Message ----------------------------------------------
 
   AddReplay* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const AddReplay& from);
   void MergeFrom(const AddReplay& from);
   void Clear();
@@ -465,7 +438,6 @@ class AddReplay : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -473,7 +445,7 @@ class AddReplay : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -502,15 +474,17 @@ class AddReplay : public ::google::protobuf::Message {
   inline void set_has_replay();
   inline void clear_has_replay();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
   ::QueryStats* stats_;
   int replay_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_user_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_user_2eproto();
+  #endif
   friend void protobuf_AssignDesc_user_2eproto();
   friend void protobuf_ShutdownFile_user_2eproto();
 
@@ -519,38 +493,38 @@ class AddReplay : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class UserBasicData : public ::google::protobuf::Message {
+class UserBasicInformation : public ::google::protobuf::MessageLite {
  public:
-  UserBasicData();
-  virtual ~UserBasicData();
+  UserBasicInformation();
+  virtual ~UserBasicInformation();
 
-  UserBasicData(const UserBasicData& from);
+  UserBasicInformation(const UserBasicInformation& from);
 
-  inline UserBasicData& operator=(const UserBasicData& from) {
+  inline UserBasicInformation& operator=(const UserBasicInformation& from) {
     CopyFrom(from);
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
+  static const UserBasicInformation& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const UserBasicInformation* internal_default_instance() {
+    return default_instance_;
   }
+  #endif
 
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const UserBasicData& default_instance();
-
-  void Swap(UserBasicData* other);
+  void Swap(UserBasicInformation* other);
 
   // implements Message ----------------------------------------------
 
-  UserBasicData* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const UserBasicData& from);
-  void MergeFrom(const UserBasicData& from);
+  UserBasicInformation* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const UserBasicInformation& from);
+  void MergeFrom(const UserBasicInformation& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -559,7 +533,6 @@ class UserBasicData : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -567,7 +540,7 @@ class UserBasicData : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -585,7 +558,7 @@ class UserBasicData : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // required string email = 4;
+  // optional string email = 4;
   inline bool has_email() const;
   inline void clear_email();
   static const int kEmailFieldNumber = 4;
@@ -597,31 +570,48 @@ class UserBasicData : public ::google::protobuf::Message {
   inline ::std::string* release_email();
   inline void set_allocated_email(::std::string* email);
 
-  // @@protoc_insertion_point(class_scope:user.UserBasicData)
+  // optional string address = 5;
+  inline bool has_address() const;
+  inline void clear_address();
+  static const int kAddressFieldNumber = 5;
+  inline const ::std::string& address() const;
+  inline void set_address(const ::std::string& value);
+  inline void set_address(const char* value);
+  inline void set_address(const char* value, size_t size);
+  inline ::std::string* mutable_address();
+  inline ::std::string* release_address();
+  inline void set_allocated_address(::std::string* address);
+
+  // @@protoc_insertion_point(class_scope:user.UserBasicInformation)
  private:
   inline void set_has_name();
   inline void clear_has_name();
   inline void set_has_email();
   inline void clear_has_email();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  inline void set_has_address();
+  inline void clear_has_address();
 
   ::std::string* name_;
   ::std::string* email_;
+  ::std::string* address_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_user_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_user_2eproto();
+  #endif
   friend void protobuf_AssignDesc_user_2eproto();
   friend void protobuf_ShutdownFile_user_2eproto();
 
   void InitAsDefaultInstance();
-  static UserBasicData* default_instance_;
+  static UserBasicInformation* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class UserData : public ::google::protobuf::Message {
+class UserData : public ::google::protobuf::MessageLite {
  public:
   UserData();
   virtual ~UserData();
@@ -633,24 +623,24 @@ class UserData : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const UserData& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const UserData* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(UserData* other);
 
   // implements Message ----------------------------------------------
 
   UserData* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const UserData& from);
   void MergeFrom(const UserData& from);
   void Clear();
@@ -661,7 +651,6 @@ class UserData : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -669,7 +658,7 @@ class UserData : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -777,6 +766,18 @@ class UserData : public ::google::protobuf::Message {
   inline ::user::UserActivityStatistics* release_stats();
   inline void set_allocated_stats(::user::UserActivityStatistics* stats);
 
+  // optional bytes description = 12;
+  inline bool has_description() const;
+  inline void clear_description();
+  static const int kDescriptionFieldNumber = 12;
+  inline const ::std::string& description() const;
+  inline void set_description(const ::std::string& value);
+  inline void set_description(const char* value);
+  inline void set_description(const void* value, size_t size);
+  inline ::std::string* mutable_description();
+  inline ::std::string* release_description();
+  inline void set_allocated_description(::std::string* description);
+
   // @@protoc_insertion_point(class_scope:user.UserData)
  private:
   inline void set_has_id();
@@ -797,8 +798,8 @@ class UserData : public ::google::protobuf::Message {
   inline void clear_has_config();
   inline void set_has_stats();
   inline void clear_has_stats();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  inline void set_has_description();
+  inline void clear_has_description();
 
   ::std::string* name_;
   ::std::string* email_;
@@ -809,12 +810,17 @@ class UserData : public ::google::protobuf::Message {
   ::google::protobuf::uint64 registrationdate_;
   ::std::string* config_;
   ::user::UserActivityStatistics* stats_;
+  ::std::string* description_;
   ::google::protobuf::uint32 id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_user_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_user_2eproto();
+  #endif
   friend void protobuf_AssignDesc_user_2eproto();
   friend void protobuf_ShutdownFile_user_2eproto();
 
@@ -823,7 +829,7 @@ class UserData : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class UserActivityStatistics : public ::google::protobuf::Message {
+class UserActivityStatistics : public ::google::protobuf::MessageLite {
  public:
   UserActivityStatistics();
   virtual ~UserActivityStatistics();
@@ -835,24 +841,24 @@ class UserActivityStatistics : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const UserActivityStatistics& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const UserActivityStatistics* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(UserActivityStatistics* other);
 
   // implements Message ----------------------------------------------
 
   UserActivityStatistics* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const UserActivityStatistics& from);
   void MergeFrom(const UserActivityStatistics& from);
   void Clear();
@@ -863,7 +869,6 @@ class UserActivityStatistics : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -871,7 +876,7 @@ class UserActivityStatistics : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -934,8 +939,6 @@ class UserActivityStatistics : public ::google::protobuf::Message {
   inline void set_has_totaladditems();
   inline void clear_has_totaladditems();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
   ::google::protobuf::uint32 magazinecount_;
   ::google::protobuf::uint32 totalnumofelements_;
   ::google::protobuf::uint32 totalnumofuniqueelements_;
@@ -946,7 +949,11 @@ class UserActivityStatistics : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_user_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_user_2eproto();
+  #endif
   friend void protobuf_AssignDesc_user_2eproto();
   friend void protobuf_ShutdownFile_user_2eproto();
 
@@ -1522,7 +1529,11 @@ inline void AddReplay::clear_stats() {
   clear_has_stats();
 }
 inline const ::QueryStats& AddReplay::stats() const {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  return stats_ != NULL ? *stats_ : *default_instance().stats_;
+#else
   return stats_ != NULL ? *stats_ : *default_instance_->stats_;
+#endif
 }
 inline ::QueryStats* AddReplay::mutable_stats() {
   set_has_stats();
@@ -1570,56 +1581,56 @@ inline void AddReplay::set_replay(::user::Replay value) {
 
 // -------------------------------------------------------------------
 
-// UserBasicData
+// UserBasicInformation
 
 // required string name = 3;
-inline bool UserBasicData::has_name() const {
+inline bool UserBasicInformation::has_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void UserBasicData::set_has_name() {
+inline void UserBasicInformation::set_has_name() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void UserBasicData::clear_has_name() {
+inline void UserBasicInformation::clear_has_name() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void UserBasicData::clear_name() {
+inline void UserBasicInformation::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
     name_->clear();
   }
   clear_has_name();
 }
-inline const ::std::string& UserBasicData::name() const {
+inline const ::std::string& UserBasicInformation::name() const {
   return *name_;
 }
-inline void UserBasicData::set_name(const ::std::string& value) {
+inline void UserBasicInformation::set_name(const ::std::string& value) {
   set_has_name();
   if (name_ == &::google::protobuf::internal::kEmptyString) {
     name_ = new ::std::string;
   }
   name_->assign(value);
 }
-inline void UserBasicData::set_name(const char* value) {
+inline void UserBasicInformation::set_name(const char* value) {
   set_has_name();
   if (name_ == &::google::protobuf::internal::kEmptyString) {
     name_ = new ::std::string;
   }
   name_->assign(value);
 }
-inline void UserBasicData::set_name(const char* value, size_t size) {
+inline void UserBasicInformation::set_name(const char* value, size_t size) {
   set_has_name();
   if (name_ == &::google::protobuf::internal::kEmptyString) {
     name_ = new ::std::string;
   }
   name_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* UserBasicData::mutable_name() {
+inline ::std::string* UserBasicInformation::mutable_name() {
   set_has_name();
   if (name_ == &::google::protobuf::internal::kEmptyString) {
     name_ = new ::std::string;
   }
   return name_;
 }
-inline ::std::string* UserBasicData::release_name() {
+inline ::std::string* UserBasicInformation::release_name() {
   clear_has_name();
   if (name_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -1629,7 +1640,7 @@ inline ::std::string* UserBasicData::release_name() {
     return temp;
   }
 }
-inline void UserBasicData::set_allocated_name(::std::string* name) {
+inline void UserBasicInformation::set_allocated_name(::std::string* name) {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
     delete name_;
   }
@@ -1642,54 +1653,54 @@ inline void UserBasicData::set_allocated_name(::std::string* name) {
   }
 }
 
-// required string email = 4;
-inline bool UserBasicData::has_email() const {
+// optional string email = 4;
+inline bool UserBasicInformation::has_email() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void UserBasicData::set_has_email() {
+inline void UserBasicInformation::set_has_email() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void UserBasicData::clear_has_email() {
+inline void UserBasicInformation::clear_has_email() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void UserBasicData::clear_email() {
+inline void UserBasicInformation::clear_email() {
   if (email_ != &::google::protobuf::internal::kEmptyString) {
     email_->clear();
   }
   clear_has_email();
 }
-inline const ::std::string& UserBasicData::email() const {
+inline const ::std::string& UserBasicInformation::email() const {
   return *email_;
 }
-inline void UserBasicData::set_email(const ::std::string& value) {
+inline void UserBasicInformation::set_email(const ::std::string& value) {
   set_has_email();
   if (email_ == &::google::protobuf::internal::kEmptyString) {
     email_ = new ::std::string;
   }
   email_->assign(value);
 }
-inline void UserBasicData::set_email(const char* value) {
+inline void UserBasicInformation::set_email(const char* value) {
   set_has_email();
   if (email_ == &::google::protobuf::internal::kEmptyString) {
     email_ = new ::std::string;
   }
   email_->assign(value);
 }
-inline void UserBasicData::set_email(const char* value, size_t size) {
+inline void UserBasicInformation::set_email(const char* value, size_t size) {
   set_has_email();
   if (email_ == &::google::protobuf::internal::kEmptyString) {
     email_ = new ::std::string;
   }
   email_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* UserBasicData::mutable_email() {
+inline ::std::string* UserBasicInformation::mutable_email() {
   set_has_email();
   if (email_ == &::google::protobuf::internal::kEmptyString) {
     email_ = new ::std::string;
   }
   return email_;
 }
-inline ::std::string* UserBasicData::release_email() {
+inline ::std::string* UserBasicInformation::release_email() {
   clear_has_email();
   if (email_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -1699,7 +1710,7 @@ inline ::std::string* UserBasicData::release_email() {
     return temp;
   }
 }
-inline void UserBasicData::set_allocated_email(::std::string* email) {
+inline void UserBasicInformation::set_allocated_email(::std::string* email) {
   if (email_ != &::google::protobuf::internal::kEmptyString) {
     delete email_;
   }
@@ -1709,6 +1720,76 @@ inline void UserBasicData::set_allocated_email(::std::string* email) {
   } else {
     clear_has_email();
     email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string address = 5;
+inline bool UserBasicInformation::has_address() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void UserBasicInformation::set_has_address() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void UserBasicInformation::clear_has_address() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void UserBasicInformation::clear_address() {
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    address_->clear();
+  }
+  clear_has_address();
+}
+inline const ::std::string& UserBasicInformation::address() const {
+  return *address_;
+}
+inline void UserBasicInformation::set_address(const ::std::string& value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+}
+inline void UserBasicInformation::set_address(const char* value) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(value);
+}
+inline void UserBasicInformation::set_address(const char* value, size_t size) {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  address_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserBasicInformation::mutable_address() {
+  set_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    address_ = new ::std::string;
+  }
+  return address_;
+}
+inline ::std::string* UserBasicInformation::release_address() {
+  clear_has_address();
+  if (address_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = address_;
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserBasicInformation::set_allocated_address(::std::string* address) {
+  if (address_ != &::google::protobuf::internal::kEmptyString) {
+    delete address_;
+  }
+  if (address) {
+    set_has_address();
+    address_ = address;
+  } else {
+    clear_has_address();
+    address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -2172,7 +2253,11 @@ inline void UserData::clear_stats() {
   clear_has_stats();
 }
 inline const ::user::UserActivityStatistics& UserData::stats() const {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  return stats_ != NULL ? *stats_ : *default_instance().stats_;
+#else
   return stats_ != NULL ? *stats_ : *default_instance_->stats_;
+#endif
 }
 inline ::user::UserActivityStatistics* UserData::mutable_stats() {
   set_has_stats();
@@ -2192,6 +2277,76 @@ inline void UserData::set_allocated_stats(::user::UserActivityStatistics* stats)
     set_has_stats();
   } else {
     clear_has_stats();
+  }
+}
+
+// optional bytes description = 12;
+inline bool UserData::has_description() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void UserData::set_has_description() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void UserData::clear_has_description() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void UserData::clear_description() {
+  if (description_ != &::google::protobuf::internal::kEmptyString) {
+    description_->clear();
+  }
+  clear_has_description();
+}
+inline const ::std::string& UserData::description() const {
+  return *description_;
+}
+inline void UserData::set_description(const ::std::string& value) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(value);
+}
+inline void UserData::set_description(const char* value) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(value);
+}
+inline void UserData::set_description(const void* value, size_t size) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserData::mutable_description() {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  return description_;
+}
+inline ::std::string* UserData::release_description() {
+  clear_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = description_;
+    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserData::set_allocated_description(::std::string* description) {
+  if (description_ != &::google::protobuf::internal::kEmptyString) {
+    delete description_;
+  }
+  if (description) {
+    set_has_description();
+    description_ = description;
+  } else {
+    clear_has_description();
+    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -2335,23 +2490,6 @@ inline void UserActivityStatistics::set_totaladditems(::google::protobuf::uint32
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace user
-
-#ifndef SWIG
-namespace google {
-namespace protobuf {
-
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::user::MessageType>() {
-  return ::user::MessageType_descriptor();
-}
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::user::Replay>() {
-  return ::user::Replay_descriptor();
-}
-
-}  // namespace google
-}  // namespace protobuf
-#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

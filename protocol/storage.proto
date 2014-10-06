@@ -1,14 +1,21 @@
-//option optimize_for = LITE_RUNTIME;
+option optimize_for = LITE_RUNTIME;
 package storage;
 
-message Storage{
-  required string name = 3;
-  required uint32 id = 4;
-  optional uint32 ownerId = 5;
-  optional fixed64 creationDate = 6;
+message StorageBasicInformation{
+	required uint32 id = 1;
 }
 
 message StorageStatistics{
 	required uint32 elementsNumber = 1;
 	required uint32 uniqueElementsNumber = 2;
 }
+
+message Storage{
+  required string name = 3;
+  required uint32 id = 4;
+  required uint32 ownerId = 5;
+  optional fixed64 creationDate = 6;
+  optional string description = 7;
+  optional StorageStatistics stats = 8;
+}
+

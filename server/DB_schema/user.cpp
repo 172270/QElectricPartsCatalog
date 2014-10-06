@@ -133,9 +133,26 @@ QByteArray* User::toArray()
     return data;
 }
 
-user::UserData *User::getPBPackage()
+QByteArray *User::toArray(QByteArray *ba)
 {
-    return static_cast<user::UserData*>(this);
+    if (!IsInitialized()){
+        throw QString("Uninitialized message!");
+    }
+
+    if(ba->size()< ByteSize() )
+        ba->resize(ByteSize());
+    SerializeToArray(ba->data(),ba->size());
+
+    return ba;
+}
+
+user::UserBasicInformation User::getPBPackage()
+{
+    user::UserBasicInformation ubi;
+    ubi.set_name(name() );
+    ///TODO check if user want's to give his email in, find information in config
+    ubi.set_email(email());
+    return ubi;
 }
 
 void User::fromArray(const QByteArray *data){

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTest>
+#include <string>
 
 #include "DB_schema/item.h"
 #include "DB_schema/user.h"
@@ -20,8 +21,14 @@ signals:
 public slots:
 
 private slots:
+    void initTestCase();
+    void cleanupTestCase();
 
     void toArray_formsArray();
+private:
+    QByteArray *ba;
+    QString longText;
+    std::string str;
 };
 
 #endif // TST_ITEM_H

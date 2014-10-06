@@ -1,8 +1,8 @@
 #include "group.h"
 
-void Group::setName(const QString &name)
+void Group::set_name(const QString &name)
 {
-    set_name(name.toStdString());
+    groups::Group::set_name(name.toStdString());
 }
 
 QString Group::getName() const
@@ -20,9 +20,9 @@ quint32 Group::getID() const
     return id();
 }
 
-void Group::setParentID(quint32 id)
+void Group::set_parentid(quint32 id)
 {
-    set_parentid(id);
+    groups::Group::set_parentid(id);
 }
 
 quint32 Group::getParentID() const
@@ -65,9 +65,10 @@ QList<Parameter> Group::getParametersList() const
 
 }
 
-groups::Group Group::getPBPackage()
-{
-     return static_cast<groups::Group>(*this);
+groups::GroupBasicInformation Group::getGroupBasicInfoPB(){
+    groups::GroupBasicInformation gbi;
+    gbi.set_id(id());
+    return gbi;
 }
 
 Group::Group()

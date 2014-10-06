@@ -30,6 +30,18 @@ void protobuf_AssignDesc_types_2eproto();
 void protobuf_ShutdownFile_types_2eproto();
 
 
+enum MsgType {
+  reqLogin = 1,
+  msgItem = 100,
+  msgUser = 110,
+  msgGroup = 120,
+  msgPackage = 130
+};
+bool MsgType_IsValid(int value);
+const MsgType MsgType_MIN = reqLogin;
+const MsgType MsgType_MAX = msgPackage;
+const int MsgType_ARRAYSIZE = MsgType_MAX + 1;
+
 // ===================================================================
 
 
@@ -40,15 +52,6 @@ void protobuf_ShutdownFile_types_2eproto();
 
 
 // @@protoc_insertion_point(namespace_scope)
-
-#ifndef SWIG
-namespace google {
-namespace protobuf {
-
-
-}  // namespace google
-}  // namespace protobuf
-#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

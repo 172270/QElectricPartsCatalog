@@ -1,4 +1,4 @@
-//option optimize_for = LITE_RUNTIME;
+option optimize_for = LITE_RUNTIME;
 package groups;
 
 message Parameter{
@@ -7,9 +7,12 @@ message Parameter{
   required string parameterConfig = 3;
 }
 
-message GroupBasicData{
-    required string name = 1;
-    required uint32 id = 2;
+// used in item message as a container for item group ID
+// to minimalize overhead coused by adding additional group info to 
+// item, full information about group can be send via separate message
+// (only once for a group of items)
+message GroupBasicInformation{
+    required uint32 id = 1;
 }
 
 message Group{

@@ -4,7 +4,9 @@ Package::Package()
 {
 }
 
-package::Package Package::getPBPackage()
+package::PackageBasicInformation Package::getPackageBasicInformation()
 {
-    return static_cast<package::Package>(*this);
+    package::PackageBasicInformation pbi;
+    pbi.set_id(id());
+    return pbi;
 }

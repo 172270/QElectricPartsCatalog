@@ -8,7 +8,7 @@ class Package : public package::Package
 public:
     Package();
 
-    package::Package getPBPackage();
+    package::PackageBasicInformation getPackageBasicInformation();
 };
 
 #endif // PACKAGE_H

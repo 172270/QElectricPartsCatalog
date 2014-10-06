@@ -1,28 +1,7 @@
-//option optimize_for = LITE_RUNTIME;
+option optimize_for = LITE_RUNTIME;
 package user;
 import public "storage.proto";
 import public "stats.proto";
-
-enum MessageType{
-	reqLogin = 1; 		// N/A
-//	reqLogout; 		// N/A 
-//	reqItem; 		// N/A
-//	reqParameters; 	// N/A
-//	reqCases; 		// N/A
-//	
-//	addUser;		// N/A
-//	addParameter;	// N/A
-//	addItemToStorage;// N/A
-//	addItemGroup;	// N/A
-//	addItem;		// N/A
-//	addCase;		// N/A
-//	addFileToUser;	// N/A
-//	addFileToGroup;	// N/A
-//	addFileToItem;	// N/A
-//	addFileToCase;	// N/A
-//	addStorage;		// N/A
-//	addSet;			// N/A
-}
 
 enum Replay{
   LOGIN_OK = 1;
@@ -53,9 +32,10 @@ message AddReplay{
   required Replay replay = 3;
 }
 
-message UserBasicData{
+message UserBasicInformation{
     required string name = 3;
-    required string email = 4;
+    optional string email = 4;
+    optional string address = 5;
 }
 
 message UserData{
@@ -69,6 +49,8 @@ message UserData{
     optional uint64 registrationdate = 8; // N/A
     optional bytes config = 9; // windows size, program settings, last group, etc.
     optional UserActivityStatistics stats = 10; // N/A
+    optional bytes description = 12; 
+    ///TODO check if "bytes" allow to put QByteArray or QString to field
 }
 
 message UserActivityStatistics{

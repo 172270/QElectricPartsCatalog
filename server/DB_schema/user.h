@@ -55,7 +55,8 @@ public:
     QByteArray getDefaultConfig();
 
     QByteArray* toArray();
-    UserData* getPBPackage();
+    QByteArray* toArray(QByteArray *ba);
+    user::UserBasicInformation getPBPackage();
     void fromArray(const QByteArray *data);
 
 private:

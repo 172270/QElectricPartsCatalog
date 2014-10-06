@@ -10,22 +10,22 @@
 
 #include "group.pb.h"
 
-class Parameter : protected groups::Parameter
+class Parameter : public groups::Parameter
 {
     QString getName() const;
     void setName(const QString &name);
 };
 
-class Group : protected groups::Group
+class Group : public groups::Group
 {
 public:
-    void setName(const QString &name);
+    void set_name(const QString &name);
     QString getName() const;
 
     void setID(quint32 id);
     quint32 getID() const;
 
-    void setParentID( quint32 id);
+    void set_parentid( quint32 id);
     quint32 getParentID() const;
 
     bool setsAllowed() const;
@@ -39,7 +39,7 @@ public:
 
     QList<Parameter> getParametersList() const;
 
-    groups::Group getPBPackage();
+    groups::GroupBasicInformation getGroupBasicInfoPB();
 
     Group();
 

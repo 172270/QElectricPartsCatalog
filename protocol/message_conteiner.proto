@@ -1,6 +1,13 @@
-//option optimize_for = LITE_RUNTIME;
+option optimize_for = LITE_RUNTIME;
 
-message messagePackage{
-   required fixed64 length = 1;
-   repeated bytes data = 2;
+import public "types.proto";
+
+message MessageMetadata{
+	required fixed64 length = 1;
+	required MsgType msgType = 2;
+	repeated bytes data = 3;
+}
+
+message MessagePackage{
+	repeated MessageMetadata data=1;
 }

@@ -15,33 +15,40 @@ class Item : public item::Item
 {
 public:
 
-    void setID(quint32 id);
     quint32 getID() const;
 
-    void setName(const QString&name);
+    void setName(const QString& name);
     QString getName() const;
 
-    void setSymbol(const QString&symbol);
+    void set_symbol(const QString& symbol);
     QString getSymbol() const;
 
-    void setNamespace(const QString&space);
+    void set_namespace_(const QString&space);
     QString getNamespace() const;
 
-    void setAddDate(const QDateTime &dt );
+    void set_adddate(const QDateTime &dt );
     QDateTime getAddDate() const;
+
+    void set_updatedate(const QDateTime &dt);
+    QDateTime getUpdateDate();
 
     void setIsPrivate( bool isPrivate );
     bool isPrivate();
 
-    void setPackage(Package *package);
-    Package *getPackage();
+    void setUser(User &user);
+    void setGroup(Group &group);
 
-    void setUser(User *user);
-    void setGroup( Group *group);
+    void addParameter(int id, QVariant value);
+    QMap<quint32, QVariant> getParameters();
 
     Item();
 
     QByteArray* toArray();
+    QByteArray *toArray(QByteArray *data);
+    void fromArray(QByteArray *data);
+
+    void setPackage(Package &package);
+
 };
 
 #endif // ITEM_H

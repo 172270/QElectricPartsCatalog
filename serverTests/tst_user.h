@@ -68,7 +68,6 @@ private slots:
     void createMsgFromUserWithoutEmail_throwsException();
 
     void toArray_createsAByteArray();
-    void toArray_createsAProperMessage();
 
 private:
     User *user;

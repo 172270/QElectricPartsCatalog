@@ -20,10 +20,9 @@
 #endif
 
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message.h>
+#include <google/protobuf/message_lite.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
 namespace storage {
@@ -33,43 +32,44 @@ void  protobuf_AddDesc_storage_2eproto();
 void protobuf_AssignDesc_storage_2eproto();
 void protobuf_ShutdownFile_storage_2eproto();
 
-class Storage;
+class StorageBasicInformation;
 class StorageStatistics;
+class Storage;
 
 // ===================================================================
 
-class Storage : public ::google::protobuf::Message {
+class StorageBasicInformation : public ::google::protobuf::MessageLite {
  public:
-  Storage();
-  virtual ~Storage();
+  StorageBasicInformation();
+  virtual ~StorageBasicInformation();
 
-  Storage(const Storage& from);
+  StorageBasicInformation(const StorageBasicInformation& from);
 
-  inline Storage& operator=(const Storage& from) {
+  inline StorageBasicInformation& operator=(const StorageBasicInformation& from) {
     CopyFrom(from);
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
+  static const StorageBasicInformation& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const StorageBasicInformation* internal_default_instance() {
+    return default_instance_;
   }
+  #endif
 
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Storage& default_instance();
-
-  void Swap(Storage* other);
+  void Swap(StorageBasicInformation* other);
 
   // implements Message ----------------------------------------------
 
-  Storage* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Storage& from);
-  void MergeFrom(const Storage& from);
+  StorageBasicInformation* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const StorageBasicInformation& from);
+  void MergeFrom(const StorageBasicInformation& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -78,7 +78,6 @@ class Storage : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -86,76 +85,43 @@ class Storage : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // required string name = 3;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 3;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
-  inline void set_allocated_name(::std::string* name);
-
-  // required uint32 id = 4;
+  // required uint32 id = 1;
   inline bool has_id() const;
   inline void clear_id();
-  static const int kIdFieldNumber = 4;
+  static const int kIdFieldNumber = 1;
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // optional uint32 ownerId = 5;
-  inline bool has_ownerid() const;
-  inline void clear_ownerid();
-  static const int kOwnerIdFieldNumber = 5;
-  inline ::google::protobuf::uint32 ownerid() const;
-  inline void set_ownerid(::google::protobuf::uint32 value);
-
-  // optional fixed64 creationDate = 6;
-  inline bool has_creationdate() const;
-  inline void clear_creationdate();
-  static const int kCreationDateFieldNumber = 6;
-  inline ::google::protobuf::uint64 creationdate() const;
-  inline void set_creationdate(::google::protobuf::uint64 value);
-
-  // @@protoc_insertion_point(class_scope:storage.Storage)
+  // @@protoc_insertion_point(class_scope:storage.StorageBasicInformation)
  private:
-  inline void set_has_name();
-  inline void clear_has_name();
   inline void set_has_id();
   inline void clear_has_id();
-  inline void set_has_ownerid();
-  inline void clear_has_ownerid();
-  inline void set_has_creationdate();
-  inline void clear_has_creationdate();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::std::string* name_;
   ::google::protobuf::uint32 id_;
-  ::google::protobuf::uint32 ownerid_;
-  ::google::protobuf::uint64 creationdate_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_storage_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_storage_2eproto();
+  #endif
   friend void protobuf_AssignDesc_storage_2eproto();
   friend void protobuf_ShutdownFile_storage_2eproto();
 
   void InitAsDefaultInstance();
-  static Storage* default_instance_;
+  static StorageBasicInformation* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class StorageStatistics : public ::google::protobuf::Message {
+class StorageStatistics : public ::google::protobuf::MessageLite {
  public:
   StorageStatistics();
   virtual ~StorageStatistics();
@@ -167,24 +133,24 @@ class StorageStatistics : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const StorageStatistics& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const StorageStatistics* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(StorageStatistics* other);
 
   // implements Message ----------------------------------------------
 
   StorageStatistics* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const StorageStatistics& from);
   void MergeFrom(const StorageStatistics& from);
   void Clear();
@@ -195,7 +161,6 @@ class StorageStatistics : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -203,7 +168,7 @@ class StorageStatistics : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -230,25 +195,246 @@ class StorageStatistics : public ::google::protobuf::Message {
   inline void set_has_uniqueelementsnumber();
   inline void clear_has_uniqueelementsnumber();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
   ::google::protobuf::uint32 elementsnumber_;
   ::google::protobuf::uint32 uniqueelementsnumber_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_storage_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_storage_2eproto();
+  #endif
   friend void protobuf_AssignDesc_storage_2eproto();
   friend void protobuf_ShutdownFile_storage_2eproto();
 
   void InitAsDefaultInstance();
   static StorageStatistics* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class Storage : public ::google::protobuf::MessageLite {
+ public:
+  Storage();
+  virtual ~Storage();
+
+  Storage(const Storage& from);
+
+  inline Storage& operator=(const Storage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const Storage& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const Storage* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(Storage* other);
+
+  // implements Message ----------------------------------------------
+
+  Storage* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const Storage& from);
+  void MergeFrom(const Storage& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string name = 3;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 3;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const char* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
+
+  // required uint32 id = 4;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 4;
+  inline ::google::protobuf::uint32 id() const;
+  inline void set_id(::google::protobuf::uint32 value);
+
+  // required uint32 ownerId = 5;
+  inline bool has_ownerid() const;
+  inline void clear_ownerid();
+  static const int kOwnerIdFieldNumber = 5;
+  inline ::google::protobuf::uint32 ownerid() const;
+  inline void set_ownerid(::google::protobuf::uint32 value);
+
+  // optional fixed64 creationDate = 6;
+  inline bool has_creationdate() const;
+  inline void clear_creationdate();
+  static const int kCreationDateFieldNumber = 6;
+  inline ::google::protobuf::uint64 creationdate() const;
+  inline void set_creationdate(::google::protobuf::uint64 value);
+
+  // optional string description = 7;
+  inline bool has_description() const;
+  inline void clear_description();
+  static const int kDescriptionFieldNumber = 7;
+  inline const ::std::string& description() const;
+  inline void set_description(const ::std::string& value);
+  inline void set_description(const char* value);
+  inline void set_description(const char* value, size_t size);
+  inline ::std::string* mutable_description();
+  inline ::std::string* release_description();
+  inline void set_allocated_description(::std::string* description);
+
+  // optional .storage.StorageStatistics stats = 8;
+  inline bool has_stats() const;
+  inline void clear_stats();
+  static const int kStatsFieldNumber = 8;
+  inline const ::storage::StorageStatistics& stats() const;
+  inline ::storage::StorageStatistics* mutable_stats();
+  inline ::storage::StorageStatistics* release_stats();
+  inline void set_allocated_stats(::storage::StorageStatistics* stats);
+
+  // @@protoc_insertion_point(class_scope:storage.Storage)
+ private:
+  inline void set_has_name();
+  inline void clear_has_name();
+  inline void set_has_id();
+  inline void clear_has_id();
+  inline void set_has_ownerid();
+  inline void clear_has_ownerid();
+  inline void set_has_creationdate();
+  inline void clear_has_creationdate();
+  inline void set_has_description();
+  inline void clear_has_description();
+  inline void set_has_stats();
+  inline void clear_has_stats();
+
+  ::std::string* name_;
+  ::google::protobuf::uint32 id_;
+  ::google::protobuf::uint32 ownerid_;
+  ::google::protobuf::uint64 creationdate_;
+  ::std::string* description_;
+  ::storage::StorageStatistics* stats_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_storage_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_storage_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_storage_2eproto();
+  friend void protobuf_ShutdownFile_storage_2eproto();
+
+  void InitAsDefaultInstance();
+  static Storage* default_instance_;
+};
 // ===================================================================
 
 
 // ===================================================================
+
+// StorageBasicInformation
+
+// required uint32 id = 1;
+inline bool StorageBasicInformation::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void StorageBasicInformation::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void StorageBasicInformation::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void StorageBasicInformation::clear_id() {
+  id_ = 0u;
+  clear_has_id();
+}
+inline ::google::protobuf::uint32 StorageBasicInformation::id() const {
+  return id_;
+}
+inline void StorageBasicInformation::set_id(::google::protobuf::uint32 value) {
+  set_has_id();
+  id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// StorageStatistics
+
+// required uint32 elementsNumber = 1;
+inline bool StorageStatistics::has_elementsnumber() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void StorageStatistics::set_has_elementsnumber() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void StorageStatistics::clear_has_elementsnumber() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void StorageStatistics::clear_elementsnumber() {
+  elementsnumber_ = 0u;
+  clear_has_elementsnumber();
+}
+inline ::google::protobuf::uint32 StorageStatistics::elementsnumber() const {
+  return elementsnumber_;
+}
+inline void StorageStatistics::set_elementsnumber(::google::protobuf::uint32 value) {
+  set_has_elementsnumber();
+  elementsnumber_ = value;
+}
+
+// required uint32 uniqueElementsNumber = 2;
+inline bool StorageStatistics::has_uniqueelementsnumber() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void StorageStatistics::set_has_uniqueelementsnumber() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void StorageStatistics::clear_has_uniqueelementsnumber() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void StorageStatistics::clear_uniqueelementsnumber() {
+  uniqueelementsnumber_ = 0u;
+  clear_has_uniqueelementsnumber();
+}
+inline ::google::protobuf::uint32 StorageStatistics::uniqueelementsnumber() const {
+  return uniqueelementsnumber_;
+}
+inline void StorageStatistics::set_uniqueelementsnumber(::google::protobuf::uint32 value) {
+  set_has_uniqueelementsnumber();
+  uniqueelementsnumber_ = value;
+}
+
+// -------------------------------------------------------------------
 
 // Storage
 
@@ -344,7 +530,7 @@ inline void Storage::set_id(::google::protobuf::uint32 value) {
   id_ = value;
 }
 
-// optional uint32 ownerId = 5;
+// required uint32 ownerId = 5;
 inline bool Storage::has_ownerid() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -388,67 +574,122 @@ inline void Storage::set_creationdate(::google::protobuf::uint64 value) {
   creationdate_ = value;
 }
 
-// -------------------------------------------------------------------
+// optional string description = 7;
+inline bool Storage::has_description() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void Storage::set_has_description() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void Storage::clear_has_description() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void Storage::clear_description() {
+  if (description_ != &::google::protobuf::internal::kEmptyString) {
+    description_->clear();
+  }
+  clear_has_description();
+}
+inline const ::std::string& Storage::description() const {
+  return *description_;
+}
+inline void Storage::set_description(const ::std::string& value) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(value);
+}
+inline void Storage::set_description(const char* value) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(value);
+}
+inline void Storage::set_description(const char* value, size_t size) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Storage::mutable_description() {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  return description_;
+}
+inline ::std::string* Storage::release_description() {
+  clear_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = description_;
+    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Storage::set_allocated_description(::std::string* description) {
+  if (description_ != &::google::protobuf::internal::kEmptyString) {
+    delete description_;
+  }
+  if (description) {
+    set_has_description();
+    description_ = description;
+  } else {
+    clear_has_description();
+    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
 
-// StorageStatistics
-
-// required uint32 elementsNumber = 1;
-inline bool StorageStatistics::has_elementsnumber() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
+// optional .storage.StorageStatistics stats = 8;
+inline bool Storage::has_stats() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void StorageStatistics::set_has_elementsnumber() {
-  _has_bits_[0] |= 0x00000001u;
+inline void Storage::set_has_stats() {
+  _has_bits_[0] |= 0x00000020u;
 }
-inline void StorageStatistics::clear_has_elementsnumber() {
-  _has_bits_[0] &= ~0x00000001u;
+inline void Storage::clear_has_stats() {
+  _has_bits_[0] &= ~0x00000020u;
 }
-inline void StorageStatistics::clear_elementsnumber() {
-  elementsnumber_ = 0u;
-  clear_has_elementsnumber();
+inline void Storage::clear_stats() {
+  if (stats_ != NULL) stats_->::storage::StorageStatistics::Clear();
+  clear_has_stats();
 }
-inline ::google::protobuf::uint32 StorageStatistics::elementsnumber() const {
-  return elementsnumber_;
+inline const ::storage::StorageStatistics& Storage::stats() const {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  return stats_ != NULL ? *stats_ : *default_instance().stats_;
+#else
+  return stats_ != NULL ? *stats_ : *default_instance_->stats_;
+#endif
 }
-inline void StorageStatistics::set_elementsnumber(::google::protobuf::uint32 value) {
-  set_has_elementsnumber();
-  elementsnumber_ = value;
+inline ::storage::StorageStatistics* Storage::mutable_stats() {
+  set_has_stats();
+  if (stats_ == NULL) stats_ = new ::storage::StorageStatistics;
+  return stats_;
 }
-
-// required uint32 uniqueElementsNumber = 2;
-inline bool StorageStatistics::has_uniqueelementsnumber() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+inline ::storage::StorageStatistics* Storage::release_stats() {
+  clear_has_stats();
+  ::storage::StorageStatistics* temp = stats_;
+  stats_ = NULL;
+  return temp;
 }
-inline void StorageStatistics::set_has_uniqueelementsnumber() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void StorageStatistics::clear_has_uniqueelementsnumber() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void StorageStatistics::clear_uniqueelementsnumber() {
-  uniqueelementsnumber_ = 0u;
-  clear_has_uniqueelementsnumber();
-}
-inline ::google::protobuf::uint32 StorageStatistics::uniqueelementsnumber() const {
-  return uniqueelementsnumber_;
-}
-inline void StorageStatistics::set_uniqueelementsnumber(::google::protobuf::uint32 value) {
-  set_has_uniqueelementsnumber();
-  uniqueelementsnumber_ = value;
+inline void Storage::set_allocated_stats(::storage::StorageStatistics* stats) {
+  delete stats_;
+  stats_ = stats;
+  if (stats) {
+    set_has_stats();
+  } else {
+    clear_has_stats();
+  }
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace storage
-
-#ifndef SWIG
-namespace google {
-namespace protobuf {
-
-
-}  // namespace google
-}  // namespace protobuf
-#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

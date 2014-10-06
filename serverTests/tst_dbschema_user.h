@@ -18,6 +18,7 @@ class tst_dbschema_user : public QObject
 public:
     explicit tst_dbschema_user(QObject *parent = 0);
     ~tst_dbschema_user(){
+        delete database;
     }
     void removeTable(QString tblName);
 signals:

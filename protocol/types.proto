@@ -1,1 +1,27 @@
-//option optimize_for = LITE_RUNTIME;
+option optimize_for = LITE_RUNTIME;
+
+enum MsgType{
+	reqLogin = 1; 		// N/A
+//	reqLogout; 		// N/A 
+//	reqItem; 		// N/A
+//	reqParameters; 	// N/A
+//	reqCases; 		// N/A
+//	
+//	addUser;		// N/A
+//	addParameter;	// N/A
+//	addItemToStorage;// N/A
+//	addItemGroup;	// N/A
+//	addItem;		// N/A
+//	addCase;		// N/A
+//	addFileToUser;	// N/A
+//	addFileToGroup;	// N/A
+//	addFileToItem;	// N/A
+//	addFileToCase;	// N/A
+//	addStorage;		// N/A
+//	addSet;			// N/A
+
+	msgItem 	= 100;
+	msgUser 	= 110;
+	msgGroup	= 120;
+	msgPackage	= 130;
+}

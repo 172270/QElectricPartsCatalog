@@ -1,4 +1,4 @@
-//option optimize_for = LITE_RUNTIME;
+option optimize_for = LITE_RUNTIME;
 package item;
 
 import public "user.proto";
@@ -13,13 +13,17 @@ message ItemParameters{
 
 message Item{
     required uint32 id = 1;
-    required package.Package package = 2;
-    required user.UserBasicData user = 3;
-    required groups.GroupBasicData group = 4;
-    required string name = 5;
-    required string symbol = 6;
-    required string namespace = 7;
-    required bool privateItem = 8;
-    required uint64 addDate = 11;
+    required string name = 2;
+    required string symbol = 3;
+    required string namespace = 4;
+    required bool privateItem = 5;
+    
+    required package.PackageBasicInformation package = 10;
+    required user.UserBasicInformation user = 11;
+    required groups.GroupBasicInformation group = 12;
+
+    required uint64 addDate = 14;
+    required uint64 updateDate = 15;
+    optional string description = 16;
     repeated ItemParameters parameters = 20;
 }

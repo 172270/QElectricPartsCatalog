@@ -211,6 +211,7 @@ void tst_user::user_shoudContainDefaultMagazine()
 {
     Storage* s = user->getStorage();
     QVERIFY( s->getID() == 0 );
+    delete s;
 }
 
 void tst_user::addStorage_ShoudAddStorage()
@@ -218,6 +219,7 @@ void tst_user::addStorage_ShoudAddStorage()
     Storage s;
     s.setID(1);
     s.set_name("jakas nazwa");
+    s.set_ownerid(5);
     QVERIFY( user->storagesNumber() == 0);
     user->addStorage(s);
     QVERIFY( user->storagesNumber()  == 1);
@@ -279,17 +281,5 @@ void tst_user::toArray_createsAByteArray()
     QByteArray *ba = user->toArray();
 
     QVERIFY(ba->size() > 0);
-    delete ba;
-}
-void tst_user::toArray_createsAProperMessage()
-{
-    setRequiredFields();
-    user->set_address("adress");
-    user->set_phonenumber("123123123");
-    QByteArray *ba = user->toArray();
-
-    User decodedUser;
-    decodedUser.fromArray(ba);
-    QVERIFY(*ba == *decodedUser.toArray() );
     delete ba;
 }

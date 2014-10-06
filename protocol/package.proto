@@ -1,5 +1,9 @@
-//option optimize_for = LITE_RUNTIME;
+option optimize_for = LITE_RUNTIME;
 package package;
+
+message PackageBasicInformation{
+	required uint32 id = 1;
+}
 
 message Package{
     required uint32 ID = 1;

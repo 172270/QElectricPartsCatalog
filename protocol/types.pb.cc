@@ -10,62 +10,53 @@
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
-
-namespace {
-
-
-}  // namespace
-
-
-void protobuf_AssignDesc_types_2eproto() {
-  protobuf_AddDesc_types_2eproto();
-  const ::google::protobuf::FileDescriptor* file =
-    ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
-      "types.proto");
-  GOOGLE_CHECK(file != NULL);
-}
-
-namespace {
-
-GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AssignDescriptors_once_);
-inline void protobuf_AssignDescriptorsOnce() {
-  ::google::protobuf::GoogleOnceInit(&protobuf_AssignDescriptors_once_,
-                 &protobuf_AssignDesc_types_2eproto);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-}
-
-}  // namespace
 
 void protobuf_ShutdownFile_types_2eproto() {
 }
 
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+void protobuf_AddDesc_types_2eproto_impl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#else
 void protobuf_AddDesc_types_2eproto() {
   static bool already_here = false;
   if (already_here) return;
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\013types.proto", 13);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "types.proto", &protobuf_RegisterTypes);
+#endif
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_types_2eproto);
 }
 
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AddDesc_types_2eproto_once_);
+void protobuf_AddDesc_types_2eproto() {
+  ::google::protobuf::::google::protobuf::GoogleOnceInit(&protobuf_AddDesc_types_2eproto_once_,
+                 &protobuf_AddDesc_types_2eproto_impl);
+}
+#else
 // Force AddDescriptors() to be called at static initialization time.
 struct StaticDescriptorInitializer_types_2eproto {
   StaticDescriptorInitializer_types_2eproto() {
     protobuf_AddDesc_types_2eproto();
   }
 } static_descriptor_initializer_types_2eproto_;
+#endif
+bool MsgType_IsValid(int value) {
+  switch(value) {
+    case 1:
+    case 100:
+    case 110:
+    case 120:
+    case 130:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 

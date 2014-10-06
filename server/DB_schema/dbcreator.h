@@ -11,8 +11,12 @@ class DbCreator : public QObject
     Q_OBJECT
 public:
     explicit DbCreator(QObject *parent = 0);
+    ~DbCreator(){
+        delete query;
+    }
 
     void initialize_database();
+
 signals:
 
 public slots:

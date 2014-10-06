@@ -19,6 +19,10 @@ class tst_dbschema_storage : public QObject
 public:
     explicit tst_dbschema_storage(QObject *parent = 0);
 
+    ~tst_dbschema_storage(){
+        delete database;
+    }
+
 signals:
 
 private slots:

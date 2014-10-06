@@ -1,9 +1,6 @@
 #include "item.h"
 
-void Item::setID(quint32 id)
-{
-    set_id(id);
-}
+
 
 quint32 Item::getID() const
 {
@@ -20,9 +17,9 @@ QString Item::getName() const
     return QString::fromStdString(name());
 }
 
-void Item::setSymbol(const QString &symbol)
+void Item::set_symbol(const QString &symbol)
 {
-    set_symbol(symbol.toStdString());
+    item::Item::set_symbol(symbol.toStdString());
 }
 
 QString Item::getSymbol() const
@@ -30,9 +27,9 @@ QString Item::getSymbol() const
     return QString::fromStdString(symbol());
 }
 
-void Item::setNamespace(const QString &space)
+void Item::set_namespace_(const QString &space)
 {
-    set_namespace_(space.toStdString());
+    item::Item::set_namespace_(space.toStdString());
 }
 
 QString Item::getNamespace() const
@@ -40,9 +37,19 @@ QString Item::getNamespace() const
     return QString::fromStdString(namespace_());
 }
 
-void Item::setAddDate(const QDateTime &dt)
+void Item::set_adddate(const QDateTime &dt)
 {
-    set_adddate(dt.toMSecsSinceEpoch());
+    item::Item::set_adddate(dt.toMSecsSinceEpoch());
+}
+
+void Item::set_updatedate(const QDateTime &dt)
+{
+    item::Item::set_updatedate(dt.toMSecsSinceEpoch());
+}
+
+QDateTime Item::getUpdateDate()
+{
+    return QDateTime::fromMSecsSinceEpoch(adddate());
 }
 
 QDateTime Item::getAddDate() const
@@ -60,24 +67,38 @@ bool Item::isPrivate()
     return privateitem();
 }
 
-void Item::setPackage(Package *package)
+void Item::setPackage(Package &package)
 {
-    mutable_package()->CopyFrom(package->getPBPackage());
+    mutable_package()->CopyFrom( package.getPackageBasicInformation());
 }
 
-Package *Item::getPackage()
+
+void Item::setUser(User &user)
 {
-    return static_cast<Package*>( mutable_package() );
+    mutable_user()->CopyFrom(user.getPBPackage() );
 }
 
-void Item::setUser(User *user)
+void Item::setGroup(Group &group)
 {
-    mutable_user()->CopyFrom( *user->getPBPackage() );
+    mutable_group()->CopyFrom( group.getGroupBasicInfoPB());
 }
 
-void Item::setGroup(Group *group)
+void Item::addParameter(int id, QVariant value)
 {
-    mutable_group()->CopyFrom(group->getPBPackage());
+    item::ItemParameters *param = add_parameters();
+    param->set_id(id);
+    param->set_value(value.toString().toStdString());
+}
+
+QMap<quint32, QVariant> Item::getParameters()
+{
+    QMap<quint32, QVariant> map;
+    int paramNumber = parameters().size()-1;
+
+    for(;paramNumber>0;--paramNumber){
+        map.insert(parameters(paramNumber).id(), QString::fromStdString(parameters(paramNumber).value()));
+    }
+    return map;
 }
 
 Item::Item()
@@ -86,5 +107,29 @@ Item::Item()
 
 QByteArray *Item::toArray()
 {
-    new QByteArray();
+    if (!IsInitialized()){
+        throw QString("Uninitialized message!");
+    }
+
+    QByteArray *data = new QByteArray(ByteSize(),'\0' );
+    SerializeToArray(data->data(),data->size());
+
+    return data;
+}
+
+QByteArray *Item::toArray(QByteArray *data)
+{
+    if (!IsInitialized()){
+        throw QString("Uninitialized message!");
+    }
+    if(data->size()< ByteSize() )
+        data->resize(ByteSize());
+
+    SerializeToArray(data->data(),data->size());
+    return data;
+}
+
+void Item::fromArray(QByteArray *data)
+{
+    this->ParseFromArray(data->data(), data->size());
 }
