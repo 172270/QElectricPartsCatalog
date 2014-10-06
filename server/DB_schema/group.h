@@ -10,12 +10,6 @@
 
 #include "group.pb.h"
 
-class Parameter : public groups::Parameter
-{
-    QString getName() const;
-    void setName(const QString &name);
-};
-
 class Group : public groups::Group
 {
 public:
@@ -37,7 +31,7 @@ public:
     void setDescription(const QString &desc);
     QString getDescription() const;
 
-    QList<Parameter> getParametersList() const;
+    QMap<quint32, ::groups::Parameter> getParameters() const;
 
     groups::GroupBasicInformation getGroupBasicInfoPB();
 

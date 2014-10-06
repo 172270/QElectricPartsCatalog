@@ -2,9 +2,10 @@ option optimize_for = LITE_RUNTIME;
 package groups;
 
 message Parameter{
-  required string name = 1;
-  required int32 type = 2;
-  required string parameterConfig = 3;
+  required uint32 id = 1;
+  required string name = 2;
+  required int32 type = 3;
+  required string parameterConfig = 4;
 }
 
 // used in item message as a container for item group ID

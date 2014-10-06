@@ -57,6 +57,7 @@ void tst_item::toArray_formsArray()
     it.addParameter(2,1);
     it.addParameter(3,"from -20.0°C to +80.0°C");
     it.addParameter(4,23.54);
+    it.addParameter(5, QDateTime::currentDateTime() );
 
     it.toArray(ba);
     Item it2;

@@ -59,6 +59,7 @@ struct StaticDescriptorInitializer_group_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int Parameter::kIdFieldNumber;
 const int Parameter::kNameFieldNumber;
 const int Parameter::kTypeFieldNumber;
 const int Parameter::kParameterConfigFieldNumber;
@@ -80,6 +81,7 @@ Parameter::Parameter(const Parameter& from)
 
 void Parameter::SharedCtor() {
   _cached_size_ = 0;
+  id_ = 0u;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   type_ = 0;
   parameterconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -127,6 +129,7 @@ Parameter* Parameter::New() const {
 
 void Parameter::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    id_ = 0u;
     if (has_name()) {
       if (name_ != &::google::protobuf::internal::kEmptyString) {
         name_->clear();
@@ -148,21 +151,37 @@ bool Parameter::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string name = 1;
+      // required uint32 id = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &id_)));
+          set_has_id();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_name;
+        break;
+      }
+
+      // required string name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_name()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(16)) goto parse_type;
+        if (input->ExpectTag(24)) goto parse_type;
         break;
       }
 
-      // required int32 type = 2;
-      case 2: {
+      // required int32 type = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_type:
@@ -173,12 +192,12 @@ bool Parameter::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_parameterConfig;
+        if (input->ExpectTag(34)) goto parse_parameterConfig;
         break;
       }
 
-      // required string parameterConfig = 3;
-      case 3: {
+      // required string parameterConfig = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_parameterConfig:
@@ -208,21 +227,26 @@ bool Parameter::MergePartialFromCodedStream(
 
 void Parameter::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string name = 1;
+  // required uint32 id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
+  }
+
+  // required string name = 2;
   if (has_name()) {
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->name(), output);
+      2, this->name(), output);
   }
 
-  // required int32 type = 2;
+  // required int32 type = 3;
   if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->type(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->type(), output);
   }
 
-  // required string parameterConfig = 3;
+  // required string parameterConfig = 4;
   if (has_parameterconfig()) {
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->parameterconfig(), output);
+      4, this->parameterconfig(), output);
   }
 
 }
@@ -231,21 +255,28 @@ int Parameter::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string name = 1;
+    // required uint32 id = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->id());
+    }
+
+    // required string name = 2;
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->name());
     }
 
-    // required int32 type = 2;
+    // required int32 type = 3;
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->type());
     }
 
-    // required string parameterConfig = 3;
+    // required string parameterConfig = 4;
     if (has_parameterconfig()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -267,6 +298,9 @@ void Parameter::CheckTypeAndMergeFrom(
 void Parameter::MergeFrom(const Parameter& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      set_id(from.id());
+    }
     if (from.has_name()) {
       set_name(from.name());
     }
@@ -286,13 +320,14 @@ void Parameter::CopyFrom(const Parameter& from) {
 }
 
 bool Parameter::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
   return true;
 }
 
 void Parameter::Swap(Parameter* other) {
   if (other != this) {
+    std::swap(id_, other->id_);
     std::swap(name_, other->name_);
     std::swap(type_, other->type_);
     std::swap(parameterconfig_, other->parameterconfig_);

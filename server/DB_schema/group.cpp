@@ -60,9 +60,15 @@ QString Group::getDescription() const
     return QString::fromStdString(description());
 }
 
-QList<Parameter> Group::getParametersList() const
+QMap<quint32, ::groups::Parameter> Group::getParameters() const
 {
+    QMap<quint32, ::groups::Parameter> map;
+    int paramNumber = parameters().size()-1;
 
+    for(;paramNumber>0;--paramNumber){
+        map.insert(parameters(paramNumber).id(), parameters(paramNumber));
+    }
+    return map;
 }
 
 groups::GroupBasicInformation Group::getGroupBasicInfoPB(){
@@ -73,15 +79,4 @@ groups::GroupBasicInformation Group::getGroupBasicInfoPB(){
 
 Group::Group()
 {
-}
-
-
-QString Parameter::getName() const
-{
-    return QString::fromStdString(name());
-}
-
-void Parameter::setName(const QString &name)
-{
-    set_name(name.toStdString());
 }

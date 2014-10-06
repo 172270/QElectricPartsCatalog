@@ -91,10 +91,17 @@ class Parameter : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
-  // required string name = 1;
+  // required uint32 id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline ::google::protobuf::uint32 id() const;
+  inline void set_id(::google::protobuf::uint32 value);
+
+  // required string name = 2;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 1;
+  static const int kNameFieldNumber = 2;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -103,17 +110,17 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // required int32 type = 2;
+  // required int32 type = 3;
   inline bool has_type() const;
   inline void clear_type();
-  static const int kTypeFieldNumber = 2;
+  static const int kTypeFieldNumber = 3;
   inline ::google::protobuf::int32 type() const;
   inline void set_type(::google::protobuf::int32 value);
 
-  // required string parameterConfig = 3;
+  // required string parameterConfig = 4;
   inline bool has_parameterconfig() const;
   inline void clear_parameterconfig();
-  static const int kParameterConfigFieldNumber = 3;
+  static const int kParameterConfigFieldNumber = 4;
   inline const ::std::string& parameterconfig() const;
   inline void set_parameterconfig(const ::std::string& value);
   inline void set_parameterconfig(const char* value);
@@ -124,6 +131,8 @@ class Parameter : public ::google::protobuf::MessageLite {
 
   // @@protoc_insertion_point(class_scope:groups.Parameter)
  private:
+  inline void set_has_id();
+  inline void clear_has_id();
   inline void set_has_name();
   inline void clear_has_name();
   inline void set_has_type();
@@ -132,11 +141,12 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline void clear_has_parameterconfig();
 
   ::std::string* name_;
-  ::std::string* parameterconfig_;
+  ::google::protobuf::uint32 id_;
   ::google::protobuf::int32 type_;
+  ::std::string* parameterconfig_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_group_2eproto_impl();
@@ -405,15 +415,37 @@ class Group : public ::google::protobuf::MessageLite {
 
 // Parameter
 
-// required string name = 1;
-inline bool Parameter::has_name() const {
+// required uint32 id = 1;
+inline bool Parameter::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Parameter::set_has_name() {
+inline void Parameter::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Parameter::clear_has_name() {
+inline void Parameter::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void Parameter::clear_id() {
+  id_ = 0u;
+  clear_has_id();
+}
+inline ::google::protobuf::uint32 Parameter::id() const {
+  return id_;
+}
+inline void Parameter::set_id(::google::protobuf::uint32 value) {
+  set_has_id();
+  id_ = value;
+}
+
+// required string name = 2;
+inline bool Parameter::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Parameter::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Parameter::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void Parameter::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
@@ -475,15 +507,15 @@ inline void Parameter::set_allocated_name(::std::string* name) {
   }
 }
 
-// required int32 type = 2;
+// required int32 type = 3;
 inline bool Parameter::has_type() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void Parameter::set_has_type() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void Parameter::clear_has_type() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void Parameter::clear_type() {
   type_ = 0;
@@ -497,15 +529,15 @@ inline void Parameter::set_type(::google::protobuf::int32 value) {
   type_ = value;
 }
 
-// required string parameterConfig = 3;
+// required string parameterConfig = 4;
 inline bool Parameter::has_parameterconfig() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void Parameter::set_has_parameterconfig() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void Parameter::clear_has_parameterconfig() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void Parameter::clear_parameterconfig() {
   if (parameterconfig_ != &::google::protobuf::internal::kEmptyString) {

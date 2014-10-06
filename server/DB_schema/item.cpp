@@ -1,7 +1,5 @@
 #include "item.h"
 
-
-
 quint32 Item::getID() const
 {
     return id();
