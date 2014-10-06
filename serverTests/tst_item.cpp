@@ -28,37 +28,30 @@ void tst_item::toArray_formsArray()
     User u;
     Group g;
 
-    u.set_name("STEFAN");
     u.set_id(3);
-
-    p.set_name("asd");
-    p.set_id(3);
-    p.set_pinnumber(123);
-
-    g.set_name("nazwa");
-    g.set_id(3);
-    g.set_parentid(2);
-    g.setAllowRecipe(false);
-    g.setAllowItems(true);
+    p.set_id(4);
+    g.set_id(5);
 
     it.set_id(1);
-    it.setName("NAZWA");
+    it.set_name("NAZWA");
     it.setPackage(p);
     it.setUser(u);
     it.setGroup(g);
     it.set_description(str);
     it.set_symbol("symbol");
     it.set_namespace_("namespace");
-    it.setIsPrivate(false);
+    it.set_private(false);
     it.set_adddate(QDateTime::currentDateTime());
     it.set_updatedate(QDateTime::currentDateTime());
 
-    it.addParameter(1,"parameter_1");
+    it.addParameter(1,"text parameter");
     it.addParameter(2,1);
     it.addParameter(3,"from -20.0°C to +80.0°C");
     it.addParameter(4,23.54);
     it.addParameter(5, QDateTime::currentDateTime() );
+    it.addParameter(6, 'c');
 
+    ba->clear();
     it.toArray(ba);
     Item it2;
     it2.fromArray(ba);
@@ -71,10 +64,48 @@ void tst_item::toArray_formsArray()
     QVERIFY(it2.getAddDate() == it.getAddDate() );
     QVERIFY(it2.getUpdateDate()== it.getUpdateDate() );
 
-    QVERIFY(it2.package().id() == it.package().id());
-    QVERIFY(it2.group().id() == it.group().id());
+    QVERIFY(it2.package().id()  == it.package().id());
+    QVERIFY(it2.group().id()    == it.group().id());
     QVERIFY(it2.getParameters() == it.getParameters() );
-    QVERIFY(it2.getAddDate() == it.getAddDate() );
+    QVERIFY(it2.getAddDate()    == it.getAddDate() );
     QVERIFY(it2.getUpdateDate() == it.getUpdateDate() );
-    QVERIFY(it2.description() == it.description() );
+    QVERIFY(it2.description()   == it.description() );
+}
+
+void tst_item::specialCharacters_HaveProperEncoding()
+{
+    Item it;
+    Package p;
+    User u;
+    Group g;
+
+    u.set_id(3);
+    p.set_id(4);
+    g.set_id(5);
+
+    it.set_id(1);
+    it.set_name("!@#$%^&*()≠²³¢€½§·«»¡¿£¼‰∧≈¾±°ΩŒĘ®™¥↑↔ÓÞĄŚÐÆŊ•ƏŁŻŹĆ‘“Ń∞×÷żźć„”ńµąśðæŋ’ə…łó→↓←ß©ęœπ");
+    it.setPackage(p);
+    it.setUser(u);
+    it.setGroup(g);
+    it.set_description(str);
+    it.set_symbol("symbol");
+    it.set_namespace_("namespace");
+    it.set_private(false);
+    it.set_adddate(QDateTime::currentDateTime());
+    it.set_updatedate(QDateTime::currentDateTime());
+
+    it.addParameter(1,"text parameter");
+    it.addParameter(2,1);
+    it.addParameter(3,"from -20.0°C to +80.0°C");
+    it.addParameter(4,23.54);
+    it.addParameter(5, QDateTime::currentDateTime() );
+    it.addParameter(6, 'c');
+
+    ba->clear();
+    it.toArray(ba);
+    Item it2;
+    it2.fromArray(ba);
+
+    QVERIFY(it2.name() == "!@#$%^&*()≠²³¢€½§·«»¡¿£¼‰∧≈¾±°ΩŒĘ®™¥↑↔ÓÞĄŚÐÆŊ•ƏŁŻŹĆ‘“Ń∞×÷żźć„”ńµąśðæŋ’ə…łó→↓←ß©ęœπ");
 }

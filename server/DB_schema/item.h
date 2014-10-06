@@ -17,7 +17,7 @@ public:
 
     quint32 getID() const;
 
-    void setName(const QString& name);
+    void set_name(const QString& name);
     QString getName() const;
 
     void set_symbol(const QString& symbol);
@@ -32,7 +32,7 @@ public:
     void set_updatedate(const QDateTime &dt);
     QDateTime getUpdateDate();
 
-    void setIsPrivate( bool isPrivate );
+    void set_private( bool isPrivate );
     bool isPrivate();
 
     void setUser(User &user);

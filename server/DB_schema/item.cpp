@@ -5,9 +5,9 @@ quint32 Item::getID() const
     return id();
 }
 
-void Item::setName(const QString &name)
+void Item::set_name(const QString &name)
 {
-    set_name(name.toStdString());
+    item::Item::set_name(name.toStdString());
 }
 
 QString Item::getName() const
@@ -55,7 +55,7 @@ QDateTime Item::getAddDate() const
     return QDateTime::fromMSecsSinceEpoch(adddate());
 }
 
-void Item::setIsPrivate(bool isPrivate)
+void Item::set_private(bool isPrivate)
 {
     set_privateitem(isPrivate);
 }

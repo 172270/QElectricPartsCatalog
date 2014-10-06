@@ -25,6 +25,7 @@ private slots:
     void cleanupTestCase();
 
     void toArray_formsArray();
+    void specialCharacters_HaveProperEncoding();
 private:
     QByteArray *ba;
     QString longText;
