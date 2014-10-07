@@ -143,13 +143,27 @@ void tst_dbschema_groups::databaseThrowsExceptionWhenDoubleGroupAdd()
 
 void tst_dbschema_groups::linkGroupWithParameter_linksGroupWithParameter()
 {
-    Group primaryGroup;
-    primaryGroup.set_parentid(1);
-    primaryGroup.set_name("Parameter_test");
-    primaryGroup.setAllowItems(true);
-    primaryGroup.setAllowRecipe(true);
-    primaryGroup.set_id(database->addGroup(primaryGroup));
+    Group g;
+    g.set_parentid(1);
+    g.set_name("Parameter_test");
+    g.setAllowItems(true);
+    g.setAllowRecipe(true);
+    g.set_id(database->addGroup(g));
 
-    Parameter p;
-    p.set_name("Parameter1");
+    Parameter p1, p2;
+    p1.set_name("Parameter1");
+    p1.config().setDefaultValue("N/A");
+    p1.config().setValueType("String");
+
+    p2.set_name("Parameter2");
+    p2.config().setDefaultValue(21);
+    p2.config().setValueType("int");
+
+    p1.set_id(database->addParameter(p1));
+    p2.set_id(database->addParameter(p2));
+
+    database->linkParameterToGroup(g, p1);
+    database->linkParameterToGroup(g, p2);
+
+    QVERIFY(g.getParameters().size() == 2);
 }

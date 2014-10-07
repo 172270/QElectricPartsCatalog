@@ -21,8 +21,9 @@ class ParameterConfig
 public:
     ParameterConfig();
     void clear();
-    QByteArray toBytes(){return QJsonDocument(object).toJson(QJsonDocument::Compact);}
-    std::string toStdString();
+    QByteArray toBytes() const;
+    QString toString() const;
+    std::string toStdString() const ;
     void fromStdString(const std::string &conf);
 
     void setDefaultValue(QVariant value);
@@ -38,9 +39,10 @@ class Parameter : public parameters::Parameter
 {
 public:
     Parameter();
+    ~Parameter();
     void set_name(const QString &name);
     QString getName() const {return QString::fromStdString( name() );}
-    ParameterConfig* getConfig() const {return m_config;}
+    ParameterConfig &config() const;
 private:
     ParameterConfig *m_config;
 };

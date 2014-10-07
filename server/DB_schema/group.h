@@ -9,7 +9,7 @@
 #include <QDateTime>
 
 #include "group.pb.h"
-#include "parameters.pb.h"
+#include "DB_schema/parameter.h"
 
 class Group : public groups::Group
 {
@@ -32,6 +32,7 @@ public:
     void set_description(const QString &desc);
     QString getDescription() const;
 
+    void add_parameter(const Parameter &parameter);
     QMap<quint32, ::parameters::ParameterBasicInformation> getParameters() const;
 
     groups::GroupBasicInformation getGroupBasicInfoPB();

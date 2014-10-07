@@ -192,17 +192,17 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // required bytes config = 3;
-  inline bool has_config() const;
-  inline void clear_config();
-  static const int kConfigFieldNumber = 3;
-  inline const ::std::string& config() const;
-  inline void set_config(const ::std::string& value);
-  inline void set_config(const char* value);
-  inline void set_config(const void* value, size_t size);
-  inline ::std::string* mutable_config();
-  inline ::std::string* release_config();
-  inline void set_allocated_config(::std::string* config);
+  // required bytes configData = 3;
+  inline bool has_configdata() const;
+  inline void clear_configdata();
+  static const int kConfigDataFieldNumber = 3;
+  inline const ::std::string& configdata() const;
+  inline void set_configdata(const ::std::string& value);
+  inline void set_configdata(const char* value);
+  inline void set_configdata(const void* value, size_t size);
+  inline ::std::string* mutable_configdata();
+  inline ::std::string* release_configdata();
+  inline void set_allocated_configdata(::std::string* configdata);
 
   // @@protoc_insertion_point(class_scope:parameters.Parameter)
  private:
@@ -210,11 +210,11 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline void clear_has_id();
   inline void set_has_name();
   inline void clear_has_name();
-  inline void set_has_config();
-  inline void clear_has_config();
+  inline void set_has_configdata();
+  inline void clear_has_configdata();
 
   ::std::string* name_;
-  ::std::string* config_;
+  ::std::string* configdata_;
   ::google::protobuf::uint32 id_;
 
   mutable int _cached_size_;
@@ -356,73 +356,73 @@ inline void Parameter::set_allocated_name(::std::string* name) {
   }
 }
 
-// required bytes config = 3;
-inline bool Parameter::has_config() const {
+// required bytes configData = 3;
+inline bool Parameter::has_configdata() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Parameter::set_has_config() {
+inline void Parameter::set_has_configdata() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Parameter::clear_has_config() {
+inline void Parameter::clear_has_configdata() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void Parameter::clear_config() {
-  if (config_ != &::google::protobuf::internal::kEmptyString) {
-    config_->clear();
+inline void Parameter::clear_configdata() {
+  if (configdata_ != &::google::protobuf::internal::kEmptyString) {
+    configdata_->clear();
   }
-  clear_has_config();
+  clear_has_configdata();
 }
-inline const ::std::string& Parameter::config() const {
-  return *config_;
+inline const ::std::string& Parameter::configdata() const {
+  return *configdata_;
 }
-inline void Parameter::set_config(const ::std::string& value) {
-  set_has_config();
-  if (config_ == &::google::protobuf::internal::kEmptyString) {
-    config_ = new ::std::string;
+inline void Parameter::set_configdata(const ::std::string& value) {
+  set_has_configdata();
+  if (configdata_ == &::google::protobuf::internal::kEmptyString) {
+    configdata_ = new ::std::string;
   }
-  config_->assign(value);
+  configdata_->assign(value);
 }
-inline void Parameter::set_config(const char* value) {
-  set_has_config();
-  if (config_ == &::google::protobuf::internal::kEmptyString) {
-    config_ = new ::std::string;
+inline void Parameter::set_configdata(const char* value) {
+  set_has_configdata();
+  if (configdata_ == &::google::protobuf::internal::kEmptyString) {
+    configdata_ = new ::std::string;
   }
-  config_->assign(value);
+  configdata_->assign(value);
 }
-inline void Parameter::set_config(const void* value, size_t size) {
-  set_has_config();
-  if (config_ == &::google::protobuf::internal::kEmptyString) {
-    config_ = new ::std::string;
+inline void Parameter::set_configdata(const void* value, size_t size) {
+  set_has_configdata();
+  if (configdata_ == &::google::protobuf::internal::kEmptyString) {
+    configdata_ = new ::std::string;
   }
-  config_->assign(reinterpret_cast<const char*>(value), size);
+  configdata_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Parameter::mutable_config() {
-  set_has_config();
-  if (config_ == &::google::protobuf::internal::kEmptyString) {
-    config_ = new ::std::string;
+inline ::std::string* Parameter::mutable_configdata() {
+  set_has_configdata();
+  if (configdata_ == &::google::protobuf::internal::kEmptyString) {
+    configdata_ = new ::std::string;
   }
-  return config_;
+  return configdata_;
 }
-inline ::std::string* Parameter::release_config() {
-  clear_has_config();
-  if (config_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* Parameter::release_configdata() {
+  clear_has_configdata();
+  if (configdata_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = config_;
-    config_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = configdata_;
+    configdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void Parameter::set_allocated_config(::std::string* config) {
-  if (config_ != &::google::protobuf::internal::kEmptyString) {
-    delete config_;
+inline void Parameter::set_allocated_configdata(::std::string* configdata) {
+  if (configdata_ != &::google::protobuf::internal::kEmptyString) {
+    delete configdata_;
   }
-  if (config) {
-    set_has_config();
-    config_ = config;
+  if (configdata) {
+    set_has_configdata();
+    configdata_ = configdata;
   } else {
-    clear_has_config();
-    config_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_configdata();
+    configdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 

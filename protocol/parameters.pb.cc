@@ -226,7 +226,7 @@ void ParameterBasicInformation::Swap(ParameterBasicInformation* other) {
 #ifndef _MSC_VER
 const int Parameter::kIdFieldNumber;
 const int Parameter::kNameFieldNumber;
-const int Parameter::kConfigFieldNumber;
+const int Parameter::kConfigDataFieldNumber;
 #endif  // !_MSC_VER
 
 Parameter::Parameter()
@@ -247,7 +247,7 @@ void Parameter::SharedCtor() {
   _cached_size_ = 0;
   id_ = 0u;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  config_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  configdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -259,8 +259,8 @@ void Parameter::SharedDtor() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
     delete name_;
   }
-  if (config_ != &::google::protobuf::internal::kEmptyString) {
-    delete config_;
+  if (configdata_ != &::google::protobuf::internal::kEmptyString) {
+    delete configdata_;
   }
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   if (this != &default_instance()) {
@@ -298,9 +298,9 @@ void Parameter::Clear() {
         name_->clear();
       }
     }
-    if (has_config()) {
-      if (config_ != &::google::protobuf::internal::kEmptyString) {
-        config_->clear();
+    if (has_configdata()) {
+      if (configdata_ != &::google::protobuf::internal::kEmptyString) {
+        configdata_->clear();
       }
     }
   }
@@ -338,17 +338,17 @@ bool Parameter::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_config;
+        if (input->ExpectTag(26)) goto parse_configData;
         break;
       }
 
-      // required bytes config = 3;
+      // required bytes configData = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_config:
+         parse_configData:
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_config()));
+                input, this->mutable_configdata()));
         } else {
           goto handle_uninterpreted;
         }
@@ -384,10 +384,10 @@ void Parameter::SerializeWithCachedSizes(
       2, this->name(), output);
   }
 
-  // required bytes config = 3;
-  if (has_config()) {
+  // required bytes configData = 3;
+  if (has_configdata()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      3, this->config(), output);
+      3, this->configdata(), output);
   }
 
 }
@@ -410,11 +410,11 @@ int Parameter::ByteSize() const {
           this->name());
     }
 
-    // required bytes config = 3;
-    if (has_config()) {
+    // required bytes configData = 3;
+    if (has_configdata()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->config());
+          this->configdata());
     }
 
   }
@@ -438,8 +438,8 @@ void Parameter::MergeFrom(const Parameter& from) {
     if (from.has_name()) {
       set_name(from.name());
     }
-    if (from.has_config()) {
-      set_config(from.config());
+    if (from.has_configdata()) {
+      set_configdata(from.configdata());
     }
   }
 }
@@ -460,7 +460,7 @@ void Parameter::Swap(Parameter* other) {
   if (other != this) {
     std::swap(id_, other->id_);
     std::swap(name_, other->name_);
-    std::swap(config_, other->config_);
+    std::swap(configdata_, other->configdata_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_cached_size_, other->_cached_size_);
   }

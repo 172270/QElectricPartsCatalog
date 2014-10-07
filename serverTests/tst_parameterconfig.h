@@ -25,6 +25,7 @@ private slots:
     void clear_removesAllData();
     void readEmptyData_setsDefaults();
     void readData_setsValues();
+    void toBytes_givesPropoerArray();
 
 private:
     ParameterConfig conf;

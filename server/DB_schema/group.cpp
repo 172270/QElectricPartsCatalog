@@ -60,6 +60,11 @@ QString Group::getDescription() const
     return QString::fromStdString(description());
 }
 
+void Group::add_parameter(const Parameter &parameter)
+{
+    add_parameters()->set_id( parameter.id() );
+}
+
 QMap<quint32, parameters::ParameterBasicInformation> Group::getParameters() const
 {
     QMap<quint32, parameters::ParameterBasicInformation> map;

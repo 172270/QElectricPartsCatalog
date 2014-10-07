@@ -33,7 +33,7 @@ public:
     quint32 addParameter(const Parameter &parameter);
 
     quint32 addGroup(const Group &group);
-    void linkParameterToGroup( const Group &group, const Parameter &parameter);
+    void linkParameterToGroup(Group &group, const Parameter &parameter);
 
     quint32 addItem(const Item &item);
 private:

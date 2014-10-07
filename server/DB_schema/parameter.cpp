@@ -6,8 +6,20 @@ void Parameter::set_name(const QString &name)
     parameters::Parameter::set_name( name.toStdString() );
 }
 
-Parameter::Parameter()
+ParameterConfig &Parameter::config() const {
+    return *m_config;
+}
+
+Parameter::Parameter() :
+   m_config(new ParameterConfig)
 {
+    set_id(0);
+    set_configdata( m_config->toStdString() );
+}
+
+Parameter::~Parameter()
+{
+    delete m_config;
 }
 
 ParameterConfig::ParameterConfig()
@@ -19,7 +31,17 @@ void ParameterConfig::clear()
     object = QJsonObject();
 }
 
-std::string ParameterConfig::toStdString()
+QByteArray ParameterConfig::toBytes() const
+{
+    return QJsonDocument(object).toJson(QJsonDocument::Compact);
+}
+
+QString ParameterConfig::toString() const
+{
+    return QString::fromStdString(toStdString());
+}
+
+std::string ParameterConfig::toStdString() const
 {
     return std::string(toBytes().data());
 }

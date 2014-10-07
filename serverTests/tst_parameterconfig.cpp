@@ -64,3 +64,11 @@ void tst_ParameterConfig::readData_setsValues()
     QVERIFY(conf.getValueType() == "QString" );
     QVERIFY(conf.defaultValue() == "DEFAULT_VALUE");
 }
+
+void tst_ParameterConfig::toBytes_givesPropoerArray()
+{
+    std::string def = "{\"default_value\":\"DEFAULT_VALUE\",\"type\":\"QString\"}";
+    conf.fromStdString(def);
+
+    QVERIFY(conf.toBytes() == "{\"default_value\":\"DEFAULT_VALUE\",\"type\":\"QString\"}");
+}

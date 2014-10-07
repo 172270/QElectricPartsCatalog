@@ -214,12 +214,13 @@ quint32 PgInterface::addParameter(const Parameter &parameter)
 {
     if(parameter.IsInitialized()){
         q.clear();
-        q.append("INSERT INTO parameters(parameter_id, name, config) VALUES(:pid, :name, :config);");
+        q.append("INSERT INTO parameters(name, config) VALUES(:name, :config);");
         query->prepare(q);
-        query->bindValue(":pid", parameter.id() );
         query->bindValue(":name", parameter.getName() );
-        query->bindValue(":config", parameter.getConfig() );
-        query->exec();
+        query->bindValue(":config", parameter.config().toString() );
+        if(!query->exec()){
+            qDebug()<<query->lastError().text();
+        }
 
         return query->lastInsertId().toUInt();
     }
@@ -247,7 +248,7 @@ quint32 PgInterface::addGroup(const Group &group)
     return 0;
 }
 
-void PgInterface::linkParameterToGroup(const Group &group, const Parameter &parameter)
+void PgInterface::linkParameterToGroup(Group &group, const Parameter &parameter)
 {
     q.clear();
     q.append("insert into group_parameter(parameter_id, group_id) values (:pid, :gid)");
@@ -259,8 +260,11 @@ void PgInterface::linkParameterToGroup(const Group &group, const Parameter &para
         UserError err;
         err.setErrorNumber(query->lastError().number());
         err.setText(query->lastError().text());
+        qDebug()<<err.text() << query->lastQuery();
         throw err;
     }
+
+    group.add_parameter(parameter);
 }
 
 quint32 PgInterface::addItem(const Item &item)
