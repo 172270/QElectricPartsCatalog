@@ -50,9 +50,9 @@ void Group::setAllowItems(bool allow)
     set_allowitems(allow);
 }
 
-void Group::setDescription(const QString &desc)
+void Group::set_description(const QString &desc)
 {
-    set_description(desc.toStdString());
+    groups::Group::set_description(desc.toStdString());
 }
 
 QString Group::getDescription() const
@@ -79,4 +79,5 @@ groups::GroupBasicInformation Group::getGroupBasicInfoPB(){
 
 Group::Group()
 {
+    set_id(0);
 }

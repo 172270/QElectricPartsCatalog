@@ -17,6 +17,7 @@ public:
 
     void initialize_database();
 
+    void addGroupRootNode();
 signals:
 
 public slots:

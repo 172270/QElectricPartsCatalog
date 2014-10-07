@@ -29,7 +29,7 @@ public:
     void setAllowRecipe(bool allow);
     void setAllowItems(bool allow);
 
-    void setDescription(const QString &desc);
+    void set_description(const QString &desc);
     QString getDescription() const;
 
     QMap<quint32, ::parameters::ParameterBasicInformation> getParameters() const;

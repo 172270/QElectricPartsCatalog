@@ -11,6 +11,7 @@
 #include "tst_item.h"
 #include "tst_itempackage.h"
 #include "tst_dbschema_groups.h"
+#include "tst_parameterconfig.h"
 
 int main(int argc, char *argv[])
 {
@@ -27,6 +28,7 @@ int main(int argc, char *argv[])
     tst_item test6;
     tst_ItemPackage test7;
     tst_dbschema_groups test8;
+    tst_ParameterConfig test9;
 
 
     int t2 = QTest::qExec(&test2, qApp->arguments() );
@@ -36,8 +38,9 @@ int main(int argc, char *argv[])
     int t6 = QTest::qExec(&test6, qApp->arguments() );
     int t7 = QTest::qExec(&test7, qApp->arguments() );
     int t8 = QTest::qExec(&test8, qApp->arguments() );
+    int t9 = QTest::qExec(&test9, qApp->arguments() );
 
     QTimer::singleShot(1,&a,SLOT(quit()));
-    return a.exec() | t2 | t3 | t4 | t5 | t6 | t7 | t8;
+    return a.exec() | t2 | t3 | t4 | t5 | t6 | t7 | t8 | t9;
 }
 

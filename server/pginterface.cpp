@@ -219,6 +219,7 @@ quint32 PgInterface::addParameter(const Parameter &parameter)
         query->bindValue(":pid", parameter.id() );
         query->bindValue(":name", parameter.getName() );
         query->bindValue(":config", parameter.getConfig() );
+        query->exec();
 
         return query->lastInsertId().toUInt();
     }
@@ -229,15 +230,17 @@ quint32 PgInterface::addGroup(const Group &group)
 {
     if(group.IsInitialized()){
         q.clear();
-        q.append("INSERT INTO groups(group_id, parent_id, name, description, allowrecipe, allowitems)"
-                 " VALUES(:gid, :pgid, :name, :desc, :allowrecipe, :allowitems);");
+        q.append("INSERT INTO groups( parent_id, name, description, allowrecipe, allowitems)"
+                 " VALUES(:pgid, :name, :desc, :allowrecipe, :allowitems);");
         query->prepare(q);
-        query->bindValue(":gid", group.id() );
         query->bindValue(":pgid", group.parentid() );
         query->bindValue(":name", group.getName() );
         query->bindValue(":desc", group.getDescription() );
         query->bindValue(":allowrecipe", group.allowsets() );
         query->bindValue(":allowitems", group.allowitems() );
+        if(!query->exec()){
+            throw QString(query->lastError().text() );
+        }
 
         return query->lastInsertId().toUInt();
     }

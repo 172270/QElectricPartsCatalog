@@ -9,6 +9,8 @@
 #include <QSqlQuery>
 
 #include "DB_schema/dbcreator.h"
+#include "DB_schema/group.h"
+#include "DB_schema/parameter.h"
 #include "pginterface.h"
 
 class tst_dbschema_groups : public QObject
@@ -26,6 +28,12 @@ private slots:
     void initTestCase();
     void cleanupTestCase();
     void cleanup();
+
+    void addGroupToDatabase_shoudSaveGroupWithAllInformation();
+    void addMeanygroups_givesSerialIDNumbers();
+    void databaseShoudAllowCreateGroupsWithSameNameAndDifferentParent();
+    void databaseThrowsExceptionWhenDoubleGroupAdd();
+    void linkGroupWithParameter_linksGroupWithParameter();
 
 private:
     QSqlQuery *query;

@@ -8,7 +8,7 @@ QT       += network testlib gui sql
 
 
 TARGET = tst_servertests
-CONFIG   += console
+CONFIG   += console c++11
 CONFIG   -= app_bundle
 
 TEMPLATE = app
@@ -39,7 +39,8 @@ HEADERS += \
     tst_dbschema_storage.h \
     tst_item.h \
     tst_itempackage.h \
-    tst_dbschema_groups.h
+    tst_dbschema_groups.h \
+    tst_parameterconfig.h
 
 SOURCES += tst_servertests.cpp \
     main.cpp \
@@ -50,7 +51,8 @@ SOURCES += tst_servertests.cpp \
     tst_dbschema_storage.cpp \
     tst_item.cpp \
     tst_itempackage.cpp \
-    tst_dbschema_groups.cpp
+    tst_dbschema_groups.cpp \
+    tst_parameterconfig.cpp
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../server/release/ -lserver
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../server/debug/ -lserver
