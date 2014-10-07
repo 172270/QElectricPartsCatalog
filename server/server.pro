@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     DB_schema/file.cpp \
     DB_schema/group.cpp \
     DB_schema/item.cpp \
-    DB_schema/package.cpp
+    DB_schema/package.cpp \
+    DB_schema/parameter.cpp
 
 HEADERS += \
     qcatalogserver.h \
@@ -37,7 +38,8 @@ HEADERS += \
     DB_schema/file.h \
     DB_schema/group.h \
     DB_schema/item.h \
-    DB_schema/package.h
+    DB_schema/package.h \
+    DB_schema/parameter.h
 
 LIBS += -lprotobuf
 

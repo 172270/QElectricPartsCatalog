@@ -64,7 +64,7 @@ uint PgInterface::addUser(User &user, QString passwd)
     storage.set_name(user.getName() + QString("_default"));
     storage.setID(addStorage(storage));
     linkStorageToUser(user, storage);
-
+    user.addStorage(storage);
     return user.id();
 }
 
@@ -133,7 +133,7 @@ bool PgInterface::checkUserPassword(User &user, QString passwd)
     return (result == passwd)? true : false;
 }
 
-void PgInterface::linkStorageToUser(User &user, Storage &storage)
+void PgInterface::linkStorageToUser(const User &user, const Storage &storage)
 {
     q.clear();
     q.append("insert into user_storage(storage_id, user_id) values (:sid, :uid)");
@@ -147,8 +147,6 @@ void PgInterface::linkStorageToUser(User &user, Storage &storage)
         err.setText(query->lastError().text());
         throw err;
     }
-
-    user.addStorage(storage);
 }
 
 QList<Storage> PgInterface::getUserStorages(User &user)
@@ -212,9 +210,54 @@ uint PgInterface::addStorage(const Storage &storage)
     return 0;
 }
 
+quint32 PgInterface::addParameter(const Parameter &parameter)
+{
+    if(parameter.IsInitialized()){
+        q.clear();
+        q.append("INSERT INTO parameters(parameter_id, name, config) VALUES(:pid, :name, :config);");
+        query->prepare(q);
+        query->bindValue(":pid", parameter.id() );
+        query->bindValue(":name", parameter.getName() );
+        query->bindValue(":config", parameter.getConfig() );
+
+        return query->lastInsertId().toUInt();
+    }
+    return 0;
+}
+
 quint32 PgInterface::addGroup(const Group &group)
 {
+    if(group.IsInitialized()){
+        q.clear();
+        q.append("INSERT INTO groups(group_id, parent_id, name, description, allowrecipe, allowitems)"
+                 " VALUES(:gid, :pgid, :name, :desc, :allowrecipe, :allowitems);");
+        query->prepare(q);
+        query->bindValue(":gid", group.id() );
+        query->bindValue(":pgid", group.parentid() );
+        query->bindValue(":name", group.getName() );
+        query->bindValue(":desc", group.getDescription() );
+        query->bindValue(":allowrecipe", group.allowsets() );
+        query->bindValue(":allowitems", group.allowitems() );
 
+        return query->lastInsertId().toUInt();
+    }
+    return 0;
+}
+
+void PgInterface::linkParameterToGroup(const Group &group, const Parameter &parameter)
+{
+    q.clear();
+    q.append("insert into group_parameter(parameter_id, group_id) values (:pid, :gid)");
+    query->prepare(q);
+    query->bindValue(":pid", parameter.id() );
+    query->bindValue(":gid", group.id() );
+
+    if(!query->exec()){
+        UserError err;
+        err.setErrorNumber(query->lastError().number());
+        err.setText(query->lastError().text());
+        throw err;
+    }
 }
 
 quint32 PgInterface::addItem(const Item &item)

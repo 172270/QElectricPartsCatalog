@@ -34,6 +34,7 @@ void protobuf_AddDesc_item_2eproto() {
   ::user::protobuf_AddDesc_user_2eproto();
   ::groups::protobuf_AddDesc_group_2eproto();
   ::package::protobuf_AddDesc_package_2eproto();
+  ::parameters::protobuf_AddDesc_parameters_2eproto();
   ItemParameters::default_instance_ = new ItemParameters();
   Item::default_instance_ = new Item();
   ItemParameters::default_instance_->InitAsDefaultInstance();

@@ -27,7 +27,8 @@ SOURCES += protocol.cpp \
     group.pb.cc \
     types.pb.cc \
     item.pb.cc \
-    package.pb.cc
+    package.pb.cc \
+    parameters.pb.cc
 
 HEADERS += protocol.h\
     user.pb.h \
@@ -39,7 +40,8 @@ HEADERS += protocol.h\
     group.pb.h \
     types.pb.h \
     item.pb.h \
-    package.pb.h
+    package.pb.h \
+    parameters.pb.h
 
 OTHER_FILES += \
     user.proto \
@@ -50,7 +52,8 @@ OTHER_FILES += \
     message_conteiner.proto \
     item.proto \
     types.proto \
-    package.proto
+    package.proto \
+    parameters.proto
 
 unix {
     target.path = /usr/lib

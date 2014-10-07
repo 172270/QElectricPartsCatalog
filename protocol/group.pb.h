@@ -23,6 +23,7 @@
 #include <google/protobuf/message_lite.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include "parameters.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace groups {
@@ -32,134 +33,10 @@ void  protobuf_AddDesc_group_2eproto();
 void protobuf_AssignDesc_group_2eproto();
 void protobuf_ShutdownFile_group_2eproto();
 
-class Parameter;
 class GroupBasicInformation;
 class Group;
 
 // ===================================================================
-
-class Parameter : public ::google::protobuf::MessageLite {
- public:
-  Parameter();
-  virtual ~Parameter();
-
-  Parameter(const Parameter& from);
-
-  inline Parameter& operator=(const Parameter& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const Parameter& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const Parameter* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
-
-  void Swap(Parameter* other);
-
-  // implements Message ----------------------------------------------
-
-  Parameter* New() const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
-  void CopyFrom(const Parameter& from);
-  void MergeFrom(const Parameter& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::std::string GetTypeName() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required uint32 id = 1;
-  inline bool has_id() const;
-  inline void clear_id();
-  static const int kIdFieldNumber = 1;
-  inline ::google::protobuf::uint32 id() const;
-  inline void set_id(::google::protobuf::uint32 value);
-
-  // required string name = 2;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 2;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
-  inline void set_allocated_name(::std::string* name);
-
-  // required int32 type = 3;
-  inline bool has_type() const;
-  inline void clear_type();
-  static const int kTypeFieldNumber = 3;
-  inline ::google::protobuf::int32 type() const;
-  inline void set_type(::google::protobuf::int32 value);
-
-  // required string parameterConfig = 4;
-  inline bool has_parameterconfig() const;
-  inline void clear_parameterconfig();
-  static const int kParameterConfigFieldNumber = 4;
-  inline const ::std::string& parameterconfig() const;
-  inline void set_parameterconfig(const ::std::string& value);
-  inline void set_parameterconfig(const char* value);
-  inline void set_parameterconfig(const char* value, size_t size);
-  inline ::std::string* mutable_parameterconfig();
-  inline ::std::string* release_parameterconfig();
-  inline void set_allocated_parameterconfig(::std::string* parameterconfig);
-
-  // @@protoc_insertion_point(class_scope:groups.Parameter)
- private:
-  inline void set_has_id();
-  inline void clear_has_id();
-  inline void set_has_name();
-  inline void clear_has_name();
-  inline void set_has_type();
-  inline void clear_has_type();
-  inline void set_has_parameterconfig();
-  inline void clear_has_parameterconfig();
-
-  ::std::string* name_;
-  ::google::protobuf::uint32 id_;
-  ::google::protobuf::int32 type_;
-  ::std::string* parameterconfig_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_group_2eproto_impl();
-  #else
-  friend void  protobuf_AddDesc_group_2eproto();
-  #endif
-  friend void protobuf_AssignDesc_group_2eproto();
-  friend void protobuf_ShutdownFile_group_2eproto();
-
-  void InitAsDefaultInstance();
-  static Parameter* default_instance_;
-};
-// -------------------------------------------------------------------
 
 class GroupBasicInformation : public ::google::protobuf::MessageLite {
  public:
@@ -337,16 +214,16 @@ class Group : public ::google::protobuf::MessageLite {
   inline bool allowitems() const;
   inline void set_allowitems(bool value);
 
-  // repeated .groups.Parameter parameters = 8;
+  // repeated .parameters.ParameterBasicInformation parameters = 8;
   inline int parameters_size() const;
   inline void clear_parameters();
   static const int kParametersFieldNumber = 8;
-  inline const ::groups::Parameter& parameters(int index) const;
-  inline ::groups::Parameter* mutable_parameters(int index);
-  inline ::groups::Parameter* add_parameters();
-  inline const ::google::protobuf::RepeatedPtrField< ::groups::Parameter >&
+  inline const ::parameters::ParameterBasicInformation& parameters(int index) const;
+  inline ::parameters::ParameterBasicInformation* mutable_parameters(int index);
+  inline ::parameters::ParameterBasicInformation* add_parameters();
+  inline const ::google::protobuf::RepeatedPtrField< ::parameters::ParameterBasicInformation >&
       parameters() const;
-  inline ::google::protobuf::RepeatedPtrField< ::groups::Parameter >*
+  inline ::google::protobuf::RepeatedPtrField< ::parameters::ParameterBasicInformation >*
       mutable_parameters();
 
   // optional string description = 9;
@@ -388,7 +265,7 @@ class Group : public ::google::protobuf::MessageLite {
   ::std::string* name_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 parentid_;
-  ::google::protobuf::RepeatedPtrField< ::groups::Parameter > parameters_;
+  ::google::protobuf::RepeatedPtrField< ::parameters::ParameterBasicInformation > parameters_;
   ::std::string* description_;
   ::google::protobuf::uint64 creationdate_;
   bool allowsets_;
@@ -412,194 +289,6 @@ class Group : public ::google::protobuf::MessageLite {
 
 
 // ===================================================================
-
-// Parameter
-
-// required uint32 id = 1;
-inline bool Parameter::has_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void Parameter::set_has_id() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void Parameter::clear_has_id() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void Parameter::clear_id() {
-  id_ = 0u;
-  clear_has_id();
-}
-inline ::google::protobuf::uint32 Parameter::id() const {
-  return id_;
-}
-inline void Parameter::set_id(::google::protobuf::uint32 value) {
-  set_has_id();
-  id_ = value;
-}
-
-// required string name = 2;
-inline bool Parameter::has_name() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void Parameter::set_has_name() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void Parameter::clear_has_name() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void Parameter::clear_name() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    name_->clear();
-  }
-  clear_has_name();
-}
-inline const ::std::string& Parameter::name() const {
-  return *name_;
-}
-inline void Parameter::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void Parameter::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(value);
-}
-inline void Parameter::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Parameter::mutable_name() {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    name_ = new ::std::string;
-  }
-  return name_;
-}
-inline ::std::string* Parameter::release_name() {
-  clear_has_name();
-  if (name_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Parameter::set_allocated_name(::std::string* name) {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
-  if (name) {
-    set_has_name();
-    name_ = name;
-  } else {
-    clear_has_name();
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required int32 type = 3;
-inline bool Parameter::has_type() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void Parameter::set_has_type() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void Parameter::clear_has_type() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void Parameter::clear_type() {
-  type_ = 0;
-  clear_has_type();
-}
-inline ::google::protobuf::int32 Parameter::type() const {
-  return type_;
-}
-inline void Parameter::set_type(::google::protobuf::int32 value) {
-  set_has_type();
-  type_ = value;
-}
-
-// required string parameterConfig = 4;
-inline bool Parameter::has_parameterconfig() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void Parameter::set_has_parameterconfig() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void Parameter::clear_has_parameterconfig() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void Parameter::clear_parameterconfig() {
-  if (parameterconfig_ != &::google::protobuf::internal::kEmptyString) {
-    parameterconfig_->clear();
-  }
-  clear_has_parameterconfig();
-}
-inline const ::std::string& Parameter::parameterconfig() const {
-  return *parameterconfig_;
-}
-inline void Parameter::set_parameterconfig(const ::std::string& value) {
-  set_has_parameterconfig();
-  if (parameterconfig_ == &::google::protobuf::internal::kEmptyString) {
-    parameterconfig_ = new ::std::string;
-  }
-  parameterconfig_->assign(value);
-}
-inline void Parameter::set_parameterconfig(const char* value) {
-  set_has_parameterconfig();
-  if (parameterconfig_ == &::google::protobuf::internal::kEmptyString) {
-    parameterconfig_ = new ::std::string;
-  }
-  parameterconfig_->assign(value);
-}
-inline void Parameter::set_parameterconfig(const char* value, size_t size) {
-  set_has_parameterconfig();
-  if (parameterconfig_ == &::google::protobuf::internal::kEmptyString) {
-    parameterconfig_ = new ::std::string;
-  }
-  parameterconfig_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Parameter::mutable_parameterconfig() {
-  set_has_parameterconfig();
-  if (parameterconfig_ == &::google::protobuf::internal::kEmptyString) {
-    parameterconfig_ = new ::std::string;
-  }
-  return parameterconfig_;
-}
-inline ::std::string* Parameter::release_parameterconfig() {
-  clear_has_parameterconfig();
-  if (parameterconfig_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = parameterconfig_;
-    parameterconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Parameter::set_allocated_parameterconfig(::std::string* parameterconfig) {
-  if (parameterconfig_ != &::google::protobuf::internal::kEmptyString) {
-    delete parameterconfig_;
-  }
-  if (parameterconfig) {
-    set_has_parameterconfig();
-    parameterconfig_ = parameterconfig;
-  } else {
-    clear_has_parameterconfig();
-    parameterconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// -------------------------------------------------------------------
 
 // GroupBasicInformation
 
@@ -787,27 +476,27 @@ inline void Group::set_allowitems(bool value) {
   allowitems_ = value;
 }
 
-// repeated .groups.Parameter parameters = 8;
+// repeated .parameters.ParameterBasicInformation parameters = 8;
 inline int Group::parameters_size() const {
   return parameters_.size();
 }
 inline void Group::clear_parameters() {
   parameters_.Clear();
 }
-inline const ::groups::Parameter& Group::parameters(int index) const {
+inline const ::parameters::ParameterBasicInformation& Group::parameters(int index) const {
   return parameters_.Get(index);
 }
-inline ::groups::Parameter* Group::mutable_parameters(int index) {
+inline ::parameters::ParameterBasicInformation* Group::mutable_parameters(int index) {
   return parameters_.Mutable(index);
 }
-inline ::groups::Parameter* Group::add_parameters() {
+inline ::parameters::ParameterBasicInformation* Group::add_parameters() {
   return parameters_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::groups::Parameter >&
+inline const ::google::protobuf::RepeatedPtrField< ::parameters::ParameterBasicInformation >&
 Group::parameters() const {
   return parameters_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::groups::Parameter >*
+inline ::google::protobuf::RepeatedPtrField< ::parameters::ParameterBasicInformation >*
 Group::mutable_parameters() {
   return &parameters_;
 }

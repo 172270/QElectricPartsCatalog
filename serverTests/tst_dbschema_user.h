@@ -46,7 +46,7 @@ private slots:
 
     void addMagazineToUser();
 
-    void addMeanyStoragesToUser();
+//    void addMeanyStoragesToUser();
 private:
     QSqlQuery *query;
     QSqlDatabase db;

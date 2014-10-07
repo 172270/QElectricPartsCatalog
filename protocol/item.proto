@@ -4,10 +4,10 @@ package item;
 import public "user.proto";
 import public "group.proto";
 import public "package.proto";
-
+import public "parameters.proto";
 
 message ItemParameters{
-  required uint32 id   = 1;
+  required uint32 id = 1;
   required bytes value = 2;
 }
 

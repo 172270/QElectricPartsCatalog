@@ -24,6 +24,11 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include "types.pb.h"
+#include "group.pb.h"
+#include "user.pb.h"
+#include "package.pb.h"
+#include "parameters.pb.h"
+#include "item.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Internal implementation detail -- do not call these.
@@ -33,6 +38,7 @@ void protobuf_ShutdownFile_message_5fconteiner_2eproto();
 
 class MessageMetadata;
 class MessagePackage;
+class ItemPackage;
 
 // ===================================================================
 
@@ -230,6 +236,144 @@ class MessagePackage : public ::google::protobuf::MessageLite {
   void InitAsDefaultInstance();
   static MessagePackage* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class ItemPackage : public ::google::protobuf::MessageLite {
+ public:
+  ItemPackage();
+  virtual ~ItemPackage();
+
+  ItemPackage(const ItemPackage& from);
+
+  inline ItemPackage& operator=(const ItemPackage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ItemPackage& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const ItemPackage* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(ItemPackage* other);
+
+  // implements Message ----------------------------------------------
+
+  ItemPackage* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ItemPackage& from);
+  void MergeFrom(const ItemPackage& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .groups.Group groups = 1;
+  inline int groups_size() const;
+  inline void clear_groups();
+  static const int kGroupsFieldNumber = 1;
+  inline const ::groups::Group& groups(int index) const;
+  inline ::groups::Group* mutable_groups(int index);
+  inline ::groups::Group* add_groups();
+  inline const ::google::protobuf::RepeatedPtrField< ::groups::Group >&
+      groups() const;
+  inline ::google::protobuf::RepeatedPtrField< ::groups::Group >*
+      mutable_groups();
+
+  // repeated .user.UserBasicInformation users = 2;
+  inline int users_size() const;
+  inline void clear_users();
+  static const int kUsersFieldNumber = 2;
+  inline const ::user::UserBasicInformation& users(int index) const;
+  inline ::user::UserBasicInformation* mutable_users(int index);
+  inline ::user::UserBasicInformation* add_users();
+  inline const ::google::protobuf::RepeatedPtrField< ::user::UserBasicInformation >&
+      users() const;
+  inline ::google::protobuf::RepeatedPtrField< ::user::UserBasicInformation >*
+      mutable_users();
+
+  // repeated .package.Package packages = 3;
+  inline int packages_size() const;
+  inline void clear_packages();
+  static const int kPackagesFieldNumber = 3;
+  inline const ::package::Package& packages(int index) const;
+  inline ::package::Package* mutable_packages(int index);
+  inline ::package::Package* add_packages();
+  inline const ::google::protobuf::RepeatedPtrField< ::package::Package >&
+      packages() const;
+  inline ::google::protobuf::RepeatedPtrField< ::package::Package >*
+      mutable_packages();
+
+  // repeated .parameters.Parameter parameters = 4;
+  inline int parameters_size() const;
+  inline void clear_parameters();
+  static const int kParametersFieldNumber = 4;
+  inline const ::parameters::Parameter& parameters(int index) const;
+  inline ::parameters::Parameter* mutable_parameters(int index);
+  inline ::parameters::Parameter* add_parameters();
+  inline const ::google::protobuf::RepeatedPtrField< ::parameters::Parameter >&
+      parameters() const;
+  inline ::google::protobuf::RepeatedPtrField< ::parameters::Parameter >*
+      mutable_parameters();
+
+  // repeated .item.Item items = 5;
+  inline int items_size() const;
+  inline void clear_items();
+  static const int kItemsFieldNumber = 5;
+  inline const ::item::Item& items(int index) const;
+  inline ::item::Item* mutable_items(int index);
+  inline ::item::Item* add_items();
+  inline const ::google::protobuf::RepeatedPtrField< ::item::Item >&
+      items() const;
+  inline ::google::protobuf::RepeatedPtrField< ::item::Item >*
+      mutable_items();
+
+  // @@protoc_insertion_point(class_scope:ItemPackage)
+ private:
+
+  ::google::protobuf::RepeatedPtrField< ::groups::Group > groups_;
+  ::google::protobuf::RepeatedPtrField< ::user::UserBasicInformation > users_;
+  ::google::protobuf::RepeatedPtrField< ::package::Package > packages_;
+  ::google::protobuf::RepeatedPtrField< ::parameters::Parameter > parameters_;
+  ::google::protobuf::RepeatedPtrField< ::item::Item > items_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_message_5fconteiner_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_message_5fconteiner_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_message_5fconteiner_2eproto();
+  friend void protobuf_ShutdownFile_message_5fconteiner_2eproto();
+
+  void InitAsDefaultInstance();
+  static ItemPackage* default_instance_;
+};
 // ===================================================================
 
 
@@ -353,6 +497,135 @@ MessagePackage::data() const {
 inline ::google::protobuf::RepeatedPtrField< ::MessageMetadata >*
 MessagePackage::mutable_data() {
   return &data_;
+}
+
+// -------------------------------------------------------------------
+
+// ItemPackage
+
+// repeated .groups.Group groups = 1;
+inline int ItemPackage::groups_size() const {
+  return groups_.size();
+}
+inline void ItemPackage::clear_groups() {
+  groups_.Clear();
+}
+inline const ::groups::Group& ItemPackage::groups(int index) const {
+  return groups_.Get(index);
+}
+inline ::groups::Group* ItemPackage::mutable_groups(int index) {
+  return groups_.Mutable(index);
+}
+inline ::groups::Group* ItemPackage::add_groups() {
+  return groups_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::groups::Group >&
+ItemPackage::groups() const {
+  return groups_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::groups::Group >*
+ItemPackage::mutable_groups() {
+  return &groups_;
+}
+
+// repeated .user.UserBasicInformation users = 2;
+inline int ItemPackage::users_size() const {
+  return users_.size();
+}
+inline void ItemPackage::clear_users() {
+  users_.Clear();
+}
+inline const ::user::UserBasicInformation& ItemPackage::users(int index) const {
+  return users_.Get(index);
+}
+inline ::user::UserBasicInformation* ItemPackage::mutable_users(int index) {
+  return users_.Mutable(index);
+}
+inline ::user::UserBasicInformation* ItemPackage::add_users() {
+  return users_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::user::UserBasicInformation >&
+ItemPackage::users() const {
+  return users_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::user::UserBasicInformation >*
+ItemPackage::mutable_users() {
+  return &users_;
+}
+
+// repeated .package.Package packages = 3;
+inline int ItemPackage::packages_size() const {
+  return packages_.size();
+}
+inline void ItemPackage::clear_packages() {
+  packages_.Clear();
+}
+inline const ::package::Package& ItemPackage::packages(int index) const {
+  return packages_.Get(index);
+}
+inline ::package::Package* ItemPackage::mutable_packages(int index) {
+  return packages_.Mutable(index);
+}
+inline ::package::Package* ItemPackage::add_packages() {
+  return packages_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::package::Package >&
+ItemPackage::packages() const {
+  return packages_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::package::Package >*
+ItemPackage::mutable_packages() {
+  return &packages_;
+}
+
+// repeated .parameters.Parameter parameters = 4;
+inline int ItemPackage::parameters_size() const {
+  return parameters_.size();
+}
+inline void ItemPackage::clear_parameters() {
+  parameters_.Clear();
+}
+inline const ::parameters::Parameter& ItemPackage::parameters(int index) const {
+  return parameters_.Get(index);
+}
+inline ::parameters::Parameter* ItemPackage::mutable_parameters(int index) {
+  return parameters_.Mutable(index);
+}
+inline ::parameters::Parameter* ItemPackage::add_parameters() {
+  return parameters_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::parameters::Parameter >&
+ItemPackage::parameters() const {
+  return parameters_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::parameters::Parameter >*
+ItemPackage::mutable_parameters() {
+  return &parameters_;
+}
+
+// repeated .item.Item items = 5;
+inline int ItemPackage::items_size() const {
+  return items_.size();
+}
+inline void ItemPackage::clear_items() {
+  items_.Clear();
+}
+inline const ::item::Item& ItemPackage::items(int index) const {
+  return items_.Get(index);
+}
+inline ::item::Item* ItemPackage::mutable_items(int index) {
+  return items_.Mutable(index);
+}
+inline ::item::Item* ItemPackage::add_items() {
+  return items_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::item::Item >&
+ItemPackage::items() const {
+  return items_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::item::Item >*
+ItemPackage::mutable_items() {
+  return &items_;
 }
 
 

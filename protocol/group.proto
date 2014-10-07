@@ -1,17 +1,13 @@
 option optimize_for = LITE_RUNTIME;
 package groups;
 
-message Parameter{
-  required uint32 id = 1;
-  required string name = 2;
-  required int32 type = 3;
-  required string parameterConfig = 4;
-}
+import public "parameters.proto";
 
 // used in item message as a container for item group ID
 // to minimalize overhead coused by adding additional group info to 
 // item, full information about group can be send via separate message
 // (only once for a group of items)
+
 message GroupBasicInformation{
     required uint32 id = 1;
 }
@@ -22,7 +18,7 @@ message Group{
   required uint32 parentID = 5;
   required bool allowSets = 6;
   required bool allowItems = 7;
-  repeated Parameter parameters= 8;
+  repeated parameters.ParameterBasicInformation parameters = 8;
   optional string description = 9;
   optional uint64 creationDate = 10;
 }

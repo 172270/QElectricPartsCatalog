@@ -15,7 +15,6 @@
 namespace groups {
 
 void protobuf_ShutdownFile_group_2eproto() {
-  delete Parameter::default_instance_;
   delete GroupBasicInformation::default_instance_;
   delete Group::default_instance_;
 }
@@ -32,10 +31,9 @@ void protobuf_AddDesc_group_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 #endif
-  Parameter::default_instance_ = new Parameter();
+  ::parameters::protobuf_AddDesc_parameters_2eproto();
   GroupBasicInformation::default_instance_ = new GroupBasicInformation();
   Group::default_instance_ = new Group();
-  Parameter::default_instance_->InitAsDefaultInstance();
   GroupBasicInformation::default_instance_->InitAsDefaultInstance();
   Group::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_group_2eproto);
@@ -55,291 +53,6 @@ struct StaticDescriptorInitializer_group_2eproto {
   }
 } static_descriptor_initializer_group_2eproto_;
 #endif
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int Parameter::kIdFieldNumber;
-const int Parameter::kNameFieldNumber;
-const int Parameter::kTypeFieldNumber;
-const int Parameter::kParameterConfigFieldNumber;
-#endif  // !_MSC_VER
-
-Parameter::Parameter()
-  : ::google::protobuf::MessageLite() {
-  SharedCtor();
-}
-
-void Parameter::InitAsDefaultInstance() {
-}
-
-Parameter::Parameter(const Parameter& from)
-  : ::google::protobuf::MessageLite() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void Parameter::SharedCtor() {
-  _cached_size_ = 0;
-  id_ = 0u;
-  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  type_ = 0;
-  parameterconfig_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-Parameter::~Parameter() {
-  SharedDtor();
-}
-
-void Parameter::SharedDtor() {
-  if (name_ != &::google::protobuf::internal::kEmptyString) {
-    delete name_;
-  }
-  if (parameterconfig_ != &::google::protobuf::internal::kEmptyString) {
-    delete parameterconfig_;
-  }
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  if (this != &default_instance()) {
-  #else
-  if (this != default_instance_) {
-  #endif
-  }
-}
-
-void Parameter::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const Parameter& Parameter::default_instance() {
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  protobuf_AddDesc_group_2eproto();
-#else
-  if (default_instance_ == NULL) protobuf_AddDesc_group_2eproto();
-#endif
-  return *default_instance_;
-}
-
-Parameter* Parameter::default_instance_ = NULL;
-
-Parameter* Parameter::New() const {
-  return new Parameter;
-}
-
-void Parameter::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    id_ = 0u;
-    if (has_name()) {
-      if (name_ != &::google::protobuf::internal::kEmptyString) {
-        name_->clear();
-      }
-    }
-    type_ = 0;
-    if (has_parameterconfig()) {
-      if (parameterconfig_ != &::google::protobuf::internal::kEmptyString) {
-        parameterconfig_->clear();
-      }
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-bool Parameter::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 id = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &id_)));
-          set_has_id();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(18)) goto parse_name;
-        break;
-      }
-
-      // required string name = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_name:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(24)) goto parse_type;
-        break;
-      }
-
-      // required int32 type = 3;
-      case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_type:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &type_)));
-          set_has_type();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(34)) goto parse_parameterConfig;
-        break;
-      }
-
-      // required string parameterConfig = 4;
-      case 4: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_parameterConfig:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_parameterconfig()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void Parameter::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 id = 1;
-  if (has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
-  }
-
-  // required string name = 2;
-  if (has_name()) {
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->name(), output);
-  }
-
-  // required int32 type = 3;
-  if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->type(), output);
-  }
-
-  // required string parameterConfig = 4;
-  if (has_parameterconfig()) {
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      4, this->parameterconfig(), output);
-  }
-
-}
-
-int Parameter::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 id = 1;
-    if (has_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
-          this->id());
-    }
-
-    // required string name = 2;
-    if (has_name()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
-    }
-
-    // required int32 type = 3;
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->type());
-    }
-
-    // required string parameterConfig = 4;
-    if (has_parameterconfig()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->parameterconfig());
-    }
-
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void Parameter::CheckTypeAndMergeFrom(
-    const ::google::protobuf::MessageLite& from) {
-  MergeFrom(*::google::protobuf::down_cast<const Parameter*>(&from));
-}
-
-void Parameter::MergeFrom(const Parameter& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_id()) {
-      set_id(from.id());
-    }
-    if (from.has_name()) {
-      set_name(from.name());
-    }
-    if (from.has_type()) {
-      set_type(from.type());
-    }
-    if (from.has_parameterconfig()) {
-      set_parameterconfig(from.parameterconfig());
-    }
-  }
-}
-
-void Parameter::CopyFrom(const Parameter& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool Parameter::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
-
-  return true;
-}
-
-void Parameter::Swap(Parameter* other) {
-  if (other != this) {
-    std::swap(id_, other->id_);
-    std::swap(name_, other->name_);
-    std::swap(type_, other->type_);
-    std::swap(parameterconfig_, other->parameterconfig_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::std::string Parameter::GetTypeName() const {
-  return "groups.Parameter";
-}
-
 
 // ===================================================================
 
@@ -692,7 +405,7 @@ bool Group::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .groups.Parameter parameters = 8;
+      // repeated .parameters.ParameterBasicInformation parameters = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -780,7 +493,7 @@ void Group::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(7, this->allowitems(), output);
   }
 
-  // repeated .groups.Parameter parameters = 8;
+  // repeated .parameters.ParameterBasicInformation parameters = 8;
   for (int i = 0; i < this->parameters_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       8, this->parameters(i), output);
@@ -849,7 +562,7 @@ int Group::ByteSize() const {
     }
 
   }
-  // repeated .groups.Parameter parameters = 8;
+  // repeated .parameters.ParameterBasicInformation parameters = 8;
   total_size += 1 * this->parameters_size();
   for (int i = 0; i < this->parameters_size(); i++) {
     total_size +=

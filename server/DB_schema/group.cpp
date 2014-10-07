@@ -60,9 +60,9 @@ QString Group::getDescription() const
     return QString::fromStdString(description());
 }
 
-QMap<quint32, ::groups::Parameter> Group::getParameters() const
+QMap<quint32, parameters::ParameterBasicInformation> Group::getParameters() const
 {
-    QMap<quint32, ::groups::Parameter> map;
+    QMap<quint32, parameters::ParameterBasicInformation> map;
     int paramNumber = parameters().size()-1;
 
     for(;paramNumber>0;--paramNumber){

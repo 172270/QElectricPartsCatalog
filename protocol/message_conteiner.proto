@@ -1,6 +1,11 @@
 option optimize_for = LITE_RUNTIME;
 
 import public "types.proto";
+import public "group.proto";
+import public "user.proto";
+import public "package.proto";
+import public "parameters.proto";
+import public "item.proto";
 
 message MessageMetadata{
 	required fixed64 length = 1;
@@ -10,4 +15,12 @@ message MessageMetadata{
 
 message MessagePackage{
 	repeated MessageMetadata data=1;
+}
+
+message ItemPackage{
+	repeated groups.Group groups = 1;
+	repeated user.UserBasicInformation users =2;
+	repeated package.Package packages = 3;
+	repeated parameters.Parameter parameters = 4;
+	repeated item.Item items = 5;
 }

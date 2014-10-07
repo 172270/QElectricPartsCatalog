@@ -26,6 +26,7 @@
 #include "user.pb.h"
 #include "group.pb.h"
 #include "package.pb.h"
+#include "parameters.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace item {

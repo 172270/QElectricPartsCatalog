@@ -7,6 +7,8 @@
 #include <QSqlError>
 
 #include "DB_schema/user.h"
+#include "DB_schema/package.h"
+#include "DB_schema/parameter.h"
 #include "DB_schema/group.h"
 #include "DB_schema/storage.h"
 #include "DB_schema/file.h"
@@ -23,12 +25,15 @@ public:
     uint addUser(User &user, QString passwd);
     void deleteUser(User &user);
     bool checkUserPassword(User &user, QString passwd);
-    void linkStorageToUser(User &user, Storage &storage);
+    void linkStorageToUser(const User &user, const Storage &storage);
     QList<Storage> getUserStorages(User &user);
 
     uint addStorage(const Storage &storage);
 
+    quint32 addParameter(const Parameter &parameter);
+
     quint32 addGroup(const Group &group);
+    void linkParameterToGroup( const Group &group, const Parameter &parameter);
 
     quint32 addItem(const Item &item);
 private:

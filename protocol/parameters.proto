@@ -1,0 +1,15 @@
+option optimize_for = LITE_RUNTIME;
+package parameters;
+
+/// ptype_ prefix add to avoid names conflicts
+
+message ParameterBasicInformation{
+	required uint32 id = 1;
+}
+
+message Parameter{
+  required uint32 id = 1;
+  required string name = 2;
+  // config :JSON data containing info about MIN / MAX values and other usefull stuff
+  required bytes config = 3; 
+}
