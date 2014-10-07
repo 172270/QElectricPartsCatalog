@@ -53,7 +53,9 @@ OTHER_FILES += \
     item.proto \
     types.proto \
     package.proto \
-    parameters.proto
+    parameters.proto \
+    ekataog.architect \
+    schema.sql
 
 unix {
     target.path = /usr/lib
