@@ -40,7 +40,8 @@ HEADERS += \
     tst_item.h \
     tst_itempackage.h \
     tst_dbschema_groups.h \
-    tst_parameterconfig.h
+    tst_parameterconfig.h \
+    tst_dbschema_item.h
 
 SOURCES += tst_servertests.cpp \
     main.cpp \
@@ -52,7 +53,8 @@ SOURCES += tst_servertests.cpp \
     tst_item.cpp \
     tst_itempackage.cpp \
     tst_dbschema_groups.cpp \
-    tst_parameterconfig.cpp
+    tst_parameterconfig.cpp \
+    tst_dbschema_item.cpp
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../server/release/ -lserver
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../server/debug/ -lserver
