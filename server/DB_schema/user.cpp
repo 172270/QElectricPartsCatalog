@@ -150,7 +150,7 @@ user::UserBasicInformation User::getPBPackage()
 {
     user::UserBasicInformation ubi;
     ubi.set_name(name() );
-    ///TODO check if user want's to give his email in, find information in config
+    ubi.set_id(id() );
     ubi.set_email(email());
     return ubi;
 }

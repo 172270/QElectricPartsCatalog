@@ -1,10 +1,5 @@
 #include "item.h"
 
-quint32 Item::getID() const
-{
-    return id();
-}
-
 void Item::set_name(const QString &name)
 {
     item::Item::set_name(name.toStdString());
@@ -25,14 +20,14 @@ QString Item::getSymbol() const
     return QString::fromStdString(symbol());
 }
 
-void Item::set_namespace_(const QString &space)
+void Item::set_name_space(const QString &space)
 {
-    item::Item::set_namespace_(space.toStdString());
+    item::Item::set_name_space(space.toStdString());
 }
 
 QString Item::getNamespace() const
 {
-    return QString::fromStdString(namespace_());
+    return QString::fromStdString(name_space());
 }
 
 void Item::set_adddate(const QDateTime &dt)
@@ -88,15 +83,26 @@ void Item::addParameter(int id, QVariant value)
     param->set_value(value.toString().toStdString());
 }
 
-QMap<quint32, QVariant> Item::getParameters()
+QVariantMap Item::getParameters() const
 {
-    QMap<quint32, QVariant> map;
+    QVariantMap map;
     int paramNumber = parameters().size()-1;
 
     for(;paramNumber>0;--paramNumber){
-        map.insert(parameters(paramNumber).id(), QString::fromStdString(parameters(paramNumber).value()));
+        map.insert(QString::number(parameters(paramNumber).id()), QString::fromStdString(parameters(paramNumber).value()));
     }
     return map;
+}
+
+QString Item::getDescription() const
+{
+     return QString::fromStdString(item::Item::description());
+}
+
+QByteArray Item::getParametersAsJSON() const
+{
+    QJsonObject object = QJsonObject::fromVariantMap( getParameters() );
+    return QJsonDocument(object).toJson(QJsonDocument::Compact);
 }
 
 Item::Item()

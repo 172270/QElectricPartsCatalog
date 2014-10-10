@@ -39,7 +39,7 @@ void tst_item::toArray_formsArray()
     it.setGroup(g);
     it.set_description(str);
     it.set_symbol("symbol");
-    it.set_namespace_("namespace");
+    it.set_name_space("namespace");
     it.set_private(false);
     it.set_adddate(QDateTime::currentDateTime());
     it.set_updatedate(QDateTime::currentDateTime());
@@ -56,19 +56,19 @@ void tst_item::toArray_formsArray()
     Item it2;
     it2.fromArray(ba);
 
-    QVERIFY(it2.id() == it.id() );
-    QVERIFY(it2.name() == it.name() );
-    QVERIFY(it2.symbol() == it.symbol());
-    QVERIFY(it2.namespace_() == it.namespace_() );
-    QVERIFY(it2.isPrivate() == it.isPrivate() );
-    QVERIFY(it2.getAddDate() == it.getAddDate() );
-    QVERIFY(it2.getUpdateDate()== it.getUpdateDate() );
+    QVERIFY(it2.id()            == it.id()          );
+    QVERIFY(it2.name()          == it.name()        );
+    QVERIFY(it2.symbol()        == it.symbol()      );
+    QVERIFY(it2.name_space()    == it.name_space()  );
+    QVERIFY(it2.isPrivate()     == it.isPrivate()   );
+    QVERIFY(it2.getAddDate()    == it.getAddDate()  );
+    QVERIFY(it2.getUpdateDate() == it.getUpdateDate());
 
     QVERIFY(it2.package().id()  == it.package().id());
-    QVERIFY(it2.group().id()    == it.group().id());
-    QVERIFY(it2.getParameters() == it.getParameters() );
-    QVERIFY(it2.getAddDate()    == it.getAddDate() );
-    QVERIFY(it2.getUpdateDate() == it.getUpdateDate() );
+    QVERIFY(it2.group().id()    == it.group().id()  );
+    QVERIFY(it2.getParameters() == it.getParameters());
+    QVERIFY(it2.getAddDate()    == it.getAddDate()  );
+    QVERIFY(it2.getUpdateDate() == it.getUpdateDate());
     QVERIFY(it2.description()   == it.description() );
 }
 
@@ -90,7 +90,7 @@ void tst_item::specialCharacters_HaveProperEncoding()
     it.setGroup(g);
     it.set_description(str);
     it.set_symbol("symbol");
-    it.set_namespace_("namespace");
+    it.set_name_space("namespace");
     it.set_private(false);
     it.set_adddate(QDateTime::currentDateTime());
     it.set_updatedate(QDateTime::currentDateTime());

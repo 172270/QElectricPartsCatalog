@@ -56,21 +56,44 @@ void ParameterConfig::fromStdString(const std::string &conf)
 void ParameterConfig::setDefaultValue(QVariant value)
 {
     QJsonValue val = QJsonValue::fromVariant(value);
-    object.insert(QStringLiteral("default_value"), val);
+    object.insert(QStringLiteral("defaultValue"), val);
 }
 
 QVariant ParameterConfig::defaultValue()
 {
-    QVariant v(object.value(QStringLiteral("default_value")).toVariant());
+    QVariant v(object.value(QStringLiteral("defaultValue")).toVariant());
     return v;
 }
 
 void ParameterConfig::setValueType(QString type)
 {
-    object.insert(QStringLiteral("type"), type);
+    object.insert(QStringLiteral("valueType"), type);
 }
 
 QString ParameterConfig::getValueType()
 {
-    return object.value(QStringLiteral("type")).toString();
+    return object.value(QStringLiteral("valueType")).toString();
 }
+
+void ParameterConfig::setMaxValue(QVariant maxVal)
+{
+    QJsonValue val = QJsonValue::fromVariant(maxVal);
+    object.insert(QStringLiteral("maxValue"), val);
+}
+
+QVariant ParameterConfig::getMaxValue() const
+{
+    return object.value(QStringLiteral("maxValue")).toString();
+}
+
+void ParameterConfig::setMinValue(QVariant minValue)
+{
+    QJsonValue val = QJsonValue::fromVariant(minValue);
+    object.insert(QStringLiteral("minValue"), val);
+}
+
+QVariant ParameterConfig::getMinValue() const
+{
+    return object.value(QStringLiteral("minValue")).toString();
+}
+

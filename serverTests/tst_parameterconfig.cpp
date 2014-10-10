@@ -58,7 +58,7 @@ void tst_ParameterConfig::readEmptyData_setsDefaults()
 
 void tst_ParameterConfig::readData_setsValues()
 {
-    std::string def = "{\"default_value\":\"DEFAULT_VALUE\",\"type\":\"QString\"}";
+    std::string def = "{\"defaultValue\":\"DEFAULT_VALUE\",\"valueType\":\"QString\"}";
     conf.fromStdString(def);
 
     QVERIFY(conf.getValueType() == "QString" );
@@ -67,8 +67,8 @@ void tst_ParameterConfig::readData_setsValues()
 
 void tst_ParameterConfig::toBytes_givesPropoerArray()
 {
-    std::string def = "{\"default_value\":\"DEFAULT_VALUE\",\"type\":\"QString\"}";
+    std::string def = "{\"defaultValue\":\"DEFAULT_VALUE\",\"valueType\":\"QString\"}";
     conf.fromStdString(def);
 
-    QVERIFY(conf.toBytes() == "{\"default_value\":\"DEFAULT_VALUE\",\"type\":\"QString\"}");
+    QVERIFY(conf.toBytes() == "{\"defaultValue\":\"DEFAULT_VALUE\",\"valueType\":\"QString\"}");
 }

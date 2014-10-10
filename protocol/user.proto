@@ -33,6 +33,7 @@ message AddReplay{
 }
 
 message UserBasicInformation{
+    required uint32 id = 2;
     required string name = 3;
     optional string email = 4;
     optional string address = 5;

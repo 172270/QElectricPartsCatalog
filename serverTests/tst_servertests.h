@@ -5,7 +5,6 @@
 #include <QtTest>
 #include <QTcpSocket>
 #include <QHostAddress>
-#include "protocol.h"
 
 class ServerTests : public QObject
 {

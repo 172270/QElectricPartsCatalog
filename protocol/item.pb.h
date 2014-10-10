@@ -223,17 +223,17 @@ class Item : public ::google::protobuf::MessageLite {
   inline ::std::string* release_symbol();
   inline void set_allocated_symbol(::std::string* symbol);
 
-  // required string namespace = 4;
-  inline bool has_namespace_() const;
-  inline void clear_namespace_();
-  static const int kNamespaceFieldNumber = 4;
-  inline const ::std::string& namespace_() const;
-  inline void set_namespace_(const ::std::string& value);
-  inline void set_namespace_(const char* value);
-  inline void set_namespace_(const char* value, size_t size);
-  inline ::std::string* mutable_namespace_();
-  inline ::std::string* release_namespace_();
-  inline void set_allocated_namespace_(::std::string* namespace_);
+  // required string name_space = 4;
+  inline bool has_name_space() const;
+  inline void clear_name_space();
+  static const int kNameSpaceFieldNumber = 4;
+  inline const ::std::string& name_space() const;
+  inline void set_name_space(const ::std::string& value);
+  inline void set_name_space(const char* value);
+  inline void set_name_space(const char* value, size_t size);
+  inline ::std::string* mutable_name_space();
+  inline ::std::string* release_name_space();
+  inline void set_allocated_name_space(::std::string* name_space);
 
   // required bool privateItem = 5;
   inline bool has_privateitem() const;
@@ -315,8 +315,8 @@ class Item : public ::google::protobuf::MessageLite {
   inline void clear_has_name();
   inline void set_has_symbol();
   inline void clear_has_symbol();
-  inline void set_has_namespace_();
-  inline void clear_has_namespace_();
+  inline void set_has_name_space();
+  inline void clear_has_name_space();
   inline void set_has_privateitem();
   inline void clear_has_privateitem();
   inline void set_has_package();
@@ -336,7 +336,7 @@ class Item : public ::google::protobuf::MessageLite {
   ::std::string* symbol_;
   ::google::protobuf::uint32 id_;
   bool privateitem_;
-  ::std::string* namespace__;
+  ::std::string* name_space_;
   ::package::PackageBasicInformation* package_;
   ::user::UserBasicInformation* user_;
   ::groups::GroupBasicInformation* group_;
@@ -624,73 +624,73 @@ inline void Item::set_allocated_symbol(::std::string* symbol) {
   }
 }
 
-// required string namespace = 4;
-inline bool Item::has_namespace_() const {
+// required string name_space = 4;
+inline bool Item::has_name_space() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void Item::set_has_namespace_() {
+inline void Item::set_has_name_space() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void Item::clear_has_namespace_() {
+inline void Item::clear_has_name_space() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void Item::clear_namespace_() {
-  if (namespace__ != &::google::protobuf::internal::kEmptyString) {
-    namespace__->clear();
+inline void Item::clear_name_space() {
+  if (name_space_ != &::google::protobuf::internal::kEmptyString) {
+    name_space_->clear();
   }
-  clear_has_namespace_();
+  clear_has_name_space();
 }
-inline const ::std::string& Item::namespace_() const {
-  return *namespace__;
+inline const ::std::string& Item::name_space() const {
+  return *name_space_;
 }
-inline void Item::set_namespace_(const ::std::string& value) {
-  set_has_namespace_();
-  if (namespace__ == &::google::protobuf::internal::kEmptyString) {
-    namespace__ = new ::std::string;
+inline void Item::set_name_space(const ::std::string& value) {
+  set_has_name_space();
+  if (name_space_ == &::google::protobuf::internal::kEmptyString) {
+    name_space_ = new ::std::string;
   }
-  namespace__->assign(value);
+  name_space_->assign(value);
 }
-inline void Item::set_namespace_(const char* value) {
-  set_has_namespace_();
-  if (namespace__ == &::google::protobuf::internal::kEmptyString) {
-    namespace__ = new ::std::string;
+inline void Item::set_name_space(const char* value) {
+  set_has_name_space();
+  if (name_space_ == &::google::protobuf::internal::kEmptyString) {
+    name_space_ = new ::std::string;
   }
-  namespace__->assign(value);
+  name_space_->assign(value);
 }
-inline void Item::set_namespace_(const char* value, size_t size) {
-  set_has_namespace_();
-  if (namespace__ == &::google::protobuf::internal::kEmptyString) {
-    namespace__ = new ::std::string;
+inline void Item::set_name_space(const char* value, size_t size) {
+  set_has_name_space();
+  if (name_space_ == &::google::protobuf::internal::kEmptyString) {
+    name_space_ = new ::std::string;
   }
-  namespace__->assign(reinterpret_cast<const char*>(value), size);
+  name_space_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Item::mutable_namespace_() {
-  set_has_namespace_();
-  if (namespace__ == &::google::protobuf::internal::kEmptyString) {
-    namespace__ = new ::std::string;
+inline ::std::string* Item::mutable_name_space() {
+  set_has_name_space();
+  if (name_space_ == &::google::protobuf::internal::kEmptyString) {
+    name_space_ = new ::std::string;
   }
-  return namespace__;
+  return name_space_;
 }
-inline ::std::string* Item::release_namespace_() {
-  clear_has_namespace_();
-  if (namespace__ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* Item::release_name_space() {
+  clear_has_name_space();
+  if (name_space_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = namespace__;
-    namespace__ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = name_space_;
+    name_space_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void Item::set_allocated_namespace_(::std::string* namespace_) {
-  if (namespace__ != &::google::protobuf::internal::kEmptyString) {
-    delete namespace__;
+inline void Item::set_allocated_name_space(::std::string* name_space) {
+  if (name_space_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_space_;
   }
-  if (namespace_) {
-    set_has_namespace_();
-    namespace__ = namespace_;
+  if (name_space) {
+    set_has_name_space();
+    name_space_ = name_space;
   } else {
-    clear_has_namespace_();
-    namespace__ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_name_space();
+    name_space_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 

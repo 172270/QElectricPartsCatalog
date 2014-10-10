@@ -1060,6 +1060,7 @@ void AddReplay::Swap(AddReplay* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int UserBasicInformation::kIdFieldNumber;
 const int UserBasicInformation::kNameFieldNumber;
 const int UserBasicInformation::kEmailFieldNumber;
 const int UserBasicInformation::kAddressFieldNumber;
@@ -1081,6 +1082,7 @@ UserBasicInformation::UserBasicInformation(const UserBasicInformation& from)
 
 void UserBasicInformation::SharedCtor() {
   _cached_size_ = 0;
+  id_ = 0u;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   email_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   address_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
@@ -1131,6 +1133,7 @@ UserBasicInformation* UserBasicInformation::New() const {
 
 void UserBasicInformation::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    id_ = 0u;
     if (has_name()) {
       if (name_ != &::google::protobuf::internal::kEmptyString) {
         name_->clear();
@@ -1156,10 +1159,26 @@ bool UserBasicInformation::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required uint32 id = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &id_)));
+          set_has_id();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_name;
+        break;
+      }
+
       // required string name = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_name()));
         } else {
@@ -1214,6 +1233,11 @@ bool UserBasicInformation::MergePartialFromCodedStream(
 
 void UserBasicInformation::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // required uint32 id = 2;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->id(), output);
+  }
+
   // required string name = 3;
   if (has_name()) {
     ::google::protobuf::internal::WireFormatLite::WriteString(
@@ -1238,6 +1262,13 @@ int UserBasicInformation::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required uint32 id = 2;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->id());
+    }
+
     // required string name = 3;
     if (has_name()) {
       total_size += 1 +
@@ -1274,6 +1305,9 @@ void UserBasicInformation::CheckTypeAndMergeFrom(
 void UserBasicInformation::MergeFrom(const UserBasicInformation& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      set_id(from.id());
+    }
     if (from.has_name()) {
       set_name(from.name());
     }
@@ -1293,13 +1327,14 @@ void UserBasicInformation::CopyFrom(const UserBasicInformation& from) {
 }
 
 bool UserBasicInformation::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
 void UserBasicInformation::Swap(UserBasicInformation* other) {
   if (other != this) {
+    std::swap(id_, other->id_);
     std::swap(name_, other->name_);
     std::swap(email_, other->email_);
     std::swap(address_, other->address_);

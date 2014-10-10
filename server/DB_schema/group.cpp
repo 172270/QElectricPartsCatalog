@@ -65,15 +65,14 @@ void Group::add_parameter(const Parameter &parameter)
     add_parameters()->set_id( parameter.id() );
 }
 
-QMap<quint32, parameters::ParameterBasicInformation> Group::getParameters() const
+QList<parameters::ParameterBasicInformation> Group::getParameters() const
 {
-    QMap<quint32, parameters::ParameterBasicInformation> map;
+    QList<parameters::ParameterBasicInformation> list;
     int paramNumber = parameters().size()-1;
 
-    for(;paramNumber>0;--paramNumber){
-        map.insert(parameters(paramNumber).id(), parameters(paramNumber));
-    }
-    return map;
+    for(;paramNumber>=0;--paramNumber)
+        list.append(parameters(paramNumber));
+    return list;
 }
 
 groups::GroupBasicInformation Group::getGroupBasicInfoPB(){

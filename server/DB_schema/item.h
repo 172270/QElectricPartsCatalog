@@ -15,15 +15,13 @@ class Item : public item::Item
 {
 public:
 
-    quint32 getID() const;
-
     void set_name(const QString& name);
     QString getName() const;
 
     void set_symbol(const QString& symbol);
     QString getSymbol() const;
 
-    void set_namespace_(const QString&space);
+    void set_name_space(const QString&space);
     QString getNamespace() const;
 
     void set_adddate(const QDateTime &dt );
@@ -39,7 +37,11 @@ public:
     void setGroup(Group &group);
 
     void addParameter(int id, QVariant value);
-    QMap<quint32, QVariant> getParameters();
+    QVariantMap getParameters() const;
+
+    QString getDescription() const;
+
+    QByteArray getParametersAsJSON() const;
 
     Item();
 

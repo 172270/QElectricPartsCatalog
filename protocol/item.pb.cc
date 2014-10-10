@@ -272,7 +272,7 @@ void ItemParameters::Swap(ItemParameters* other) {
 const int Item::kIdFieldNumber;
 const int Item::kNameFieldNumber;
 const int Item::kSymbolFieldNumber;
-const int Item::kNamespaceFieldNumber;
+const int Item::kNameSpaceFieldNumber;
 const int Item::kPrivateItemFieldNumber;
 const int Item::kPackageFieldNumber;
 const int Item::kUserFieldNumber;
@@ -320,7 +320,7 @@ void Item::SharedCtor() {
   id_ = 0u;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   symbol_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  namespace__ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  name_space_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   privateitem_ = false;
   package_ = NULL;
   user_ = NULL;
@@ -342,8 +342,8 @@ void Item::SharedDtor() {
   if (symbol_ != &::google::protobuf::internal::kEmptyString) {
     delete symbol_;
   }
-  if (namespace__ != &::google::protobuf::internal::kEmptyString) {
-    delete namespace__;
+  if (name_space_ != &::google::protobuf::internal::kEmptyString) {
+    delete name_space_;
   }
   if (description_ != &::google::protobuf::internal::kEmptyString) {
     delete description_;
@@ -392,9 +392,9 @@ void Item::Clear() {
         symbol_->clear();
       }
     }
-    if (has_namespace_()) {
-      if (namespace__ != &::google::protobuf::internal::kEmptyString) {
-        namespace__->clear();
+    if (has_name_space()) {
+      if (name_space_ != &::google::protobuf::internal::kEmptyString) {
+        name_space_->clear();
       }
     }
     privateitem_ = false;
@@ -466,17 +466,17 @@ bool Item::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(34)) goto parse_namespace;
+        if (input->ExpectTag(34)) goto parse_name_space;
         break;
       }
 
-      // required string namespace = 4;
+      // required string name_space = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_namespace:
+         parse_name_space:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_namespace_()));
+                input, this->mutable_name_space()));
         } else {
           goto handle_uninterpreted;
         }
@@ -637,10 +637,10 @@ void Item::SerializeWithCachedSizes(
       3, this->symbol(), output);
   }
 
-  // required string namespace = 4;
-  if (has_namespace_()) {
+  // required string name_space = 4;
+  if (has_name_space()) {
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      4, this->namespace_(), output);
+      4, this->name_space(), output);
   }
 
   // required bool privateItem = 5;
@@ -715,11 +715,11 @@ int Item::ByteSize() const {
           this->symbol());
     }
 
-    // required string namespace = 4;
-    if (has_namespace_()) {
+    // required string name_space = 4;
+    if (has_name_space()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->namespace_());
+          this->name_space());
     }
 
     // required bool privateItem = 5;
@@ -804,8 +804,8 @@ void Item::MergeFrom(const Item& from) {
     if (from.has_symbol()) {
       set_symbol(from.symbol());
     }
-    if (from.has_namespace_()) {
-      set_namespace_(from.namespace_());
+    if (from.has_name_space()) {
+      set_name_space(from.name_space());
     }
     if (from.has_privateitem()) {
       set_privateitem(from.privateitem());
@@ -862,7 +862,7 @@ void Item::Swap(Item* other) {
     std::swap(id_, other->id_);
     std::swap(name_, other->name_);
     std::swap(symbol_, other->symbol_);
-    std::swap(namespace__, other->namespace__);
+    std::swap(name_space_, other->name_space_);
     std::swap(privateitem_, other->privateitem_);
     std::swap(package_, other->package_);
     std::swap(user_, other->user_);

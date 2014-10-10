@@ -31,6 +31,12 @@ public:
 
     void setValueType( QString type);
     QString getValueType();
+
+    void setMaxValue(QVariant maxVal);
+    QVariant getMaxValue() const;
+
+    void setMinValue(QVariant minValue);
+    QVariant getMinValue() const;
 private:
     QJsonObject object;
 };

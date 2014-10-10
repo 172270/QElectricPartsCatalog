@@ -19,7 +19,7 @@ CONFIG += staticlib c++11
 
 DEFINES += PROTOCOL_LIBRARY
 
-SOURCES += protocol.cpp \
+SOURCES += \
     user.pb.cc \
     stats.pb.cc \
     storage.pb.cc \
@@ -30,7 +30,7 @@ SOURCES += protocol.cpp \
     package.pb.cc \
     parameters.pb.cc
 
-HEADERS += protocol.h\
+HEADERS +=\
     user.pb.h \
     stats.pb.h \
     messagetype.h \

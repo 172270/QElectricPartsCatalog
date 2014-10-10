@@ -546,6 +546,13 @@ class UserBasicInformation : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
+  // required uint32 id = 2;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 2;
+  inline ::google::protobuf::uint32 id() const;
+  inline void set_id(::google::protobuf::uint32 value);
+
   // required string name = 3;
   inline bool has_name() const;
   inline void clear_name();
@@ -584,6 +591,8 @@ class UserBasicInformation : public ::google::protobuf::MessageLite {
 
   // @@protoc_insertion_point(class_scope:user.UserBasicInformation)
  private:
+  inline void set_has_id();
+  inline void clear_has_id();
   inline void set_has_name();
   inline void clear_has_name();
   inline void set_has_email();
@@ -594,9 +603,10 @@ class UserBasicInformation : public ::google::protobuf::MessageLite {
   ::std::string* name_;
   ::std::string* email_;
   ::std::string* address_;
+  ::google::protobuf::uint32 id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_user_2eproto_impl();
@@ -1583,15 +1593,37 @@ inline void AddReplay::set_replay(::user::Replay value) {
 
 // UserBasicInformation
 
-// required string name = 3;
-inline bool UserBasicInformation::has_name() const {
+// required uint32 id = 2;
+inline bool UserBasicInformation::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void UserBasicInformation::set_has_name() {
+inline void UserBasicInformation::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void UserBasicInformation::clear_has_name() {
+inline void UserBasicInformation::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void UserBasicInformation::clear_id() {
+  id_ = 0u;
+  clear_has_id();
+}
+inline ::google::protobuf::uint32 UserBasicInformation::id() const {
+  return id_;
+}
+inline void UserBasicInformation::set_id(::google::protobuf::uint32 value) {
+  set_has_id();
+  id_ = value;
+}
+
+// required string name = 3;
+inline bool UserBasicInformation::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UserBasicInformation::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UserBasicInformation::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void UserBasicInformation::clear_name() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
@@ -1655,13 +1687,13 @@ inline void UserBasicInformation::set_allocated_name(::std::string* name) {
 
 // optional string email = 4;
 inline bool UserBasicInformation::has_email() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void UserBasicInformation::set_has_email() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void UserBasicInformation::clear_has_email() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void UserBasicInformation::clear_email() {
   if (email_ != &::google::protobuf::internal::kEmptyString) {
@@ -1725,13 +1757,13 @@ inline void UserBasicInformation::set_allocated_email(::std::string* email) {
 
 // optional string address = 5;
 inline bool UserBasicInformation::has_address() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void UserBasicInformation::set_has_address() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void UserBasicInformation::clear_has_address() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void UserBasicInformation::clear_address() {
   if (address_ != &::google::protobuf::internal::kEmptyString) {

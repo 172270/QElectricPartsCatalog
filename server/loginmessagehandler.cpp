@@ -1,7 +1,5 @@
 #include "loginmessagehandler.h"
 
-#include "protocol.h"
-
 void LoginMessageHandler::setData(QByteArray *d)
 {
     data = d;

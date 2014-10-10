@@ -269,5 +269,34 @@ void PgInterface::linkParameterToGroup(Group &group, const Parameter &parameter)
 
 quint32 PgInterface::addItem(const Item &item)
 {
+//INSERT INTO items(
+//    item_id, users_id, case_id, group_id, name, symbol, namespace,
+//    creationdate, update, parameters, isrecipe, isitem, description)
+//VALUES (?, ?, ?, ?, ?, ?, ?,
+//    ?, ?, ?, ?, ?, ?);
+
+    q.clear();
+    q.append("insert into items( item_id, users_id, case_id, group_id, name, symbol, namespace, parameters, isrecipe, isitem"
+             + (item.has_description() ? QString(", description") : QString()) +
+             ") VALUES (:iid, :uid, :cid, :gid, :name, :symbol, :namespace, :parameters, :isRecipe, :isItem"
+             + (item.has_description() ? QString(", :desc") : QString()) + ");");
+    if (!query->prepare(q)){
+        qDebug() << query->lastError().text();
+    }
+
+    query->bindValue(":iid", item.id());
+    query->bindValue(":uid", item.user().id());
+    query->bindValue(":cid", item.package().id());
+    query->bindValue(":gid", item.group().id());
+    query->bindValue(":name", item.getName());
+    query->bindValue(":symbol", item.getSymbol());
+    query->bindValue(":namespace", item.getNamespace());
+    query->bindValue(":parameters", item.getParametersAsJSON());
+    query->bindValue(":isRecipe", false);
+    query->bindValue(":isItem", true);
+
+    if(item.has_description()){
+        query->bindValue(":desc", item.getDescription());
+    }
 
 }

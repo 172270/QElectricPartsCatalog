@@ -33,12 +33,10 @@ public:
     QString getDescription() const;
 
     void add_parameter(const Parameter &parameter);
-    QMap<quint32, ::parameters::ParameterBasicInformation> getParameters() const;
+    QList<parameters::ParameterBasicInformation> getParameters() const;
 
     groups::GroupBasicInformation getGroupBasicInfoPB();
-
     Group();
-
 private:
 };
 

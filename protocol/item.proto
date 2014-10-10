@@ -15,7 +15,7 @@ message Item{
     required uint32 id = 1;
     required string name = 2;
     required string symbol = 3;
-    required string namespace = 4;
+    required string name_space = 4;
     required bool privateItem = 5;
     
     required package.PackageBasicInformation package = 10;
