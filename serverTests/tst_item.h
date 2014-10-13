@@ -24,8 +24,12 @@ private slots:
     void initTestCase();
     void cleanupTestCase();
 
+    void getParameters_givesEmptyMap();
+    void insertParameter_insertsNewParameter();
+    void insertSameParameter_changesParameterFromGivenId();
     void toArray_formsArray();
     void specialCharacters_HaveProperEncoding();
+
 private:
     QByteArray *ba;
     QString longText;

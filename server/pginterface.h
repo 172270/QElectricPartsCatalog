@@ -29,13 +29,14 @@ public:
     QList<Storage> getUserStorages(User &user);
 
     uint addStorage(const Storage &storage);
+    uint addPackage(Package &package);
 
     quint32 addParameter(const Parameter &parameter);
 
     quint32 addGroup(const Group &group);
     void linkParameterToGroup(Group &group, const Parameter &parameter);
 
-    quint32 addItem(const Item &item);
+    quint32 addItem(Item &item);
 private:
     QSqlDatabase db;
     QSqlQuery *query;

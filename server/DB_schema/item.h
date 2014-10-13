@@ -36,12 +36,12 @@ public:
     void setUser(User &user);
     void setGroup(Group &group);
 
-    void addParameter(int id, QVariant value);
+    void insertParameter(int id, QVariant value);
     QVariantMap getParameters() const;
 
     QString getDescription() const;
 
-    QByteArray getParametersAsJSON() const;
+    QString getParametersAsJSON() const;
 
     Item();
 

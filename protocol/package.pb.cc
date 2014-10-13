@@ -226,8 +226,9 @@ void PackageBasicInformation::Swap(PackageBasicInformation* other) {
 #ifndef _MSC_VER
 const int Package::kIDFieldNumber;
 const int Package::kNameFieldNumber;
+const int Package::kMountTypeFieldNumber;
 const int Package::kPinNumberFieldNumber;
-const int Package::kOtherDataFieldNumber;
+const int Package::kConfigFieldNumber;
 #endif  // !_MSC_VER
 
 Package::Package()
@@ -248,8 +249,9 @@ void Package::SharedCtor() {
   _cached_size_ = 0;
   id_ = 0u;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  mounttype_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   pinnumber_ = 0u;
-  otherdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  config_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -261,8 +263,11 @@ void Package::SharedDtor() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
     delete name_;
   }
-  if (otherdata_ != &::google::protobuf::internal::kEmptyString) {
-    delete otherdata_;
+  if (mounttype_ != &::google::protobuf::internal::kEmptyString) {
+    delete mounttype_;
+  }
+  if (config_ != &::google::protobuf::internal::kEmptyString) {
+    delete config_;
   }
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   if (this != &default_instance()) {
@@ -300,10 +305,15 @@ void Package::Clear() {
         name_->clear();
       }
     }
+    if (has_mounttype()) {
+      if (mounttype_ != &::google::protobuf::internal::kEmptyString) {
+        mounttype_->clear();
+      }
+    }
     pinnumber_ = 0u;
-    if (has_otherdata()) {
-      if (otherdata_ != &::google::protobuf::internal::kEmptyString) {
-        otherdata_->clear();
+    if (has_config()) {
+      if (config_ != &::google::protobuf::internal::kEmptyString) {
+        config_->clear();
       }
     }
   }
@@ -341,12 +351,26 @@ bool Package::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_pinNumber;
+        if (input->ExpectTag(26)) goto parse_mountType;
         break;
       }
 
-      // optional uint32 pinNumber = 3;
+      // optional string mountType = 3;
       case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_mountType:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_mounttype()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(32)) goto parse_pinNumber;
+        break;
+      }
+
+      // optional uint32 pinNumber = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_pinNumber:
@@ -357,17 +381,17 @@ bool Package::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(34)) goto parse_otherData;
+        if (input->ExpectTag(42)) goto parse_config;
         break;
       }
 
-      // optional bytes otherData = 4;
-      case 4: {
+      // optional bytes config = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_otherData:
+         parse_config:
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_otherdata()));
+                input, this->mutable_config()));
         } else {
           goto handle_uninterpreted;
         }
@@ -403,15 +427,21 @@ void Package::SerializeWithCachedSizes(
       2, this->name(), output);
   }
 
-  // optional uint32 pinNumber = 3;
-  if (has_pinnumber()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->pinnumber(), output);
+  // optional string mountType = 3;
+  if (has_mounttype()) {
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->mounttype(), output);
   }
 
-  // optional bytes otherData = 4;
-  if (has_otherdata()) {
+  // optional uint32 pinNumber = 4;
+  if (has_pinnumber()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->pinnumber(), output);
+  }
+
+  // optional bytes config = 5;
+  if (has_config()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      4, this->otherdata(), output);
+      5, this->config(), output);
   }
 
 }
@@ -434,18 +464,25 @@ int Package::ByteSize() const {
           this->name());
     }
 
-    // optional uint32 pinNumber = 3;
+    // optional string mountType = 3;
+    if (has_mounttype()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->mounttype());
+    }
+
+    // optional uint32 pinNumber = 4;
     if (has_pinnumber()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt32Size(
           this->pinnumber());
     }
 
-    // optional bytes otherData = 4;
-    if (has_otherdata()) {
+    // optional bytes config = 5;
+    if (has_config()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->otherdata());
+          this->config());
     }
 
   }
@@ -469,11 +506,14 @@ void Package::MergeFrom(const Package& from) {
     if (from.has_name()) {
       set_name(from.name());
     }
+    if (from.has_mounttype()) {
+      set_mounttype(from.mounttype());
+    }
     if (from.has_pinnumber()) {
       set_pinnumber(from.pinnumber());
     }
-    if (from.has_otherdata()) {
-      set_otherdata(from.otherdata());
+    if (from.has_config()) {
+      set_config(from.config());
     }
   }
 }
@@ -494,8 +534,9 @@ void Package::Swap(Package* other) {
   if (other != this) {
     std::swap(id_, other->id_);
     std::swap(name_, other->name_);
+    std::swap(mounttype_, other->mounttype_);
     std::swap(pinnumber_, other->pinnumber_);
-    std::swap(otherdata_, other->otherdata_);
+    std::swap(config_, other->config_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_cached_size_, other->_cached_size_);
   }

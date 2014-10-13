@@ -8,6 +8,7 @@ message PackageBasicInformation{
 message Package{
     required uint32 ID = 1;
     required string name =2;
-    optional uint32 pinNumber = 3;
-    optional bytes otherData = 4;
+    optional string mountType = 3;
+    optional uint32 pinNumber = 4;
+    optional bytes config = 5;
 }

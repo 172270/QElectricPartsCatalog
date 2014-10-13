@@ -210,6 +210,38 @@ uint PgInterface::addStorage(const Storage &storage)
     return 0;
 }
 
+uint PgInterface::addPackage(Package &package)
+{
+    if(package.IsInitialized()){
+        q.clear();
+        q.append("INSERT INTO packages(name" +
+                 (package.has_pinnumber()? QString(QStringLiteral(",pinNr")):QString()) +
+                 (package.has_mounttype()? QString(QStringLiteral(",mountType")):QString()) +
+                 (package.has_config()? QString(QStringLiteral(",config")):QString()) +
+                 ") VALUES(:name"+
+                 (package.has_pinnumber()? QString(QStringLiteral(",:pinNr")):QString()) +
+                 (package.has_mounttype()? QString(QStringLiteral(",:mountType")):QString()) +
+                 (package.has_config()? QString(QStringLiteral(",:config")):QString()) +
+                 ");");
+        query->prepare(q);
+        query->bindValue(":name", package.getName() );
+        if(package.has_pinnumber())
+            query->bindValue(":pinNr", package.pinnumber() );
+        if(package.has_mounttype())
+            query->bindValue(":mountType", package.getMountType());
+        if(package.has_config())
+            query->bindValue(":config", package.config().toString() );
+
+        if(!query->exec()){
+            qDebug()<<query->lastError().text();
+        }
+
+        package.set_id(query->lastInsertId().toUInt());
+        return package.id();
+    }
+    return 0;
+}
+
 quint32 PgInterface::addParameter(const Parameter &parameter)
 {
     if(parameter.IsInitialized()){
@@ -267,36 +299,37 @@ void PgInterface::linkParameterToGroup(Group &group, const Parameter &parameter)
     group.add_parameter(parameter);
 }
 
-quint32 PgInterface::addItem(const Item &item)
+quint32 PgInterface::addItem(Item &item)
 {
-//INSERT INTO items(
-//    item_id, users_id, case_id, group_id, name, symbol, namespace,
-//    creationdate, update, parameters, isrecipe, isitem, description)
-//VALUES (?, ?, ?, ?, ?, ?, ?,
-//    ?, ?, ?, ?, ?, ?);
+    if(item.IsInitialized() ){
+        q.clear();
+        q.append("insert into items(users_id, case_id, group_id, name, symbol, namespace, parameters, isrecipe, isitem, update"
+                 + (item.has_description() ? QString(", description") : QString()) +
+                 ") VALUES (:uid, :cid, :gid, :name, :symbol, :namespace, :parameters, :isRecipe, :isItem, :up"
+                 + (item.has_description() ? QString(", :desc") : QString()) + ");");
+        if (!query->prepare(q)){
+            qDebug() << query->lastError().text();
+        }
 
-    q.clear();
-    q.append("insert into items( item_id, users_id, case_id, group_id, name, symbol, namespace, parameters, isrecipe, isitem"
-             + (item.has_description() ? QString(", description") : QString()) +
-             ") VALUES (:iid, :uid, :cid, :gid, :name, :symbol, :namespace, :parameters, :isRecipe, :isItem"
-             + (item.has_description() ? QString(", :desc") : QString()) + ");");
-    if (!query->prepare(q)){
-        qDebug() << query->lastError().text();
+        query->bindValue(":uid", item.user().id());
+        query->bindValue(":cid", item.package().id());
+        query->bindValue(":gid", item.group().id());
+        query->bindValue(":name", item.getName());
+        query->bindValue(":symbol", item.getSymbol());
+        query->bindValue(":namespace", item.getNamespace());
+        query->bindValue(":parameters", item.getParametersAsJSON());
+        query->bindValue(":isRecipe", false);
+        query->bindValue(":isItem", true);
+        query->bindValue(":up", "now()");
+
+        if(item.has_description()){
+            query->bindValue(":desc", item.getDescription());
+        }
+
+        if(!query->exec()){
+            qDebug()<<query->lastError().text();
+        }
+        item.set_id(query->lastInsertId().toUInt());
     }
-
-    query->bindValue(":iid", item.id());
-    query->bindValue(":uid", item.user().id());
-    query->bindValue(":cid", item.package().id());
-    query->bindValue(":gid", item.group().id());
-    query->bindValue(":name", item.getName());
-    query->bindValue(":symbol", item.getSymbol());
-    query->bindValue(":namespace", item.getNamespace());
-    query->bindValue(":parameters", item.getParametersAsJSON());
-    query->bindValue(":isRecipe", false);
-    query->bindValue(":isItem", true);
-
-    if(item.has_description()){
-        query->bindValue(":desc", item.getDescription());
-    }
-
+    return item.id();
 }

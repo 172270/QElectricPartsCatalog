@@ -1,5 +1,6 @@
 #include "tst_item.h"
 
+#include <QChar>
 tst_item::tst_item(QObject *parent) :
     QObject(parent)
 {
@@ -19,6 +20,12 @@ void tst_item::initTestCase()
 void tst_item::cleanupTestCase()
 {
     delete ba;
+}
+
+void tst_item::getParameters_givesEmptyMap()
+{
+    Item it;
+    QVERIFY(it.getParameters().size() == 0 );
 }
 
 void tst_item::toArray_formsArray()
@@ -44,12 +51,12 @@ void tst_item::toArray_formsArray()
     it.set_adddate(QDateTime::currentDateTime());
     it.set_updatedate(QDateTime::currentDateTime());
 
-    it.addParameter(1,"text parameter");
-    it.addParameter(2,1);
-    it.addParameter(3,"from -20.0°C to +80.0°C");
-    it.addParameter(4,23.54);
-    it.addParameter(5, QDateTime::currentDateTime() );
-    it.addParameter(6, 'c');
+    it.insertParameter(1,"text parameter");
+    it.insertParameter(2,1);
+    it.insertParameter(3,"from -20.0°C to +80.0°C");
+    it.insertParameter(4,23.54);
+    it.insertParameter(5, QDateTime::currentDateTime() );
+    it.insertParameter(6, 'c');
 
     ba->clear();
     it.toArray(ba);
@@ -95,12 +102,12 @@ void tst_item::specialCharacters_HaveProperEncoding()
     it.set_adddate(QDateTime::currentDateTime());
     it.set_updatedate(QDateTime::currentDateTime());
 
-    it.addParameter(1,"text parameter");
-    it.addParameter(2,1);
-    it.addParameter(3,"from -20.0°C to +80.0°C");
-    it.addParameter(4,23.54);
-    it.addParameter(5, QDateTime::currentDateTime() );
-    it.addParameter(6, 'c');
+    it.insertParameter(1,"text parameter");
+    it.insertParameter(2,1);
+    it.insertParameter(3,"from -20.0°C to +80.0°C");
+    it.insertParameter(4,23.54);
+    it.insertParameter(5, QDateTime::currentDateTime() );
+    it.insertParameter(6, 'c');
 
     ba->clear();
     it.toArray(ba);
@@ -108,4 +115,39 @@ void tst_item::specialCharacters_HaveProperEncoding()
     it2.fromArray(ba);
 
     QVERIFY(it2.name() == "!@#$%^&*()≠²³¢€½§·«»¡¿£¼‰∧≈¾±°ΩŒĘ®™¥↑↔ÓÞĄŚÐÆŊ•ƏŁŻŹĆ‘“Ń∞×÷żźć„”ńµąśðæŋ’ə…łó→↓←ß©ęœπ");
+}
+
+void tst_item::insertParameter_insertsNewParameter()
+{
+    Item it;
+    QDateTime time = QDateTime::currentDateTime();
+    it.insertParameter(1,"text parameter");
+    it.insertParameter(2,1);
+    it.insertParameter(3,"from -20.0°C to +80.0°C");
+    it.insertParameter(4,23.54);
+    it.insertParameter(5, time );
+//    it.insertParameter(6, QChar('c') );
+
+//    QChar c = it.getParameters().value(QString::number(6)).toChar();
+
+    QVERIFY(it.getParameters().value(QString::number(1)).toString() == "text parameter");
+    QVERIFY(it.getParameters().value(QString::number(2)).toInt() == 1);
+    QVERIFY(it.getParameters().value(QString::number(3)).toString() == "from -20.0°C to +80.0°C");
+    QVERIFY(it.getParameters().value(QString::number(4)).toDouble() == 23.54 );
+    QVERIFY(it.getParameters().value(QString::number(5)).toDateTime().toString() == time.toString());
+//    QVERIFY(it.getParameters().value(QString::number(6)).toChar().toLatin1() == QChar('c').toLatin1() );
+    QVERIFY(it.getParameters().size() == 5 );
+}
+
+void tst_item::insertSameParameter_changesParameterFromGivenId()
+{
+    Item it;
+    QDateTime time = QDateTime::currentDateTime();
+    it.insertParameter(1,"text parameter");
+    it.insertParameter(2,1);
+    it.insertParameter(1,123);
+
+    QVERIFY(it.getParameters().value(QString::number(1)).toInt() == 123);
+    QVERIFY(it.getParameters().value(QString::number(2)).toInt() == 1);
+    QVERIFY(it.getParameters().size() == 2 );
 }

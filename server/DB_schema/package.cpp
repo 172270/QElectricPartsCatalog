@@ -2,6 +2,7 @@
 
 Package::Package()
 {
+    set_id(0);
 }
 
 package::PackageBasicInformation Package::getPackageBasicInformation()

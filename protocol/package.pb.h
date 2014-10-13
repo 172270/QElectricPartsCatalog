@@ -192,24 +192,36 @@ class Package : public ::google::protobuf::MessageLite {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // optional uint32 pinNumber = 3;
+  // optional string mountType = 3;
+  inline bool has_mounttype() const;
+  inline void clear_mounttype();
+  static const int kMountTypeFieldNumber = 3;
+  inline const ::std::string& mounttype() const;
+  inline void set_mounttype(const ::std::string& value);
+  inline void set_mounttype(const char* value);
+  inline void set_mounttype(const char* value, size_t size);
+  inline ::std::string* mutable_mounttype();
+  inline ::std::string* release_mounttype();
+  inline void set_allocated_mounttype(::std::string* mounttype);
+
+  // optional uint32 pinNumber = 4;
   inline bool has_pinnumber() const;
   inline void clear_pinnumber();
-  static const int kPinNumberFieldNumber = 3;
+  static const int kPinNumberFieldNumber = 4;
   inline ::google::protobuf::uint32 pinnumber() const;
   inline void set_pinnumber(::google::protobuf::uint32 value);
 
-  // optional bytes otherData = 4;
-  inline bool has_otherdata() const;
-  inline void clear_otherdata();
-  static const int kOtherDataFieldNumber = 4;
-  inline const ::std::string& otherdata() const;
-  inline void set_otherdata(const ::std::string& value);
-  inline void set_otherdata(const char* value);
-  inline void set_otherdata(const void* value, size_t size);
-  inline ::std::string* mutable_otherdata();
-  inline ::std::string* release_otherdata();
-  inline void set_allocated_otherdata(::std::string* otherdata);
+  // optional bytes config = 5;
+  inline bool has_config() const;
+  inline void clear_config();
+  static const int kConfigFieldNumber = 5;
+  inline const ::std::string& config() const;
+  inline void set_config(const ::std::string& value);
+  inline void set_config(const char* value);
+  inline void set_config(const void* value, size_t size);
+  inline ::std::string* mutable_config();
+  inline ::std::string* release_config();
+  inline void set_allocated_config(::std::string* config);
 
   // @@protoc_insertion_point(class_scope:package.Package)
  private:
@@ -217,18 +229,21 @@ class Package : public ::google::protobuf::MessageLite {
   inline void clear_has_id();
   inline void set_has_name();
   inline void clear_has_name();
+  inline void set_has_mounttype();
+  inline void clear_has_mounttype();
   inline void set_has_pinnumber();
   inline void clear_has_pinnumber();
-  inline void set_has_otherdata();
-  inline void clear_has_otherdata();
+  inline void set_has_config();
+  inline void clear_has_config();
 
   ::std::string* name_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 pinnumber_;
-  ::std::string* otherdata_;
+  ::std::string* mounttype_;
+  ::std::string* config_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_package_2eproto_impl();
@@ -366,15 +381,85 @@ inline void Package::set_allocated_name(::std::string* name) {
   }
 }
 
-// optional uint32 pinNumber = 3;
-inline bool Package::has_pinnumber() const {
+// optional string mountType = 3;
+inline bool Package::has_mounttype() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Package::set_has_pinnumber() {
+inline void Package::set_has_mounttype() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Package::clear_has_pinnumber() {
+inline void Package::clear_has_mounttype() {
   _has_bits_[0] &= ~0x00000004u;
+}
+inline void Package::clear_mounttype() {
+  if (mounttype_ != &::google::protobuf::internal::kEmptyString) {
+    mounttype_->clear();
+  }
+  clear_has_mounttype();
+}
+inline const ::std::string& Package::mounttype() const {
+  return *mounttype_;
+}
+inline void Package::set_mounttype(const ::std::string& value) {
+  set_has_mounttype();
+  if (mounttype_ == &::google::protobuf::internal::kEmptyString) {
+    mounttype_ = new ::std::string;
+  }
+  mounttype_->assign(value);
+}
+inline void Package::set_mounttype(const char* value) {
+  set_has_mounttype();
+  if (mounttype_ == &::google::protobuf::internal::kEmptyString) {
+    mounttype_ = new ::std::string;
+  }
+  mounttype_->assign(value);
+}
+inline void Package::set_mounttype(const char* value, size_t size) {
+  set_has_mounttype();
+  if (mounttype_ == &::google::protobuf::internal::kEmptyString) {
+    mounttype_ = new ::std::string;
+  }
+  mounttype_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Package::mutable_mounttype() {
+  set_has_mounttype();
+  if (mounttype_ == &::google::protobuf::internal::kEmptyString) {
+    mounttype_ = new ::std::string;
+  }
+  return mounttype_;
+}
+inline ::std::string* Package::release_mounttype() {
+  clear_has_mounttype();
+  if (mounttype_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = mounttype_;
+    mounttype_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Package::set_allocated_mounttype(::std::string* mounttype) {
+  if (mounttype_ != &::google::protobuf::internal::kEmptyString) {
+    delete mounttype_;
+  }
+  if (mounttype) {
+    set_has_mounttype();
+    mounttype_ = mounttype;
+  } else {
+    clear_has_mounttype();
+    mounttype_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional uint32 pinNumber = 4;
+inline bool Package::has_pinnumber() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Package::set_has_pinnumber() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Package::clear_has_pinnumber() {
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void Package::clear_pinnumber() {
   pinnumber_ = 0u;
@@ -388,73 +473,73 @@ inline void Package::set_pinnumber(::google::protobuf::uint32 value) {
   pinnumber_ = value;
 }
 
-// optional bytes otherData = 4;
-inline bool Package::has_otherdata() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+// optional bytes config = 5;
+inline bool Package::has_config() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void Package::set_has_otherdata() {
-  _has_bits_[0] |= 0x00000008u;
+inline void Package::set_has_config() {
+  _has_bits_[0] |= 0x00000010u;
 }
-inline void Package::clear_has_otherdata() {
-  _has_bits_[0] &= ~0x00000008u;
+inline void Package::clear_has_config() {
+  _has_bits_[0] &= ~0x00000010u;
 }
-inline void Package::clear_otherdata() {
-  if (otherdata_ != &::google::protobuf::internal::kEmptyString) {
-    otherdata_->clear();
+inline void Package::clear_config() {
+  if (config_ != &::google::protobuf::internal::kEmptyString) {
+    config_->clear();
   }
-  clear_has_otherdata();
+  clear_has_config();
 }
-inline const ::std::string& Package::otherdata() const {
-  return *otherdata_;
+inline const ::std::string& Package::config() const {
+  return *config_;
 }
-inline void Package::set_otherdata(const ::std::string& value) {
-  set_has_otherdata();
-  if (otherdata_ == &::google::protobuf::internal::kEmptyString) {
-    otherdata_ = new ::std::string;
+inline void Package::set_config(const ::std::string& value) {
+  set_has_config();
+  if (config_ == &::google::protobuf::internal::kEmptyString) {
+    config_ = new ::std::string;
   }
-  otherdata_->assign(value);
+  config_->assign(value);
 }
-inline void Package::set_otherdata(const char* value) {
-  set_has_otherdata();
-  if (otherdata_ == &::google::protobuf::internal::kEmptyString) {
-    otherdata_ = new ::std::string;
+inline void Package::set_config(const char* value) {
+  set_has_config();
+  if (config_ == &::google::protobuf::internal::kEmptyString) {
+    config_ = new ::std::string;
   }
-  otherdata_->assign(value);
+  config_->assign(value);
 }
-inline void Package::set_otherdata(const void* value, size_t size) {
-  set_has_otherdata();
-  if (otherdata_ == &::google::protobuf::internal::kEmptyString) {
-    otherdata_ = new ::std::string;
+inline void Package::set_config(const void* value, size_t size) {
+  set_has_config();
+  if (config_ == &::google::protobuf::internal::kEmptyString) {
+    config_ = new ::std::string;
   }
-  otherdata_->assign(reinterpret_cast<const char*>(value), size);
+  config_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Package::mutable_otherdata() {
-  set_has_otherdata();
-  if (otherdata_ == &::google::protobuf::internal::kEmptyString) {
-    otherdata_ = new ::std::string;
+inline ::std::string* Package::mutable_config() {
+  set_has_config();
+  if (config_ == &::google::protobuf::internal::kEmptyString) {
+    config_ = new ::std::string;
   }
-  return otherdata_;
+  return config_;
 }
-inline ::std::string* Package::release_otherdata() {
-  clear_has_otherdata();
-  if (otherdata_ == &::google::protobuf::internal::kEmptyString) {
+inline ::std::string* Package::release_config() {
+  clear_has_config();
+  if (config_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
-    ::std::string* temp = otherdata_;
-    otherdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    ::std::string* temp = config_;
+    config_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }
-inline void Package::set_allocated_otherdata(::std::string* otherdata) {
-  if (otherdata_ != &::google::protobuf::internal::kEmptyString) {
-    delete otherdata_;
+inline void Package::set_allocated_config(::std::string* config) {
+  if (config_ != &::google::protobuf::internal::kEmptyString) {
+    delete config_;
   }
-  if (otherdata) {
-    set_has_otherdata();
-    otherdata_ = otherdata;
+  if (config) {
+    set_has_config();
+    config_ = config;
   } else {
-    clear_has_otherdata();
-    otherdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_config();
+    config_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
