@@ -34,6 +34,8 @@ private slots:
     void databaseShoudAllowCreateGroupsWithSameNameAndDifferentParent();
     void databaseThrowsExceptionWhenDoubleGroupAdd();
     void linkGroupWithParameter_linksGroupWithParameter();
+    void getGroup_getsGroupInfo();
+    void getGroup_getsGroupParameters();
 
 private:
     QSqlQuery *query;

@@ -34,8 +34,8 @@ void DbCreator::initialize_database()
 void DbCreator::addGroupRootNode()
 {
     QString q;
-    q.append("insert into groups (parent_id, name, allowRecipe, allowItems)"
-             " values(NULL, 'ROOT', false, false);");
+    q.append("insert into groups (parent_id, name, allowRecipe, allowItems, description)"
+             " values(NULL, 'ROOT', false, false, 'The base group for all groups');");
     if (!query->exec(q)){
         qDebug()<<query->lastError().text();
     }

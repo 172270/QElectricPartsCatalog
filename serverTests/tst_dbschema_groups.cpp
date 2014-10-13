@@ -167,3 +167,62 @@ void tst_dbschema_groups::linkGroupWithParameter_linksGroupWithParameter()
 
     QVERIFY(g.getParameters().size() == 2);
 }
+
+void tst_dbschema_groups::getGroup_getsGroupInfo()
+{
+    Group g;
+
+    g.MergeFrom(database->getGroup(1));
+
+    QVERIFY(g.id() == 1);
+    QVERIFY(g.parentid() == 0);
+    QVERIFY(g.name() == "ROOT");
+    QVERIFY(g.description()== "The base group for all groups");
+    QVERIFY(g.allowitems() == false);
+    QVERIFY(g.allowsets() == false);
+}
+
+void tst_dbschema_groups::getGroup_getsGroupParameters()
+{
+    Group g;
+    g.set_parentid(1);
+    g.set_name("group_test");
+    g.setAllowItems(true);
+    g.setAllowRecipe(true);
+    g.set_id(database->addGroup(g));
+
+    Parameter p1, p2, p3, p4;
+    p1.set_name("Parameter1");
+    p1.config().setDefaultValue("N/A");
+    p1.config().setValueType("String");
+
+    p2.set_name("Parameter2");
+    p2.config().setDefaultValue(21);
+    p2.config().setValueType("int");
+    p2.config().setMaxValue(230);
+    p2.config().setMinValue(-23);
+
+    p3.set_name("Parameter3");
+    p3.config().setDefaultValue(0.00001);
+    p3.config().setValueType("float");
+    p3.config().setMaxValue(1e12);
+    p3.config().setMinValue(1e-12);
+
+    p4.set_name("Parameter4");
+    p4.config().setDefaultValue(" some custom parameter ");
+    p4.config().setValueType("custom parameter");
+
+    database->addParameter(p1);
+    database->addParameter(p2);
+    database->addParameter(p3);
+    database->addParameter(p4);
+
+    database->linkParameterToGroup(g, p1);
+    database->linkParameterToGroup(g, p2);
+    database->linkParameterToGroup(g, p3);
+    database->linkParameterToGroup(g, p4);
+
+    Group g2;
+    g2.MergeFrom(database->getGroup( g.id() ));
+    QVERIFY(g2.getParameters().size() == 4 );
+}

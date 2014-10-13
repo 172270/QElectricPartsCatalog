@@ -242,7 +242,7 @@ uint PgInterface::addPackage(Package &package)
     return 0;
 }
 
-quint32 PgInterface::addParameter(const Parameter &parameter)
+quint32 PgInterface::addParameter(Parameter &parameter)
 {
     if(parameter.IsInitialized()){
         q.clear();
@@ -254,7 +254,8 @@ quint32 PgInterface::addParameter(const Parameter &parameter)
             qDebug()<<query->lastError().text();
         }
 
-        return query->lastInsertId().toUInt();
+        parameter.set_id(query->lastInsertId().toUInt());
+        return parameter.id();
     }
     return 0;
 }
@@ -278,6 +279,50 @@ quint32 PgInterface::addGroup(const Group &group)
         return query->lastInsertId().toUInt();
     }
     return 0;
+}
+
+Group PgInterface::getGroup(uint id)
+{
+    Group g;
+    q.clear();
+    q.append("SELECT "
+             "group_id, "
+             "parent_id, "
+             "name, "
+             "description, "
+             "creationtime, "
+             "allowitems, "
+             "allowrecipe "
+           "FROM "
+             "groups "
+           "WHERE "
+             "group_id =" + QString::number(id) );
+    if(!query->exec(q)){
+        qDebug()<<query->lastError().text();
+    }
+    int size = query->size();
+    if(size == 1){
+        query->first();
+        g.set_id(query->value("group_id").toUInt());
+        g.set_name(query->value("name").toString());
+        g.set_parentid(query->value("parent_id").toUInt());
+        g.set_description(query->value("description").toString());
+        g.set_creationdate(query->value("creationtime").toDateTime());
+        g.setAllowItems(query->value("allowitems").toBool() );
+        g.setAllowRecipe(query->value("allowrecipe").toBool() );
+
+       q.clear();
+       q.append("SELECT parameter_id FROM group_parameter WHERE group_id =" + QString::number(g.id()));
+       if(!query->exec(q)){
+           qDebug()<<query->lastError().text();
+       }
+       while(query->next()){
+           Parameter p;
+           p.set_id(query->value("parameter_id").toUInt());
+           g.add_parameter(p);
+       }
+    }
+    return g;
 }
 
 void PgInterface::linkParameterToGroup(Group &group, const Parameter &parameter)

@@ -76,8 +76,14 @@ void Item::setGroup(Group &group)
     mutable_group()->CopyFrom( group.getGroupBasicInfoPB());
 }
 
-void Item::insertParameter(int id, QVariant value)
+void Item::insertParameter(uint id, QVariant value)
 {
+    for(int i=0;i<parameters().size();i++){
+        if( parameters(i).id() == id){
+            mutable_parameters(i)->set_value(value.toString().toStdString() );
+            return;
+        }
+    }
     item::ItemParameters *param = add_parameters();
     param->set_id(id);
     param->set_value(value.toString().toStdString() );
@@ -88,11 +94,9 @@ QVariantMap Item::getParameters() const
     QVariantMap map;
     int paramNumber = parameters().size()-1;
 
-    for(;paramNumber>=0;--paramNumber){
-        if(map.contains(QString::number(parameters(paramNumber).id())))
-            continue;
+    for(;paramNumber>=0;--paramNumber)
         map.insert(QString::number(parameters(paramNumber).id()), QString::fromStdString(parameters(paramNumber).value()));
-    }
+
     return map;
 }
 

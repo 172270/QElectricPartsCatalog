@@ -31,9 +31,10 @@ public:
     uint addStorage(const Storage &storage);
     uint addPackage(Package &package);
 
-    quint32 addParameter(const Parameter &parameter);
+    quint32 addParameter(Parameter &parameter);
 
     quint32 addGroup(const Group &group);
+    Group getGroup(uint id);
     void linkParameterToGroup(Group &group, const Parameter &parameter);
 
     quint32 addItem(Item &item);

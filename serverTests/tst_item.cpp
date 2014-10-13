@@ -74,6 +74,8 @@ void tst_item::toArray_formsArray()
     QVERIFY(it2.package().id()  == it.package().id());
     QVERIFY(it2.group().id()    == it.group().id()  );
     QVERIFY(it2.getParameters() == it.getParameters());
+    QVERIFY(it2.getParameters().size() == 6);
+    QVERIFY(it2.parameters().size() == 6);
     QVERIFY(it2.getAddDate()    == it.getAddDate()  );
     QVERIFY(it2.getUpdateDate() == it.getUpdateDate());
     QVERIFY(it2.description()   == it.description() );
@@ -142,12 +144,13 @@ void tst_item::insertParameter_insertsNewParameter()
 void tst_item::insertSameParameter_changesParameterFromGivenId()
 {
     Item it;
-    QDateTime time = QDateTime::currentDateTime();
     it.insertParameter(1,"text parameter");
+    it.insertParameter(1,"dsa");
     it.insertParameter(2,1);
     it.insertParameter(1,123);
 
     QVERIFY(it.getParameters().value(QString::number(1)).toInt() == 123);
     QVERIFY(it.getParameters().value(QString::number(2)).toInt() == 1);
     QVERIFY(it.getParameters().size() == 2 );
+    QVERIFY(it.parameters().size() == 2);
 }

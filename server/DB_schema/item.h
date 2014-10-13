@@ -36,7 +36,7 @@ public:
     void setUser(User &user);
     void setGroup(Group &group);
 
-    void insertParameter(int id, QVariant value);
+    void insertParameter(uint id, QVariant value);
     QVariantMap getParameters() const;
 
     QString getDescription() const;

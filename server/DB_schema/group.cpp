@@ -20,11 +20,6 @@ quint32 Group::getID() const
     return id();
 }
 
-void Group::set_parentid(quint32 id)
-{
-    groups::Group::set_parentid(id);
-}
-
 quint32 Group::getParentID() const
 {
     return parentid();
@@ -58,6 +53,11 @@ void Group::set_description(const QString &desc)
 QString Group::getDescription() const
 {
     return QString::fromStdString(description());
+}
+
+void Group::set_creationdate(QDateTime &&dt)
+{
+    groups::Group::set_creationdate(dt.toMSecsSinceEpoch());
 }
 
 void Group::add_parameter(const Parameter &parameter)

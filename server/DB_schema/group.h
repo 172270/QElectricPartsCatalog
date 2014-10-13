@@ -20,7 +20,6 @@ public:
     void setID(quint32 id);
     quint32 getID() const;
 
-    void set_parentid( quint32 id);
     quint32 getParentID() const;
 
     bool setsAllowed() const;
@@ -31,6 +30,8 @@ public:
 
     void set_description(const QString &desc);
     QString getDescription() const;
+
+    void set_creationdate(QDateTime &&dt);
 
     void add_parameter(const Parameter &parameter);
     QList<parameters::ParameterBasicInformation> getParameters() const;
