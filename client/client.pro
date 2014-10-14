@@ -16,13 +16,16 @@ CONFIG += c++11
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    logindialog.cpp
+    logindialog.cpp \
+    adduserdialog.cpp
 
 HEADERS  += mainwindow.h \
-    logindialog.h
+    logindialog.h \
+    adduserdialog.h
 
 FORMS    += mainwindow.ui \
-    logindialog.ui
+    logindialog.ui \
+    adduserdialog.ui
 
 unix:!macx: LIBS += -L$$OUT_PWD/../lib/ -lprotocol
 
