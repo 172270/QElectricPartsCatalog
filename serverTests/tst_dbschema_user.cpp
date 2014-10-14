@@ -188,12 +188,12 @@ void tst_dbschema_user::checkPassword_returnFalseIfWrongPassword()
 
     database->addUser(u,"good");
 
-    QVERIFY(database->checkUserPassword(u,"BAD") == false);
-    QVERIFY(database->checkUserPassword(u,"good") == true);
+    QVERIFY(database->checkUserPassword(u.getName(),"BAD") == false);
+    QVERIFY(database->checkUserPassword(u.getName(),"good") == true);
 
     u.set_name(getUniqueName());
-    QVERIFY(database->checkUserPassword(u,"BAD") == false);
-    QVERIFY(database->checkUserPassword(u,"good") == false);
+    QVERIFY(database->checkUserPassword(u.getName(),"BAD") == false);
+    QVERIFY(database->checkUserPassword(u.getName(),"good") == false);
 }
 
 void tst_dbschema_user::addMagazineToUser()

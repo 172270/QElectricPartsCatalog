@@ -28,7 +28,9 @@ SOURCES += \
     types.pb.cc \
     item.pb.cc \
     package.pb.cc \
-    parameters.pb.cc
+    parameters.pb.cc \
+    messages/loginrequest.cpp \
+    messages/messagescontainer.cpp
 
 HEADERS +=\
     user.pb.h \
@@ -41,7 +43,9 @@ HEADERS +=\
     types.pb.h \
     item.pb.h \
     package.pb.h \
-    parameters.pb.h
+    parameters.pb.h \
+    messages/loginrequest.h \
+    messages/messagescontainer.h
 
 OTHER_FILES += \
     user.proto \

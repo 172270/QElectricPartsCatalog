@@ -110,8 +110,6 @@ void User::setConfig(QByteArray conf)
     user::UserData::set_config(QString(conf).toStdString());
 }
 
-
-
 QByteArray User::getDefaultConfig()
 {
     QJsonObject json;

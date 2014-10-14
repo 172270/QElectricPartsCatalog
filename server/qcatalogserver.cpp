@@ -1,51 +1,50 @@
 #include "qcatalogserver.h"
 
+#include <QWebSocket>
 #include <QPointer>
 
 QCatalogServer::QCatalogServer(QObject *parent) :
-    QTcpServer(parent)
+    QWebSocketServer(QStringLiteral("EKATALOG"),QWebSocketServer::NonSecureMode, parent)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
     db.setHostName("localhost");
-    db.setDatabaseName("ekatalog");
+    db.setDatabaseName("ekatalog_tests");
     db.setUserName("postgres");
     db.setPassword("postgres");
 }
 
 void QCatalogServer::startServer()
 {
-    int port = 2345; /// TODO odczyt z qsettings
+    quint16 port = setup.value("listenPort", 6666).toUInt();
+     if(!this->listen(QHostAddress::Any, port)){
+         qDebug() << "Could not start server";
+     }
+     else{
+         qDebug() << "Listening to port " << port << "...";
+     }
 
-    if(!this->listen(QHostAddress::Any, port))
-    {
-        qDebug() << "Could not start server";
-    }
-    else
-    {
-        qDebug() << "Listening to port " << port << "...";
-    }
+     connect(this, SIGNAL(newConnection()), this, SLOT(incomingConnection()));
 }
 
 
-void QCatalogServer::incomingConnection(qintptr socketDescriptor)
+void QCatalogServer::incomingConnection()
 {
-    // We have a new connection
-    qDebug() << socketDescriptor << " Connecting...";
 
-    // Every new connection will be run in a newly created thread
-    QPointer<QCatalogServerThread> thread;
-    try
-    {
-        thread = new QCatalogServerThread(socketDescriptor, this);
-    }
-    catch (QString e){
-        qDebug() << e;
-    }
-    // connect signal/slot
-    // once a thread is not needed, it will be beleted later
+    if(hasPendingConnections()){
+        QWebSocket *ws;
+        ws = nextPendingConnection();
+        // We have a new panding connection
+        qDebug() << ws->peerAddress() << " Connecting...";
+//        connect(ws, &QWebSocket::disconnected, [=](){
+//            qDebug()<< "socket disconnected for reason: " << ws->closeReason() << ws->closeCode() ;
+//            ws->deleteLater();
+//        });
 
-    if (thread){
-        connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
-        thread->start();
+        QCatalogServerThread* thread;
+        thread = new QCatalogServerThread(ws, this);
+        if (thread){
+            connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+            thread->start();
+        }
     }
 }

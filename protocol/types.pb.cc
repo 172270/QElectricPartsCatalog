@@ -47,6 +47,8 @@ struct StaticDescriptorInitializer_types_2eproto {
 bool MsgType_IsValid(int value) {
   switch(value) {
     case 1:
+    case 2:
+    case 20:
     case 100:
     case 110:
     case 120:

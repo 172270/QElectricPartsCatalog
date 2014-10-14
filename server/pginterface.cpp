@@ -113,12 +113,12 @@ void PgInterface::deleteUser(User &user)
     }
 }
 
-bool PgInterface::checkUserPassword(User &user, QString passwd)
+bool PgInterface::checkUserPassword(QString user, QString passwd)
 {
     q.clear();
     q.append("select password from users WHERE name=:name");
     query->prepare(q);
-    query->bindValue(":name", user.getName());
+    query->bindValue(":name", user);
     if(!query->exec()){
         UserError err;
         err.setErrorNumber(query->lastError().number());

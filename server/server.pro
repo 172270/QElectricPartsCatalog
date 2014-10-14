@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core network sql
+QT       += core network sql websockets
 
 TARGET = ../lib/server
 CONFIG   += console c++11 staticlib
@@ -41,7 +41,7 @@ HEADERS += \
     DB_schema/package.h \
     DB_schema/parameter.h
 
-LIBS += -lprotobuf
+LIBS += -lprotobuf-lite
 
 OTHER_FILES +=
 

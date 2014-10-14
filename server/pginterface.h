@@ -24,7 +24,7 @@ public:
 
     uint addUser(User &user, QString passwd);
     void deleteUser(User &user);
-    bool checkUserPassword(User &user, QString passwd);
+    bool checkUserPassword(QString user, QString passwd);
     void linkStorageToUser(const User &user, const Storage &storage);
     QList<Storage> getUserStorages(User &user);
 

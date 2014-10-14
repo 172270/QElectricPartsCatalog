@@ -2,80 +2,64 @@
 #include "messagetype.h"
 #include "loginmessagehandler.h"
 
+#include "messages/messagescontainer.h"
 
-QCatalogServerThread::QCatalogServerThread(qintptr ID, QObject *parent) :
-    QThread(parent), socketDescriptor(ID)
+
+QCatalogServerThread::QCatalogServerThread(QWebSocket *s, QObject *parent) :
+    QThread(parent)
 {
-    socket = new QTcpSocket();
+    static int databaseDescription = 0;
+    socket = s;
 
-    data = new QByteArray();
-    if(!socket->setSocketDescriptor(this->socketDescriptor))
-    {
-        QString socketNotOpen = "socket can't be opened!!";
-        throw socketNotOpen ;
-    }
-    db = new QSqlDatabase(QSqlDatabase::cloneDatabase(QSqlDatabase::database(), QString::number(socketDescriptor)));
+    db = new QSqlDatabase(QSqlDatabase::cloneDatabase(QSqlDatabase::database(), QString::number(databaseDescription++)));
     if (!db->open()){
         QString dbNotOpen = "database can't be opened!!";
         throw dbNotOpen ;
     }
-    query = new QSqlQuery(*db);
+    query = new QSqlQuery();
 }
 
-
-
-void QCatalogServerThread::choseMessageHandler()
+QCatalogServerThread::~QCatalogServerThread()
 {
-    PBMessageTypeChecker * mt = new PBMessageTypeChecker( data );
-    if (mt->getType() == PBMsgType::LOGIN)
-        emit requestLogin(data);
-    //    else if( data->at(1) == PBMsgType::LOGOUT){
-    //        //            req_logout();
-    //    }
-    //    else if( data->at(1) == PBMsgType::USERADD ){
-    //        //            req_userAdd(data);
-    //    }
 }
 
-void QCatalogServerThread::setData(QByteArray &&d)
+void QCatalogServerThread::readyRead(QByteArray ba)
 {
-    data->append(*d);
-}
+    qDebug()<<"recived message";
+    MessagesContainer requestMessage, responseMessage;
+    requestMessage.fromArray(ba);
 
-void QCatalogServerThread::readyRead()
-{
-    setData(socket->readAll());
-    choseMessageHandler();
-    data->clear();
+    for(int i=0;i<requestMessage.container().size();i++){
+        if(requestMessage.container(i).msgtype()== MsgType::reqLogin){
+            qDebug()<<"request login";
+            LoginMessageHandler handler;
+            MessageCapsule mc = MessageCapsule(requestMessage.getCapsuleAsArray(i));
+            handler.setData( mc.encapsulateMessage() );
+            handler.processData();
+            responseMessage.addMessage(MsgType::resLogin, handler.getResponse());
+        }
+    }
+    socket->sendBinaryMessage(responseMessage.toArray() );
 }
 
 void QCatalogServerThread::disconnected()
 {
-    qDebug() << socketDescriptor << " Disconnected";
     socket->deleteLater();
-    //    QString connection = db->connectionName();
-    //    db->close();
-    //    delete db;
-    //    QSqlDatabase::removeDatabase(connection);
-    //    exit(0);
+    QString connection = db->connectionName();
+    db->close();
+    delete db;
+    delete query;
+
+    QSqlDatabase::removeDatabase(connection);
+    exit(0);
 }
 
 void QCatalogServerThread::run()
 {
-    // thread starts here
     qDebug() << " Thread started";
 
-    // note - Qt::DirectConnection is used because it's multithreaded
-    //        This makes the slot to be invoked immediately, when the signal is emitted.
-
-    connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()), Qt::DirectConnection);
+    connect(socket, SIGNAL(binaryMessageReceived(QByteArray)), this, SLOT(readyRead(QByteArray)), Qt::DirectConnection);
     connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
 
-    // We'll have multiple clients, we want to know which is which
-    qDebug() << socketDescriptor << " Client connected";
-
-    // make this thread a loop,
-    // thread will stay alive so that signal/slot to function properly
-    // not dropped out in the middle when thread dies
     exec();
 }

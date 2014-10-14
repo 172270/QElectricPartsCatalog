@@ -210,13 +210,6 @@ class LoginResponse : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
-  // required uint32 msgType = 1 [default = 14];
-  inline bool has_msgtype() const;
-  inline void clear_msgtype();
-  static const int kMsgTypeFieldNumber = 1;
-  inline ::google::protobuf::uint32 msgtype() const;
-  inline void set_msgtype(::google::protobuf::uint32 value);
-
   // required .user.Replay replay = 2;
   inline bool has_replay() const;
   inline void clear_replay();
@@ -226,16 +219,13 @@ class LoginResponse : public ::google::protobuf::MessageLite {
 
   // @@protoc_insertion_point(class_scope:user.LoginResponse)
  private:
-  inline void set_has_msgtype();
-  inline void clear_has_msgtype();
   inline void set_has_replay();
   inline void clear_has_replay();
 
-  ::google::protobuf::uint32 msgtype_;
   int replay_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_user_2eproto_impl();
@@ -1121,37 +1111,15 @@ inline void LoginRequest::set_allocated_password(::std::string* password) {
 
 // LoginResponse
 
-// required uint32 msgType = 1 [default = 14];
-inline bool LoginResponse::has_msgtype() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void LoginResponse::set_has_msgtype() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void LoginResponse::clear_has_msgtype() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void LoginResponse::clear_msgtype() {
-  msgtype_ = 14u;
-  clear_has_msgtype();
-}
-inline ::google::protobuf::uint32 LoginResponse::msgtype() const {
-  return msgtype_;
-}
-inline void LoginResponse::set_msgtype(::google::protobuf::uint32 value) {
-  set_has_msgtype();
-  msgtype_ = value;
-}
-
 // required .user.Replay replay = 2;
 inline bool LoginResponse::has_replay() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
 inline void LoginResponse::set_has_replay() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
 }
 inline void LoginResponse::clear_has_replay() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void LoginResponse::clear_replay() {
   replay_ = 1;

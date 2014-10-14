@@ -1,5 +1,5 @@
 option optimize_for = LITE_RUNTIME;
-
+package container;
 import public "types.proto";
 import public "group.proto";
 import public "user.proto";
@@ -7,17 +7,16 @@ import public "package.proto";
 import public "parameters.proto";
 import public "item.proto";
 
-message MessageMetadata{
-	required fixed64 length = 1;
+message MessageContainer{
+	repeated MessageCapsule container=1;
+}
+
+message MessageCapsule{
 	required MsgType msgType = 2;
-	repeated bytes data = 3;
+	required bytes data = 3;
 }
 
-message MessagePackage{
-	repeated MessageMetadata data=1;
-}
-
-message ItemPackage{
+message Items{
 	repeated groups.Group groups = 1;
 	repeated user.UserBasicInformation users =2;
 	repeated package.Package packages = 3;

@@ -15,7 +15,6 @@ message LoginRequest{
 }
 
 message LoginResponse{
-  required uint32 msgType = 1[default = 14];
   required Replay replay = 2;
 }
 

@@ -1,27 +1,23 @@
 #ifndef LOGINMESSAGEHANDLER_H
 #define LOGINMESSAGEHANDLER_H
 
-#include "qcatalogserverthread.h"
-
 #include "DB_schema/user.h"
+#include "pginterface.h"
 
 class LoginMessageHandler : public QObject
 {
     Q_OBJECT
 public:
-    LoginMessageHandler();
+    LoginMessageHandler(){;}
 
 public:
-    void setData(QByteArray *data);
+    void setData(QByteArray &&data);
     void processData();
-    QByteArray *data;
-    void extractPBMessage();
+    QByteArray getResponse();
 private:
-    void getWorker();
-
-    user::LoginRequest userLoginMsg;
-    user::LoginResponse userLoginReplayMsg;
-
+    PgInterface database;
+    user::LoginRequest req;
+    user::LoginResponse res;
 };
 
 #endif // LOGINMESSAGEHANDLER_H

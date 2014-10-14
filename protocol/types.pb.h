@@ -32,6 +32,8 @@ void protobuf_ShutdownFile_types_2eproto();
 
 enum MsgType {
   reqLogin = 1,
+  reqLogout = 2,
+  resLogin = 20,
   msgItem = 100,
   msgUser = 110,
   msgGroup = 120,
