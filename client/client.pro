@@ -17,15 +17,18 @@ CONFIG += c++11
 SOURCES += main.cpp\
         mainwindow.cpp \
     logindialog.cpp \
-    adduserdialog.cpp
+    adduserdialog.cpp \
+    addgroup.cpp
 
 HEADERS  += mainwindow.h \
     logindialog.h \
-    adduserdialog.h
+    adduserdialog.h \
+    addgroup.h
 
 FORMS    += mainwindow.ui \
     logindialog.ui \
-    adduserdialog.ui
+    adduserdialog.ui \
+    addgroup.ui
 
 unix:!macx: LIBS += -L$$OUT_PWD/../lib/ -lprotocol
 

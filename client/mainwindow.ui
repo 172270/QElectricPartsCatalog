@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>453</width>
-    <height>419</height>
+    <width>586</width>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,10 +19,24 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>453</width>
-     <height>25</height>
+     <width>586</width>
+     <height>27</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuPlik">
+    <property name="title">
+     <string>plik</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuKatalog">
+    <property name="title">
+     <string>Katalog</string>
+    </property>
+    <addaction name="actionAddGroup"/>
+    <addaction name="actionAddParameter"/>
+   </widget>
+   <addaction name="menuPlik"/>
+   <addaction name="menuKatalog"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -33,6 +47,16 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAddGroup">
+   <property name="text">
+    <string>Okno dodawani grup</string>
+   </property>
+  </action>
+  <action name="actionAddParameter">
+   <property name="text">
+    <string>Okno dodawania parametrów</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

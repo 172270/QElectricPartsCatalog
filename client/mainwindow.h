@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "addgroup.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -14,8 +16,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void showAddGroup();
+
 private:
     Ui::MainWindow *ui;
+
+    AddGroup *addGroupWidget;
 };
 
 #endif // MAINWINDOW_H
