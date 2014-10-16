@@ -13,9 +13,6 @@ public:
     explicit tst_user(QObject *parent = 0);
 
     void setRequiredFields();
-signals:
-
-    void finished();
 
 public slots:
 

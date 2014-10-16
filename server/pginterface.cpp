@@ -106,7 +106,9 @@ bool PgInterface::userEmailExists(QString &email)
 
 void PgInterface::updateLastLogin(User &u)
 {
-///TODO implement
+    q.clear();
+    q.append("UPDATE users SET lastlogin = now() WHERE id = "+ QString::number( u.id()) +";");
+    query->exec(q);
 }
 
 User PgInterface::getUserByName(const QString &name)

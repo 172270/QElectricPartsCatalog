@@ -53,6 +53,9 @@ LoginDialog::LoginDialog(QWidget *parent) :
     connect(this, &LoginDialog::loginOk, [=](){
         ui->connectResponseLabel->setText("Autentification succes");
         setup.setValue("login", ui->userLogin->text() );
+        setup.setValue("serverIp", ui->serverIp->text() );
+        setup.setValue("serverPort", ui->serverPort->text() );
+        this->accept();
     });
 
     connect(m_socket, &QWebSocket::disconnected, [=](){

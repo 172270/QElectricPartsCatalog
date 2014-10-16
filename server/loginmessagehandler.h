@@ -8,7 +8,7 @@ class LoginMessageHandler : public QObject
 {
     Q_OBJECT
 public:
-    LoginMessageHandler(){;}
+    LoginMessageHandler(): user(new User){;}
 
 public:
     void setData(QByteArray &&data);
@@ -16,10 +16,12 @@ public:
     User *getUserData();
     QByteArray getResponse();
     bool loginOk(){ return res.replay()==user::Replay::LoginPass; }
+    void updateLastLogin();
 private:
     PgInterface database;
     user::LoginRequest req;
     user::LoginResponse res;
+    User *user;
 };
 
 #endif // LOGINMESSAGEHANDLER_H
