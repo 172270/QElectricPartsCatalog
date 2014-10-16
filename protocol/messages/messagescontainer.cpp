@@ -1,29 +1,56 @@
 #include "messagescontainer.h"
 #include <QString>
-
+#include <QDebug>
 MessagesContainer::MessagesContainer()
 {
 }
 
-void MessagesContainer::addMessage(MsgType type, QByteArray &&data)
+void MessagesContainer::addMessage(MsgType type, const QByteArray &ba)
 {
-    container::MessageCapsule *mc = add_container();
+    container::MessageCapsule *mc = add_capsules();
     mc->set_msgtype(type);
-    mc->set_data(QString(data).toStdString());
+    mc->set_data(ba.data(), ba.size());
 }
 
-QByteArray MessagesContainer::getCapsuleAsArray(int i)
+void MessagesContainer::addMessage(MsgType type, QByteArray &&ba)
 {
-    std::string msg = container(i).SerializeAsString();
-    QString ba = QString::fromStdString(msg);
-    return ba.toLatin1();
+    container::MessageCapsule *mc = add_capsules();
+    mc->set_msgtype(type);
+    mc->set_data(ba.data(), ba.size());
+}
+
+void MessagesContainer::addMessage(MsgType type, const QString &data)
+{
+    container::MessageCapsule *mc = add_capsules();
+    mc->set_msgtype(type);
+    mc->set_data(data.toStdString());
+}
+
+void MessagesContainer::addMessage(MsgType type,QString &&data){
+    container::MessageCapsule *mc = add_capsules();
+    mc->set_msgtype(type);
+    mc->set_data(data.toStdString());
+}
+
+void MessagesContainer::addMessage(MsgType type, QByteArray *ba)
+{
+    container::MessageCapsule *mc = add_capsules();
+    mc->set_msgtype(type);
+    mc->set_data(ba->data(), ba->size());
+    delete ba;
+}
+
+MessageCapsule MessagesContainer::getCapsule(int i)
+{
+    return static_cast<MessageCapsule>(capsules(i));
 }
 
 QByteArray MessagesContainer::toArray()
 {
     QByteArray ba;
-    ba.resize( ByteSize() );
-    ba.append( SerializeToArray(ba.data(),ba.size() ));
+    int size = ByteSize();
+    ba.resize(size);
+    SerializeToArray(ba.data(), size );
     return ba;
 }
 
@@ -32,13 +59,21 @@ void MessagesContainer::fromArray(QByteArray &ba)
     ParseFromArray(ba.data(), ba.size() );
 }
 
-MessageCapsule::MessageCapsule(QByteArray &&capsule)
-{
-    ParseFromArray(capsule.data(), capsule.size());
+void MessageCapsule::fromArray(QByteArray &ba){
+    ParseFromArray(ba.data(), ba.size());
 }
 
-QByteArray MessageCapsule::encapsulateMessage()
+MessageCapsule::MessageCapsule(QByteArray &&capsule)
 {
-    QString dataString = QString::fromStdString(data());
-    return dataString.toLatin1();
+    fromArray(capsule);
+}
+
+MessageCapsule::MessageCapsule(const container::MessageCapsule &other)
+{
+    this->MergeFrom(other);
+}
+
+QByteArray MessageCapsule::getData()
+{
+    return QByteArray(data().data(), data().size());
 }

@@ -1,6 +1,7 @@
 #include "loginmessagehandler.h"
 
 #include <QDebug>
+#include <QCryptographicHash>
 
 void LoginMessageHandler::setData(QByteArray &&d)
 {
@@ -11,16 +12,29 @@ void LoginMessageHandler::processData()
 {
     qDebug()<< "User "<< QString::fromStdString(req.name()) << "try to login";
     QString userName = QString::fromStdString(req.name());
-    bool loginOk = database.checkUserPassword(userName, QString::fromStdString(req.password())); ///TODO hash passwd
+
+    QByteArray pass = QCryptographicHash::hash(QByteArray(req.password().data(), req.password().size() ), QCryptographicHash::Sha512);
+    bool loginOk = database.checkUserPassword(userName, pass.toHex() );
 
     if(loginOk){
-        res.set_replay(user::Replay::LOGIN_OK);
+        res.set_replay(user::Replay::LoginPass);
         qDebug()<<" login succesfull";
     }
     else{
-        res.set_replay(user::Replay::BAD_USER_OR_PASSWD);
+        res.set_replay(user::Replay::LoginDeny);
         qDebug()<<" bad user or password";
     }
+}
+
+User* LoginMessageHandler::getUserData()
+{
+    ///TODO get all user data (info about files etc.)
+
+    User *u = new User;
+
+    u->MergeFrom(database.getUserByName( QString::fromStdString(req.name()) ));
+
+    return u;
 }
 
 QByteArray LoginMessageHandler::getResponse()

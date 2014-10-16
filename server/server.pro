@@ -15,33 +15,19 @@ SOURCES += main.cpp \
     qcatalogserver.cpp \
     qcatalogserverthread.cpp \
     loginmessagehandler.cpp \
-    DB_schema/loginmessage.cpp \
-    DB_schema/user.cpp \
-    DB_schema/storege.cpp \
-    DB_schema/dbcreator.cpp \
     pginterface.cpp \
-    DB_schema/file.cpp \
-    DB_schema/group.cpp \
-    DB_schema/item.cpp \
-    DB_schema/package.cpp \
-    DB_schema/parameter.cpp
+    registerusermessagehandler.cpp \
+    dbcreator.cpp
 
 HEADERS += \
     qcatalogserver.h \
     qcatalogserverthread.h \
     loginmessagehandler.h \
-    DB_schema/loginmessage.h \
-    DB_schema/user.h \
-    DB_schema/storage.h \
-    DB_schema/dbcreator.h \
     pginterface.h \
-    DB_schema/file.h \
-    DB_schema/group.h \
-    DB_schema/item.h \
-    DB_schema/package.h \
-    DB_schema/parameter.h
+    registerusermessagehandler.h \
+    dbcreator.h
 
-LIBS += -lprotobuf-lite
+LIBS += -lprotobuf
 
 OTHER_FILES +=
 

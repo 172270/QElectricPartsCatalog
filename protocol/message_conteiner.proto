@@ -1,4 +1,4 @@
-option optimize_for = LITE_RUNTIME;
+//option optimize_for = LITE_RUNTIME;
 package container;
 import public "types.proto";
 import public "group.proto";
@@ -8,7 +8,7 @@ import public "parameters.proto";
 import public "item.proto";
 
 message MessageContainer{
-	repeated MessageCapsule container=1;
+	repeated MessageCapsule capsules=1;
 }
 
 message MessageCapsule{

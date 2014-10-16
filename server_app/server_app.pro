@@ -31,4 +31,4 @@ DEPENDPATH += $$PWD/../protocol
 
 unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../lib/libprotocol.a
 
-LIBS += -lprotobuf-lite
+LIBS += -lprotobuf

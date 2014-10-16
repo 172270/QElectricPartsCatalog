@@ -2,9 +2,7 @@
 #define USER_H
 
 #include <QString>
-#include <QValidator>
 #include <QDateTime>
-#include <QDataStream>
 #include <QJsonObject>
 #include <QJsonDocument>
 
@@ -30,9 +28,11 @@ public:
     User();
 
     void set_name(const QString  &name);
+    void set_name(const std::string &name);
     QString getName() const;
 
     void set_email(const QString &value);
+    void set_email(const ::std::string &email);
     QString getEmail() const;
 
     Storage *getStorage();
@@ -42,10 +42,12 @@ public:
     QList<Storage *> getStoragesList();
     int storagesNumber() const;
 
-    void set_address(const QString adr){  user::UserData::set_address(adr.toStdString() ); }
+    void set_address(const QString &adr){  user::UserData::set_address(adr.toStdString() ); }
+    void set_address(const ::std::string &adr){user::UserData::set_address(adr);}
     QString getAddress() const { return QString::fromStdString(address()); }
 
     void set_phonenumber(const QString &number);
+    void set_phonenumber(const ::std::string &number){ user::UserData::set_phonenumber(number);}
     QString getPhoneNumber() const;
 
     void set_registrationdate( QDateTime registrationDate );
@@ -59,26 +61,12 @@ public:
     user::UserBasicInformation getPBPackage();
     void fromArray(const QByteArray *data);
 
+    void set_description(QString &&description){ user::UserData::set_description(description.toStdString());}
+    void set_description(const ::std::string &adr){user::UserData::set_description(adr);}
+    QString getDescription()const{ return QString::fromStdString(description());}
+    void set_lastlogin(QDateTime lastlogin);
 private:
     quint32 defaultStorageID;
-};
-
-
-
-QT_BEGIN_NAMESPACE
-class QRegExp;
-QT_END_NAMESPACE
-
-class EmailValidator : public QValidator
-{
-    Q_OBJECT
-public:
-    explicit EmailValidator(QObject *parent = 0);
-    State validate(QString &text, int &pos) const;
-
-private:
-    const QRegExp m_validMailRegExp;
-    const QRegExp m_intermediateMailRegExp;
 };
 
 #endif // USER_H

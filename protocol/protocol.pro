@@ -9,7 +9,7 @@ PROTOS = stats.proto user.proto
 #include(protobuf.pri)
 
 QT       -= gui
-QT       += network
+QT       += network core sql
 
 TARGET = ../lib/protocol
 
@@ -30,9 +30,18 @@ SOURCES += \
     package.pb.cc \
     parameters.pb.cc \
     messages/loginrequest.cpp \
-    messages/messagescontainer.cpp
+    messages/messagescontainer.cpp \
+    messages/userregistrationmessage.cpp \
+    DB_schema/loginmessage.cpp \
+    DB_schema/user.cpp \
+    DB_schema/storege.cpp \
+    DB_schema/file.cpp \
+    DB_schema/group.cpp \
+    DB_schema/item.cpp \
+    DB_schema/package.cpp \
+    DB_schema/parameter.cpp
 
-HEADERS +=\
+HEADERS += \
     user.pb.h \
     stats.pb.h \
     messagetype.h \
@@ -45,7 +54,16 @@ HEADERS +=\
     package.pb.h \
     parameters.pb.h \
     messages/loginrequest.h \
-    messages/messagescontainer.h
+    messages/messagescontainer.h \
+    messages/userregistrationmessage.h \
+    DB_schema/loginmessage.h \
+    DB_schema/user.h \
+    DB_schema/storage.h \
+    DB_schema/file.h \
+    DB_schema/group.h \
+    DB_schema/item.h \
+    DB_schema/package.h \
+    DB_schema/parameter.h
 
 OTHER_FILES += \
     user.proto \
@@ -66,5 +84,5 @@ unix {
     INSTALLS += target
 }
 
-LIBS += -lprotobuf-lite
+LIBS += -lprotobuf
 

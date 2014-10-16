@@ -8,7 +8,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
-#include "DB_schema/dbcreator.h"
+#include "dbcreator.h"
 
 #include "pginterface.h"
 

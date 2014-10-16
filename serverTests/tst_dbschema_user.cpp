@@ -73,8 +73,8 @@ void tst_dbschema_user::cleanup()
 void tst_dbschema_user::createUserShoudGiveNewId()
 {
     User u;
-    u.set_name("admin");
-    u.set_email("cszawisza@gmail.com");
+    u.set_name(QStringLiteral("admin"));
+    u.set_email(QStringLiteral("cszawisza@gmail.com"));
 
     QVERIFY(database->addUser(u,"MY NEW PASSWORD! FUCK YEAH") != 0 );
 }
@@ -104,8 +104,8 @@ void tst_dbschema_user::getBadUser_returnsEmptyUser()
 void tst_dbschema_user::createdUser_getsRegisterDate()
 {
     User u1, u2;
-    u1.set_name("exampleUser1");
-    u1.set_email("exampleuser1@example.ex");
+    u1.set_name(QStringLiteral("exampleUser1"));
+    u1.set_email(QStringLiteral("exampleuser1@example.ex"));
 
     database->addUser(u1,"examplePasswd");
     QVERIFY(u2.has_registrationdate()==false);
@@ -117,10 +117,10 @@ void tst_dbschema_user::createUserWithSameNameOrEmail_throwaException()
 {
     User u1,u2;
 
-    u1.set_name("admin");
-    u1.set_email("sdfsdfsdfs@gmail.com");
-    u2.set_name("noname");
-    u2.set_email("cszawisza@gmail.com");
+    u1.set_name(QStringLiteral("admin"));
+    u1.set_email(QStringLiteral("sdfsdfsdfs@gmail.com"));
+    u2.set_name(QStringLiteral("noname"));
+    u2.set_email(QStringLiteral("cszawisza@gmail.com"));
 
     QVERIFY_EXCEPTION_THROWN(database->addUser(u1,"passwordd"), UserError);
     QVERIFY_EXCEPTION_THROWN(database->addUser(u2,"passwordd"), UserError);
@@ -138,8 +138,8 @@ void tst_dbschema_user::getUser_getsUser()
     User u;
     u.set_name(getUniqueName());
     u.set_email(getUniqueEmail());
-    u.set_phonenumber("123123123");
-    u.set_address("address USA");
+    u.set_phonenumber(QStringLiteral("123123123"));
+    u.set_address(QStringLiteral("address USA"));
 
     database->addUser(u,"passwd");
 

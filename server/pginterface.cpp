@@ -7,6 +7,11 @@ PgInterface::PgInterface()
         db.open();
 }
 
+PgInterface::~PgInterface()
+{
+    delete query;
+}
+
 User PgInterface::getUserById(uint id)
 {
     User u;
@@ -29,7 +34,9 @@ User PgInterface::getUserById(uint id)
         u.set_address(query->value("address").toString());
         u.set_phonenumber(query->value("phonenumber").toString().trimmed() ); // char field has constant size
         u.set_registrationdate(query->value("registrationdate").toDateTime());
-        u.setConfig(query->value("registrationdate").toByteArray() );
+        u.set_lastlogin(query->value("lastlogin").toDateTime());
+        u.set_description(query->value("description").toString());
+        u.setConfig(query->value("config").toByteArray() );
     }
     return u;
 }
@@ -41,17 +48,20 @@ uint PgInterface::addUser(User &user, QString passwd)
     q.append("( name, password, email, config" +
              (user.has_phonenumber()? QString(", phonenumber"): QString(""))+
              (user.has_address()? QString(", address"): QString(""))+
+             (user.has_description()? QString(", description"): QString("")) +
              ") values(:name, :password, :email, :config"+
              (user.has_phonenumber()? QString(", :phonenumber"): QString(""))+
              (user.has_address()? QString(", :address"): QString(""))+
+             (user.has_description()? QString(", :desc"): QString(""))+
              +")");
     query->prepare(q);
     query->bindValue(":name", user.getName() );
     query->bindValue(":password", passwd );
-    query->bindValue(":email",user.has_email()?user.getEmail():QString() );
+    query->bindValue(":email",(user.getEmail().size()?user.getEmail():QString() ));
     query->bindValue(":config", QString(user.getDefaultConfig()) );
     query->bindValue(":phonenumber", user.getPhoneNumber());
     query->bindValue(":address", user.getAddress());
+    query->bindValue(":desc", user.getDescription() );
 
     if( !query->exec()){
         UserError err;
@@ -66,6 +76,37 @@ uint PgInterface::addUser(User &user, QString passwd)
     linkStorageToUser(user, storage);
     user.addStorage(storage);
     return user.id();
+}
+
+bool PgInterface::userNameExists(QString &name)
+{
+    q.clear();
+    q.append("SELECT exists(select true from users where name = :name); ");
+
+    query->prepare(q);
+    query->bindValue(":name",(name.size()? name :QString() ));
+    query->exec();
+
+    query->first();
+    return query->value(0).toBool();
+}
+
+bool PgInterface::userEmailExists(QString &email)
+{
+    q.clear();
+    q.append("SELECT exists(select true from users where email = :email); ");
+
+    query->prepare(q);
+    query->bindValue(":email",(email.size()? email :QString() ));
+    query->exec();
+
+    query->first();
+    return query->value(0).toBool();
+}
+
+void PgInterface::updateLastLogin(User &u)
+{
+///TODO implement
 }
 
 User PgInterface::getUserByName(const QString &name)
@@ -88,9 +129,11 @@ User PgInterface::getUserByName(const QString &name)
         u.set_id(query->value("id").toUInt());
         u.set_email(query->value("email").toString());
         u.set_address(query->value("address").toString());
-        u.set_phonenumber(query->value("phonenumber").toString().trimmed() ); // char field has constant size
+        u.set_phonenumber(query->value("phonenumber").toString() );
         u.set_registrationdate(query->value("registrationdate").toDateTime());
-        u.setConfig(query->value("registrationdate").toByteArray() );
+        u.set_lastlogin(query->value("lastlogin").toDateTime());
+        u.set_description(query->value("description").toString());
+        u.setConfig(query->value("config").toByteArray() );
     }
 
     u.addStorages( getUserStorages(u) );

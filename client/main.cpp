@@ -33,6 +33,9 @@ int main(int argc, char *argv[])
     msg->append(QT_VERSION_STR);
     qDebug() << msg->toUtf8();
 
+    delete prog;
+    delete msg;
+
     MainWindow w;
     LoginDialog *lDialog = new LoginDialog();
     if(lDialog->exec()){

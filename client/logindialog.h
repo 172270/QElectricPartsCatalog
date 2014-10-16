@@ -6,7 +6,7 @@
 #include <QAbstractSocket>
 #include <QWebSocket>
 
-#include <QSharedPointer>
+#include "DB_schema/user.h"
 
 namespace Ui {
 class LoginDialog;
@@ -20,6 +20,8 @@ public:
     explicit LoginDialog(QWidget *parent = 0);
     ~LoginDialog();
 
+public slots:
+    void readyRead(QByteArray msg);
 signals:
     void loginOk();
     void loginFailure();
@@ -32,8 +34,8 @@ private slots:
     void doReconnect();
     void doLogin();
 private:
+    User user;
     QWebSocket *m_socket;
-    bool isConnected = false;
 };
 
 #endif // LOGINDIALOG_H

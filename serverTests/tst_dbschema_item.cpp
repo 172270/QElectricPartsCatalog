@@ -44,8 +44,8 @@ void tst_dbschema_item::saveItemWithBasicInfo()
 
     database->addPackage(c1);
 
-    u1.set_name("admin1");
-    u1.set_email("cszawisza1@gmail.com");
+    u1.set_name(QStringLiteral("admin1"));
+    u1.set_email(QStringLiteral("cszawisza1@gmail.com"));
     database->addUser(u1, QStringLiteral("sadasd"));
 
     p1.set_name("Parameter1");

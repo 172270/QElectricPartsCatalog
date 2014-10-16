@@ -13,7 +13,9 @@ public:
 public:
     void setData(QByteArray &&data);
     void processData();
+    User *getUserData();
     QByteArray getResponse();
+    bool loginOk(){ return res.replay()==user::Replay::LoginPass; }
 private:
     PgInterface database;
     user::LoginRequest req;

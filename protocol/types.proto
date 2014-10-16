@@ -1,4 +1,4 @@
-option optimize_for = LITE_RUNTIME;
+//option optimize_for = LITE_RUNTIME;
 
 enum MsgType{
 	reqLogin = 1; 		// N/A
@@ -7,8 +7,9 @@ enum MsgType{
 //	reqParameters; 	// N/A
 //	reqCases; 		// N/A
 
-	resLogin = 20;
-//	addUser;		// N/A
+	resLogin = -1;
+
+	addUser = 80;	// N/A
 //	addParameter;	// N/A
 //	addItemToStorage;// N/A
 //	addItemGroup;	// N/A
@@ -20,6 +21,8 @@ enum MsgType{
 //	addFileToCase;	// N/A
 //	addStorage;		// N/A
 //	addSet;			// N/A
+
+	resAddUser = -80;
 
 	msgItem 	= 100;
 	msgUser 	= 110;

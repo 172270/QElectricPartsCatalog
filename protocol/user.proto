@@ -1,12 +1,22 @@
-option optimize_for = LITE_RUNTIME;
+//option optimize_for = LITE_RUNTIME;
 package user;
 import public "storage.proto";
 import public "stats.proto";
 
 enum Replay{
-  LOGIN_OK = 1;
-  BAD_USER_OR_PASSWD = 10;
-  USER_ALREADY_LOGGED_IN = 11;
+  LoginPass = 1;
+  LoginDeny = 2;
+
+  EmailExists = 3;
+  EmailAddressToLong = 4;
+  EmailNotValidate = 5;
+  PasswordToShort = 6;
+  UserNameToLong = 11;
+  UserNameToShort = 12;
+  UserAlreadyExists=13;
+  UserAddOk = 14;
+
+  UserAlreadyLogged = 21;
 }
 
 message LoginRequest{
@@ -18,17 +28,18 @@ message LoginResponse{
   required Replay replay = 2;
 }
 
-message Add{
+message Register{
   required string name = 2;
   required string password = 3;
   required string email = 4;
   optional string address = 5;
-  optional bytes phonenumber = 8;
+  optional string description = 6;
+  optional string phonenumber = 8;
+  optional bytes avatar = 9;
 }
 
-message AddReplay{
-  required QueryStats stats = 2;
-  required Replay replay = 3;
+message RegisterResponse{
+  repeated Replay replay = 3;
 }
 
 message UserBasicInformation{

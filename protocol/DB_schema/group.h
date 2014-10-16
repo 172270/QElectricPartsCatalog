@@ -2,7 +2,6 @@
 #define GROUP_H
 
 #include <QString>
-#include <QValidator>
 #include <QDataStream>
 #include <QJsonObject>
 #include <QJsonDocument>

@@ -7,12 +7,15 @@
 #include "messages/loginrequest.h"
 #include "messages/messagescontainer.h"
 
+#include "adduserdialog.h"
+
 LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginDialog),
     m_socket(new QWebSocket("EKatalog client"))
 {
     ui->setupUi(this);
+    ui->connection_groupbox->setChecked(false);
 
     qRegisterMetaType<QAbstractSocket::SocketState>();
 
@@ -22,9 +25,25 @@ LoginDialog::LoginDialog(QWidget *parent) :
     ui->userPassword->setEchoMode(QLineEdit::Password);
 
     connect(ui->testConnction, SIGNAL(clicked()), this, SLOT(doConnectTest()));
+
     connect(ui->login, static_cast<void (QPushButton::*)(bool)>(&QPushButton::clicked),
             [=](){
         doReconnect();
+        doLogin();
+    });
+
+    connect(ui->registerNewUser, static_cast<void (QPushButton::*)(bool)>(&QPushButton::clicked),
+            [=](){
+        doReconnect();
+        if(m_socket->state() == QAbstractSocket::ConnectedState){
+            disconnect(m_socket, SIGNAL(binaryMessageReceived(QByteArray)), this, SLOT(readyRead(QByteArray)));
+            AddUserDialog *dialog = new AddUserDialog(m_socket, this);
+            dialog->exec();
+            connect(m_socket, SIGNAL(binaryMessageReceived(QByteArray)), this, SLOT(readyRead(QByteArray)));
+        }
+        else{
+            ui->connectResponseLabel->setText("peer disconnected");
+        }
     });
 
     connect(this, &LoginDialog::loginFailure, [=](){
@@ -33,37 +52,41 @@ LoginDialog::LoginDialog(QWidget *parent) :
 
     connect(this, &LoginDialog::loginOk, [=](){
         ui->connectResponseLabel->setText("Autentification succes");
+        setup.setValue("login", ui->userLogin->text() );
     });
 
     connect(m_socket, &QWebSocket::disconnected, [=](){
         qDebug()<<" peer disconnected";
-        isConnected = false;
+        ui->connectResponseLabel->setText("peer disconnected");
     });
 
     connect(m_socket, &QWebSocket::connected, [=]() {
         qDebug()<< " peer connected";
-        isConnected = true;
-        doLogin();
     });
 
-    connect(m_socket, &QWebSocket::binaryMessageReceived, [=](QByteArray msg){
-        qDebug()<<"recived message: "<< msg.toHex();
-        MessagesContainer mc;
-        mc.fromArray(msg);
-        MessageCapsule mcap = MessageCapsule(mc.getCapsuleAsArray(0));
+    connect(m_socket, SIGNAL(binaryMessageReceived(QByteArray)), this, SLOT(readyRead(QByteArray)));
+}
 
-        if(mcap.msgtype() == MsgType::resLogin ){
+void LoginDialog::readyRead(QByteArray msg){
+    MessagesContainer mc;
+    mc.fromArray(msg);
+    for(int i = 0; i<mc.capsules().size();++i)
+        if(mc.getCapsule(i).msgtype() == MsgType::resLogin ){
             qDebug()<<" got login response";
             user::LoginResponse res;
-            res.ParseFromString(mcap.data());
-            if(res.replay() == user::Replay::LOGIN_OK){
+            res.ParseFromString(mc.getCapsule(i).data());
+            if(res.replay() == user::Replay::LoginPass){
                 emit loginOk();
             }
-            else if(res.replay() == user::Replay::BAD_USER_OR_PASSWD ){
+            else if(res.replay() == user::Replay::LoginDeny ){
                 emit loginFailure();
             }
         }
-    });
+        else if(mc.getCapsule(i).msgtype() == MsgType::msgUser){
+            qDebug()<<" got user response";
+            user.ParseFromString(mc.getCapsule(i).data());
+        }
+
 }
 
 void LoginDialog::doReconnect(){
@@ -80,14 +103,16 @@ void LoginDialog::doReconnect(){
         host = url.host();
         qDebug() << "closing socket";
         m_socket->close();
-        isConnected = false;
     }
 
-    if(!isConnected){
+    if(m_socket->state() == QAbstractSocket::UnconnectedState){
         m_socket->open(url);
-    }
-    else{
-        doLogin();
+        QEventLoop pause;
+        QTimer *timer = new QTimer();
+        timer->setSingleShot(1000);
+        connect(timer, SIGNAL(timeout()), &pause, SLOT(quit()));
+        connect(m_socket, SIGNAL( connected() ), &pause, SLOT(quit()));
+        pause.exec();
     }
 }
 
@@ -100,7 +125,7 @@ void LoginDialog::doLogin()
     MessagesContainer mc;
     mc.addMessage(MsgType::reqLogin, req.toArray());
 
-    qDebug()<<" socket connected!: sending message: "<< QString(mc.toArray());
+    qDebug()<<" socket connected!: sending message: "<< QString(mc.toArray().toHex());
 
     m_socket->sendBinaryMessage(mc.toArray());
 }

@@ -18,11 +18,15 @@ class PgInterface
 {
 public:
     PgInterface();
+    ~PgInterface();
 
     User getUserById(uint id);
     User getUserByName(const QString &name);
-
     uint addUser(User &user, QString passwd);
+    bool userNameExists(QString &name);
+    bool userEmailExists(QString &email);
+    void updateLastLogin(User &u);
+
     void deleteUser(User &user);
     bool checkUserPassword(QString user, QString passwd);
     void linkStorageToUser(const User &user, const Storage &storage);

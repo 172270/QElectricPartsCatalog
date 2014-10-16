@@ -24,23 +24,24 @@ CREATE TABLE public.files (
 
 ALTER SEQUENCE public.files_file_id_seq OWNED BY public.files.file_id;
 
-CREATE SEQUENCE public.cases_case_id_seq;
+CREATE SEQUENCE public.packages_case_id_seq;
 
-CREATE TABLE public.cases (
-                case_id INTEGER NOT NULL DEFAULT nextval('public.cases_case_id_seq'),
+CREATE TABLE public.packages (
+                case_id INTEGER NOT NULL DEFAULT nextval('public.packages_case_id_seq'),
                 name VARCHAR(255) NOT NULL,
-                pinNr INTEGER NOT NULL,
-                mountType VARCHAR(32) NOT NULL,
-                CONSTRAINT pk_cases PRIMARY KEY (case_id)
+                pinNr INTEGER,
+                mountType VARCHAR(32),
+                config OTHER,
+                CONSTRAINT pk_packages PRIMARY KEY (case_id)
 );
 
 
-ALTER SEQUENCE public.cases_case_id_seq OWNED BY public.cases.case_id;
+ALTER SEQUENCE public.packages_case_id_seq OWNED BY public.packages.case_id;
 
-CREATE TABLE public.cases_files (
+CREATE TABLE public.packages_files (
                 case_id INTEGER NOT NULL,
                 file_id INTEGER NOT NULL,
-                CONSTRAINT cases_files_pk PRIMARY KEY (case_id, file_id)
+                CONSTRAINT packages_files_pk PRIMARY KEY (case_id, file_id)
 );
 
 
@@ -65,10 +66,11 @@ CREATE SEQUENCE public.users_id_seq;
 CREATE TABLE public.users (
                 id INTEGER NOT NULL DEFAULT nextval('public.users_id_seq'),
                 name VARCHAR(34) NOT NULL,
-                password CHAR(32) NOT NULL,
+                password CHAR(64) NOT NULL,
                 email VARCHAR(255) NOT NULL,
-                phonenumber CHAR(10),
-                address VARCHAR(1024),
+                phonenumber VARCHAR(32) NOT NULL,
+                address LONGNVARCHAR NOT NULL,
+                description LONGNVARCHAR NOT NULL,
                 registrationdate TIMESTAMP DEFAULT now() NOT NULL,
                 lastlogin TIMESTAMP,
                 config OTHER,
@@ -146,8 +148,10 @@ CREATE TABLE public.groups_files (
 );
 
 
+CREATE SEQUENCE public.items_item_id_seq;
+
 CREATE TABLE public.items (
-                item_id INTEGER NOT NULL,
+                item_id INTEGER NOT NULL DEFAULT nextval('public.items_item_id_seq'),
                 users_id INTEGER NOT NULL,
                 case_id INTEGER NOT NULL,
                 group_id INTEGER NOT NULL,
@@ -163,6 +167,8 @@ CREATE TABLE public.items (
                 CONSTRAINT items_pk PRIMARY KEY (item_id)
 );
 
+
+ALTER SEQUENCE public.items_item_id_seq OWNED BY public.items.item_id;
 
 CREATE UNIQUE INDEX items_symbol_uk
  ON public.items
@@ -218,7 +224,7 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.cases_files ADD CONSTRAINT files_cases_files_fk
+ALTER TABLE public.packages_files ADD CONSTRAINT files_cases_files_fk
 FOREIGN KEY (file_id)
 REFERENCES public.files (file_id)
 ON DELETE NO ACTION
@@ -241,14 +247,14 @@ NOT DEFERRABLE;
 
 ALTER TABLE public.items ADD CONSTRAINT cases_items_fk
 FOREIGN KEY (case_id)
-REFERENCES public.cases (case_id)
+REFERENCES public.packages (case_id)
 ON DELETE CASCADE
 ON UPDATE CASCADE
 NOT DEFERRABLE;
 
-ALTER TABLE public.cases_files ADD CONSTRAINT cases_cases_files_fk
+ALTER TABLE public.packages_files ADD CONSTRAINT cases_cases_files_fk
 FOREIGN KEY (case_id)
-REFERENCES public.cases (case_id)
+REFERENCES public.packages (case_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;

@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTest>
 
-#include "user.h"
+#include "DB_schema/user.h"
 
 class tst_user : public QObject
 {

@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = client
 TEMPLATE = app
-LIBS += -lprotobuf-lite
+LIBS += -lprotobuf
 
 CONFIG += c++11
 

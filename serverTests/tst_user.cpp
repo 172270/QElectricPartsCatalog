@@ -40,14 +40,14 @@ void tst_user::userShoudContainName()
 void tst_user::setName_shoudSetName()
 {
     QVERIFY( user->getName() == "" );
-    user->set_name("stefan");
+    user->set_name(QStringLiteral("stefan"));
     QVERIFY( user->getName() == "stefan" );
 }
 
 void tst_user::nameShoudBeTrimmed()
 {
     QVERIFY( user->getName() == "" );
-    user->set_name(" stefan");
+    user->set_name(QStringLiteral(" stefan"));
     QVERIFY( user->getName() == "stefan" );
 }
 
@@ -68,9 +68,9 @@ void tst_user::nameShoudBeTrimmed()
 
 void tst_user::nameCanHaveDotsAndDashes()
 {
-    user->set_name("abc.def");
+    user->set_name(QStringLiteral("abc.def"));
     QVERIFY( user->getName() == "abc.def" );
-    user->set_name("abc_def");
+    user->set_name(QStringLiteral("abc_def"));
     QVERIFY( user->getName() == "abc_def" );
 }
 
@@ -82,14 +82,14 @@ void tst_user::userShoudContainEMail()
 void tst_user::setEmail_shoudSetEmail()
 {
     QVERIFY( user->getEmail() == "" );
-    user->set_email("stefan@s.xx");
+    user->set_email(QStringLiteral("stefan@s.xx"));
     QVERIFY( user->getEmail() == "stefan@s.xx" );
 }
 
 void tst_user::spacesShoudBeRemovedFromEmail()
 {
     QVERIFY( user->getEmail() == "" );
-    user->set_email(" stefan@s.xx");
+    user->set_email(QStringLiteral(" stefan@s.xx"));
     QVERIFY( user->getEmail() == "stefan@s.xx" );
 }
 
@@ -115,9 +115,9 @@ void tst_user::spacesShoudBeRemovedFromEmail()
 void tst_user::goodEmail_shoudNot_throwAnExeption()
 {
     try{
-        user->set_email("sdfs@a.bb");
-        user->set_email("d223zxc@b.cc");
-        user->set_email("ab.c@w.ll");
+        user->set_email(QStringLiteral("sdfs@a.bb"));
+        user->set_email(QStringLiteral("d223zxc@b.cc"));
+        user->set_email(QStringLiteral("ab.c@w.ll"));
     }
     catch(QString e){
         QVERIFY(0);
@@ -137,7 +137,7 @@ void tst_user::setId_setsID()
 
 void tst_user::setAddress_setsAddress()
 {
-    user->set_address("New York, 2/3");
+    user->set_address(QStringLiteral("New York, 2/3"));
     QVERIFY(user->address() == "New York, 2/3");
 }
 
@@ -148,13 +148,13 @@ void tst_user::userHasNoAddressByDefault()
 
 void tst_user::userHasAddressAfterSet()
 {
-    user->set_address("addressskjdfhlasdhfkjash");
+    user->set_address(QStringLiteral("addressskjdfhlasdhfkjash"));
     QVERIFY(user->has_address() == true);
 }
 
 void tst_user::userHasNoAddressAfterClearingAddress()
 {
-    user->set_address("addressskjdfhlasdhfkjash");
+    user->set_address(QStringLiteral("addressskjdfhlasdhfkjash"));
     QVERIFY(user->has_address() == true);
     user->clear_address();
     QVERIFY(user->has_address() == false);
@@ -173,13 +173,13 @@ void tst_user::userHasNoPhonenumberByDefault()
 
 void tst_user::userHasPhonenumberAfterSet()
 {
-    user->set_phonenumber("123456789");
+    user->set_phonenumber(QStringLiteral("123456789"));
     QVERIFY(user->has_phonenumber() == true);
 }
 
 void tst_user::userHasNoNumberAfterClearingNumber()
 {
-    user->set_phonenumber("123456789");
+    user->set_phonenumber(QStringLiteral("123456789"));
     QVERIFY(user->has_phonenumber() == true);
     user->clear_phonenumber();
     QVERIFY(user->has_phonenumber() == false);
@@ -218,7 +218,7 @@ void tst_user::addStorage_ShoudAddStorage()
 {
     Storage s;
     s.setID(1);
-    s.set_name("jakas nazwa");
+    s.set_name(QStringLiteral("jakas nazwa"));
     s.set_ownerid(5);
     QVERIFY( user->storagesNumber() == 0);
     user->addStorage(s);
@@ -237,7 +237,7 @@ void tst_user::addStorage_ShoudThrowExeptionWhenStorageIspartiallyInitialized()
     s.setID(5);
     QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
     Storage s2;
-    s2.set_name("assas");
+    s2.set_name(QStringLiteral("assas"));
     QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
 }
 
@@ -260,8 +260,8 @@ void tst_user::createMsgFromUserWithoutId_throwsException()
 void tst_user::setRequiredFields()
 {
     user->set_id(10);
-    user->set_name("NAME");
-    user->set_email("email@ww.ww");
+    user->set_name(QStringLiteral("NAME"));
+    user->set_email(QStringLiteral("email@ww.ww"));
 }
 
 void tst_user::createMsgFromUserWithoutEmail_throwsException()
@@ -275,8 +275,8 @@ void tst_user::createMsgFromUserWithoutEmail_throwsException()
 void tst_user::toArray_createsAByteArray()
 {
     setRequiredFields();
-    user->set_address("adress");
-    user->set_phonenumber("123123123");
+    user->set_address(QStringLiteral("adress"));
+    user->set_phonenumber(QStringLiteral("123123123"));
 
     QByteArray *ba = user->toArray();
 

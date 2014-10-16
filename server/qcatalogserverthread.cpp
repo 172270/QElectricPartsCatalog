@@ -1,8 +1,10 @@
 #include "qcatalogserverthread.h"
 #include "messagetype.h"
 #include "loginmessagehandler.h"
+#include "registerusermessagehandler.h"
 
 #include "messages/messagescontainer.h"
+
 
 
 QCatalogServerThread::QCatalogServerThread(QWebSocket *s, QObject *parent) :
@@ -29,17 +31,28 @@ void QCatalogServerThread::readyRead(QByteArray ba)
     MessagesContainer requestMessage, responseMessage;
     requestMessage.fromArray(ba);
 
-    for(int i=0;i<requestMessage.container().size();i++){
-        if(requestMessage.container(i).msgtype()== MsgType::reqLogin){
+    for(int i=0;i<requestMessage.capsules().size();i++){
+        if(requestMessage.capsules(i).msgtype()== MsgType::reqLogin){
             qDebug()<<"request login";
             LoginMessageHandler handler;
-            MessageCapsule mc = MessageCapsule(requestMessage.getCapsuleAsArray(i));
-            handler.setData( mc.encapsulateMessage() );
+            handler.setData( requestMessage.getCapsule(i).getData() );
             handler.processData();
             responseMessage.addMessage(MsgType::resLogin, handler.getResponse());
+            if( handler.loginOk() )
+                responseMessage.addMessage(MsgType::msgUser, handler.getUserData()->toArray() );
+        }
+
+        if(requestMessage.capsules(i).msgtype()== MsgType::addUser){
+            qDebug()<<"request add user";
+            RegisterUserMessageHandler handler;
+            handler.setData( requestMessage.getCapsule(i).getData() );
+            handler.processData();
+            responseMessage.addMessage(MsgType::resAddUser, handler.getResponse());
         }
     }
-    socket->sendBinaryMessage(responseMessage.toArray() );
+
+    if(responseMessage.capsules_size()>0)
+        socket->sendBinaryMessage(responseMessage.toArray() );
 }
 
 void QCatalogServerThread::disconnected()
