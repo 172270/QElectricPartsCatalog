@@ -20,5 +20,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::showAddGroup()
 {
+    ///TODO connect not existing "recive message" fignals to slots
+    /// e.g. "got new parameters" signal to addGroup Widget
     addGroupWidget->show();
 }
