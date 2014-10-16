@@ -15,6 +15,8 @@ public:
     void setRequiredFields();
 signals:
 
+    void finished();
+
 public slots:
 
 private slots:

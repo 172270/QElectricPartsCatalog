@@ -20,6 +20,8 @@ void tst_user::initTestCase()
 
 void tst_user::cleanupTestCase()
 {
+    qDebug()<<" finished";
+    emit finished();
 }
 
 void tst_user::init()

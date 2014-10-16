@@ -84,9 +84,8 @@ void LoginDialog::readyRead(QByteArray msg){
         }
         else if(mc.getCapsule(i).msgtype() == MsgType::msgUser){
             qDebug()<<" got user response";
-            user.ParseFromString(mc.getCapsule(i).data());
+            user.ParseFromArray( mc.getCapsule(i).getData().data(), mc.getCapsule(i).getData().size());
         }
-
 }
 
 void LoginDialog::doReconnect(){
