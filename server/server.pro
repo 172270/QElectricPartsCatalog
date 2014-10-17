@@ -27,7 +27,7 @@ HEADERS += \
     registerusermessagehandler.h \
     dbcreator.h
 
-LIBS += -lprotobuf
+LIBS += -lprotobuf-lite
 
 OTHER_FILES +=
 

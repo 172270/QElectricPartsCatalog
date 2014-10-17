@@ -39,9 +39,11 @@ public:
 
     quint32 addGroup(const Group &group);
     Group getGroup(uint id);
+
     void linkParameterToGroup(Group &group, const Parameter &parameter);
 
     quint32 addItem(Item &item);
+    void saveGroupParametersIDs(Group &g);
 private:
     QSqlDatabase db;
     QSqlQuery *query;

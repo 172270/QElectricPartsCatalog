@@ -10,14 +10,33 @@ void LoginRequest::set_password(QString &&passwd)
     user::LoginRequest::set_password(passwd.toStdString());
 }
 
-QByteArray LoginRequest::toArray()
+MsgType LoginRequest::type() const
 {
-    QByteArray ba;
-    ba.resize( ByteSize() );
-    ba.append( SerializeToArray(ba.data(),ba.size() ));
-    return ba;
+    return MsgType::reqLogin;
 }
 
-LoginRequest::LoginRequest()
+int LoginRequest::ByteSize() const
 {
+    return user::LoginRequest::ByteSize();
+}
+
+LoginRequest::LoginRequest() :
+    user::LoginRequest(),
+    protocol::Message()
+{
+}
+
+LoginRequest::~LoginRequest()
+{
+
+}
+
+MsgType LoginRequestResponse::type() const
+{
+    return MsgType::resLogin;
+}
+
+MsgType LogoutRequest::type() const
+{
+    return MsgType::reqLogout;
 }

@@ -5,6 +5,14 @@ MessagesContainer::MessagesContainer()
 {
 }
 
+void MessagesContainer::addMessage(protocol::Message *msg)
+{
+    container::MessageCapsule *mc = add_capsules();
+    mc->set_msgtype(msg->type());
+    QByteArray ba = msg->toArray();
+    mc->set_data(ba.data(), ba.size());
+}
+
 void MessagesContainer::addMessage(MsgType type, const QByteArray &ba)
 {
     container::MessageCapsule *mc = add_capsules();
@@ -45,27 +53,44 @@ MessageCapsule MessagesContainer::getCapsule(int i)
     return static_cast<MessageCapsule>(capsules(i));
 }
 
-QByteArray MessagesContainer::toArray()
+int MessagesContainer::ByteSize() const
 {
-    QByteArray ba;
-    int size = ByteSize();
-    ba.resize(size);
-    SerializeToArray(ba.data(), size );
-    return ba;
+    return container::MessageContainer::ByteSize();
 }
 
-void MessagesContainer::fromArray(QByteArray &ba)
+bool MessagesContainer::ParseFromArray(const void *data, int size)
 {
-    ParseFromArray(ba.data(), ba.size() );
+   return container::MessageContainer::ParseFromArray(data,size);
 }
 
-void MessageCapsule::fromArray(QByteArray &ba){
-    ParseFromArray(ba.data(), ba.size());
+bool MessagesContainer::SerializeToArray(void *data, int size) const
+{
+    return container::MessageContainer::SerializeToArray(data,size);
 }
 
-MessageCapsule::MessageCapsule(QByteArray &&capsule)
+MsgType MessagesContainer::type() const
 {
-    fromArray(capsule);
+    return MsgType::msgContainer;
+}
+
+int MessageCapsule::ByteSize() const
+{
+    return container::MessageCapsule::ByteSize();
+}
+
+bool MessageCapsule::SerializeToArray(void *data, int size) const
+{
+    return container::MessageCapsule::SerializeToArray(data,size);
+}
+
+bool MessageCapsule::ParseFromArray(const void *data, int size)
+{
+    return container::MessageCapsule::ParseFromArray(data,size);
+}
+
+MsgType MessageCapsule::type() const
+{
+    return MsgType::msgCapsule;
 }
 
 MessageCapsule::MessageCapsule(const container::MessageCapsule &other)
@@ -77,3 +102,8 @@ QByteArray MessageCapsule::getData()
 {
     return QByteArray(data().data(), data().size());
 }
+
+//MsgType MessagesContainer::type() const
+//{
+//    return MsgType::msgContainer;
+//}

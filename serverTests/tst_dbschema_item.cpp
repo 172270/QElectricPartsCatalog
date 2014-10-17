@@ -32,6 +32,11 @@ void tst_dbschema_item::initTestCase()
     database = new PgInterface();
 }
 
+void tst_dbschema_item::cleanupTestCase()
+{
+    delete database;
+}
+
 void tst_dbschema_item::saveItemWithBasicInfo()
 {
     Group primaryGroup1, primaryGroup2, child1, child2;

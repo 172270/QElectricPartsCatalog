@@ -2,16 +2,18 @@
 #define MESSAGESCONTAINER_H
 
 #include "message_conteiner.pb.h"
+#include "message.h"
 #include "types.pb.h"
 
 #include <QByteArray>
 
 class MessageCapsule;
-class MessagesContainer : public container::MessageContainer
+
+class MessagesContainer : public container::MessageContainer, public protocol::Message
 {
 public:
     MessagesContainer();
-
+    void addMessage(protocol::Message *msg);
     void addMessage(MsgType type, const QByteArray &ba);
     void addMessage(MsgType type, QByteArray &&ba);
     void addMessage(MsgType type, const QString &data);
@@ -19,17 +21,26 @@ public:
     void addMessage(MsgType type, QByteArray *ba);
     MessageCapsule getCapsule(int i);
 
-    QByteArray toArray();
-    void fromArray(QByteArray &ba);
+    MsgType type() const;
+    int ByteSize() const;
+protected:
+    bool SerializeToArray(void *data, int size) const;
+    bool ParseFromArray(const void *data, int size);
 };
 
-class MessageCapsule : public container::MessageCapsule
+class MessageCapsule : public container::MessageCapsule, public protocol::Message
 {
 public:
     MessageCapsule(QByteArray &&capsule);
     MessageCapsule(const container::MessageCapsule &other);
+
     QByteArray getData();
-    void fromArray(QByteArray &ba);
+    MsgType type() const;
+
+protected:
+    int ByteSize() const;
+    bool SerializeToArray(void *data, int size) const;
+    bool ParseFromArray(const void *data, int size);
 };
 
 #endif // MESSAGESCONTAINER_H

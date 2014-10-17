@@ -31,6 +31,7 @@ private slots:
 protected:
     void run();
 private:
+    bool userIsLogged;
     QSqlQuery *query;
     QSqlDatabase *db;
     QWebSocket *socket;

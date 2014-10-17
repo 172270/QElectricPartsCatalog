@@ -5,13 +5,12 @@
 
 #include "messages/messagescontainer.h"
 
-
-
 QCatalogServerThread::QCatalogServerThread(QWebSocket *s, QObject *parent) :
     QThread(parent)
 {
     static int databaseDescription = 0;
     socket = s;
+    userIsLogged = false;
 
     db = new QSqlDatabase(QSqlDatabase::cloneDatabase(QSqlDatabase::database(), QString::number(databaseDescription++)));
     if (!db->open()){
@@ -38,8 +37,10 @@ void QCatalogServerThread::readyRead(QByteArray ba)
             handler.setData( requestMessage.getCapsule(i).getData() );
             handler.processData();
             responseMessage.addMessage(MsgType::resLogin, handler.getResponse());
-            if( handler.loginOk() )
+            if( handler.loginOk() ){
                 responseMessage.addMessage(MsgType::msgUser, handler.getUserData()->toArray() );
+                userIsLogged = true;
+            }
         }
 
         if(requestMessage.capsules(i).msgtype()== MsgType::addUser){
@@ -49,6 +50,12 @@ void QCatalogServerThread::readyRead(QByteArray ba)
             handler.processData();
             responseMessage.addMessage(MsgType::resAddUser, handler.getResponse());
         }
+
+        if( requestMessage.capsules(i).msgtype() == MsgType::reqLogout){
+            qDebug()<<"request user logout";
+            userIsLogged = false;
+        }
+
     }
 
     if(responseMessage.capsules_size()>0)
@@ -69,7 +76,7 @@ void QCatalogServerThread::disconnected()
 
 void QCatalogServerThread::run()
 {
-    qDebug() << " Thread started";
+    qDebug() << " Thread: "<< this->currentThreadId() << "started with stack size set to" << this->stackSize() ;
 
     connect(socket, SIGNAL(binaryMessageReceived(QByteArray)), this, SLOT(readyRead(QByteArray)), Qt::DirectConnection);
     connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));

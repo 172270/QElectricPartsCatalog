@@ -63,7 +63,8 @@ HEADERS += \
     DB_schema/group.h \
     DB_schema/item.h \
     DB_schema/package.h \
-    DB_schema/parameter.h
+    DB_schema/parameter.h \
+    messages/message.h
 
 OTHER_FILES += \
     user.proto \
@@ -84,5 +85,5 @@ unix {
     INSTALLS += target
 }
 
-LIBS += -lprotobuf
+LIBS += -lprotobuf-lite
 

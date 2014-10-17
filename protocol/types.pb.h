@@ -22,7 +22,6 @@
 #include <google/protobuf/generated_message_util.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/generated_enum_reflection.h>
 // @@protoc_insertion_point(includes)
 
 // Internal implementation detail -- do not call these.
@@ -40,23 +39,14 @@ enum MsgType {
   msgItem = 100,
   msgUser = 110,
   msgGroup = 120,
-  msgPackage = 130
+  msgContainer = 130,
+  msgCapsule = 131
 };
 bool MsgType_IsValid(int value);
 const MsgType MsgType_MIN = resAddUser;
-const MsgType MsgType_MAX = msgPackage;
+const MsgType MsgType_MAX = msgCapsule;
 const int MsgType_ARRAYSIZE = MsgType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* MsgType_descriptor();
-inline const ::std::string& MsgType_Name(MsgType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    MsgType_descriptor(), value);
-}
-inline bool MsgType_Parse(
-    const ::std::string& name, MsgType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<MsgType>(
-    MsgType_descriptor(), name, value);
-}
 // ===================================================================
 
 
@@ -67,19 +57,6 @@ inline bool MsgType_Parse(
 
 
 // @@protoc_insertion_point(namespace_scope)
-
-#ifndef SWIG
-namespace google {
-namespace protobuf {
-
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::MsgType>() {
-  return ::MsgType_descriptor();
-}
-
-}  // namespace google
-}  // namespace protobuf
-#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

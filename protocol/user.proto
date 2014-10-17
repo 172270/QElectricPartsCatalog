@@ -1,4 +1,4 @@
-//option optimize_for = LITE_RUNTIME;
+option optimize_for = LITE_RUNTIME;
 package user;
 import public "storage.proto";
 import public "stats.proto";
@@ -22,6 +22,10 @@ enum Replay{
 message LoginRequest{
   required string name = 3;
   required string password = 4;
+}
+
+message LogoutRequest{
+  required bool logout=1;
 }
 
 message LoginResponse{

@@ -125,7 +125,7 @@ void LoginDialog::doLogin()
     req.set_password( ui->userPassword->text() );
 
     MessagesContainer mc;
-    mc.addMessage(MsgType::reqLogin, req.toArray());
+    mc.addMessage(&req);
 
     qDebug()<<" socket connected!: sending message: "<< QString(mc.toArray().toHex());
 

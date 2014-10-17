@@ -20,10 +20,9 @@
 #endif
 
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message.h>
+#include <google/protobuf/message_lite.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
 namespace package {
@@ -38,7 +37,7 @@ class Package;
 
 // ===================================================================
 
-class PackageBasicInformation : public ::google::protobuf::Message {
+class PackageBasicInformation : public ::google::protobuf::MessageLite {
  public:
   PackageBasicInformation();
   virtual ~PackageBasicInformation();
@@ -50,24 +49,24 @@ class PackageBasicInformation : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const PackageBasicInformation& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const PackageBasicInformation* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(PackageBasicInformation* other);
 
   // implements Message ----------------------------------------------
 
   PackageBasicInformation* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const PackageBasicInformation& from);
   void MergeFrom(const PackageBasicInformation& from);
   void Clear();
@@ -78,7 +77,6 @@ class PackageBasicInformation : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -86,7 +84,7 @@ class PackageBasicInformation : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -104,14 +102,16 @@ class PackageBasicInformation : public ::google::protobuf::Message {
   inline void set_has_id();
   inline void clear_has_id();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
   ::google::protobuf::uint32 id_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_package_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_package_2eproto();
+  #endif
   friend void protobuf_AssignDesc_package_2eproto();
   friend void protobuf_ShutdownFile_package_2eproto();
 
@@ -120,7 +120,7 @@ class PackageBasicInformation : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class Package : public ::google::protobuf::Message {
+class Package : public ::google::protobuf::MessageLite {
  public:
   Package();
   virtual ~Package();
@@ -132,24 +132,24 @@ class Package : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
   static const Package& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const Package* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(Package* other);
 
   // implements Message ----------------------------------------------
 
   Package* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const Package& from);
   void MergeFrom(const Package& from);
   void Clear();
@@ -160,7 +160,6 @@ class Package : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -168,7 +167,7 @@ class Package : public ::google::protobuf::Message {
   void SetCachedSize(int size) const;
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -237,8 +236,6 @@ class Package : public ::google::protobuf::Message {
   inline void set_has_config();
   inline void clear_has_config();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
   ::std::string* name_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 pinnumber_;
@@ -248,7 +245,11 @@ class Package : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_package_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_package_2eproto();
+  #endif
   friend void protobuf_AssignDesc_package_2eproto();
   friend void protobuf_ShutdownFile_package_2eproto();
 
@@ -546,15 +547,6 @@ inline void Package::set_allocated_config(::std::string* config) {
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace package
-
-#ifndef SWIG
-namespace google {
-namespace protobuf {
-
-
-}  // namespace google
-}  // namespace protobuf
-#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

@@ -3,19 +3,36 @@
 
 #include <QString>
 #include <QtTest>
-#include <QTcpSocket>
+#include <QtWebSockets>
 #include <QHostAddress>
 
-class ServerTests : public QObject
+#include "messages/messagescontainer.h"
+
+class tst_ServerTests : public QObject
 {
     Q_OBJECT
 
 public:
-    ServerTests();
+    tst_ServerTests();
 
+    bool doConnect();
+    bool waitForSignal(const char *amember, quint64 waitTime = 1000);
+    bool waitForBinaryMessage();
+protected slots:
+    void signalArrived();
+    void signalArrived(QByteArray);
 private Q_SLOTS:
+    void init();
     void initTestCase();
     void cleanupTestCase();
+    void cleanup();
+
+    void connectToServer();
+    void serverResponseToPing();
+    void serverDontRespondToUnknownData();
+
+    void addBasicUserToServer();
+
     void loginToServer();
     void logoutFromServer();
     void loginWhileLogged();
@@ -31,7 +48,9 @@ private Q_SLOTS:
 
 private:
 
-    QTcpSocket socket;
+    QWebSocket *socket;
+    MessagesContainer *mc;
+    QByteArray *binaryMessage;
 };
 
 #endif // TST_SERVERTESTS_H

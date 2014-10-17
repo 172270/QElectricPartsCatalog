@@ -1,4 +1,4 @@
-//option optimize_for = LITE_RUNTIME;
+option optimize_for = LITE_RUNTIME;
 
 enum MsgType{
 	reqLogin = 1; 		// N/A
@@ -27,5 +27,6 @@ enum MsgType{
 	msgItem 	= 100;
 	msgUser 	= 110;
 	msgGroup	= 120;
-	msgPackage	= 130;
+	msgContainer= 130;
+	msgCapsule	= 131;
 }

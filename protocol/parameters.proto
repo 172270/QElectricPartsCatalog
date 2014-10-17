@@ -1,4 +1,4 @@
-//option optimize_for = LITE_RUNTIME;
+option optimize_for = LITE_RUNTIME;
 package parameters;
 
 /// ptype_ prefix add to avoid names conflicts

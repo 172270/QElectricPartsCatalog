@@ -326,6 +326,20 @@ quint32 PgInterface::addGroup(const Group &group)
     return 0;
 }
 
+void PgInterface::saveGroupParametersIDs(Group &g)
+{
+    q.clear();
+    q.append("SELECT parameter_id FROM group_parameter WHERE group_id =" + QString::number(g.id()));
+    if(!query->exec(q)){
+        qDebug()<<query->lastError().text();
+    }
+    while(query->next()){
+        Parameter p;
+        p.set_id(query->value("parameter_id").toUInt());
+        g.add_parameter(p);
+    }
+}
+
 Group PgInterface::getGroup(uint id)
 {
     Group g;
@@ -338,9 +352,9 @@ Group PgInterface::getGroup(uint id)
              "creationtime, "
              "allowitems, "
              "allowrecipe "
-           "FROM "
+             "FROM "
              "groups "
-           "WHERE "
+             "WHERE "
              "group_id =" + QString::number(id) );
     if(!query->exec(q)){
         qDebug()<<query->lastError().text();
@@ -355,17 +369,8 @@ Group PgInterface::getGroup(uint id)
         g.set_creationdate(query->value("creationtime").toDateTime());
         g.setAllowItems(query->value("allowitems").toBool() );
         g.setAllowRecipe(query->value("allowrecipe").toBool() );
-
-       q.clear();
-       q.append("SELECT parameter_id FROM group_parameter WHERE group_id =" + QString::number(g.id()));
-       if(!query->exec(q)){
-           qDebug()<<query->lastError().text();
-       }
-       while(query->next()){
-           Parameter p;
-           p.set_id(query->value("parameter_id").toUInt());
-           g.add_parameter(p);
-       }
+        
+        saveGroupParametersIDs(g);
     }
     return g;
 }

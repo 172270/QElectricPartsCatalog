@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += network testlib gui sql
+QT       += network testlib gui sql websockets
 
 
 TARGET = tst_servertests
@@ -20,7 +20,7 @@ win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../protocol/release/ -
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../protocol/debug/ -lprotocol
 else:unix: LIBS += -L$$OUT_PWD/../lib/ -lprotocol
 
-LIBS += -lprotobuf
+LIBS += -lprotobuf-lite
 
 INCLUDEPATH += $$PWD/../protocol
 INCLUDEPATH += $$PWD/../server/DB_schema

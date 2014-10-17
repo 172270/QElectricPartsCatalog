@@ -54,6 +54,7 @@ void tst_dbschema_groups::cleanupTestCase()
         db.close();
     }
     delete query;
+    delete database;
 }
 
 void tst_dbschema_groups::cleanup()

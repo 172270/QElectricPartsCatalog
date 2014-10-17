@@ -25,6 +25,7 @@ public slots:
 
 private slots:
     void initTestCase();
+    void cleanupTestCase();
     void saveItemWithBasicInfo();
 private:
     QSqlQuery *query;

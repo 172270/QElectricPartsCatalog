@@ -42,9 +42,12 @@ void QCatalogServer::incomingConnection()
 
         QCatalogServerThread* thread;
         thread = new QCatalogServerThread(ws, this);
+        thread->setStackSize(1*1024*1024);
+
         if (thread){
             connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
             thread->start();
+            thread->setPriority(QThread::LowestPriority);
         }
     }
 }

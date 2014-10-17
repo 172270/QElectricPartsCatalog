@@ -10,72 +10,40 @@
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
-
-namespace {
-
-const ::google::protobuf::EnumDescriptor* MsgType_descriptor_ = NULL;
-
-}  // namespace
-
-
-void protobuf_AssignDesc_types_2eproto() {
-  protobuf_AddDesc_types_2eproto();
-  const ::google::protobuf::FileDescriptor* file =
-    ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
-      "types.proto");
-  GOOGLE_CHECK(file != NULL);
-  MsgType_descriptor_ = file->enum_type(0);
-}
-
-namespace {
-
-GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AssignDescriptors_once_);
-inline void protobuf_AssignDescriptorsOnce() {
-  ::google::protobuf::GoogleOnceInit(&protobuf_AssignDescriptors_once_,
-                 &protobuf_AssignDesc_types_2eproto);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-}
-
-}  // namespace
 
 void protobuf_ShutdownFile_types_2eproto() {
 }
 
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+void protobuf_AddDesc_types_2eproto_impl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#else
 void protobuf_AddDesc_types_2eproto() {
   static bool already_here = false;
   if (already_here) return;
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\013types.proto*\234\001\n\007MsgType\022\014\n\010reqLogin\020\001\022"
-    "\r\n\treqLogout\020\002\022\025\n\010resLogin\020\377\377\377\377\377\377\377\377\377\001\022\013\n"
-    "\007addUser\020P\022\027\n\nresAddUser\020\260\377\377\377\377\377\377\377\377\001\022\013\n\007m"
-    "sgItem\020d\022\013\n\007msgUser\020n\022\014\n\010msgGroup\020x\022\017\n\nm"
-    "sgPackage\020\202\001", 172);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "types.proto", &protobuf_RegisterTypes);
+#endif
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_types_2eproto);
 }
 
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AddDesc_types_2eproto_once_);
+void protobuf_AddDesc_types_2eproto() {
+  ::google::protobuf::::google::protobuf::GoogleOnceInit(&protobuf_AddDesc_types_2eproto_once_,
+                 &protobuf_AddDesc_types_2eproto_impl);
+}
+#else
 // Force AddDescriptors() to be called at static initialization time.
 struct StaticDescriptorInitializer_types_2eproto {
   StaticDescriptorInitializer_types_2eproto() {
     protobuf_AddDesc_types_2eproto();
   }
 } static_descriptor_initializer_types_2eproto_;
-const ::google::protobuf::EnumDescriptor* MsgType_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return MsgType_descriptor_;
-}
+#endif
 bool MsgType_IsValid(int value) {
   switch(value) {
     case -80:
@@ -87,6 +55,7 @@ bool MsgType_IsValid(int value) {
     case 110:
     case 120:
     case 130:
+    case 131:
       return true;
     default:
       return false;
