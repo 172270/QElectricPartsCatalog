@@ -8,6 +8,7 @@
 
 #include "storage.h"
 #include "user.pb.h"
+#include "message.h"
 
 class UserError{
 public:
@@ -22,7 +23,7 @@ private:
     int m_errorNumber;
 };
 
-class User : public protbuf::UserData
+class User : public protbuf::UserData, public protocol::Message
 {
 public:
     User();
@@ -56,10 +57,7 @@ public:
     void setConfig(QByteArray conf);
     QByteArray getDefaultConfig();
 
-    QByteArray* toArray();
-    QByteArray* toArray(QByteArray *ba);
     protbuf::UserBasicInformation getPBPackage();
-    void fromArray(const QByteArray *data);
 
     void set_description(QString &&description){ protbuf::UserData::set_description(description.toStdString());}
     void set_description(const ::std::string &adr){protbuf::UserData::set_description(adr);}
@@ -67,6 +65,27 @@ public:
     void set_lastlogin(QDateTime lastlogin);
 private:
     quint32 defaultStorageID;
+
+    // Message interface
+public:
+    MsgType type() const
+    {
+        return MsgType::msgUser;
+    }
+    int ByteSize() const
+    {
+        return protbuf::UserData::ByteSize();
+    }
+
+protected:
+    bool SerializeToArray(void *data, int size) const
+    {
+        return protbuf::UserData::SerializeToArray(data,size);
+    }
+    bool ParseFromArray(const void *data, int size)
+    {
+        return protbuf::UserData::ParseFromArray(data,size);
+    }
 };
 
 #endif // USER_H

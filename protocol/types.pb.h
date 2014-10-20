@@ -40,11 +40,14 @@ enum MsgType {
   msgUser = 110,
   msgGroup = 120,
   msgContainer = 130,
-  msgCapsule = 131
+  msgCapsule = 131,
+  msgPackage = 140,
+  msgParameter = 150,
+  msgStorage = 160
 };
 bool MsgType_IsValid(int value);
 const MsgType MsgType_MIN = resAddUser;
-const MsgType MsgType_MAX = msgCapsule;
+const MsgType MsgType_MAX = msgStorage;
 const int MsgType_ARRAYSIZE = MsgType_MAX + 1;
 
 // ===================================================================

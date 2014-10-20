@@ -83,9 +83,8 @@ void tst_dbschema_storage::createMessage_divesNotNullArray()
     s.setID(1000);
     s.setCreationDate(QDateTime::currentDateTime());
 
-    QByteArray *ba = s.toArray();
-    QVERIFY(ba->size()>0);
-    delete ba;
+    QByteArray ba = s.toArray();
+    QVERIFY(ba.size()>0);
 }
 
 void tst_dbschema_storage::fromArray_formsProperStorage()
@@ -99,8 +98,8 @@ void tst_dbschema_storage::fromArray_formsProperStorage()
     s.set_name(str);
     s.setID(1000);
     s.setCreationDate(QDateTime::currentDateTime());
-    QByteArray *ba = s.toArray();
-    QVERIFY(ba->size()>0);
+    QByteArray ba = s.toArray();
+    QVERIFY(ba.size()>0);
 
     Storage s2;
     s2.fromArray(ba);
@@ -108,7 +107,7 @@ void tst_dbschema_storage::fromArray_formsProperStorage()
     QVERIFY(s2.getName() == s.getName() );
     QVERIFY(s2.getID() == s.getID() );
     QVERIFY(s2.getCreationDate() == s.getCreationDate() );
-    delete ba;
+
 }
 
 void tst_dbschema_storage::fromArray_formsProperStorage2()

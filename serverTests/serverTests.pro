@@ -32,7 +32,6 @@ DEPENDPATH += $$PWD/../server
 
 HEADERS += \
     tst_servertests.h \
-    tst_loginhandler.h \
     tst_user.h \
     tst_magazine.h \
     tst_dbschema_user.h \
@@ -46,7 +45,6 @@ HEADERS += \
 
 SOURCES += tst_servertests.cpp \
     main.cpp \
-    tst_loginhandler.cpp \
     tst_user.cpp \
     tst_magazine.cpp \
     tst_dbschema_user.cpp \

@@ -8,9 +8,8 @@ tst_user::tst_user(QObject *parent) :
 void tst_user::user_ShoudCreatePbMessage()
 {
     setRequiredFields();
-    QByteArray *ba = user->toArray();
-    QVERIFY( ba->size() > 0 );
-    delete ba;
+    QByteArray ba = user->toArray();
+    QVERIFY( ba.size() > 0 );
 }
 
 
@@ -278,8 +277,7 @@ void tst_user::toArray_createsAByteArray()
     user->set_address(QStringLiteral("adress"));
     user->set_phonenumber(QStringLiteral("123123123"));
 
-    QByteArray *ba = user->toArray();
+    QByteArray ba = user->toArray();
 
-    QVERIFY(ba->size() > 0);
-    delete ba;
+    QVERIFY(ba.size() > 0);
 }

@@ -8,9 +8,10 @@
 #include <QDateTime>
 
 #include "group.pb.h"
-#include "messages/parameter.h"
+#include "parameter.h"
+#include "message.h"
 
-class Group : public protbuf::Group
+class Group : public protbuf::Group, public protocol::Message
 {
 public:
     void set_name(const QString &name);
@@ -38,6 +39,27 @@ public:
     protbuf::GroupBasicInformation getGroupBasicInfoPB();
     Group();
 private:
+
+    // Message interface
+public:
+    MsgType type() const
+    {
+        return MsgType::msgGroup;
+    }
+    int ByteSize() const
+    {
+        return protbuf::Group::ByteSize();
+    }
+
+protected:
+    bool SerializeToArray(void *data, int size) const
+    {
+        return protbuf::Group::SerializeToArray(data,size);
+    }
+    bool ParseFromArray(const void *data, int size)
+    {
+        return protbuf::Group::ParseFromArray(data,size);
+    }
 };
 
 #endif // GROUP_H

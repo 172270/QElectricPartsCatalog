@@ -2,6 +2,7 @@
 #define MESSAGE_H
 
 #include "types.pb.h"
+
 #include <QByteArray>
 
 namespace protocol {

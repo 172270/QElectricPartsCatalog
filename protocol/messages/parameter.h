@@ -11,10 +11,7 @@
 #include <string>
 
 #include "parameters.pb.h"
-
-class ParameterValue{
-
-};
+#include "message.h"
 
 class ParameterConfig
 {
@@ -41,7 +38,7 @@ private:
     QJsonObject object;
 };
 
-class Parameter : public protbuf::Parameter
+class Parameter : public protbuf::Parameter , public protocol::Message
 {
 public:
     Parameter();
@@ -51,6 +48,26 @@ public:
     ParameterConfig &config() const;
 private:
     ParameterConfig *m_config;
+
+public:
+    MsgType type() const
+    {
+        return MsgType::msgParameter;
+    }
+    int ByteSize() const
+    {
+        return protbuf::Parameter::ByteSize();
+    }
+
+protected:
+    bool SerializeToArray(void *data, int size) const
+    {
+        return protbuf::Parameter::SerializeToArray(data,size);
+    }
+    bool ParseFromArray(const void *data, int size)
+    {
+        return protbuf::Parameter::ParseFromArray(data,size);
+    }
 };
 
 #endif // PARAMETER_H

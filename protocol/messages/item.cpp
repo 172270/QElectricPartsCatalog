@@ -117,32 +117,3 @@ Item::Item()
     set_adddate(QDateTime());
     set_updatedate(QDateTime());
 }
-
-QByteArray *Item::toArray()
-{
-    if (!IsInitialized()){
-        throw QString("Uninitialized message!");
-    }
-
-    QByteArray *data = new QByteArray(ByteSize(),'\0' );
-    SerializeToArray(data->data(),data->size());
-
-    return data;
-}
-
-QByteArray *Item::toArray(QByteArray *data)
-{
-    if (!IsInitialized()){
-        throw QString("Uninitialized message!");
-    }
-    if(data->size()< ByteSize() )
-        data->resize(ByteSize());
-
-    SerializeToArray(data->data(),data->size());
-    return data;
-}
-
-void Item::fromArray(QByteArray *data)
-{
-    this->ParseFromArray(data->data(), data->size());
-}

@@ -6,12 +6,13 @@
 #include "user.h"
 #include "group.h"
 #include "package.h"
+#include "message.h"
 
 #include <QObject>
 #include <QDateTime>
 #include <QString>
 
-class Item : public protbuf::Item
+class Item : public protbuf::Item, public protocol::Message
 {
 public:
 
@@ -45,12 +46,28 @@ public:
 
     Item();
 
-    QByteArray* toArray();
-    QByteArray *toArray(QByteArray *data);
-    void fromArray(QByteArray *data);
-
     void setPackage(Package &package);
 
+    // Message interface
+public:
+    MsgType type() const
+    {
+        return MsgType::msgItem;
+    }
+    int ByteSize() const
+    {
+        return protbuf::Item::ByteSize();
+    }
+
+protected:
+    bool SerializeToArray(void *data, int size) const
+    {
+        return protbuf::Item::SerializeToArray(data,size);
+    }
+    bool ParseFromArray(const void *data, int size)
+    {
+        return protbuf::Item::ParseFromArray(data,size);
+    }
 };
 
 #endif // ITEM_H

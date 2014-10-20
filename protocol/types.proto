@@ -29,4 +29,7 @@ enum MsgType{
 	msgGroup	= 120;
 	msgContainer= 130;
 	msgCapsule	= 131;
+	msgPackage	= 140;
+	msgParameter= 150;
+	msgStorage	= 160;
 }

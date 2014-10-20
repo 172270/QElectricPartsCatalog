@@ -3,13 +3,14 @@
 
 #include <QString>
 #include "package.pb.h"
+#include "message.h"
 
 class PackageConfig{
 public:
     QString toString(){return QString();}
 };
 
-class Package : public protbuf::Package
+class Package : public protbuf::Package , public protocol::Message
 {
 public:
     Package();
@@ -23,6 +24,27 @@ public:
 
 private:
     PackageConfig m_config;
+
+    // Message interface
+public:
+    MsgType type() const
+    {
+        return MsgType::msgPackage;
+    }
+    int ByteSize() const
+    {
+        return protbuf::Package::ByteSize();
+    }
+
+protected:
+    bool SerializeToArray(void *data, int size) const
+    {
+        return protbuf::Package::SerializeToArray(data,size);
+    }
+    bool ParseFromArray(const void *data, int size)
+    {
+        return protbuf::Package::ParseFromArray(data,size);
+    }
 };
 
 #endif // PACKAGE_H

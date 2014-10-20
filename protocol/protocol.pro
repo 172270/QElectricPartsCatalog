@@ -32,7 +32,6 @@ SOURCES += \
     messages/loginrequest.cpp \
     messages/messagescontainer.cpp \
     messages/userregistrationmessage.cpp \
-    messages/loginmessage.cpp \
     messages/user.cpp \
     messages/storege.cpp \
     messages/file.cpp \
@@ -56,7 +55,6 @@ HEADERS += \
     messages/loginrequest.h \
     messages/messagescontainer.h \
     messages/userregistrationmessage.h \
-    messages/loginmessage.h \
     messages/user.h \
     messages/storage.h \
     messages/file.h \

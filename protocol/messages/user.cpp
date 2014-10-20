@@ -24,16 +24,6 @@ QString User::getName() const
 
 void User::set_email(const QString &value)
 {
-    //    if(!value.size())
-    //        throw QString("Empty emails not allowed!");
-    //    EmailValidator validator;
-    //    int pos =0;
-    //    QString mail = value.trimmed().toLower();
-    //    QValidator::State state = validator.validate(mail,pos);
-    //    if (state == QValidator::Invalid ||state ==  QValidator::Intermediate ){
-    //        throw QString("Invalid email address!");
-    //    }
-    //    else
     protbuf::UserData::set_email(value.trimmed().toStdString());
 }
 
@@ -131,31 +121,6 @@ QByteArray User::getDefaultConfig()
     return QJsonDocument(json).toJson(QJsonDocument::Compact);
 }
 
-QByteArray* User::toArray()
-{
-    if (!IsInitialized()){
-        throw QString("Uninitialized message!");
-    }
-
-    QByteArray *data = new QByteArray(ByteSize(),'\0' );
-    SerializeToArray(data->data(),data->size());
-
-    return data;
-}
-
-QByteArray *User::toArray(QByteArray *ba)
-{
-    if (!IsInitialized()){
-        throw QString("Uninitialized message!");
-    }
-
-    if(ba->size()< ByteSize() )
-        ba->resize(ByteSize());
-    SerializeToArray(ba->data(),ba->size());
-
-    return ba;
-}
-
 protbuf::UserBasicInformation User::getPBPackage()
 {
     protbuf::UserBasicInformation ubi;
@@ -163,10 +128,6 @@ protbuf::UserBasicInformation User::getPBPackage()
     ubi.set_id(id() );
     ubi.set_email(email());
     return ubi;
-}
-
-void User::fromArray(const QByteArray *data){
-    this->ParseFromArray(data->data(), data->size());
 }
 
 
