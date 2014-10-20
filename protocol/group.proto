@@ -1,5 +1,5 @@
 option optimize_for = LITE_RUNTIME;
-package groups;
+package protbuf;
 
 import public "parameters.proto";
 
@@ -18,7 +18,7 @@ message Group{
   required uint32 parentID = 5;
   required bool allowSets = 6;
   required bool allowItems = 7;
-  repeated parameters.ParameterBasicInformation parameters = 8;
+  repeated ParameterBasicInformation parameters = 8;
   optional string description = 9;
   optional uint64 creationDate = 10;
 }

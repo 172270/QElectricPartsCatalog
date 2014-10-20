@@ -11,26 +11,36 @@ MsgType UserRegistrationMessage::type() const
 
 int UserRegistrationMessage::ByteSize() const
 {
-    return user::Register::ByteSize();
+    return protbuf::Register::ByteSize();
 }
 
 bool UserRegistrationMessage::SerializeToArray(void *data, int size) const
 {
-    return user::Register::SerializeToArray(data,size);
+    return protbuf::Register::SerializeToArray(data,size);
 }
 
 bool UserRegistrationMessage::ParseFromArray(const void *data, int size)
 {
-    return user::Register::ParseFromArray(data,size);
+    return protbuf::Register::ParseFromArray(data,size);
 }
 
 
+MsgType UserRegistrationMessageReplay::type() const
+{
+    return MsgType::resAddUser;
+}
+
+int UserRegistrationMessageReplay::ByteSize() const
+{
+    return protbuf::RegisterResponse::ByteSize();
+}
+
 bool UserRegistrationMessageReplay::SerializeToArray(void *data, int size) const
 {
-    return user::RegisterResponse::SerializeToArray(data,size);
+    return protbuf::RegisterResponse::SerializeToArray(data,size);
 }
 
 bool UserRegistrationMessageReplay::ParseFromArray(const void *data, int size)
 {
-    return user::RegisterResponse::ParseFromArray(data,size);
+    return protbuf::RegisterResponse::ParseFromArray(data,size);
 }

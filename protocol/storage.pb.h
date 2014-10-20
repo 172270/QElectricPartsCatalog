@@ -25,7 +25,7 @@
 #include <google/protobuf/extension_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace storage {
+namespace protbuf {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_storage_2eproto();
@@ -98,7 +98,7 @@ class StorageBasicInformation : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // @@protoc_insertion_point(class_scope:storage.StorageBasicInformation)
+  // @@protoc_insertion_point(class_scope:protbuf.StorageBasicInformation)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -188,7 +188,7 @@ class StorageStatistics : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::uint32 uniqueelementsnumber() const;
   inline void set_uniqueelementsnumber(::google::protobuf::uint32 value);
 
-  // @@protoc_insertion_point(class_scope:storage.StorageStatistics)
+  // @@protoc_insertion_point(class_scope:protbuf.StorageStatistics)
  private:
   inline void set_has_elementsnumber();
   inline void clear_has_elementsnumber();
@@ -312,16 +312,16 @@ class Storage : public ::google::protobuf::MessageLite {
   inline ::std::string* release_description();
   inline void set_allocated_description(::std::string* description);
 
-  // optional .storage.StorageStatistics stats = 8;
+  // optional .protbuf.StorageStatistics stats = 8;
   inline bool has_stats() const;
   inline void clear_stats();
   static const int kStatsFieldNumber = 8;
-  inline const ::storage::StorageStatistics& stats() const;
-  inline ::storage::StorageStatistics* mutable_stats();
-  inline ::storage::StorageStatistics* release_stats();
-  inline void set_allocated_stats(::storage::StorageStatistics* stats);
+  inline const ::protbuf::StorageStatistics& stats() const;
+  inline ::protbuf::StorageStatistics* mutable_stats();
+  inline ::protbuf::StorageStatistics* release_stats();
+  inline void set_allocated_stats(::protbuf::StorageStatistics* stats);
 
-  // @@protoc_insertion_point(class_scope:storage.Storage)
+  // @@protoc_insertion_point(class_scope:protbuf.Storage)
  private:
   inline void set_has_name();
   inline void clear_has_name();
@@ -341,7 +341,7 @@ class Storage : public ::google::protobuf::MessageLite {
   ::google::protobuf::uint32 ownerid_;
   ::google::protobuf::uint64 creationdate_;
   ::std::string* description_;
-  ::storage::StorageStatistics* stats_;
+  ::protbuf::StorageStatistics* stats_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
@@ -644,7 +644,7 @@ inline void Storage::set_allocated_description(::std::string* description) {
   }
 }
 
-// optional .storage.StorageStatistics stats = 8;
+// optional .protbuf.StorageStatistics stats = 8;
 inline bool Storage::has_stats() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -655,28 +655,28 @@ inline void Storage::clear_has_stats() {
   _has_bits_[0] &= ~0x00000020u;
 }
 inline void Storage::clear_stats() {
-  if (stats_ != NULL) stats_->::storage::StorageStatistics::Clear();
+  if (stats_ != NULL) stats_->::protbuf::StorageStatistics::Clear();
   clear_has_stats();
 }
-inline const ::storage::StorageStatistics& Storage::stats() const {
+inline const ::protbuf::StorageStatistics& Storage::stats() const {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   return stats_ != NULL ? *stats_ : *default_instance().stats_;
 #else
   return stats_ != NULL ? *stats_ : *default_instance_->stats_;
 #endif
 }
-inline ::storage::StorageStatistics* Storage::mutable_stats() {
+inline ::protbuf::StorageStatistics* Storage::mutable_stats() {
   set_has_stats();
-  if (stats_ == NULL) stats_ = new ::storage::StorageStatistics;
+  if (stats_ == NULL) stats_ = new ::protbuf::StorageStatistics;
   return stats_;
 }
-inline ::storage::StorageStatistics* Storage::release_stats() {
+inline ::protbuf::StorageStatistics* Storage::release_stats() {
   clear_has_stats();
-  ::storage::StorageStatistics* temp = stats_;
+  ::protbuf::StorageStatistics* temp = stats_;
   stats_ = NULL;
   return temp;
 }
-inline void Storage::set_allocated_stats(::storage::StorageStatistics* stats) {
+inline void Storage::set_allocated_stats(::protbuf::StorageStatistics* stats) {
   delete stats_;
   stats_ = stats;
   if (stats) {
@@ -689,7 +689,7 @@ inline void Storage::set_allocated_stats(::storage::StorageStatistics* stats) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace storage
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)
 

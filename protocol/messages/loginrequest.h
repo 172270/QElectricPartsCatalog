@@ -5,7 +5,7 @@
 #include "message.h"
 #include <QString>
 
-class LoginRequest : public user::LoginRequest, public protocol::Message
+class LoginRequest : public protbuf::LoginRequest, public protocol::Message
 {
 public:
     LoginRequest();
@@ -19,48 +19,48 @@ protected:
     int ByteSize() const;
     bool SerializeToArray(void *data, int size) const
     {
-        return user::LoginRequest::SerializeToArray(data,size);
+        return protbuf::LoginRequest::SerializeToArray(data,size);
     }
     bool ParseFromArray(const void *data, int size)
     {
-        return user::LoginRequest::ParseFromArray(data,size);
+        return protbuf::LoginRequest::ParseFromArray(data,size);
     }
 };
 
-class LogoutRequest :public user::LogoutRequest, public protocol::Message
+class LogoutRequest :public protbuf::LogoutRequest, public protocol::Message
 {
     MsgType type() const;
 protected:
     int ByteSize() const
     {
-        return user::LogoutRequest::ByteSize();
+        return protbuf::LogoutRequest::ByteSize();
     }
     bool SerializeToArray(void *data, int size) const
     {
-        return user::LogoutRequest::SerializeToArray(data,size);
+        return protbuf::LogoutRequest::SerializeToArray(data,size);
     }
     bool ParseFromArray(const void *data, int size)
     {
-        return user::LogoutRequest::ParseFromArray(data,size);
+        return protbuf::LogoutRequest::ParseFromArray(data,size);
     }
 };
 
-class LoginRequestResponse : public user::LoginResponse, public protocol::Message
+class LoginRequestResponse : public protbuf::LoginResponse, public protocol::Message
 {
 public:
     MsgType type() const;
 protected:
     int ByteSize() const
     {
-        return user::LoginResponse::ByteSize();
+        return protbuf::LoginResponse::ByteSize();
     }
     bool SerializeToArray(void *data, int size) const
     {
-        return user::LoginResponse::SerializeToArray(data,size);
+        return protbuf::LoginResponse::SerializeToArray(data,size);
     }
     bool ParseFromArray(const void *data, int size)
     {
-        return user::LoginResponse::ParseFromArray(data,size);
+        return protbuf::LoginResponse::ParseFromArray(data,size);
     }
 };
 

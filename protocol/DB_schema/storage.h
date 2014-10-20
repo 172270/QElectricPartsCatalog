@@ -6,7 +6,7 @@
 #include <QDateTime>
 #include "storage.pb.h"
 
-class Storage : public storage::Storage
+class Storage : public protbuf::Storage
 {
 public:
     Storage();

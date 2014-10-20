@@ -2,12 +2,12 @@
 
 void LoginRequest::set_name(QString &&name)
 {
-    user::LoginRequest::set_name(name.toStdString());
+    protbuf::LoginRequest::set_name(name.toStdString());
 }
 
 void LoginRequest::set_password(QString &&passwd)
 {
-    user::LoginRequest::set_password(passwd.toStdString());
+    protbuf::LoginRequest::set_password(passwd.toStdString());
 }
 
 MsgType LoginRequest::type() const
@@ -17,11 +17,11 @@ MsgType LoginRequest::type() const
 
 int LoginRequest::ByteSize() const
 {
-    return user::LoginRequest::ByteSize();
+    return protbuf::LoginRequest::ByteSize();
 }
 
 LoginRequest::LoginRequest() :
-    user::LoginRequest(),
+    protbuf::LoginRequest(),
     protocol::Message()
 {
 }

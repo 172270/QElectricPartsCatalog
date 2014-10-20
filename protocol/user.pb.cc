@@ -12,7 +12,7 @@
 #include <google/protobuf/wire_format_lite_inl.h>
 // @@protoc_insertion_point(includes)
 
-namespace user {
+namespace protbuf {
 
 void protobuf_ShutdownFile_user_2eproto() {
   delete LoginRequest::default_instance_;
@@ -37,7 +37,7 @@ void protobuf_AddDesc_user_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 #endif
-  ::storage::protobuf_AddDesc_storage_2eproto();
+  ::protbuf::protobuf_AddDesc_storage_2eproto();
   ::protobuf_AddDesc_stats_2eproto();
   LoginRequest::default_instance_ = new LoginRequest();
   LogoutRequest::default_instance_ = new LogoutRequest();
@@ -303,7 +303,7 @@ void LoginRequest::Swap(LoginRequest* other) {
 }
 
 ::std::string LoginRequest::GetTypeName() const {
-  return "user.LoginRequest";
+  return "protbuf.LoginRequest";
 }
 
 
@@ -469,7 +469,7 @@ void LogoutRequest::Swap(LogoutRequest* other) {
 }
 
 ::std::string LogoutRequest::GetTypeName() const {
-  return "user.LogoutRequest";
+  return "protbuf.LogoutRequest";
 }
 
 
@@ -545,7 +545,7 @@ bool LoginResponse::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .user.Replay replay = 2;
+      // required .protbuf.Replay replay = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -553,8 +553,8 @@ bool LoginResponse::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::user::Replay_IsValid(value)) {
-            set_replay(static_cast< ::user::Replay >(value));
+          if (::protbuf::Replay_IsValid(value)) {
+            set_replay(static_cast< ::protbuf::Replay >(value));
           }
         } else {
           goto handle_uninterpreted;
@@ -580,7 +580,7 @@ bool LoginResponse::MergePartialFromCodedStream(
 
 void LoginResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required .user.Replay replay = 2;
+  // required .protbuf.Replay replay = 2;
   if (has_replay()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->replay(), output);
@@ -592,7 +592,7 @@ int LoginResponse::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .user.Replay replay = 2;
+    // required .protbuf.Replay replay = 2;
     if (has_replay()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->replay());
@@ -640,7 +640,7 @@ void LoginResponse::Swap(LoginResponse* other) {
 }
 
 ::std::string LoginResponse::GetTypeName() const {
-  return "user.LoginResponse";
+  return "protbuf.LoginResponse";
 }
 
 
@@ -1060,7 +1060,7 @@ void Register::Swap(Register* other) {
 }
 
 ::std::string Register::GetTypeName() const {
-  return "user.Register";
+  return "protbuf.Register";
 }
 
 
@@ -1133,7 +1133,7 @@ bool RegisterResponse::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .user.Replay replay = 3;
+      // repeated .protbuf.Replay replay = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
@@ -1142,15 +1142,15 @@ bool RegisterResponse::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::user::Replay_IsValid(value)) {
-            add_replay(static_cast< ::user::Replay >(value));
+          if (::protbuf::Replay_IsValid(value)) {
+            add_replay(static_cast< ::protbuf::Replay >(value));
           }
         } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
                    == ::google::protobuf::internal::WireFormatLite::
                       WIRETYPE_LENGTH_DELIMITED) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedEnumNoInline(
                  input,
-                 &::user::Replay_IsValid,
+                 &::protbuf::Replay_IsValid,
                  this->mutable_replay())));
         } else {
           goto handle_uninterpreted;
@@ -1177,7 +1177,7 @@ bool RegisterResponse::MergePartialFromCodedStream(
 
 void RegisterResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated .user.Replay replay = 3;
+  // repeated .protbuf.Replay replay = 3;
   for (int i = 0; i < this->replay_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       3, this->replay(i), output);
@@ -1188,7 +1188,7 @@ void RegisterResponse::SerializeWithCachedSizes(
 int RegisterResponse::ByteSize() const {
   int total_size = 0;
 
-  // repeated .user.Replay replay = 3;
+  // repeated .protbuf.Replay replay = 3;
   {
     int data_size = 0;
     for (int i = 0; i < this->replay_size(); i++) {
@@ -1234,7 +1234,7 @@ void RegisterResponse::Swap(RegisterResponse* other) {
 }
 
 ::std::string RegisterResponse::GetTypeName() const {
-  return "user.RegisterResponse";
+  return "protbuf.RegisterResponse";
 }
 
 
@@ -1525,7 +1525,7 @@ void UserBasicInformation::Swap(UserBasicInformation* other) {
 }
 
 ::std::string UserBasicInformation::GetTypeName() const {
-  return "user.UserBasicInformation";
+  return "protbuf.UserBasicInformation";
 }
 
 
@@ -1552,10 +1552,10 @@ UserData::UserData()
 
 void UserData::InitAsDefaultInstance() {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  stats_ = const_cast< ::user::UserActivityStatistics*>(
-      ::user::UserActivityStatistics::internal_default_instance());
+  stats_ = const_cast< ::protbuf::UserActivityStatistics*>(
+      ::protbuf::UserActivityStatistics::internal_default_instance());
 #else
-  stats_ = const_cast< ::user::UserActivityStatistics*>(&::user::UserActivityStatistics::default_instance());
+  stats_ = const_cast< ::protbuf::UserActivityStatistics*>(&::protbuf::UserActivityStatistics::default_instance());
 #endif
 }
 
@@ -1665,7 +1665,7 @@ void UserData::Clear() {
       }
     }
     if (has_stats()) {
-      if (stats_ != NULL) stats_->::user::UserActivityStatistics::Clear();
+      if (stats_ != NULL) stats_->::protbuf::UserActivityStatistics::Clear();
     }
     if (has_description()) {
       if (description_ != &::google::protobuf::internal::kEmptyString) {
@@ -1800,7 +1800,7 @@ bool UserData::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .user.UserActivityStatistics stats = 10;
+      // optional .protbuf.UserActivityStatistics stats = 10;
       case 10: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -1814,7 +1814,7 @@ bool UserData::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .storage.Storage storages = 11;
+      // repeated .protbuf.Storage storages = 11;
       case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -1905,13 +1905,13 @@ void UserData::SerializeWithCachedSizes(
       9, this->config(), output);
   }
 
-  // optional .user.UserActivityStatistics stats = 10;
+  // optional .protbuf.UserActivityStatistics stats = 10;
   if (has_stats()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       10, this->stats(), output);
   }
 
-  // repeated .storage.Storage storages = 11;
+  // repeated .protbuf.Storage storages = 11;
   for (int i = 0; i < this->storages_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       11, this->storages(i), output);
@@ -1987,7 +1987,7 @@ int UserData::ByteSize() const {
           this->config());
     }
 
-    // optional .user.UserActivityStatistics stats = 10;
+    // optional .protbuf.UserActivityStatistics stats = 10;
     if (has_stats()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -2002,7 +2002,7 @@ int UserData::ByteSize() const {
     }
 
   }
-  // repeated .storage.Storage storages = 11;
+  // repeated .protbuf.Storage storages = 11;
   total_size += 1 * this->storages_size();
   for (int i = 0; i < this->storages_size(); i++) {
     total_size +=
@@ -2052,7 +2052,7 @@ void UserData::MergeFrom(const UserData& from) {
       set_config(from.config());
     }
     if (from.has_stats()) {
-      mutable_stats()->::user::UserActivityStatistics::MergeFrom(from.stats());
+      mutable_stats()->::protbuf::UserActivityStatistics::MergeFrom(from.stats());
     }
     if (from.has_description()) {
       set_description(from.description());
@@ -2097,7 +2097,7 @@ void UserData::Swap(UserData* other) {
 }
 
 ::std::string UserData::GetTypeName() const {
-  return "user.UserData";
+  return "protbuf.UserData";
 }
 
 
@@ -2440,12 +2440,12 @@ void UserActivityStatistics::Swap(UserActivityStatistics* other) {
 }
 
 ::std::string UserActivityStatistics::GetTypeName() const {
-  return "user.UserActivityStatistics";
+  return "protbuf.UserActivityStatistics";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace user
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)

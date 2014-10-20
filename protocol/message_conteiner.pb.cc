@@ -12,7 +12,7 @@
 #include <google/protobuf/wire_format_lite_inl.h>
 // @@protoc_insertion_point(includes)
 
-namespace container {
+namespace protbuf {
 
 void protobuf_ShutdownFile_message_5fconteiner_2eproto() {
   delete MessageContainer::default_instance_;
@@ -33,11 +33,11 @@ void protobuf_AddDesc_message_5fconteiner_2eproto() {
 
 #endif
   ::protobuf_AddDesc_types_2eproto();
-  ::groups::protobuf_AddDesc_group_2eproto();
-  ::user::protobuf_AddDesc_user_2eproto();
-  ::package::protobuf_AddDesc_package_2eproto();
-  ::parameters::protobuf_AddDesc_parameters_2eproto();
-  ::item::protobuf_AddDesc_item_2eproto();
+  ::protbuf::protobuf_AddDesc_group_2eproto();
+  ::protbuf::protobuf_AddDesc_user_2eproto();
+  ::protbuf::protobuf_AddDesc_package_2eproto();
+  ::protbuf::protobuf_AddDesc_parameters_2eproto();
+  ::protbuf::protobuf_AddDesc_item_2eproto();
   MessageContainer::default_instance_ = new MessageContainer();
   MessageCapsule::default_instance_ = new MessageCapsule();
   Items::default_instance_ = new Items();
@@ -131,7 +131,7 @@ bool MessageContainer::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .container.MessageCapsule capsules = 1;
+      // repeated .protbuf.MessageCapsule capsules = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -163,7 +163,7 @@ bool MessageContainer::MergePartialFromCodedStream(
 
 void MessageContainer::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated .container.MessageCapsule capsules = 1;
+  // repeated .protbuf.MessageCapsule capsules = 1;
   for (int i = 0; i < this->capsules_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       1, this->capsules(i), output);
@@ -174,7 +174,7 @@ void MessageContainer::SerializeWithCachedSizes(
 int MessageContainer::ByteSize() const {
   int total_size = 0;
 
-  // repeated .container.MessageCapsule capsules = 1;
+  // repeated .protbuf.MessageCapsule capsules = 1;
   total_size += 1 * this->capsules_size();
   for (int i = 0; i < this->capsules_size(); i++) {
     total_size +=
@@ -221,7 +221,7 @@ void MessageContainer::Swap(MessageContainer* other) {
 }
 
 ::std::string MessageContainer::GetTypeName() const {
-  return "container.MessageContainer";
+  return "protbuf.MessageContainer";
 }
 
 
@@ -433,7 +433,7 @@ void MessageCapsule::Swap(MessageCapsule* other) {
 }
 
 ::std::string MessageCapsule::GetTypeName() const {
-  return "container.MessageCapsule";
+  return "protbuf.MessageCapsule";
 }
 
 
@@ -514,7 +514,7 @@ bool Items::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .groups.Group groups = 1;
+      // repeated .protbuf.Group groups = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -529,7 +529,7 @@ bool Items::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .user.UserBasicInformation users = 2;
+      // repeated .protbuf.UserBasicInformation users = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -544,7 +544,7 @@ bool Items::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .package.Package packages = 3;
+      // repeated .protbuf.Package packages = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -559,7 +559,7 @@ bool Items::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .parameters.Parameter parameters = 4;
+      // repeated .protbuf.Parameter parameters = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -574,7 +574,7 @@ bool Items::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .item.Item items = 5;
+      // repeated .protbuf.Item items = 5;
       case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -606,31 +606,31 @@ bool Items::MergePartialFromCodedStream(
 
 void Items::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated .groups.Group groups = 1;
+  // repeated .protbuf.Group groups = 1;
   for (int i = 0; i < this->groups_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       1, this->groups(i), output);
   }
 
-  // repeated .user.UserBasicInformation users = 2;
+  // repeated .protbuf.UserBasicInformation users = 2;
   for (int i = 0; i < this->users_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       2, this->users(i), output);
   }
 
-  // repeated .package.Package packages = 3;
+  // repeated .protbuf.Package packages = 3;
   for (int i = 0; i < this->packages_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       3, this->packages(i), output);
   }
 
-  // repeated .parameters.Parameter parameters = 4;
+  // repeated .protbuf.Parameter parameters = 4;
   for (int i = 0; i < this->parameters_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       4, this->parameters(i), output);
   }
 
-  // repeated .item.Item items = 5;
+  // repeated .protbuf.Item items = 5;
   for (int i = 0; i < this->items_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       5, this->items(i), output);
@@ -641,7 +641,7 @@ void Items::SerializeWithCachedSizes(
 int Items::ByteSize() const {
   int total_size = 0;
 
-  // repeated .groups.Group groups = 1;
+  // repeated .protbuf.Group groups = 1;
   total_size += 1 * this->groups_size();
   for (int i = 0; i < this->groups_size(); i++) {
     total_size +=
@@ -649,7 +649,7 @@ int Items::ByteSize() const {
         this->groups(i));
   }
 
-  // repeated .user.UserBasicInformation users = 2;
+  // repeated .protbuf.UserBasicInformation users = 2;
   total_size += 1 * this->users_size();
   for (int i = 0; i < this->users_size(); i++) {
     total_size +=
@@ -657,7 +657,7 @@ int Items::ByteSize() const {
         this->users(i));
   }
 
-  // repeated .package.Package packages = 3;
+  // repeated .protbuf.Package packages = 3;
   total_size += 1 * this->packages_size();
   for (int i = 0; i < this->packages_size(); i++) {
     total_size +=
@@ -665,7 +665,7 @@ int Items::ByteSize() const {
         this->packages(i));
   }
 
-  // repeated .parameters.Parameter parameters = 4;
+  // repeated .protbuf.Parameter parameters = 4;
   total_size += 1 * this->parameters_size();
   for (int i = 0; i < this->parameters_size(); i++) {
     total_size +=
@@ -673,7 +673,7 @@ int Items::ByteSize() const {
         this->parameters(i));
   }
 
-  // repeated .item.Item items = 5;
+  // repeated .protbuf.Item items = 5;
   total_size += 1 * this->items_size();
   for (int i = 0; i < this->items_size(); i++) {
     total_size +=
@@ -740,12 +740,12 @@ void Items::Swap(Items* other) {
 }
 
 ::std::string Items::GetTypeName() const {
-  return "container.Items";
+  return "protbuf.Items";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace container
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)

@@ -3,7 +3,7 @@
 #include <QDebug>
 void Parameter::set_name(const QString &name)
 {
-    parameters::Parameter::set_name( name.toStdString() );
+    protbuf::Parameter::set_name( name.toStdString() );
 }
 
 ParameterConfig &Parameter::config() const {

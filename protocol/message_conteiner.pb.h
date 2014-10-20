@@ -31,7 +31,7 @@
 #include "item.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace container {
+namespace protbuf {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_message_5fconteiner_2eproto();
@@ -97,22 +97,22 @@ class MessageContainer : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
-  // repeated .container.MessageCapsule capsules = 1;
+  // repeated .protbuf.MessageCapsule capsules = 1;
   inline int capsules_size() const;
   inline void clear_capsules();
   static const int kCapsulesFieldNumber = 1;
-  inline const ::container::MessageCapsule& capsules(int index) const;
-  inline ::container::MessageCapsule* mutable_capsules(int index);
-  inline ::container::MessageCapsule* add_capsules();
-  inline const ::google::protobuf::RepeatedPtrField< ::container::MessageCapsule >&
+  inline const ::protbuf::MessageCapsule& capsules(int index) const;
+  inline ::protbuf::MessageCapsule* mutable_capsules(int index);
+  inline ::protbuf::MessageCapsule* add_capsules();
+  inline const ::google::protobuf::RepeatedPtrField< ::protbuf::MessageCapsule >&
       capsules() const;
-  inline ::google::protobuf::RepeatedPtrField< ::container::MessageCapsule >*
+  inline ::google::protobuf::RepeatedPtrField< ::protbuf::MessageCapsule >*
       mutable_capsules();
 
-  // @@protoc_insertion_point(class_scope:container.MessageContainer)
+  // @@protoc_insertion_point(class_scope:protbuf.MessageContainer)
  private:
 
-  ::google::protobuf::RepeatedPtrField< ::container::MessageCapsule > capsules_;
+  ::google::protobuf::RepeatedPtrField< ::protbuf::MessageCapsule > capsules_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -202,7 +202,7 @@ class MessageCapsule : public ::google::protobuf::MessageLite {
   inline ::std::string* release_data();
   inline void set_allocated_data(::std::string* data);
 
-  // @@protoc_insertion_point(class_scope:container.MessageCapsule)
+  // @@protoc_insertion_point(class_scope:protbuf.MessageCapsule)
  private:
   inline void set_has_msgtype();
   inline void clear_has_msgtype();
@@ -281,74 +281,74 @@ class Items : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
-  // repeated .groups.Group groups = 1;
+  // repeated .protbuf.Group groups = 1;
   inline int groups_size() const;
   inline void clear_groups();
   static const int kGroupsFieldNumber = 1;
-  inline const ::groups::Group& groups(int index) const;
-  inline ::groups::Group* mutable_groups(int index);
-  inline ::groups::Group* add_groups();
-  inline const ::google::protobuf::RepeatedPtrField< ::groups::Group >&
+  inline const ::protbuf::Group& groups(int index) const;
+  inline ::protbuf::Group* mutable_groups(int index);
+  inline ::protbuf::Group* add_groups();
+  inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Group >&
       groups() const;
-  inline ::google::protobuf::RepeatedPtrField< ::groups::Group >*
+  inline ::google::protobuf::RepeatedPtrField< ::protbuf::Group >*
       mutable_groups();
 
-  // repeated .user.UserBasicInformation users = 2;
+  // repeated .protbuf.UserBasicInformation users = 2;
   inline int users_size() const;
   inline void clear_users();
   static const int kUsersFieldNumber = 2;
-  inline const ::user::UserBasicInformation& users(int index) const;
-  inline ::user::UserBasicInformation* mutable_users(int index);
-  inline ::user::UserBasicInformation* add_users();
-  inline const ::google::protobuf::RepeatedPtrField< ::user::UserBasicInformation >&
+  inline const ::protbuf::UserBasicInformation& users(int index) const;
+  inline ::protbuf::UserBasicInformation* mutable_users(int index);
+  inline ::protbuf::UserBasicInformation* add_users();
+  inline const ::google::protobuf::RepeatedPtrField< ::protbuf::UserBasicInformation >&
       users() const;
-  inline ::google::protobuf::RepeatedPtrField< ::user::UserBasicInformation >*
+  inline ::google::protobuf::RepeatedPtrField< ::protbuf::UserBasicInformation >*
       mutable_users();
 
-  // repeated .package.Package packages = 3;
+  // repeated .protbuf.Package packages = 3;
   inline int packages_size() const;
   inline void clear_packages();
   static const int kPackagesFieldNumber = 3;
-  inline const ::package::Package& packages(int index) const;
-  inline ::package::Package* mutable_packages(int index);
-  inline ::package::Package* add_packages();
-  inline const ::google::protobuf::RepeatedPtrField< ::package::Package >&
+  inline const ::protbuf::Package& packages(int index) const;
+  inline ::protbuf::Package* mutable_packages(int index);
+  inline ::protbuf::Package* add_packages();
+  inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Package >&
       packages() const;
-  inline ::google::protobuf::RepeatedPtrField< ::package::Package >*
+  inline ::google::protobuf::RepeatedPtrField< ::protbuf::Package >*
       mutable_packages();
 
-  // repeated .parameters.Parameter parameters = 4;
+  // repeated .protbuf.Parameter parameters = 4;
   inline int parameters_size() const;
   inline void clear_parameters();
   static const int kParametersFieldNumber = 4;
-  inline const ::parameters::Parameter& parameters(int index) const;
-  inline ::parameters::Parameter* mutable_parameters(int index);
-  inline ::parameters::Parameter* add_parameters();
-  inline const ::google::protobuf::RepeatedPtrField< ::parameters::Parameter >&
+  inline const ::protbuf::Parameter& parameters(int index) const;
+  inline ::protbuf::Parameter* mutable_parameters(int index);
+  inline ::protbuf::Parameter* add_parameters();
+  inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Parameter >&
       parameters() const;
-  inline ::google::protobuf::RepeatedPtrField< ::parameters::Parameter >*
+  inline ::google::protobuf::RepeatedPtrField< ::protbuf::Parameter >*
       mutable_parameters();
 
-  // repeated .item.Item items = 5;
+  // repeated .protbuf.Item items = 5;
   inline int items_size() const;
   inline void clear_items();
   static const int kItemsFieldNumber = 5;
-  inline const ::item::Item& items(int index) const;
-  inline ::item::Item* mutable_items(int index);
-  inline ::item::Item* add_items();
-  inline const ::google::protobuf::RepeatedPtrField< ::item::Item >&
+  inline const ::protbuf::Item& items(int index) const;
+  inline ::protbuf::Item* mutable_items(int index);
+  inline ::protbuf::Item* add_items();
+  inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Item >&
       items() const;
-  inline ::google::protobuf::RepeatedPtrField< ::item::Item >*
+  inline ::google::protobuf::RepeatedPtrField< ::protbuf::Item >*
       mutable_items();
 
-  // @@protoc_insertion_point(class_scope:container.Items)
+  // @@protoc_insertion_point(class_scope:protbuf.Items)
  private:
 
-  ::google::protobuf::RepeatedPtrField< ::groups::Group > groups_;
-  ::google::protobuf::RepeatedPtrField< ::user::UserBasicInformation > users_;
-  ::google::protobuf::RepeatedPtrField< ::package::Package > packages_;
-  ::google::protobuf::RepeatedPtrField< ::parameters::Parameter > parameters_;
-  ::google::protobuf::RepeatedPtrField< ::item::Item > items_;
+  ::google::protobuf::RepeatedPtrField< ::protbuf::Group > groups_;
+  ::google::protobuf::RepeatedPtrField< ::protbuf::UserBasicInformation > users_;
+  ::google::protobuf::RepeatedPtrField< ::protbuf::Package > packages_;
+  ::google::protobuf::RepeatedPtrField< ::protbuf::Parameter > parameters_;
+  ::google::protobuf::RepeatedPtrField< ::protbuf::Item > items_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
@@ -371,27 +371,27 @@ class Items : public ::google::protobuf::MessageLite {
 
 // MessageContainer
 
-// repeated .container.MessageCapsule capsules = 1;
+// repeated .protbuf.MessageCapsule capsules = 1;
 inline int MessageContainer::capsules_size() const {
   return capsules_.size();
 }
 inline void MessageContainer::clear_capsules() {
   capsules_.Clear();
 }
-inline const ::container::MessageCapsule& MessageContainer::capsules(int index) const {
+inline const ::protbuf::MessageCapsule& MessageContainer::capsules(int index) const {
   return capsules_.Get(index);
 }
-inline ::container::MessageCapsule* MessageContainer::mutable_capsules(int index) {
+inline ::protbuf::MessageCapsule* MessageContainer::mutable_capsules(int index) {
   return capsules_.Mutable(index);
 }
-inline ::container::MessageCapsule* MessageContainer::add_capsules() {
+inline ::protbuf::MessageCapsule* MessageContainer::add_capsules() {
   return capsules_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::container::MessageCapsule >&
+inline const ::google::protobuf::RepeatedPtrField< ::protbuf::MessageCapsule >&
 MessageContainer::capsules() const {
   return capsules_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::container::MessageCapsule >*
+inline ::google::protobuf::RepeatedPtrField< ::protbuf::MessageCapsule >*
 MessageContainer::mutable_capsules() {
   return &capsules_;
 }
@@ -497,127 +497,127 @@ inline void MessageCapsule::set_allocated_data(::std::string* data) {
 
 // Items
 
-// repeated .groups.Group groups = 1;
+// repeated .protbuf.Group groups = 1;
 inline int Items::groups_size() const {
   return groups_.size();
 }
 inline void Items::clear_groups() {
   groups_.Clear();
 }
-inline const ::groups::Group& Items::groups(int index) const {
+inline const ::protbuf::Group& Items::groups(int index) const {
   return groups_.Get(index);
 }
-inline ::groups::Group* Items::mutable_groups(int index) {
+inline ::protbuf::Group* Items::mutable_groups(int index) {
   return groups_.Mutable(index);
 }
-inline ::groups::Group* Items::add_groups() {
+inline ::protbuf::Group* Items::add_groups() {
   return groups_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::groups::Group >&
+inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Group >&
 Items::groups() const {
   return groups_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::groups::Group >*
+inline ::google::protobuf::RepeatedPtrField< ::protbuf::Group >*
 Items::mutable_groups() {
   return &groups_;
 }
 
-// repeated .user.UserBasicInformation users = 2;
+// repeated .protbuf.UserBasicInformation users = 2;
 inline int Items::users_size() const {
   return users_.size();
 }
 inline void Items::clear_users() {
   users_.Clear();
 }
-inline const ::user::UserBasicInformation& Items::users(int index) const {
+inline const ::protbuf::UserBasicInformation& Items::users(int index) const {
   return users_.Get(index);
 }
-inline ::user::UserBasicInformation* Items::mutable_users(int index) {
+inline ::protbuf::UserBasicInformation* Items::mutable_users(int index) {
   return users_.Mutable(index);
 }
-inline ::user::UserBasicInformation* Items::add_users() {
+inline ::protbuf::UserBasicInformation* Items::add_users() {
   return users_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::user::UserBasicInformation >&
+inline const ::google::protobuf::RepeatedPtrField< ::protbuf::UserBasicInformation >&
 Items::users() const {
   return users_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::user::UserBasicInformation >*
+inline ::google::protobuf::RepeatedPtrField< ::protbuf::UserBasicInformation >*
 Items::mutable_users() {
   return &users_;
 }
 
-// repeated .package.Package packages = 3;
+// repeated .protbuf.Package packages = 3;
 inline int Items::packages_size() const {
   return packages_.size();
 }
 inline void Items::clear_packages() {
   packages_.Clear();
 }
-inline const ::package::Package& Items::packages(int index) const {
+inline const ::protbuf::Package& Items::packages(int index) const {
   return packages_.Get(index);
 }
-inline ::package::Package* Items::mutable_packages(int index) {
+inline ::protbuf::Package* Items::mutable_packages(int index) {
   return packages_.Mutable(index);
 }
-inline ::package::Package* Items::add_packages() {
+inline ::protbuf::Package* Items::add_packages() {
   return packages_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::package::Package >&
+inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Package >&
 Items::packages() const {
   return packages_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::package::Package >*
+inline ::google::protobuf::RepeatedPtrField< ::protbuf::Package >*
 Items::mutable_packages() {
   return &packages_;
 }
 
-// repeated .parameters.Parameter parameters = 4;
+// repeated .protbuf.Parameter parameters = 4;
 inline int Items::parameters_size() const {
   return parameters_.size();
 }
 inline void Items::clear_parameters() {
   parameters_.Clear();
 }
-inline const ::parameters::Parameter& Items::parameters(int index) const {
+inline const ::protbuf::Parameter& Items::parameters(int index) const {
   return parameters_.Get(index);
 }
-inline ::parameters::Parameter* Items::mutable_parameters(int index) {
+inline ::protbuf::Parameter* Items::mutable_parameters(int index) {
   return parameters_.Mutable(index);
 }
-inline ::parameters::Parameter* Items::add_parameters() {
+inline ::protbuf::Parameter* Items::add_parameters() {
   return parameters_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::parameters::Parameter >&
+inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Parameter >&
 Items::parameters() const {
   return parameters_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::parameters::Parameter >*
+inline ::google::protobuf::RepeatedPtrField< ::protbuf::Parameter >*
 Items::mutable_parameters() {
   return &parameters_;
 }
 
-// repeated .item.Item items = 5;
+// repeated .protbuf.Item items = 5;
 inline int Items::items_size() const {
   return items_.size();
 }
 inline void Items::clear_items() {
   items_.Clear();
 }
-inline const ::item::Item& Items::items(int index) const {
+inline const ::protbuf::Item& Items::items(int index) const {
   return items_.Get(index);
 }
-inline ::item::Item* Items::mutable_items(int index) {
+inline ::protbuf::Item* Items::mutable_items(int index) {
   return items_.Mutable(index);
 }
-inline ::item::Item* Items::add_items() {
+inline ::protbuf::Item* Items::add_items() {
   return items_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::item::Item >&
+inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Item >&
 Items::items() const {
   return items_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::item::Item >*
+inline ::google::protobuf::RepeatedPtrField< ::protbuf::Item >*
 Items::mutable_items() {
   return &items_;
 }
@@ -625,7 +625,7 @@ Items::mutable_items() {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace container
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)
 

@@ -1,5 +1,5 @@
 option optimize_for = LITE_RUNTIME;
-package container;
+package protbuf;
 import public "types.proto";
 import public "group.proto";
 import public "user.proto";
@@ -17,9 +17,9 @@ message MessageCapsule{
 }
 
 message Items{
-	repeated groups.Group groups = 1;
-	repeated user.UserBasicInformation users =2;
-	repeated package.Package packages = 3;
-	repeated parameters.Parameter parameters = 4;
-	repeated item.Item items = 5;
+	repeated Group groups = 1;
+	repeated UserBasicInformation users =2;
+	repeated Package packages = 3;
+	repeated Parameter parameters = 4;
+	repeated Item items = 5;
 }

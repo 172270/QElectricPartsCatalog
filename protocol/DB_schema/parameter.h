@@ -41,7 +41,7 @@ private:
     QJsonObject object;
 };
 
-class Parameter : public parameters::Parameter
+class Parameter : public protbuf::Parameter
 {
 public:
     Parameter();

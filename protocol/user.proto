@@ -1,5 +1,5 @@
 option optimize_for = LITE_RUNTIME;
-package user;
+package protbuf;
 import public "storage.proto";
 import public "stats.proto";
 
@@ -57,7 +57,7 @@ message UserData{
     required uint32 ID = 2;
     required string name = 3;
     required string email = 4;
-    repeated storage.Storage storages = 11;
+    repeated Storage storages = 11;
     optional string address = 5;
     optional bytes phoneNumber = 6;
     optional uint64 lastLogin = 7; // N/A

@@ -45,43 +45,43 @@ void RegisterUserMessageHandler::processData()
     bool hasErrors = false;
     if(req.name().size()>34){
         qDebug()<<"user name to long";
-        res.add_replay(user::Replay::UserNameToLong);
+        res.add_replay(protbuf::Replay::UserNameToLong);
         hasErrors = true;
     }
 
     if(req.name().size()<2){
         qDebug()<<"user name to short";
-        res.add_replay(user::Replay::UserNameToShort);
+        res.add_replay(protbuf::Replay::UserNameToShort);
         hasErrors = true;
     }
 
     if(req.email().size()>255){
         qDebug()<<"user email to long";
-        res.add_replay(user::Replay::EmailAddressToLong);
+        res.add_replay(protbuf::Replay::EmailAddressToLong);
         hasErrors = true;
     }
 
     if(state != QValidator::Acceptable){
         qDebug()<<"email not validate";
-        res.add_replay(user::Replay::EmailNotValidate);
+        res.add_replay(protbuf::Replay::EmailNotValidate);
         hasErrors = true;
     }
 
     if(req.password().size()==0){
         qDebug()<<"user has no password";
-        res.add_replay(user::Replay::PasswordToShort);
+        res.add_replay(protbuf::Replay::PasswordToShort);
         hasErrors = true;
     }
 
     if(database.userEmailExists(email)){
         qDebug()<<"user email exists";
-        res.add_replay(user::Replay::EmailExists);
+        res.add_replay(protbuf::Replay::EmailExists);
         hasErrors = true;
     }
 
     if(database.userNameExists(name)){
         qDebug()<<"user name exists";
-        res.add_replay(user::Replay::UserAlreadyExists);
+        res.add_replay(protbuf::Replay::UserAlreadyExists);
         hasErrors = true;
     }
 
@@ -103,7 +103,7 @@ void RegisterUserMessageHandler::processData()
     QByteArray pass = QCryptographicHash::hash(QByteArray(req.password().data(), req.password().size() ), QCryptographicHash::Sha512);
     try{
         database.addUser(u, pass.toHex() );
-        res.add_replay(user::Replay::UserAddOk);
+        res.add_replay(protbuf::Replay::UserAddOk);
     }
     catch(UserError e){
         qDebug()<<e.text();

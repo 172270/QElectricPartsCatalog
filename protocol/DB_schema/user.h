@@ -22,7 +22,7 @@ private:
     int m_errorNumber;
 };
 
-class User : public user::UserData
+class User : public protbuf::UserData
 {
 public:
     User();
@@ -42,12 +42,12 @@ public:
     QList<Storage *> getStoragesList();
     int storagesNumber() const;
 
-    void set_address(const QString &adr){  user::UserData::set_address(adr.toStdString() ); }
-    void set_address(const ::std::string &adr){user::UserData::set_address(adr);}
+    void set_address(const QString &adr){  protbuf::UserData::set_address(adr.toStdString() ); }
+    void set_address(const ::std::string &adr){protbuf::UserData::set_address(adr);}
     QString getAddress() const { return QString::fromStdString(address()); }
 
     void set_phonenumber(const QString &number);
-    void set_phonenumber(const ::std::string &number){ user::UserData::set_phonenumber(number);}
+    void set_phonenumber(const ::std::string &number){ protbuf::UserData::set_phonenumber(number);}
     QString getPhoneNumber() const;
 
     void set_registrationdate( QDateTime registrationDate );
@@ -58,11 +58,11 @@ public:
 
     QByteArray* toArray();
     QByteArray* toArray(QByteArray *ba);
-    user::UserBasicInformation getPBPackage();
+    protbuf::UserBasicInformation getPBPackage();
     void fromArray(const QByteArray *data);
 
-    void set_description(QString &&description){ user::UserData::set_description(description.toStdString());}
-    void set_description(const ::std::string &adr){user::UserData::set_description(adr);}
+    void set_description(QString &&description){ protbuf::UserData::set_description(description.toStdString());}
+    void set_description(const ::std::string &adr){protbuf::UserData::set_description(adr);}
     QString getDescription()const{ return QString::fromStdString(description());}
     void set_lastlogin(QDateTime lastlogin);
 private:

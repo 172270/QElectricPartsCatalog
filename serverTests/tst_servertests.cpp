@@ -132,7 +132,7 @@ void tst_ServerTests::addBasicUserToServer()
     QByteArray ba = QByteArray (mc->getCapsule(0).toArray().data(), mc->getCapsule(0).toArray().size());
 
     QVERIFY( registerResponse.fromArray(ba));
-    QVERIFY( registerResponse.replay(0) == user::Replay::UserAddOk );
+    QVERIFY( registerResponse.replay(0) == protbuf::Replay::UserAddOk );
 }
 
 void tst_ServerTests::loginToServer()
@@ -151,7 +151,12 @@ void tst_ServerTests::loginToServer()
     mc->Clear();
     QVERIFY(mc->fromArray(binaryMessage));
     QVERIFY(loginResponse.fromArray(mc->getCapsule(0).getData()));
-    QVERIFY(loginResponse.replay() == user::Replay::LoginPass);
+    QVERIFY(loginResponse.replay() == protbuf::Replay::LoginPass);
+}
+
+void tst_ServerTests::loginChangesUserStatus()
+{
+
 }
 
 void tst_ServerTests::logoutFromServer()

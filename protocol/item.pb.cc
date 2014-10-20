@@ -12,7 +12,7 @@
 #include <google/protobuf/wire_format_lite_inl.h>
 // @@protoc_insertion_point(includes)
 
-namespace item {
+namespace protbuf {
 
 void protobuf_ShutdownFile_item_2eproto() {
   delete ItemParameters::default_instance_;
@@ -31,10 +31,10 @@ void protobuf_AddDesc_item_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 #endif
-  ::user::protobuf_AddDesc_user_2eproto();
-  ::groups::protobuf_AddDesc_group_2eproto();
-  ::package::protobuf_AddDesc_package_2eproto();
-  ::parameters::protobuf_AddDesc_parameters_2eproto();
+  ::protbuf::protobuf_AddDesc_user_2eproto();
+  ::protbuf::protobuf_AddDesc_group_2eproto();
+  ::protbuf::protobuf_AddDesc_package_2eproto();
+  ::protbuf::protobuf_AddDesc_parameters_2eproto();
   ItemParameters::default_instance_ = new ItemParameters();
   Item::default_instance_ = new Item();
   ItemParameters::default_instance_->InitAsDefaultInstance();
@@ -262,7 +262,7 @@ void ItemParameters::Swap(ItemParameters* other) {
 }
 
 ::std::string ItemParameters::GetTypeName() const {
-  return "item.ItemParameters";
+  return "protbuf.ItemParameters";
 }
 
 
@@ -290,22 +290,22 @@ Item::Item()
 
 void Item::InitAsDefaultInstance() {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  package_ = const_cast< ::package::PackageBasicInformation*>(
-      ::package::PackageBasicInformation::internal_default_instance());
+  package_ = const_cast< ::protbuf::PackageBasicInformation*>(
+      ::protbuf::PackageBasicInformation::internal_default_instance());
 #else
-  package_ = const_cast< ::package::PackageBasicInformation*>(&::package::PackageBasicInformation::default_instance());
+  package_ = const_cast< ::protbuf::PackageBasicInformation*>(&::protbuf::PackageBasicInformation::default_instance());
 #endif
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  user_ = const_cast< ::user::UserBasicInformation*>(
-      ::user::UserBasicInformation::internal_default_instance());
+  user_ = const_cast< ::protbuf::UserBasicInformation*>(
+      ::protbuf::UserBasicInformation::internal_default_instance());
 #else
-  user_ = const_cast< ::user::UserBasicInformation*>(&::user::UserBasicInformation::default_instance());
+  user_ = const_cast< ::protbuf::UserBasicInformation*>(&::protbuf::UserBasicInformation::default_instance());
 #endif
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  group_ = const_cast< ::groups::GroupBasicInformation*>(
-      ::groups::GroupBasicInformation::internal_default_instance());
+  group_ = const_cast< ::protbuf::GroupBasicInformation*>(
+      ::protbuf::GroupBasicInformation::internal_default_instance());
 #else
-  group_ = const_cast< ::groups::GroupBasicInformation*>(&::groups::GroupBasicInformation::default_instance());
+  group_ = const_cast< ::protbuf::GroupBasicInformation*>(&::protbuf::GroupBasicInformation::default_instance());
 #endif
 }
 
@@ -399,13 +399,13 @@ void Item::Clear() {
     }
     privateitem_ = false;
     if (has_package()) {
-      if (package_ != NULL) package_->::package::PackageBasicInformation::Clear();
+      if (package_ != NULL) package_->::protbuf::PackageBasicInformation::Clear();
     }
     if (has_user()) {
-      if (user_ != NULL) user_->::user::UserBasicInformation::Clear();
+      if (user_ != NULL) user_->::protbuf::UserBasicInformation::Clear();
     }
     if (has_group()) {
-      if (group_ != NULL) group_->::groups::GroupBasicInformation::Clear();
+      if (group_ != NULL) group_->::protbuf::GroupBasicInformation::Clear();
     }
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
@@ -500,7 +500,7 @@ bool Item::MergePartialFromCodedStream(
         break;
       }
 
-      // required .package.PackageBasicInformation package = 10;
+      // required .protbuf.PackageBasicInformation package = 10;
       case 10: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -514,7 +514,7 @@ bool Item::MergePartialFromCodedStream(
         break;
       }
 
-      // required .user.UserBasicInformation user = 11;
+      // required .protbuf.UserBasicInformation user = 11;
       case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -528,7 +528,7 @@ bool Item::MergePartialFromCodedStream(
         break;
       }
 
-      // required .groups.GroupBasicInformation group = 12;
+      // required .protbuf.GroupBasicInformation group = 12;
       case 12: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -588,7 +588,7 @@ bool Item::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .item.ItemParameters parameters = 20;
+      // repeated .protbuf.ItemParameters parameters = 20;
       case 20: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -648,19 +648,19 @@ void Item::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->privateitem(), output);
   }
 
-  // required .package.PackageBasicInformation package = 10;
+  // required .protbuf.PackageBasicInformation package = 10;
   if (has_package()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       10, this->package(), output);
   }
 
-  // required .user.UserBasicInformation user = 11;
+  // required .protbuf.UserBasicInformation user = 11;
   if (has_user()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       11, this->user(), output);
   }
 
-  // required .groups.GroupBasicInformation group = 12;
+  // required .protbuf.GroupBasicInformation group = 12;
   if (has_group()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       12, this->group(), output);
@@ -682,7 +682,7 @@ void Item::SerializeWithCachedSizes(
       16, this->description(), output);
   }
 
-  // repeated .item.ItemParameters parameters = 20;
+  // repeated .protbuf.ItemParameters parameters = 20;
   for (int i = 0; i < this->parameters_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       20, this->parameters(i), output);
@@ -727,21 +727,21 @@ int Item::ByteSize() const {
       total_size += 1 + 1;
     }
 
-    // required .package.PackageBasicInformation package = 10;
+    // required .protbuf.PackageBasicInformation package = 10;
     if (has_package()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->package());
     }
 
-    // required .user.UserBasicInformation user = 11;
+    // required .protbuf.UserBasicInformation user = 11;
     if (has_user()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->user());
     }
 
-    // required .groups.GroupBasicInformation group = 12;
+    // required .protbuf.GroupBasicInformation group = 12;
     if (has_group()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -772,7 +772,7 @@ int Item::ByteSize() const {
     }
 
   }
-  // repeated .item.ItemParameters parameters = 20;
+  // repeated .protbuf.ItemParameters parameters = 20;
   total_size += 2 * this->parameters_size();
   for (int i = 0; i < this->parameters_size(); i++) {
     total_size +=
@@ -811,13 +811,13 @@ void Item::MergeFrom(const Item& from) {
       set_privateitem(from.privateitem());
     }
     if (from.has_package()) {
-      mutable_package()->::package::PackageBasicInformation::MergeFrom(from.package());
+      mutable_package()->::protbuf::PackageBasicInformation::MergeFrom(from.package());
     }
     if (from.has_user()) {
-      mutable_user()->::user::UserBasicInformation::MergeFrom(from.user());
+      mutable_user()->::protbuf::UserBasicInformation::MergeFrom(from.user());
     }
     if (from.has_group()) {
-      mutable_group()->::groups::GroupBasicInformation::MergeFrom(from.group());
+      mutable_group()->::protbuf::GroupBasicInformation::MergeFrom(from.group());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
@@ -877,12 +877,12 @@ void Item::Swap(Item* other) {
 }
 
 ::std::string Item::GetTypeName() const {
-  return "item.Item";
+  return "protbuf.Item";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace item
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)

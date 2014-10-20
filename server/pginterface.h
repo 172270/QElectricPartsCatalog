@@ -22,15 +22,15 @@ public:
 
     User getUserById(uint id);
     User getUserByName(const QString &name);
-    uint addUser(User &user, QString passwd);
+    uint addUser(User &protbuf, QString passwd);
     bool userNameExists(QString &name);
     bool userEmailExists(QString &email);
     void updateLastLogin(User &u);
 
-    void deleteUser(User &user);
-    bool checkUserPassword(QString user, QString passwd);
-    void linkStorageToUser(const User &user, const Storage &storage);
-    QList<Storage> getUserStorages(User &user);
+    void deleteUser(User &protbuf);
+    bool checkUserPassword(QString protbuf, QString passwd);
+    void linkStorageToUser(const User &protbuf, const Storage &storage);
+    QList<Storage> getUserStorages(User &protbuf);
 
     uint addStorage(const Storage &storage);
     uint addPackage(Package &package);

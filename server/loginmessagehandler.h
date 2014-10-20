@@ -15,12 +15,12 @@ public:
     void processData();
     User *getUserData();
     QByteArray getResponse();
-    bool loginOk(){ return res.replay()==user::Replay::LoginPass; }
+    bool loginOk(){ return res.replay()==protbuf::Replay::LoginPass; }
     void updateLastLogin();
 private:
     PgInterface database;
-    user::LoginRequest req;
-    user::LoginResponse res;
+    protbuf::LoginRequest req;
+    protbuf::LoginResponse res;
     User *user;
 };
 

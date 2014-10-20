@@ -11,7 +11,7 @@
 #include <QDateTime>
 #include <QString>
 
-class Item : public item::Item
+class Item : public protbuf::Item
 {
 public:
 

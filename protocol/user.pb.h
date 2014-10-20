@@ -27,7 +27,7 @@
 #include "stats.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace user {
+namespace protbuf {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_user_2eproto();
@@ -140,7 +140,7 @@ class LoginRequest : public ::google::protobuf::MessageLite {
   inline ::std::string* release_password();
   inline void set_allocated_password(::std::string* password);
 
-  // @@protoc_insertion_point(class_scope:user.LoginRequest)
+  // @@protoc_insertion_point(class_scope:protbuf.LoginRequest)
  private:
   inline void set_has_name();
   inline void clear_has_name();
@@ -226,7 +226,7 @@ class LogoutRequest : public ::google::protobuf::MessageLite {
   inline bool logout() const;
   inline void set_logout(bool value);
 
-  // @@protoc_insertion_point(class_scope:user.LogoutRequest)
+  // @@protoc_insertion_point(class_scope:protbuf.LogoutRequest)
  private:
   inline void set_has_logout();
   inline void clear_has_logout();
@@ -302,14 +302,14 @@ class LoginResponse : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
-  // required .user.Replay replay = 2;
+  // required .protbuf.Replay replay = 2;
   inline bool has_replay() const;
   inline void clear_replay();
   static const int kReplayFieldNumber = 2;
-  inline ::user::Replay replay() const;
-  inline void set_replay(::user::Replay value);
+  inline ::protbuf::Replay replay() const;
+  inline void set_replay(::protbuf::Replay value);
 
-  // @@protoc_insertion_point(class_scope:user.LoginResponse)
+  // @@protoc_insertion_point(class_scope:protbuf.LoginResponse)
  private:
   inline void set_has_replay();
   inline void clear_has_replay();
@@ -469,7 +469,7 @@ class Register : public ::google::protobuf::MessageLite {
   inline ::std::string* release_avatar();
   inline void set_allocated_avatar(::std::string* avatar);
 
-  // @@protoc_insertion_point(class_scope:user.Register)
+  // @@protoc_insertion_point(class_scope:protbuf.Register)
  private:
   inline void set_has_name();
   inline void clear_has_name();
@@ -563,17 +563,17 @@ class RegisterResponse : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
-  // repeated .user.Replay replay = 3;
+  // repeated .protbuf.Replay replay = 3;
   inline int replay_size() const;
   inline void clear_replay();
   static const int kReplayFieldNumber = 3;
-  inline ::user::Replay replay(int index) const;
-  inline void set_replay(int index, ::user::Replay value);
-  inline void add_replay(::user::Replay value);
+  inline ::protbuf::Replay replay(int index) const;
+  inline void set_replay(int index, ::protbuf::Replay value);
+  inline void add_replay(::protbuf::Replay value);
   inline const ::google::protobuf::RepeatedField<int>& replay() const;
   inline ::google::protobuf::RepeatedField<int>* mutable_replay();
 
-  // @@protoc_insertion_point(class_scope:user.RegisterResponse)
+  // @@protoc_insertion_point(class_scope:protbuf.RegisterResponse)
  private:
 
   ::google::protobuf::RepeatedField<int> replay_;
@@ -690,7 +690,7 @@ class UserBasicInformation : public ::google::protobuf::MessageLite {
   inline ::std::string* release_address();
   inline void set_allocated_address(::std::string* address);
 
-  // @@protoc_insertion_point(class_scope:user.UserBasicInformation)
+  // @@protoc_insertion_point(class_scope:protbuf.UserBasicInformation)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -806,16 +806,16 @@ class UserData : public ::google::protobuf::MessageLite {
   inline ::std::string* release_email();
   inline void set_allocated_email(::std::string* email);
 
-  // repeated .storage.Storage storages = 11;
+  // repeated .protbuf.Storage storages = 11;
   inline int storages_size() const;
   inline void clear_storages();
   static const int kStoragesFieldNumber = 11;
-  inline const ::storage::Storage& storages(int index) const;
-  inline ::storage::Storage* mutable_storages(int index);
-  inline ::storage::Storage* add_storages();
-  inline const ::google::protobuf::RepeatedPtrField< ::storage::Storage >&
+  inline const ::protbuf::Storage& storages(int index) const;
+  inline ::protbuf::Storage* mutable_storages(int index);
+  inline ::protbuf::Storage* add_storages();
+  inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Storage >&
       storages() const;
-  inline ::google::protobuf::RepeatedPtrField< ::storage::Storage >*
+  inline ::google::protobuf::RepeatedPtrField< ::protbuf::Storage >*
       mutable_storages();
 
   // optional string address = 5;
@@ -868,14 +868,14 @@ class UserData : public ::google::protobuf::MessageLite {
   inline ::std::string* release_config();
   inline void set_allocated_config(::std::string* config);
 
-  // optional .user.UserActivityStatistics stats = 10;
+  // optional .protbuf.UserActivityStatistics stats = 10;
   inline bool has_stats() const;
   inline void clear_stats();
   static const int kStatsFieldNumber = 10;
-  inline const ::user::UserActivityStatistics& stats() const;
-  inline ::user::UserActivityStatistics* mutable_stats();
-  inline ::user::UserActivityStatistics* release_stats();
-  inline void set_allocated_stats(::user::UserActivityStatistics* stats);
+  inline const ::protbuf::UserActivityStatistics& stats() const;
+  inline ::protbuf::UserActivityStatistics* mutable_stats();
+  inline ::protbuf::UserActivityStatistics* release_stats();
+  inline void set_allocated_stats(::protbuf::UserActivityStatistics* stats);
 
   // optional bytes description = 12;
   inline bool has_description() const;
@@ -889,7 +889,7 @@ class UserData : public ::google::protobuf::MessageLite {
   inline ::std::string* release_description();
   inline void set_allocated_description(::std::string* description);
 
-  // @@protoc_insertion_point(class_scope:user.UserData)
+  // @@protoc_insertion_point(class_scope:protbuf.UserData)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -914,13 +914,13 @@ class UserData : public ::google::protobuf::MessageLite {
 
   ::std::string* name_;
   ::std::string* email_;
-  ::google::protobuf::RepeatedPtrField< ::storage::Storage > storages_;
+  ::google::protobuf::RepeatedPtrField< ::protbuf::Storage > storages_;
   ::std::string* address_;
   ::std::string* phonenumber_;
   ::google::protobuf::uint64 lastlogin_;
   ::google::protobuf::uint64 registrationdate_;
   ::std::string* config_;
-  ::user::UserActivityStatistics* stats_;
+  ::protbuf::UserActivityStatistics* stats_;
   ::std::string* description_;
   ::google::protobuf::uint32 id_;
 
@@ -1035,7 +1035,7 @@ class UserActivityStatistics : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::uint32 totaladditems() const;
   inline void set_totaladditems(::google::protobuf::uint32 value);
 
-  // @@protoc_insertion_point(class_scope:user.UserActivityStatistics)
+  // @@protoc_insertion_point(class_scope:protbuf.UserActivityStatistics)
  private:
   inline void set_has_magazinecount();
   inline void clear_has_magazinecount();
@@ -1248,7 +1248,7 @@ inline void LogoutRequest::set_logout(bool value) {
 
 // LoginResponse
 
-// required .user.Replay replay = 2;
+// required .protbuf.Replay replay = 2;
 inline bool LoginResponse::has_replay() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1262,11 +1262,11 @@ inline void LoginResponse::clear_replay() {
   replay_ = 1;
   clear_has_replay();
 }
-inline ::user::Replay LoginResponse::replay() const {
-  return static_cast< ::user::Replay >(replay_);
+inline ::protbuf::Replay LoginResponse::replay() const {
+  return static_cast< ::protbuf::Replay >(replay_);
 }
-inline void LoginResponse::set_replay(::user::Replay value) {
-  assert(::user::Replay_IsValid(value));
+inline void LoginResponse::set_replay(::protbuf::Replay value) {
+  assert(::protbuf::Replay_IsValid(value));
   set_has_replay();
   replay_ = value;
 }
@@ -1769,22 +1769,22 @@ inline void Register::set_allocated_avatar(::std::string* avatar) {
 
 // RegisterResponse
 
-// repeated .user.Replay replay = 3;
+// repeated .protbuf.Replay replay = 3;
 inline int RegisterResponse::replay_size() const {
   return replay_.size();
 }
 inline void RegisterResponse::clear_replay() {
   replay_.Clear();
 }
-inline ::user::Replay RegisterResponse::replay(int index) const {
-  return static_cast< ::user::Replay >(replay_.Get(index));
+inline ::protbuf::Replay RegisterResponse::replay(int index) const {
+  return static_cast< ::protbuf::Replay >(replay_.Get(index));
 }
-inline void RegisterResponse::set_replay(int index, ::user::Replay value) {
-  assert(::user::Replay_IsValid(value));
+inline void RegisterResponse::set_replay(int index, ::protbuf::Replay value) {
+  assert(::protbuf::Replay_IsValid(value));
   replay_.Set(index, value);
 }
-inline void RegisterResponse::add_replay(::user::Replay value) {
-  assert(::user::Replay_IsValid(value));
+inline void RegisterResponse::add_replay(::protbuf::Replay value) {
+  assert(::protbuf::Replay_IsValid(value));
   replay_.Add(value);
 }
 inline const ::google::protobuf::RepeatedField<int>&
@@ -2198,27 +2198,27 @@ inline void UserData::set_allocated_email(::std::string* email) {
   }
 }
 
-// repeated .storage.Storage storages = 11;
+// repeated .protbuf.Storage storages = 11;
 inline int UserData::storages_size() const {
   return storages_.size();
 }
 inline void UserData::clear_storages() {
   storages_.Clear();
 }
-inline const ::storage::Storage& UserData::storages(int index) const {
+inline const ::protbuf::Storage& UserData::storages(int index) const {
   return storages_.Get(index);
 }
-inline ::storage::Storage* UserData::mutable_storages(int index) {
+inline ::protbuf::Storage* UserData::mutable_storages(int index) {
   return storages_.Mutable(index);
 }
-inline ::storage::Storage* UserData::add_storages() {
+inline ::protbuf::Storage* UserData::add_storages() {
   return storages_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::storage::Storage >&
+inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Storage >&
 UserData::storages() const {
   return storages_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::storage::Storage >*
+inline ::google::protobuf::RepeatedPtrField< ::protbuf::Storage >*
 UserData::mutable_storages() {
   return &storages_;
 }
@@ -2477,7 +2477,7 @@ inline void UserData::set_allocated_config(::std::string* config) {
   }
 }
 
-// optional .user.UserActivityStatistics stats = 10;
+// optional .protbuf.UserActivityStatistics stats = 10;
 inline bool UserData::has_stats() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
@@ -2488,28 +2488,28 @@ inline void UserData::clear_has_stats() {
   _has_bits_[0] &= ~0x00000200u;
 }
 inline void UserData::clear_stats() {
-  if (stats_ != NULL) stats_->::user::UserActivityStatistics::Clear();
+  if (stats_ != NULL) stats_->::protbuf::UserActivityStatistics::Clear();
   clear_has_stats();
 }
-inline const ::user::UserActivityStatistics& UserData::stats() const {
+inline const ::protbuf::UserActivityStatistics& UserData::stats() const {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   return stats_ != NULL ? *stats_ : *default_instance().stats_;
 #else
   return stats_ != NULL ? *stats_ : *default_instance_->stats_;
 #endif
 }
-inline ::user::UserActivityStatistics* UserData::mutable_stats() {
+inline ::protbuf::UserActivityStatistics* UserData::mutable_stats() {
   set_has_stats();
-  if (stats_ == NULL) stats_ = new ::user::UserActivityStatistics;
+  if (stats_ == NULL) stats_ = new ::protbuf::UserActivityStatistics;
   return stats_;
 }
-inline ::user::UserActivityStatistics* UserData::release_stats() {
+inline ::protbuf::UserActivityStatistics* UserData::release_stats() {
   clear_has_stats();
-  ::user::UserActivityStatistics* temp = stats_;
+  ::protbuf::UserActivityStatistics* temp = stats_;
   stats_ = NULL;
   return temp;
 }
-inline void UserData::set_allocated_stats(::user::UserActivityStatistics* stats) {
+inline void UserData::set_allocated_stats(::protbuf::UserActivityStatistics* stats) {
   delete stats_;
   stats_ = stats;
   if (stats) {
@@ -2728,7 +2728,7 @@ inline void UserActivityStatistics::set_totaladditems(::google::protobuf::uint32
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace user
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)
 

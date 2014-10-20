@@ -1,5 +1,5 @@
 option optimize_for = LITE_RUNTIME;
-package storage;
+package protbuf;
 
 message StorageBasicInformation{
 	required uint32 id = 1;

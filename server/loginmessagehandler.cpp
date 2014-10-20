@@ -17,13 +17,13 @@ void LoginMessageHandler::processData()
     bool loginOk = database.checkUserPassword(userName, pass.toHex() );
 
     if(loginOk){
-        res.set_replay(user::Replay::LoginPass);
+        res.set_replay(protbuf::Replay::LoginPass);
         getUserData();
         updateLastLogin();
         qDebug()<<" login succesfull";
     }
     else{
-        res.set_replay(user::Replay::LoginDeny);
+        res.set_replay(protbuf::Replay::LoginDeny);
         qDebug()<<" bad user or password";
     }
 

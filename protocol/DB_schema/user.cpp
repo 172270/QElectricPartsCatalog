@@ -4,17 +4,17 @@ User::User():
     defaultStorageID(0)
 {
     set_id(0);
-    user::UserData::set_config(QString(getDefaultConfig()).toStdString() );
+    protbuf::UserData::set_config(QString(getDefaultConfig()).toStdString() );
 }
 
 void User::set_name(const QString &name)
 {
-    user::UserData::set_name(name.trimmed().toStdString());
+    protbuf::UserData::set_name(name.trimmed().toStdString());
 }
 
 void User::set_name(const std::string & name)
 {
-    user::UserData::set_name(name);
+    protbuf::UserData::set_name(name);
 }
 
 QString User::getName() const
@@ -34,12 +34,12 @@ void User::set_email(const QString &value)
     //        throw QString("Invalid email address!");
     //    }
     //    else
-    user::UserData::set_email(value.trimmed().toStdString());
+    protbuf::UserData::set_email(value.trimmed().toStdString());
 }
 
 void User::set_email(const std::string &email)
 {
-    user::UserData::set_email(email); ///TODO test for trimmed
+    protbuf::UserData::set_email(email); ///TODO test for trimmed
 }
 
 QString User::getEmail() const
@@ -66,7 +66,7 @@ void User::addStorage(const Storage &s )
 {
     if (!s.IsInitialized() )
         throw QString("storage is not initialized!");
-    storage::Storage *store = add_storages();
+    protbuf::Storage *store = add_storages();
     store->CopyFrom(s);
 }
 
@@ -95,7 +95,7 @@ int User::storagesNumber() const{ return storages_size();}
 
 void User::set_phonenumber(const QString &number)
 {
-    user::UserData::set_phonenumber(number.toStdString());
+    protbuf::UserData::set_phonenumber(number.toStdString());
 }
 
 QString User::getPhoneNumber() const
@@ -104,12 +104,12 @@ QString User::getPhoneNumber() const
 }
 
 void User::set_lastlogin(QDateTime lastlogin){
-    user::UserData::set_lastlogin(lastlogin.toMSecsSinceEpoch());
+    protbuf::UserData::set_lastlogin(lastlogin.toMSecsSinceEpoch());
 }
 
 void User::set_registrationdate(QDateTime registrationDate)
 {
-    user::UserData::set_registrationdate(registrationDate.toMSecsSinceEpoch());
+    protbuf::UserData::set_registrationdate(registrationDate.toMSecsSinceEpoch());
 }
 
 QDateTime User::get_registrationdate()
@@ -119,7 +119,7 @@ QDateTime User::get_registrationdate()
 
 void User::setConfig(QByteArray conf)
 {
-    user::UserData::set_config(QString(conf).toStdString());
+    protbuf::UserData::set_config(QString(conf).toStdString());
 }
 
 QByteArray User::getDefaultConfig()
@@ -156,9 +156,9 @@ QByteArray *User::toArray(QByteArray *ba)
     return ba;
 }
 
-user::UserBasicInformation User::getPBPackage()
+protbuf::UserBasicInformation User::getPBPackage()
 {
-    user::UserBasicInformation ubi;
+    protbuf::UserBasicInformation ubi;
     ubi.set_name(name() );
     ubi.set_id(id() );
     ubi.set_email(email());

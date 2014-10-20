@@ -1,5 +1,5 @@
 option optimize_for = LITE_RUNTIME;
-package parameters;
+package protbuf;
 
 /// ptype_ prefix add to avoid names conflicts
 

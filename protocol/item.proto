@@ -1,5 +1,5 @@
 option optimize_for = LITE_RUNTIME;
-package item;
+package protbuf;
 
 import public "user.proto";
 import public "group.proto";
@@ -18,9 +18,9 @@ message Item{
     required string name_space = 4;
     required bool privateItem = 5;
     
-    required package.PackageBasicInformation package = 10;
-    required user.UserBasicInformation user = 11;
-    required groups.GroupBasicInformation group = 12;
+    required PackageBasicInformation package = 10;
+    required UserBasicInformation user = 11;
+    required GroupBasicInformation group = 12;
 
     required uint64 addDate = 14;
     required uint64 updateDate = 15;

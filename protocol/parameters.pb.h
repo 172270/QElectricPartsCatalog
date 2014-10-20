@@ -25,7 +25,7 @@
 #include <google/protobuf/extension_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace parameters {
+namespace protbuf {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_parameters_2eproto();
@@ -97,7 +97,7 @@ class ParameterBasicInformation : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // @@protoc_insertion_point(class_scope:parameters.ParameterBasicInformation)
+  // @@protoc_insertion_point(class_scope:protbuf.ParameterBasicInformation)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -204,7 +204,7 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline ::std::string* release_configdata();
   inline void set_allocated_configdata(::std::string* configdata);
 
-  // @@protoc_insertion_point(class_scope:parameters.Parameter)
+  // @@protoc_insertion_point(class_scope:protbuf.Parameter)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -429,7 +429,7 @@ inline void Parameter::set_allocated_configdata(::std::string* configdata) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace parameters
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)
 

@@ -21,31 +21,31 @@ void AddUserDialog::readyRead(QByteArray msg){
     for(int i = 0; i<mc.capsules().size();++i){
         if(mc.getCapsule(i).msgtype() == MsgType::resAddUser ){
             qDebug()<<" got add user response";
-            user::RegisterResponse res;
+            protbuf::RegisterResponse res;
             res.ParseFromString(mc.getCapsule(i).data());
             for(int j = 0 ; j<res.replay_size();j++){
-                if(res.replay(j) == user::Replay::EmailExists){
+                if(res.replay(j) == protbuf::Replay::EmailExists){
                     ui->status->setText("User email exists");
                 }
-                else if(res.replay(j) == user::Replay::EmailAddressToLong ){
+                else if(res.replay(j) == protbuf::Replay::EmailAddressToLong ){
                     ui->status->setText("Email to long");
                 }
-                else if(res.replay(j) == user::Replay::EmailNotValidate){
+                else if(res.replay(j) == protbuf::Replay::EmailNotValidate){
                     ui->status->setText("Email not validate");
                 }
-                else if(res.replay(j) == user::Replay::UserNameToLong){
+                else if(res.replay(j) == protbuf::Replay::UserNameToLong){
                     ui->status->setText("User name to long");
                 }
-                else if(res.replay(j) == user::Replay::UserNameToShort){
+                else if(res.replay(j) == protbuf::Replay::UserNameToShort){
                     ui->status->setText("User name to short");
                 }
-                else if(res.replay(j) == user::Replay::PasswordToShort){
+                else if(res.replay(j) == protbuf::Replay::PasswordToShort){
                     ui->status->setText("User has to short password");
                 }
-                else if(res.replay(j) == user::Replay::UserAlreadyExists){
+                else if(res.replay(j) == protbuf::Replay::UserAlreadyExists){
                     ui->status->setText("User name exists");
                 }
-                else if (res.replay(j) == user::Replay::UserAddOk ){
+                else if (res.replay(j) == protbuf::Replay::UserAddOk ){
                     ui->status->setText("USER CREATED!!");
                 }
             }

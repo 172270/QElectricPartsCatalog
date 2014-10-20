@@ -5,9 +5,9 @@ Package::Package()
     set_id(0);
 }
 
-package::PackageBasicInformation Package::getPackageBasicInformation()
+protbuf::PackageBasicInformation Package::getPackageBasicInformation()
 {
-    package::PackageBasicInformation pbi;
+    protbuf::PackageBasicInformation pbi;
     pbi.set_id(id());
     return pbi;
 }

@@ -25,7 +25,7 @@
 #include <google/protobuf/extension_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace package {
+namespace protbuf {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_package_2eproto();
@@ -97,7 +97,7 @@ class PackageBasicInformation : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // @@protoc_insertion_point(class_scope:package.PackageBasicInformation)
+  // @@protoc_insertion_point(class_scope:protbuf.PackageBasicInformation)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -223,7 +223,7 @@ class Package : public ::google::protobuf::MessageLite {
   inline ::std::string* release_config();
   inline void set_allocated_config(::std::string* config);
 
-  // @@protoc_insertion_point(class_scope:package.Package)
+  // @@protoc_insertion_point(class_scope:protbuf.Package)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -546,7 +546,7 @@ inline void Package::set_allocated_config(::std::string* config) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace package
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)
 

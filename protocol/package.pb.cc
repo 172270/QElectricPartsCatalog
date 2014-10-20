@@ -12,7 +12,7 @@
 #include <google/protobuf/wire_format_lite_inl.h>
 // @@protoc_insertion_point(includes)
 
-namespace package {
+namespace protbuf {
 
 void protobuf_ShutdownFile_package_2eproto() {
   delete PackageBasicInformation::default_instance_;
@@ -217,7 +217,7 @@ void PackageBasicInformation::Swap(PackageBasicInformation* other) {
 }
 
 ::std::string PackageBasicInformation::GetTypeName() const {
-  return "package.PackageBasicInformation";
+  return "protbuf.PackageBasicInformation";
 }
 
 
@@ -543,12 +543,12 @@ void Package::Swap(Package* other) {
 }
 
 ::std::string Package::GetTypeName() const {
-  return "package.Package";
+  return "protbuf.Package";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace package
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)

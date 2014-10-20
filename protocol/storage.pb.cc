@@ -12,7 +12,7 @@
 #include <google/protobuf/wire_format_lite_inl.h>
 // @@protoc_insertion_point(includes)
 
-namespace storage {
+namespace protbuf {
 
 void protobuf_ShutdownFile_storage_2eproto() {
   delete StorageBasicInformation::default_instance_;
@@ -220,7 +220,7 @@ void StorageBasicInformation::Swap(StorageBasicInformation* other) {
 }
 
 ::std::string StorageBasicInformation::GetTypeName() const {
-  return "storage.StorageBasicInformation";
+  return "protbuf.StorageBasicInformation";
 }
 
 
@@ -423,7 +423,7 @@ void StorageStatistics::Swap(StorageStatistics* other) {
 }
 
 ::std::string StorageStatistics::GetTypeName() const {
-  return "storage.StorageStatistics";
+  return "protbuf.StorageStatistics";
 }
 
 
@@ -445,10 +445,10 @@ Storage::Storage()
 
 void Storage::InitAsDefaultInstance() {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  stats_ = const_cast< ::storage::StorageStatistics*>(
-      ::storage::StorageStatistics::internal_default_instance());
+  stats_ = const_cast< ::protbuf::StorageStatistics*>(
+      ::protbuf::StorageStatistics::internal_default_instance());
 #else
-  stats_ = const_cast< ::storage::StorageStatistics*>(&::storage::StorageStatistics::default_instance());
+  stats_ = const_cast< ::protbuf::StorageStatistics*>(&::protbuf::StorageStatistics::default_instance());
 #endif
 }
 
@@ -525,7 +525,7 @@ void Storage::Clear() {
       }
     }
     if (has_stats()) {
-      if (stats_ != NULL) stats_->::storage::StorageStatistics::Clear();
+      if (stats_ != NULL) stats_->::protbuf::StorageStatistics::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -612,7 +612,7 @@ bool Storage::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .storage.StorageStatistics stats = 8;
+      // optional .protbuf.StorageStatistics stats = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -670,7 +670,7 @@ void Storage::SerializeWithCachedSizes(
       7, this->description(), output);
   }
 
-  // optional .storage.StorageStatistics stats = 8;
+  // optional .protbuf.StorageStatistics stats = 8;
   if (has_stats()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       8, this->stats(), output);
@@ -715,7 +715,7 @@ int Storage::ByteSize() const {
           this->description());
     }
 
-    // optional .storage.StorageStatistics stats = 8;
+    // optional .protbuf.StorageStatistics stats = 8;
     if (has_stats()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -753,7 +753,7 @@ void Storage::MergeFrom(const Storage& from) {
       set_description(from.description());
     }
     if (from.has_stats()) {
-      mutable_stats()->::storage::StorageStatistics::MergeFrom(from.stats());
+      mutable_stats()->::protbuf::StorageStatistics::MergeFrom(from.stats());
     }
   }
 }
@@ -787,12 +787,12 @@ void Storage::Swap(Storage* other) {
 }
 
 ::std::string Storage::GetTypeName() const {
-  return "storage.Storage";
+  return "protbuf.Storage";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace storage
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)

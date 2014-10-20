@@ -15,8 +15,8 @@ public:
     QByteArray getResponse();
 private:
     PgInterface database;
-    user::Register req;
-    user::RegisterResponse res;
+    protbuf::Register req;
+    protbuf::RegisterResponse res;
 };
 
 QT_BEGIN_NAMESPACE

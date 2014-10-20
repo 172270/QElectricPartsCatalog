@@ -10,7 +10,7 @@
 #include "group.pb.h"
 #include "DB_schema/parameter.h"
 
-class Group : public groups::Group
+class Group : public protbuf::Group
 {
 public:
     void set_name(const QString &name);
@@ -33,9 +33,9 @@ public:
     void set_creationdate(QDateTime &&dt);
 
     void add_parameter(const Parameter &parameter);
-    QList<parameters::ParameterBasicInformation> getParameters() const;
+    QList<protbuf::ParameterBasicInformation> getParameters() const;
 
-    groups::GroupBasicInformation getGroupBasicInfoPB();
+    protbuf::GroupBasicInformation getGroupBasicInfoPB();
     Group();
 private:
 };

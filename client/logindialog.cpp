@@ -76,12 +76,12 @@ void LoginDialog::readyRead(QByteArray msg){
     for(int i = 0; i<mc.capsules().size();++i)
         if(mc.getCapsule(i).msgtype() == MsgType::resLogin ){
             qDebug()<<" got login response";
-            user::LoginResponse res;
+            protbuf::LoginResponse res;
             res.ParseFromString(mc.getCapsule(i).data());
-            if(res.replay() == user::Replay::LoginPass){
+            if(res.replay() == protbuf::Replay::LoginPass){
                 emit loginOk();
             }
-            else if(res.replay() == user::Replay::LoginDeny ){
+            else if(res.replay() == protbuf::Replay::LoginDeny ){
                 emit loginFailure();
             }
         }

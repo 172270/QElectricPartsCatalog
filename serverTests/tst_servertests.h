@@ -34,6 +34,7 @@ private Q_SLOTS:
     void addBasicUserToServer();
 
     void loginToServer();
+    void loginChangesUserStatus();
     void logoutFromServer();
     void loginWhileLogged();
     void logoutWhileNotLoged();

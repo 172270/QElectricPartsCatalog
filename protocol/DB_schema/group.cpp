@@ -2,7 +2,7 @@
 
 void Group::set_name(const QString &name)
 {
-    groups::Group::set_name(name.toStdString());
+    protbuf::Group::set_name(name.toStdString());
 }
 
 QString Group::getName() const
@@ -47,7 +47,7 @@ void Group::setAllowItems(bool allow)
 
 void Group::set_description(const QString &desc)
 {
-    groups::Group::set_description(desc.toStdString());
+    protbuf::Group::set_description(desc.toStdString());
 }
 
 QString Group::getDescription() const
@@ -57,7 +57,7 @@ QString Group::getDescription() const
 
 void Group::set_creationdate(QDateTime &&dt)
 {
-    groups::Group::set_creationdate(dt.toMSecsSinceEpoch());
+    protbuf::Group::set_creationdate(dt.toMSecsSinceEpoch());
 }
 
 void Group::add_parameter(const Parameter &parameter)
@@ -65,9 +65,9 @@ void Group::add_parameter(const Parameter &parameter)
     add_parameters()->set_id( parameter.id() );
 }
 
-QList<parameters::ParameterBasicInformation> Group::getParameters() const
+QList<protbuf::ParameterBasicInformation> Group::getParameters() const
 {
-    QList<parameters::ParameterBasicInformation> list;
+    QList<protbuf::ParameterBasicInformation> list;
     int paramNumber = parameters().size()-1;
 
     for(;paramNumber>=0;--paramNumber)
@@ -75,8 +75,8 @@ QList<parameters::ParameterBasicInformation> Group::getParameters() const
     return list;
 }
 
-groups::GroupBasicInformation Group::getGroupBasicInfoPB(){
-    groups::GroupBasicInformation gbi;
+protbuf::GroupBasicInformation Group::getGroupBasicInfoPB(){
+    protbuf::GroupBasicInformation gbi;
     gbi.set_id(id());
     return gbi;
 }

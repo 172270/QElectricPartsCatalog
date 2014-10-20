@@ -35,7 +35,7 @@ QString Storage::getName() const
 
 void Storage::set_name(const QString &value)
 {
-    storage::Storage::set_name(value.trimmed().toStdString());
+    protbuf::Storage::set_name(value.trimmed().toStdString());
 }
 
 quint32 Storage::getID() const

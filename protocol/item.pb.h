@@ -29,7 +29,7 @@
 #include "parameters.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace item {
+namespace protbuf {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_item_2eproto();
@@ -113,7 +113,7 @@ class ItemParameters : public ::google::protobuf::MessageLite {
   inline ::std::string* release_value();
   inline void set_allocated_value(::std::string* value);
 
-  // @@protoc_insertion_point(class_scope:item.ItemParameters)
+  // @@protoc_insertion_point(class_scope:protbuf.ItemParameters)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -242,32 +242,32 @@ class Item : public ::google::protobuf::MessageLite {
   inline bool privateitem() const;
   inline void set_privateitem(bool value);
 
-  // required .package.PackageBasicInformation package = 10;
+  // required .protbuf.PackageBasicInformation package = 10;
   inline bool has_package() const;
   inline void clear_package();
   static const int kPackageFieldNumber = 10;
-  inline const ::package::PackageBasicInformation& package() const;
-  inline ::package::PackageBasicInformation* mutable_package();
-  inline ::package::PackageBasicInformation* release_package();
-  inline void set_allocated_package(::package::PackageBasicInformation* package);
+  inline const ::protbuf::PackageBasicInformation& package() const;
+  inline ::protbuf::PackageBasicInformation* mutable_package();
+  inline ::protbuf::PackageBasicInformation* release_package();
+  inline void set_allocated_package(::protbuf::PackageBasicInformation* package);
 
-  // required .user.UserBasicInformation user = 11;
+  // required .protbuf.UserBasicInformation user = 11;
   inline bool has_user() const;
   inline void clear_user();
   static const int kUserFieldNumber = 11;
-  inline const ::user::UserBasicInformation& user() const;
-  inline ::user::UserBasicInformation* mutable_user();
-  inline ::user::UserBasicInformation* release_user();
-  inline void set_allocated_user(::user::UserBasicInformation* user);
+  inline const ::protbuf::UserBasicInformation& user() const;
+  inline ::protbuf::UserBasicInformation* mutable_user();
+  inline ::protbuf::UserBasicInformation* release_user();
+  inline void set_allocated_user(::protbuf::UserBasicInformation* user);
 
-  // required .groups.GroupBasicInformation group = 12;
+  // required .protbuf.GroupBasicInformation group = 12;
   inline bool has_group() const;
   inline void clear_group();
   static const int kGroupFieldNumber = 12;
-  inline const ::groups::GroupBasicInformation& group() const;
-  inline ::groups::GroupBasicInformation* mutable_group();
-  inline ::groups::GroupBasicInformation* release_group();
-  inline void set_allocated_group(::groups::GroupBasicInformation* group);
+  inline const ::protbuf::GroupBasicInformation& group() const;
+  inline ::protbuf::GroupBasicInformation* mutable_group();
+  inline ::protbuf::GroupBasicInformation* release_group();
+  inline void set_allocated_group(::protbuf::GroupBasicInformation* group);
 
   // required uint64 addDate = 14;
   inline bool has_adddate() const;
@@ -295,19 +295,19 @@ class Item : public ::google::protobuf::MessageLite {
   inline ::std::string* release_description();
   inline void set_allocated_description(::std::string* description);
 
-  // repeated .item.ItemParameters parameters = 20;
+  // repeated .protbuf.ItemParameters parameters = 20;
   inline int parameters_size() const;
   inline void clear_parameters();
   static const int kParametersFieldNumber = 20;
-  inline const ::item::ItemParameters& parameters(int index) const;
-  inline ::item::ItemParameters* mutable_parameters(int index);
-  inline ::item::ItemParameters* add_parameters();
-  inline const ::google::protobuf::RepeatedPtrField< ::item::ItemParameters >&
+  inline const ::protbuf::ItemParameters& parameters(int index) const;
+  inline ::protbuf::ItemParameters* mutable_parameters(int index);
+  inline ::protbuf::ItemParameters* add_parameters();
+  inline const ::google::protobuf::RepeatedPtrField< ::protbuf::ItemParameters >&
       parameters() const;
-  inline ::google::protobuf::RepeatedPtrField< ::item::ItemParameters >*
+  inline ::google::protobuf::RepeatedPtrField< ::protbuf::ItemParameters >*
       mutable_parameters();
 
-  // @@protoc_insertion_point(class_scope:item.Item)
+  // @@protoc_insertion_point(class_scope:protbuf.Item)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -337,13 +337,13 @@ class Item : public ::google::protobuf::MessageLite {
   ::google::protobuf::uint32 id_;
   bool privateitem_;
   ::std::string* name_space_;
-  ::package::PackageBasicInformation* package_;
-  ::user::UserBasicInformation* user_;
-  ::groups::GroupBasicInformation* group_;
+  ::protbuf::PackageBasicInformation* package_;
+  ::protbuf::UserBasicInformation* user_;
+  ::protbuf::GroupBasicInformation* group_;
   ::google::protobuf::uint64 adddate_;
   ::google::protobuf::uint64 updatedate_;
   ::std::string* description_;
-  ::google::protobuf::RepeatedPtrField< ::item::ItemParameters > parameters_;
+  ::google::protobuf::RepeatedPtrField< ::protbuf::ItemParameters > parameters_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(12 + 31) / 32];
@@ -716,7 +716,7 @@ inline void Item::set_privateitem(bool value) {
   privateitem_ = value;
 }
 
-// required .package.PackageBasicInformation package = 10;
+// required .protbuf.PackageBasicInformation package = 10;
 inline bool Item::has_package() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -727,28 +727,28 @@ inline void Item::clear_has_package() {
   _has_bits_[0] &= ~0x00000020u;
 }
 inline void Item::clear_package() {
-  if (package_ != NULL) package_->::package::PackageBasicInformation::Clear();
+  if (package_ != NULL) package_->::protbuf::PackageBasicInformation::Clear();
   clear_has_package();
 }
-inline const ::package::PackageBasicInformation& Item::package() const {
+inline const ::protbuf::PackageBasicInformation& Item::package() const {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   return package_ != NULL ? *package_ : *default_instance().package_;
 #else
   return package_ != NULL ? *package_ : *default_instance_->package_;
 #endif
 }
-inline ::package::PackageBasicInformation* Item::mutable_package() {
+inline ::protbuf::PackageBasicInformation* Item::mutable_package() {
   set_has_package();
-  if (package_ == NULL) package_ = new ::package::PackageBasicInformation;
+  if (package_ == NULL) package_ = new ::protbuf::PackageBasicInformation;
   return package_;
 }
-inline ::package::PackageBasicInformation* Item::release_package() {
+inline ::protbuf::PackageBasicInformation* Item::release_package() {
   clear_has_package();
-  ::package::PackageBasicInformation* temp = package_;
+  ::protbuf::PackageBasicInformation* temp = package_;
   package_ = NULL;
   return temp;
 }
-inline void Item::set_allocated_package(::package::PackageBasicInformation* package) {
+inline void Item::set_allocated_package(::protbuf::PackageBasicInformation* package) {
   delete package_;
   package_ = package;
   if (package) {
@@ -758,7 +758,7 @@ inline void Item::set_allocated_package(::package::PackageBasicInformation* pack
   }
 }
 
-// required .user.UserBasicInformation user = 11;
+// required .protbuf.UserBasicInformation user = 11;
 inline bool Item::has_user() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -769,28 +769,28 @@ inline void Item::clear_has_user() {
   _has_bits_[0] &= ~0x00000040u;
 }
 inline void Item::clear_user() {
-  if (user_ != NULL) user_->::user::UserBasicInformation::Clear();
+  if (user_ != NULL) user_->::protbuf::UserBasicInformation::Clear();
   clear_has_user();
 }
-inline const ::user::UserBasicInformation& Item::user() const {
+inline const ::protbuf::UserBasicInformation& Item::user() const {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   return user_ != NULL ? *user_ : *default_instance().user_;
 #else
   return user_ != NULL ? *user_ : *default_instance_->user_;
 #endif
 }
-inline ::user::UserBasicInformation* Item::mutable_user() {
+inline ::protbuf::UserBasicInformation* Item::mutable_user() {
   set_has_user();
-  if (user_ == NULL) user_ = new ::user::UserBasicInformation;
+  if (user_ == NULL) user_ = new ::protbuf::UserBasicInformation;
   return user_;
 }
-inline ::user::UserBasicInformation* Item::release_user() {
+inline ::protbuf::UserBasicInformation* Item::release_user() {
   clear_has_user();
-  ::user::UserBasicInformation* temp = user_;
+  ::protbuf::UserBasicInformation* temp = user_;
   user_ = NULL;
   return temp;
 }
-inline void Item::set_allocated_user(::user::UserBasicInformation* user) {
+inline void Item::set_allocated_user(::protbuf::UserBasicInformation* user) {
   delete user_;
   user_ = user;
   if (user) {
@@ -800,7 +800,7 @@ inline void Item::set_allocated_user(::user::UserBasicInformation* user) {
   }
 }
 
-// required .groups.GroupBasicInformation group = 12;
+// required .protbuf.GroupBasicInformation group = 12;
 inline bool Item::has_group() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -811,28 +811,28 @@ inline void Item::clear_has_group() {
   _has_bits_[0] &= ~0x00000080u;
 }
 inline void Item::clear_group() {
-  if (group_ != NULL) group_->::groups::GroupBasicInformation::Clear();
+  if (group_ != NULL) group_->::protbuf::GroupBasicInformation::Clear();
   clear_has_group();
 }
-inline const ::groups::GroupBasicInformation& Item::group() const {
+inline const ::protbuf::GroupBasicInformation& Item::group() const {
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   return group_ != NULL ? *group_ : *default_instance().group_;
 #else
   return group_ != NULL ? *group_ : *default_instance_->group_;
 #endif
 }
-inline ::groups::GroupBasicInformation* Item::mutable_group() {
+inline ::protbuf::GroupBasicInformation* Item::mutable_group() {
   set_has_group();
-  if (group_ == NULL) group_ = new ::groups::GroupBasicInformation;
+  if (group_ == NULL) group_ = new ::protbuf::GroupBasicInformation;
   return group_;
 }
-inline ::groups::GroupBasicInformation* Item::release_group() {
+inline ::protbuf::GroupBasicInformation* Item::release_group() {
   clear_has_group();
-  ::groups::GroupBasicInformation* temp = group_;
+  ::protbuf::GroupBasicInformation* temp = group_;
   group_ = NULL;
   return temp;
 }
-inline void Item::set_allocated_group(::groups::GroupBasicInformation* group) {
+inline void Item::set_allocated_group(::protbuf::GroupBasicInformation* group) {
   delete group_;
   group_ = group;
   if (group) {
@@ -956,27 +956,27 @@ inline void Item::set_allocated_description(::std::string* description) {
   }
 }
 
-// repeated .item.ItemParameters parameters = 20;
+// repeated .protbuf.ItemParameters parameters = 20;
 inline int Item::parameters_size() const {
   return parameters_.size();
 }
 inline void Item::clear_parameters() {
   parameters_.Clear();
 }
-inline const ::item::ItemParameters& Item::parameters(int index) const {
+inline const ::protbuf::ItemParameters& Item::parameters(int index) const {
   return parameters_.Get(index);
 }
-inline ::item::ItemParameters* Item::mutable_parameters(int index) {
+inline ::protbuf::ItemParameters* Item::mutable_parameters(int index) {
   return parameters_.Mutable(index);
 }
-inline ::item::ItemParameters* Item::add_parameters() {
+inline ::protbuf::ItemParameters* Item::add_parameters() {
   return parameters_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::item::ItemParameters >&
+inline const ::google::protobuf::RepeatedPtrField< ::protbuf::ItemParameters >&
 Item::parameters() const {
   return parameters_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::item::ItemParameters >*
+inline ::google::protobuf::RepeatedPtrField< ::protbuf::ItemParameters >*
 Item::mutable_parameters() {
   return &parameters_;
 }
@@ -984,7 +984,7 @@ Item::mutable_parameters() {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace item
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)
 

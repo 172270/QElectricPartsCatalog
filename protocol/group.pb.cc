@@ -12,7 +12,7 @@
 #include <google/protobuf/wire_format_lite_inl.h>
 // @@protoc_insertion_point(includes)
 
-namespace groups {
+namespace protbuf {
 
 void protobuf_ShutdownFile_group_2eproto() {
   delete GroupBasicInformation::default_instance_;
@@ -31,7 +31,7 @@ void protobuf_AddDesc_group_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 #endif
-  ::parameters::protobuf_AddDesc_parameters_2eproto();
+  ::protbuf::protobuf_AddDesc_parameters_2eproto();
   GroupBasicInformation::default_instance_ = new GroupBasicInformation();
   Group::default_instance_ = new Group();
   GroupBasicInformation::default_instance_->InitAsDefaultInstance();
@@ -218,7 +218,7 @@ void GroupBasicInformation::Swap(GroupBasicInformation* other) {
 }
 
 ::std::string GroupBasicInformation::GetTypeName() const {
-  return "groups.GroupBasicInformation";
+  return "protbuf.GroupBasicInformation";
 }
 
 
@@ -405,7 +405,7 @@ bool Group::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .parameters.ParameterBasicInformation parameters = 8;
+      // repeated .protbuf.ParameterBasicInformation parameters = 8;
       case 8: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -493,7 +493,7 @@ void Group::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(7, this->allowitems(), output);
   }
 
-  // repeated .parameters.ParameterBasicInformation parameters = 8;
+  // repeated .protbuf.ParameterBasicInformation parameters = 8;
   for (int i = 0; i < this->parameters_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       8, this->parameters(i), output);
@@ -562,7 +562,7 @@ int Group::ByteSize() const {
     }
 
   }
-  // repeated .parameters.ParameterBasicInformation parameters = 8;
+  // repeated .protbuf.ParameterBasicInformation parameters = 8;
   total_size += 1 * this->parameters_size();
   for (int i = 0; i < this->parameters_size(); i++) {
     total_size +=
@@ -640,12 +640,12 @@ void Group::Swap(Group* other) {
 }
 
 ::std::string Group::GetTypeName() const {
-  return "groups.Group";
+  return "protbuf.Group";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace groups
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)

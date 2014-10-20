@@ -12,7 +12,7 @@
 #include <google/protobuf/wire_format_lite_inl.h>
 // @@protoc_insertion_point(includes)
 
-namespace parameters {
+namespace protbuf {
 
 void protobuf_ShutdownFile_parameters_2eproto() {
   delete ParameterBasicInformation::default_instance_;
@@ -217,7 +217,7 @@ void ParameterBasicInformation::Swap(ParameterBasicInformation* other) {
 }
 
 ::std::string ParameterBasicInformation::GetTypeName() const {
-  return "parameters.ParameterBasicInformation";
+  return "protbuf.ParameterBasicInformation";
 }
 
 
@@ -467,12 +467,12 @@ void Parameter::Swap(Parameter* other) {
 }
 
 ::std::string Parameter::GetTypeName() const {
-  return "parameters.Parameter";
+  return "protbuf.Parameter";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace parameters
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)

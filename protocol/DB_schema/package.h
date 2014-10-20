@@ -9,12 +9,12 @@ public:
     QString toString(){return QString();}
 };
 
-class Package : public package::Package
+class Package : public protbuf::Package
 {
 public:
     Package();
 
-    package::PackageBasicInformation getPackageBasicInformation();
+    protbuf::PackageBasicInformation getPackageBasicInformation();
 
 
     QString getName() const { return QString::fromStdString(name());}

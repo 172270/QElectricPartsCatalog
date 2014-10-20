@@ -9,7 +9,7 @@
 
 class MessageCapsule;
 
-class MessagesContainer : public container::MessageContainer, public protocol::Message
+class MessagesContainer : public protbuf::MessageContainer, public protocol::Message
 {
 public:
     MessagesContainer();
@@ -28,11 +28,11 @@ protected:
     bool ParseFromArray(const void *data, int size);
 };
 
-class MessageCapsule : public container::MessageCapsule, public protocol::Message
+class MessageCapsule : public protbuf::MessageCapsule, public protocol::Message
 {
 public:
     MessageCapsule(QByteArray &&capsule);
-    MessageCapsule(const container::MessageCapsule &other);
+    MessageCapsule(const protbuf::MessageCapsule &other);
 
     QByteArray getData();
     MsgType type() const;

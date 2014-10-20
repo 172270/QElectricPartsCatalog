@@ -2,7 +2,7 @@
 
 void Item::set_name(const QString &name)
 {
-    item::Item::set_name(name.toStdString());
+    protbuf::Item::set_name(name.toStdString());
 }
 
 QString Item::getName() const
@@ -12,7 +12,7 @@ QString Item::getName() const
 
 void Item::set_symbol(const QString &symbol)
 {
-    item::Item::set_symbol(symbol.toStdString());
+    protbuf::Item::set_symbol(symbol.toStdString());
 }
 
 QString Item::getSymbol() const
@@ -22,7 +22,7 @@ QString Item::getSymbol() const
 
 void Item::set_name_space(const QString &space)
 {
-    item::Item::set_name_space(space.toStdString());
+    protbuf::Item::set_name_space(space.toStdString());
 }
 
 QString Item::getNamespace() const
@@ -32,12 +32,12 @@ QString Item::getNamespace() const
 
 void Item::set_adddate(const QDateTime &dt)
 {
-    item::Item::set_adddate(dt.toMSecsSinceEpoch());
+    protbuf::Item::set_adddate(dt.toMSecsSinceEpoch());
 }
 
 void Item::set_updatedate(const QDateTime &dt)
 {
-    item::Item::set_updatedate(dt.toMSecsSinceEpoch());
+    protbuf::Item::set_updatedate(dt.toMSecsSinceEpoch());
 }
 
 QDateTime Item::getUpdateDate()
@@ -84,7 +84,7 @@ void Item::insertParameter(uint id, QVariant value)
             return;
         }
     }
-    item::ItemParameters *param = add_parameters();
+    protbuf::ItemParameters *param = add_parameters();
     param->set_id(id);
     param->set_value(value.toString().toStdString() );
 }
@@ -102,7 +102,7 @@ QVariantMap Item::getParameters() const
 
 QString Item::getDescription() const
 {
-     return QString::fromStdString(item::Item::description());
+     return QString::fromStdString(protbuf::Item::description());
 }
 
 QString Item::getParametersAsJSON() const

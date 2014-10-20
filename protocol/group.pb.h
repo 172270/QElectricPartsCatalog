@@ -26,7 +26,7 @@
 #include "parameters.pb.h"
 // @@protoc_insertion_point(includes)
 
-namespace groups {
+namespace protbuf {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_group_2eproto();
@@ -98,7 +98,7 @@ class GroupBasicInformation : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // @@protoc_insertion_point(class_scope:groups.GroupBasicInformation)
+  // @@protoc_insertion_point(class_scope:protbuf.GroupBasicInformation)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -214,16 +214,16 @@ class Group : public ::google::protobuf::MessageLite {
   inline bool allowitems() const;
   inline void set_allowitems(bool value);
 
-  // repeated .parameters.ParameterBasicInformation parameters = 8;
+  // repeated .protbuf.ParameterBasicInformation parameters = 8;
   inline int parameters_size() const;
   inline void clear_parameters();
   static const int kParametersFieldNumber = 8;
-  inline const ::parameters::ParameterBasicInformation& parameters(int index) const;
-  inline ::parameters::ParameterBasicInformation* mutable_parameters(int index);
-  inline ::parameters::ParameterBasicInformation* add_parameters();
-  inline const ::google::protobuf::RepeatedPtrField< ::parameters::ParameterBasicInformation >&
+  inline const ::protbuf::ParameterBasicInformation& parameters(int index) const;
+  inline ::protbuf::ParameterBasicInformation* mutable_parameters(int index);
+  inline ::protbuf::ParameterBasicInformation* add_parameters();
+  inline const ::google::protobuf::RepeatedPtrField< ::protbuf::ParameterBasicInformation >&
       parameters() const;
-  inline ::google::protobuf::RepeatedPtrField< ::parameters::ParameterBasicInformation >*
+  inline ::google::protobuf::RepeatedPtrField< ::protbuf::ParameterBasicInformation >*
       mutable_parameters();
 
   // optional string description = 9;
@@ -245,7 +245,7 @@ class Group : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::uint64 creationdate() const;
   inline void set_creationdate(::google::protobuf::uint64 value);
 
-  // @@protoc_insertion_point(class_scope:groups.Group)
+  // @@protoc_insertion_point(class_scope:protbuf.Group)
  private:
   inline void set_has_name();
   inline void clear_has_name();
@@ -265,7 +265,7 @@ class Group : public ::google::protobuf::MessageLite {
   ::std::string* name_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 parentid_;
-  ::google::protobuf::RepeatedPtrField< ::parameters::ParameterBasicInformation > parameters_;
+  ::google::protobuf::RepeatedPtrField< ::protbuf::ParameterBasicInformation > parameters_;
   ::std::string* description_;
   ::google::protobuf::uint64 creationdate_;
   bool allowsets_;
@@ -476,27 +476,27 @@ inline void Group::set_allowitems(bool value) {
   allowitems_ = value;
 }
 
-// repeated .parameters.ParameterBasicInformation parameters = 8;
+// repeated .protbuf.ParameterBasicInformation parameters = 8;
 inline int Group::parameters_size() const {
   return parameters_.size();
 }
 inline void Group::clear_parameters() {
   parameters_.Clear();
 }
-inline const ::parameters::ParameterBasicInformation& Group::parameters(int index) const {
+inline const ::protbuf::ParameterBasicInformation& Group::parameters(int index) const {
   return parameters_.Get(index);
 }
-inline ::parameters::ParameterBasicInformation* Group::mutable_parameters(int index) {
+inline ::protbuf::ParameterBasicInformation* Group::mutable_parameters(int index) {
   return parameters_.Mutable(index);
 }
-inline ::parameters::ParameterBasicInformation* Group::add_parameters() {
+inline ::protbuf::ParameterBasicInformation* Group::add_parameters() {
   return parameters_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::parameters::ParameterBasicInformation >&
+inline const ::google::protobuf::RepeatedPtrField< ::protbuf::ParameterBasicInformation >&
 Group::parameters() const {
   return parameters_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::parameters::ParameterBasicInformation >*
+inline ::google::protobuf::RepeatedPtrField< ::protbuf::ParameterBasicInformation >*
 Group::mutable_parameters() {
   return &parameters_;
 }
@@ -596,7 +596,7 @@ inline void Group::set_creationdate(::google::protobuf::uint64 value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace groups
+}  // namespace protbuf
 
 // @@protoc_insertion_point(global_scope)
 
