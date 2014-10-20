@@ -2,7 +2,7 @@
 
 
 QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
-    QObject(parent), loginHandler(db), userRegisterHandler(db)
+    QObject(parent), userRegisterHandler(db), loginHandler(db)
 {
 }
 
@@ -25,7 +25,6 @@ void QCatalogServerWorker::readyRead(const QByteArray &ba)
                 }
             }
             else if(requestMessage.capsules(i).msgtype()== MsgType::addUser){
-//                RegisterUserMessageHandler handler(db);
                 userRegisterHandler.setData( requestMessage.getCapsule(i).getData() );
                 userRegisterHandler.processData();
                 responseMessage.addMessage(MsgType::resAddUser, userRegisterHandler.getResponse());

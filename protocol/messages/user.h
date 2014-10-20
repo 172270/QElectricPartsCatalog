@@ -63,9 +63,10 @@ public:
     void set_description(const ::std::string &adr){protbuf::UserData::set_description(adr);}
     QString getDescription()const{ return QString::fromStdString(description());}
     void set_lastlogin(QDateTime lastlogin);
+
 private:
-    quint32 defaultStorageID;
-    bool m_isLogged = false;
+    quint32 defaultStorageID; ///TODO move functionality to cache
+    bool m_isLogged = false; ///TODO move functionality to cache
   public:
     MsgType type() const;
     int ByteSize() const;

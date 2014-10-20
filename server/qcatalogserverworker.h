@@ -4,7 +4,6 @@
 #include <QObject>
 
 #include <QDebug>
-#include <QSqlDatabase>
 #include <QDateTime>
 
 #include "messages/messagescontainer.h"
@@ -17,14 +16,12 @@ class QCatalogServerWorker : public QObject
 public:
     explicit QCatalogServerWorker(QSqlDatabase db, QObject *parent = 0);
 
-
 signals:
     void responseAvalible(QByteArray res);
     void messageCorrupted();
     void unknownMessageType( MsgType );
 
 public slots:
-
     void readyRead(const QByteArray &ba);
 
 private:

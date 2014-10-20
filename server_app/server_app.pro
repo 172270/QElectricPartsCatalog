@@ -32,3 +32,4 @@ DEPENDPATH += $$PWD/../protocol
 unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../lib/libprotocol.a
 
 LIBS += -lprotobuf-lite
+#QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic -march=corei7-avx -pipe -ffast-math -flto

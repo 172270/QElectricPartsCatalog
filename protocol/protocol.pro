@@ -84,4 +84,6 @@ unix {
 }
 
 LIBS += -lprotobuf-lite
+#QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic -march=corei7-avx -pipe -ffast-math -flto
+
 

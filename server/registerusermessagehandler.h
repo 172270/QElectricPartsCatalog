@@ -1,5 +1,4 @@
-#ifndef REGISTERUSERMESSAGEHANDLER_H
-#define REGISTERUSERMESSAGEHANDLER_H
+#pragma once
 
 #include <QByteArray>
 #include <QValidator>
@@ -35,6 +34,3 @@ private:
     const QRegExp m_validMailRegExp;
     const QRegExp m_intermediateMailRegExp;
 };
-
-
-#endif // REGISTERUSERMESSAGEHANDLER_H
