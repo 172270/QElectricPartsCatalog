@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     loginmessagehandler.cpp \
     pginterface.cpp \
     registerusermessagehandler.cpp \
-    dbcreator.cpp
+    dbcreator.cpp \
+    qcatalogserverworker.cpp
 
 HEADERS += \
     qcatalogserver.h \
@@ -25,7 +26,8 @@ HEADERS += \
     loginmessagehandler.h \
     pginterface.h \
     registerusermessagehandler.h \
-    dbcreator.h
+    dbcreator.h \
+    qcatalogserverworker.h
 
 LIBS += -lprotobuf-lite
 

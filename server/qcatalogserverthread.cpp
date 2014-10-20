@@ -3,21 +3,28 @@
 #include "loginmessagehandler.h"
 #include "registerusermessagehandler.h"
 
-#include "messages/messagescontainer.h"
+
 
 QCatalogServerThread::QCatalogServerThread(QWebSocket *s, QObject *parent) :
     QThread(parent)
 {
-    static int databaseDescription = 0;
+    static int id = 0;
+    dbConnectionName = QString::number(id++);
+    worker = new QCatalogServerWorker();
+
     socket = s;
     userIsLogged = false;
 
-    db = new QSqlDatabase(QSqlDatabase::cloneDatabase(QSqlDatabase::database(), QString::number(databaseDescription++)));
+    db = new QSqlDatabase(QSqlDatabase::addDatabase("QPSQL", dbConnectionName));
+    db->setDatabaseName("ekatalog_tests"); /// TODO change to QSettings
+    db->setHostName("localhost");
+    db->setUserName("postgres");
+    db->setPassword("postgres");
+
     if (!db->open()){
         QString dbNotOpen = "database can't be opened!!";
         throw dbNotOpen ;
     }
-    query = new QSqlQuery();
 }
 
 QCatalogServerThread::~QCatalogServerThread()
@@ -33,7 +40,7 @@ void QCatalogServerThread::readyRead(QByteArray ba)
     for(int i=0;i<requestMessage.capsules().size();i++){
         if(requestMessage.capsules(i).msgtype()== MsgType::reqLogin){
             qDebug()<<"request login";
-            LoginMessageHandler handler;
+            LoginMessageHandler handler(dbConnectionName);
             handler.setData( requestMessage.getCapsule(i).getData() );
             handler.processData();
             responseMessage.addMessage(MsgType::resLogin, handler.getResponse());
@@ -45,7 +52,7 @@ void QCatalogServerThread::readyRead(QByteArray ba)
 
         if(requestMessage.capsules(i).msgtype()== MsgType::addUser){
             qDebug()<<"request add user";
-            RegisterUserMessageHandler handler;
+            RegisterUserMessageHandler handler(dbConnectionName);
             handler.setData( requestMessage.getCapsule(i).getData() );
             handler.processData();
             responseMessage.addMessage(MsgType::resAddUser, handler.getResponse());
@@ -68,8 +75,6 @@ void QCatalogServerThread::disconnected()
     QString connection = db->connectionName();
     db->close();
     delete db;
-    delete query;
-
     QSqlDatabase::removeDatabase(connection);
     exit(0);
 }

@@ -8,7 +8,7 @@ class LoginMessageHandler : public QObject
 {
     Q_OBJECT
 public:
-    LoginMessageHandler(): user(new User){;}
+    LoginMessageHandler(QString conName): database(conName), user(new User){;}
 
 public:
     void setData(QByteArray &&data);

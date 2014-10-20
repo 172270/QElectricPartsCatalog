@@ -20,7 +20,8 @@ QValidator::State EmailValidator::validate(QString &text, int &pos) const
     return Invalid;
 }
 
-RegisterUserMessageHandler::RegisterUserMessageHandler()
+RegisterUserMessageHandler::RegisterUserMessageHandler(QString dbName):
+    database(dbName)
 {
 }
 

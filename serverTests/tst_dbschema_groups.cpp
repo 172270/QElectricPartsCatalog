@@ -38,7 +38,7 @@ void tst_dbschema_groups::initTestCase()
     creator = new DbCreator(this);
     creator->initialize_database();
 
-    database = new PgInterface();
+    database = new PgInterface(db.connectionName());
 }
 
 void tst_dbschema_groups::cleanupTestCase()

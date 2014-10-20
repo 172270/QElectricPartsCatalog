@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+    db.setDatabaseName("ekatalog_tests"); /// TODO change to QSettings
     db.setHostName("localhost");
     db.setUserName("postgres");
     db.setPassword("postgres");

@@ -40,7 +40,7 @@ void tst_dbschema_user::initTestCase()
     creator = new DbCreator(this);
     creator->initialize_database();
 
-    database = new PgInterface();
+    database = new PgInterface(db.connectionName());
 }
 
 void tst_dbschema_user::removeTable(QString tblName)

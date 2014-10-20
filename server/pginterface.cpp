@@ -1,10 +1,14 @@
 #include "pginterface.h"
 #include <QDebug>
-PgInterface::PgInterface()
+PgInterface::PgInterface(QString connectionName)
 {
+    db = QSqlDatabase::database(connectionName);
     query = new QSqlQuery(db);
-    if (!db.isOpen())
+    if (!db.isOpen()){
         db.open();
+    }
+
+    qDebug() << "opened db connection :" << db.connectionName();
 }
 
 PgInterface::~PgInterface()

@@ -17,7 +17,7 @@
 class PgInterface
 {
 public:
-    PgInterface();
+    PgInterface(QString connectionName);
     ~PgInterface();
 
     User getUserById(uint id);

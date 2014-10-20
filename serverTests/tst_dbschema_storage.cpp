@@ -37,7 +37,7 @@ void tst_dbschema_storage::initTestCase()
     creator = new DbCreator(this);
     creator->initialize_database();
     delete creator;
-    database = new PgInterface();
+    database = new PgInterface(db.connectionName());
 }
 void tst_dbschema_storage::removeTable(QString tblName)
 {

@@ -11,6 +11,9 @@
 #include <QWebSocket>
 #include "loginmessagehandler.h"
 
+#include "qcatalogserverworker.h"
+
+
 class QCatalogServerThread : public QThread
 {
     Q_OBJECT
@@ -20,21 +23,21 @@ public:
 
 signals:
     void requestLogin( QByteArray *data );
-    //    void requestItem(QByteArray* data);
-
 
 private slots:
     void readyRead(QByteArray ba);
     void disconnected();
 
-    // QThread interface
 protected:
     void run();
 private:
+
     bool userIsLogged;
-    QSqlQuery *query;
     QSqlDatabase *db;
     QWebSocket *socket;
+
+    QCatalogServerWorker *worker;
+    QString dbConnectionName;
 };
 
 #endif // EC_THREAD_H
