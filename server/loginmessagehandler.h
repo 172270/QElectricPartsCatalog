@@ -1,7 +1,7 @@
 #ifndef LOGINMESSAGEHANDLER_H
 #define LOGINMESSAGEHANDLER_H
 
-#include "DB_schema/user.h"
+#include "messages/user.h"
 #include "pginterface.h"
 
 class LoginMessageHandler : public QObject

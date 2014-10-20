@@ -9,8 +9,8 @@
 #include <QSqlQuery>
 
 #include "dbcreator.h"
-#include "DB_schema/group.h"
-#include "DB_schema/parameter.h"
+#include "messages/group.h"
+#include "messages/parameter.h"
 #include "pginterface.h"
 
 class tst_dbschema_groups : public QObject

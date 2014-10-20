@@ -8,7 +8,7 @@
 #include <QDateTime>
 
 #include "group.pb.h"
-#include "DB_schema/parameter.h"
+#include "messages/parameter.h"
 
 class Group : public protbuf::Group
 {

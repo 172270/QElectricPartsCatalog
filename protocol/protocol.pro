@@ -32,14 +32,14 @@ SOURCES += \
     messages/loginrequest.cpp \
     messages/messagescontainer.cpp \
     messages/userregistrationmessage.cpp \
-    DB_schema/loginmessage.cpp \
-    DB_schema/user.cpp \
-    DB_schema/storege.cpp \
-    DB_schema/file.cpp \
-    DB_schema/group.cpp \
-    DB_schema/item.cpp \
-    DB_schema/package.cpp \
-    DB_schema/parameter.cpp
+    messages/loginmessage.cpp \
+    messages/user.cpp \
+    messages/storege.cpp \
+    messages/file.cpp \
+    messages/group.cpp \
+    messages/item.cpp \
+    messages/package.cpp \
+    messages/parameter.cpp
 
 HEADERS += \
     user.pb.h \
@@ -56,14 +56,14 @@ HEADERS += \
     messages/loginrequest.h \
     messages/messagescontainer.h \
     messages/userregistrationmessage.h \
-    DB_schema/loginmessage.h \
-    DB_schema/user.h \
-    DB_schema/storage.h \
-    DB_schema/file.h \
-    DB_schema/group.h \
-    DB_schema/item.h \
-    DB_schema/package.h \
-    DB_schema/parameter.h \
+    messages/loginmessage.h \
+    messages/user.h \
+    messages/storage.h \
+    messages/file.h \
+    messages/group.h \
+    messages/item.h \
+    messages/package.h \
+    messages/parameter.h \
     messages/message.h
 
 OTHER_FILES += \

@@ -6,7 +6,7 @@
 #include <QAbstractSocket>
 #include <QWebSocket>
 
-#include "DB_schema/user.h"
+#include "messages/user.h"
 
 namespace Ui {
 class LoginDialog;

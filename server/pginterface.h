@@ -6,13 +6,13 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-#include "DB_schema/user.h"
-#include "DB_schema/package.h"
-#include "DB_schema/parameter.h"
-#include "DB_schema/group.h"
-#include "DB_schema/storage.h"
-#include "DB_schema/file.h"
-#include "DB_schema/item.h"
+#include "messages/user.h"
+#include "messages/package.h"
+#include "messages/parameter.h"
+#include "messages/group.h"
+#include "messages/storage.h"
+#include "messages/file.h"
+#include "messages/item.h"
 
 class PgInterface
 {

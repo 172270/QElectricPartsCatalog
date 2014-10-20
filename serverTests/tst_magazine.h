@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTest>
 
-#include "DB_schema/storage.h"
+#include "messages/storage.h"
 
 class tst_Magazine :public QObject
 {

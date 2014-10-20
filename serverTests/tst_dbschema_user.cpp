@@ -1,6 +1,6 @@
 #include "tst_dbschema_user.h"
 
-#include "DB_schema/user.h"
+#include "messages/user.h"
 
 tst_dbschema_user::tst_dbschema_user(QObject *parent) :
     QObject(parent), currentID(0), currentEmail(0)

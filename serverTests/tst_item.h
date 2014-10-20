@@ -5,10 +5,10 @@
 #include <QTest>
 #include <string>
 
-#include "DB_schema/item.h"
-#include "DB_schema/user.h"
-#include "DB_schema/package.h"
-#include "DB_schema/group.h"
+#include "messages/item.h"
+#include "messages/user.h"
+#include "messages/package.h"
+#include "messages/group.h"
 
 class tst_item : public QObject
 {

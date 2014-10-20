@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTest>
 
-#include "DB_schema/parameter.h"
+#include "messages/parameter.h"
 
 class tst_ParameterConfig : public QObject
 {

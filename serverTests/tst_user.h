@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTest>
 
-#include "DB_schema/user.h"
+#include "messages/user.h"
 
 class tst_user : public QObject
 {

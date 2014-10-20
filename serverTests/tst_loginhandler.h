@@ -4,7 +4,7 @@
 #include <QTest>
 #include <QObject>
 
-#include "DB_schema/loginmessage.h"
+#include "messages/loginmessage.h"
 
 class tst_loginHandler : QObject
 {
