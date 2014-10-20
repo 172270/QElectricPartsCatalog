@@ -7,9 +7,7 @@
 #include <QSqlError>
 #include <QSqlDatabase>
 #include <QDateTime>
-
 #include <QWebSocket>
-#include "loginmessagehandler.h"
 
 #include "qcatalogserverworker.h"
 
@@ -21,11 +19,12 @@ public:
     explicit QCatalogServerThread(QWebSocket *s, QObject *parent = 0);
     ~QCatalogServerThread();
 
+public slots:
+    void send(const QByteArray *ba);
 signals:
     void requestLogin( QByteArray *data );
 
 private slots:
-    void readyRead(QByteArray ba);
     void disconnected();
 
 protected:
@@ -38,6 +37,7 @@ private:
 
     QCatalogServerWorker *worker;
     QString dbConnectionName;
+    quint64 bytesWritten = 0;
 };
 
 #endif // EC_THREAD_H

@@ -22,8 +22,7 @@ public:
 
     void toArray(QByteArray *ba) const{
         int size = ByteSize();
-        if(ba->size() < size)
-            ba->resize( size );
+        ba->resize( size );
         SerializeToArray(ba->data(),ba->size());
     }
 

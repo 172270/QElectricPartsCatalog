@@ -16,15 +16,19 @@ class QCatalogServerWorker : public QObject
 public:
     explicit QCatalogServerWorker(QObject *parent = 0);
 
+    QString getDbConnectionName() const;
+    void setDbConnectionName(const QString &value);
+
 signals:
+    void responseAvalible(QByteArray *res);
 
 public slots:
 
-    void readyRead(QByteArray ba);
-
+    void readyRead(QByteArray &ba);
 
 private:
     MessagesContainer responseMessage;
+    QString dbConnectionName;
 };
 
 #endif // QCATALOGSERVERWORKER_H
