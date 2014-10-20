@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     addTest(new tst_item);
     addTest(new tst_ItemPackage);
     addTest(new tst_ParameterConfig );
-    addTest(new tst_MessageContainer);
+//    addTest(new tst_MessageContainer);
     addTest(new tst_ServerWorkerTests);
 
     QTimer::singleShot(1,&a,SLOT(quit()));

@@ -26,7 +26,6 @@ void tst_ServerWorkerTests::initTestCase()
     worker = new QCatalogServerWorker(QSqlDatabase::database());
     responseSignalSpy = new QSignalSpy(worker, SIGNAL(responseAvalible(QByteArray)));
     connect(worker, SIGNAL(responseAvalible(QByteArray)), this, SLOT(onResponseAvalible(QByteArray)));
-    worker->setDbConnectionName("");
     binaryMessage = new QByteArray();
 }
 

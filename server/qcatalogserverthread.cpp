@@ -21,7 +21,6 @@ QCatalogServerThread::QCatalogServerThread(QWebSocket *s, QObject *parent) :
     }
 
     worker = new QCatalogServerWorker(*db);
-    worker->setDbConnectionName(dbConnectionName);
 }
 
 QCatalogServerThread::~QCatalogServerThread()

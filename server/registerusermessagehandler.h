@@ -10,6 +10,7 @@ class RegisterUserMessageHandler
 {
 public:
     RegisterUserMessageHandler(QString dbName);
+    RegisterUserMessageHandler(QSqlDatabase db);
     void setData(QByteArray &&d);
     void processData();
     QByteArray getResponse();

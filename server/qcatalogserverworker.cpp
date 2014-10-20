@@ -2,7 +2,7 @@
 
 
 QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
-    QObject(parent), loginHandler(db)
+    QObject(parent), loginHandler(db), userRegisterHandler(db)
 {
 }
 
@@ -25,10 +25,10 @@ void QCatalogServerWorker::readyRead(const QByteArray &ba)
                 }
             }
             else if(requestMessage.capsules(i).msgtype()== MsgType::addUser){
-                RegisterUserMessageHandler handler(getDbConnectionName());
-                handler.setData( requestMessage.getCapsule(i).getData() );
-                handler.processData();
-                responseMessage.addMessage(MsgType::resAddUser, handler.getResponse());
+//                RegisterUserMessageHandler handler(db);
+                userRegisterHandler.setData( requestMessage.getCapsule(i).getData() );
+                userRegisterHandler.processData();
+                responseMessage.addMessage(MsgType::resAddUser, userRegisterHandler.getResponse());
             }
             else if( requestMessage.capsules(i).msgtype() == MsgType::reqLogout){
             }
@@ -42,13 +42,3 @@ void QCatalogServerWorker::readyRead(const QByteArray &ba)
         emit responseAvalible( *buf );
     }
 }
-QString QCatalogServerWorker::getDbConnectionName() const
-{
-    return dbConnectionName;
-}
-
-void QCatalogServerWorker::setDbConnectionName(const QString &value)
-{
-    dbConnectionName = value;
-}
-

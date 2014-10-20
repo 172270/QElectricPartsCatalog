@@ -21,6 +21,7 @@ public:
     }
 
     ~LoginMessageHandler(){
+        delete user; ///TODO is this valid, taking getUserData into consideration?
     }
 
 public:

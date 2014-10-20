@@ -29,16 +29,11 @@ void QCatalogServer::startServer()
 
 void QCatalogServer::incomingConnection()
 {
-
     if(hasPendingConnections()){
         QWebSocket *ws;
         ws = nextPendingConnection();
         // We have a new panding connection
         qDebug() << ws->peerAddress() << " Connecting...";
-//        connect(ws, &QWebSocket::disconnected, [=](){
-//            qDebug()<< "socket disconnected for reason: " << ws->closeReason() << ws->closeCode() ;
-//            ws->deleteLater();
-//        });
 
         QCatalogServerThread* thread;
         thread = new QCatalogServerThread(ws, this);

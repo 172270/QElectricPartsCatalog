@@ -12,8 +12,6 @@ PgInterface::PgInterface(QString connectionName)
 PgInterface::~PgInterface()
 {
     QString name = db.connectionName();
-    db.close();
-    db.removeDatabase(name);
     delete query;
 }
 

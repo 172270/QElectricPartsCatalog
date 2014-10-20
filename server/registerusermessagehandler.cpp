@@ -25,8 +25,14 @@ RegisterUserMessageHandler::RegisterUserMessageHandler(QString dbName):
 {
 }
 
+RegisterUserMessageHandler::RegisterUserMessageHandler(QSqlDatabase db):
+    database(db.connectionName())
+{
+}
+
 void RegisterUserMessageHandler::setData(QByteArray &&d)
 {
+    req.Clear();
     req.ParseFromArray(d.data(),d.size());
     if(!req.IsInitialized()){
         qDebug()<<" message is not initialized!";
