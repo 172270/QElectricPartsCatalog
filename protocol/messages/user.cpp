@@ -96,6 +96,36 @@ QString User::getPhoneNumber() const
 void User::set_lastlogin(QDateTime lastlogin){
     protbuf::UserData::set_lastlogin(lastlogin.toMSecsSinceEpoch());
 }
+bool User::isLogged() const
+{
+    return m_isLogged;
+}
+
+void User::setIsLogged(bool value)
+{
+    m_isLogged = value;
+}
+
+
+MsgType User::type() const
+{
+    return MsgType::msgUser;
+}
+
+int User::ByteSize() const
+{
+    return protbuf::UserData::ByteSize();
+}
+
+bool User::SerializeToArray(void *data, int size) const
+{
+    return protbuf::UserData::SerializeToArray(data,size);
+}
+
+bool User::ParseFromArray(const void *data, int size)
+{
+    return protbuf::UserData::ParseFromArray(data,size);
+}
 
 void User::set_registrationdate(QDateTime registrationDate)
 {

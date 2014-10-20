@@ -5,8 +5,7 @@ QCatalogServerThread::QCatalogServerThread(QWebSocket *s, QObject *parent) :
 {
     static int id = 0;
     dbConnectionName = QString::number(id++);
-    worker = new QCatalogServerWorker();
-    worker->setDbConnectionName(dbConnectionName);
+
     socket = s;
     userIsLogged = false;
 
@@ -20,10 +19,14 @@ QCatalogServerThread::QCatalogServerThread(QWebSocket *s, QObject *parent) :
         QString dbNotOpen = "database can't be opened!!";
         throw dbNotOpen ;
     }
+
+    worker = new QCatalogServerWorker(*db);
+    worker->setDbConnectionName(dbConnectionName);
 }
 
 QCatalogServerThread::~QCatalogServerThread()
 {
+    delete worker;
 }
 
 void QCatalogServerThread::send(const QByteArray *ba){

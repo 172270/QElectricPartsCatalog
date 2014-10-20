@@ -4,23 +4,26 @@
 #include <QObject>
 
 #include <QDebug>
-#include <QSqlQuery>
-#include <QSqlError>
 #include <QSqlDatabase>
 #include <QDateTime>
+
 #include "messages/messagescontainer.h"
+#include "loginmessagehandler.h"
+#include "registerusermessagehandler.h"
 
 class QCatalogServerWorker : public QObject
 {
     Q_OBJECT
 public:
-    explicit QCatalogServerWorker(QObject *parent = 0);
+    explicit QCatalogServerWorker(QSqlDatabase db, QObject *parent = 0);
 
     QString getDbConnectionName() const;
     void setDbConnectionName(const QString &value);
 
 signals:
-    void responseAvalible(QByteArray *res);
+    void responseAvalible(QByteArray res);
+    void messageCorrupted();
+    void unknownMessageType( MsgType );
 
 public slots:
 
@@ -28,6 +31,7 @@ public slots:
 
 private:
     MessagesContainer responseMessage;
+    LoginMessageHandler loginHandler;
     QString dbConnectionName;
 };
 

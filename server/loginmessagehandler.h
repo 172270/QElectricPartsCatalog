@@ -8,14 +8,22 @@ class LoginMessageHandler : public QObject
 {
     Q_OBJECT
 public:
-    LoginMessageHandler(QString conName): database(conName), user(new User){;}
+    LoginMessageHandler(QString conName):
+        database(conName), user(new User){
+        ;
+    }
+    LoginMessageHandler(QSqlDatabase db):
+        database(db.connectionName()), user(new User){
+        ;
+    }
 
 public:
     void setData(QByteArray &&data);
     void processData();
     User *getUserData();
     QByteArray getResponse();
-    bool loginOk(){ return res.replay()==protbuf::Replay::LoginPass; }
+
+    bool loginOk();
     void updateLastLogin();
 private:
     PgInterface database;

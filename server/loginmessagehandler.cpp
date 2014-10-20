@@ -5,28 +5,34 @@
 
 void LoginMessageHandler::setData(QByteArray &&d)
 {
+    req.Clear();
+    res.Clear();
+
     req.ParseFromArray( d.data(),d.size() );
 }
 
 void LoginMessageHandler::processData()
 {
-    qDebug()<< "User "<< QString::fromStdString(req.name()) << "try to login";
-    QString userName = QString::fromStdString(req.name());
 
-    QByteArray pass = QCryptographicHash::hash(QByteArray(req.password().data(), req.password().size() ), QCryptographicHash::Sha512);
-    bool loginOk = database.checkUserPassword(userName, pass.toHex() );
+    if(!user->isLogged() ){
+        QString userName = QString::fromStdString(req.name());
 
-    if(loginOk){
-        res.set_replay(protbuf::Replay::LoginPass);
-        getUserData();
-        updateLastLogin();
-        qDebug()<<" login succesfull";
+        QByteArray pass = QCryptographicHash::hash(QByteArray(req.password().data(), req.password().size() ), QCryptographicHash::Sha512);
+        bool loginOk = database.checkUserPassword(userName, pass.toHex() );
+
+        if(loginOk){
+            res.set_replay(protbuf::Replay::LoginPass);
+            user->setIsLogged(true);
+            getUserData();
+            updateLastLogin();
+        }
+        else{
+            res.set_replay(protbuf::Replay::LoginDeny);
+        }
     }
     else{
-        res.set_replay(protbuf::Replay::LoginDeny);
-        qDebug()<<" bad user or password";
+        res.set_replay(protbuf::Replay::UserAlreadyLogged);
     }
-
 }
 
 User* LoginMessageHandler::getUserData()
@@ -44,6 +50,10 @@ QByteArray LoginMessageHandler::getResponse()
     ba.resize(res.ByteSize());
     res.SerializePartialToArray(ba.data(), ba.size() );
     return ba;
+}
+
+bool LoginMessageHandler::loginOk(){
+    return res.replay()==protbuf::Replay::LoginPass;
 }
 
 void LoginMessageHandler::updateLastLogin()

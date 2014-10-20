@@ -65,27 +65,17 @@ public:
     void set_lastlogin(QDateTime lastlogin);
 private:
     quint32 defaultStorageID;
-
-    // Message interface
+    bool m_isLogged = false;
 public:
-    MsgType type() const
-    {
-        return MsgType::msgUser;
-    }
-    int ByteSize() const
-    {
-        return protbuf::UserData::ByteSize();
-    }
+    MsgType type() const;
+    int ByteSize() const;
+
+    bool isLogged() const;
+    void setIsLogged(bool value);
 
 protected:
-    bool SerializeToArray(void *data, int size) const
-    {
-        return protbuf::UserData::SerializeToArray(data,size);
-    }
-    bool ParseFromArray(const void *data, int size)
-    {
-        return protbuf::UserData::ParseFromArray(data,size);
-    }
+    bool SerializeToArray(void *data, int size) const;
+    bool ParseFromArray(const void *data, int size);
 };
 
 #endif // USER_H

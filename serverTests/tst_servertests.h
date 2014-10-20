@@ -3,32 +3,27 @@
 
 #include <QString>
 #include <QtTest>
-#include <QtWebSockets>
 #include <QHostAddress>
 
-#include "messages/messagescontainer.h"
+#include <qcatalogserverworker.h>
 
-class tst_ServerTests : public QObject
+class tst_ServerWorkerTests : public QObject
 {
     Q_OBJECT
 
 public:
-    tst_ServerTests();
+    tst_ServerWorkerTests();
 
-    bool doConnect();
-    bool waitForSignal(const char *amember, quint64 waitTime = 1000);
-    bool waitForBinaryMessage();
-protected slots:
-    void signalArrived();
-    void signalArrived(QByteArray);
+    void waitForSignal(QSignalSpy spy);
+public slots:
+
+    void onResponseAvalible(QByteArray ba);
 private Q_SLOTS:
     void init();
     void initTestCase();
     void cleanupTestCase();
     void cleanup();
 
-    void connectToServer();
-    void serverResponseToPing();
     void serverDontRespondToUnknownData();
 
     void addBasicUserToServer();
@@ -42,16 +37,13 @@ private Q_SLOTS:
     void loginToServerBadUser();
 
     void userAdd();
-//    void userDel();
-
-
-    //    void loginReciveLastLoginTime();
-
 private:
 
-    QWebSocket *socket;
+    QCatalogServerWorker *worker;
     MessagesContainer *mc;
     QByteArray *binaryMessage;
+
+    QSignalSpy *responseSignalSpy;
 };
 
 #endif // TST_SERVERTESTS_H

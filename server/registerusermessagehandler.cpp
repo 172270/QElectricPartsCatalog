@@ -28,8 +28,6 @@ RegisterUserMessageHandler::RegisterUserMessageHandler(QString dbName):
 void RegisterUserMessageHandler::setData(QByteArray &&d)
 {
     req.ParseFromArray(d.data(),d.size());
-
-    qDebug()<<d.size() << req.ByteSize() ;
     if(!req.IsInitialized()){
         qDebug()<<" message is not initialized!";
     }

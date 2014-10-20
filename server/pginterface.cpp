@@ -7,8 +7,6 @@ PgInterface::PgInterface(QString connectionName)
     if (!db.isOpen()){
         db.open();
     }
-
-    qDebug() << "opened db connection :" << db.connectionName();
 }
 
 PgInterface::~PgInterface()
