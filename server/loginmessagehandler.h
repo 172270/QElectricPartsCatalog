@@ -8,13 +8,19 @@ class LoginMessageHandler : public QObject
 {
     Q_OBJECT
 public:
+    LoginMessageHandler() = delete;
     LoginMessageHandler(QString conName):
-        database(conName), user(new User){
-        ;
+        database(conName)
+    {
+        user = new User();
     }
     LoginMessageHandler(QSqlDatabase db):
-        database(db.connectionName()), user(new User){
-        ;
+        database(db.connectionName())
+    {
+       user = new User( );
+    }
+
+    ~LoginMessageHandler(){
     }
 
 public:

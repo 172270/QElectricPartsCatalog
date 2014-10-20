@@ -34,6 +34,7 @@ void tst_dbschema_item::initTestCase()
 
 void tst_dbschema_item::cleanupTestCase()
 {
+    delete query;
     delete database;
 }
 

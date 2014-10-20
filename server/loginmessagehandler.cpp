@@ -13,8 +13,7 @@ void LoginMessageHandler::setData(QByteArray &&d)
 
 void LoginMessageHandler::processData()
 {
-
-    if(!user->isLogged() ){
+    if(!user->isLogged()){
         QString userName = QString::fromStdString(req.name());
 
         QByteArray pass = QCryptographicHash::hash(QByteArray(req.password().data(), req.password().size() ), QCryptographicHash::Sha512);
@@ -35,12 +34,13 @@ void LoginMessageHandler::processData()
     }
 }
 
-User* LoginMessageHandler::getUserData()
+User *LoginMessageHandler::getUserData()
 {
     ///TODO get all user data (info about files etc.)
     user->MergeFrom(database.getUserByName( QString::fromStdString(req.name()) ));
     ///TODO add getUser method that take pointer to user, and pass user to that function instead
     /// marging data from other user
+
     return user;
 }
 

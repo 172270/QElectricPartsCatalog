@@ -49,6 +49,3 @@ int qApp_exec(){
 int keepassx_main(int argc, char** argv ){
     return keepassx_main_impl(argc,argv,qApp_exec);
 }
-
-
-

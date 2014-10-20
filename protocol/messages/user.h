@@ -66,12 +66,12 @@ public:
 private:
     quint32 defaultStorageID;
     bool m_isLogged = false;
-public:
+  public:
     MsgType type() const;
     int ByteSize() const;
 
     bool isLogged() const;
-    void setIsLogged(bool value);
+    void setIsLogged(bool isLogged);
 
 protected:
     bool SerializeToArray(void *data, int size) const;

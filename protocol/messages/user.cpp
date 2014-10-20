@@ -1,6 +1,7 @@
 #include "user.h"
 
 User::User():
+    protbuf::UserData(),
     defaultStorageID(0)
 {
     set_id(0);
@@ -101,9 +102,9 @@ bool User::isLogged() const
     return m_isLogged;
 }
 
-void User::setIsLogged(bool value)
+void User::setIsLogged(bool isLogged)
 {
-    m_isLogged = value;
+    m_isLogged = isLogged;
 }
 
 

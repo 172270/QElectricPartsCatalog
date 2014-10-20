@@ -27,15 +27,6 @@ QCatalogServerThread::QCatalogServerThread(QWebSocket *s, QObject *parent) :
 QCatalogServerThread::~QCatalogServerThread()
 {
     delete worker;
-}
-
-void QCatalogServerThread::send(const QByteArray *ba){
-    bytesWritten += socket->sendBinaryMessage(*ba);
-}
-
-void QCatalogServerThread::disconnected()
-{
-    socket->deleteLater();
     QString connection = db->connectionName();
     db->close();
     delete db;
@@ -43,13 +34,21 @@ void QCatalogServerThread::disconnected()
     exit(0);
 }
 
+void QCatalogServerThread::send(const QByteArray &ba){
+    bytesWritten += socket->sendBinaryMessage(ba);
+}
+
+void QCatalogServerThread::disconnected()
+{
+    socket->deleteLater();
+
+}
+
 void QCatalogServerThread::run()
 {
-    qDebug() << " Thread: "<< this->currentThreadId() << "started with stack size set to" << this->stackSize() ;
-
     connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
-    connect(socket, SIGNAL(binaryMessageReceived(QByteArray&)), worker, SLOT(readylRead(QByteArray&)), Qt::DirectConnection);
-    connect(worker, SIGNAL(responseAvalible(QByteArray)), this, SLOT(send(const QByteArray*)));
+    connect(socket, SIGNAL(binaryMessageReceived(QByteArray)), worker, SLOT(readyRead(QByteArray)), Qt::DirectConnection);
+    connect(worker, SIGNAL(responseAvalible(QByteArray)), this, SLOT(send(const QByteArray)));
 
     exec();
 }

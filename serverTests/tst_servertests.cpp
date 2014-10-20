@@ -34,6 +34,8 @@ void tst_ServerWorkerTests::cleanupTestCase()
 {
     delete mc;
     delete binaryMessage;
+    delete worker;
+    delete responseSignalSpy;
 }
 
 void tst_ServerWorkerTests::cleanup()
@@ -47,7 +49,7 @@ void tst_ServerWorkerTests::cleanup()
 void tst_ServerWorkerTests::serverDontRespondToUnknownData()
 {
     QSignalSpy spy(worker, SIGNAL(messageCorrupted() ));
-    QByteArray ba = QByteArray(1000,'\0');
+    const QByteArray ba = QByteArray(1000,'\0');
     worker->readyRead(ba);
     QVERIFY( spy.count() == 1 );
 }

@@ -20,9 +20,9 @@ public:
     ~QCatalogServerThread();
 
 public slots:
-    void send(const QByteArray *ba);
+    void send(const QByteArray &ba);
 signals:
-    void requestLogin( QByteArray *data );
+    void requestLogin( QByteArray &data );
 
 private slots:
     void disconnected();

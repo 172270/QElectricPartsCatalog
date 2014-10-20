@@ -27,7 +27,7 @@ signals:
 
 public slots:
 
-    void readyRead(QByteArray &ba);
+    void readyRead(const QByteArray &ba);
 
 private:
     MessagesContainer responseMessage;

@@ -6,7 +6,7 @@ QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
 {
 }
 
-void QCatalogServerWorker::readyRead(QByteArray &ba)
+void QCatalogServerWorker::readyRead(const QByteArray &ba)
 {
     static QByteArray *buf  = new QByteArray();
     responseMessage.Clear();
