@@ -30,7 +30,6 @@ QCatalogServerThread::~QCatalogServerThread()
     db->close();
     delete db;
     QSqlDatabase::removeDatabase(connection);
-    exit(0);
 }
 
 void QCatalogServerThread::send(const QByteArray &ba)
@@ -41,6 +40,7 @@ void QCatalogServerThread::send(const QByteArray &ba)
 void QCatalogServerThread::disconnected()
 {
     socket->deleteLater();
+    exit(0);
 }
 
 void QCatalogServerThread::run()

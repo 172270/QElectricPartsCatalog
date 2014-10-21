@@ -69,6 +69,7 @@ bool LoginMessageHandler::moveResponseToCache()
     QByteArray *ba = new QByteArray(res.ByteSize(),'\0');
     res.SerializePartialToArray(ba->data(), ba->size() );
     m_cache.responseMessage()->addMessage(MsgType::resLogin, ba);
-    m_cache.responseMessage()->addMessage(m_cache.getUserData());
+    if(m_cache.userStatus()->logged)
+        m_cache.responseMessage()->addMessage(m_cache.getUserData());
     return true;
 }
