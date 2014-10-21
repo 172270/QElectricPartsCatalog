@@ -2,21 +2,28 @@
 
 #include <QByteArray>
 #include <QValidator>
+#include "workercache.h"
+#include "messagehandlerinterface.h"
 #include "user.pb.h"
 #include "pginterface.h"
 
-class RegisterUserMessageHandler
+class RegisterUserMessageHandler : public MessageHandlerInterface
 {
 public:
-    RegisterUserMessageHandler(QString dbName);
-    RegisterUserMessageHandler(QSqlDatabase db);
-    void setData(QByteArray &&d);
-    void processData();
-    QByteArray getResponse();
+    RegisterUserMessageHandler(WorkerCache *cache);
+    ~RegisterUserMessageHandler(){;}
+    bool moveResponseToCache();
+    bool processData();
+    bool parseData(const QByteArray &ba);
+    bool parseData(QByteArray &&ba);
+    void checkEmail(bool hasErrors, QValidator::State state);
+    bool checkEmail();
 private:
-    PgInterface database;
     protbuf::Register req;
     protbuf::RegisterResponse res;
+
+    bool clearCacheData();
+    bool checkName();
 };
 
 QT_BEGIN_NAMESPACE

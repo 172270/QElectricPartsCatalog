@@ -181,3 +181,24 @@ void UserError::setErrorNumber(int errorNumber)
     m_errorNumber = errorNumber;
 }
 
+
+
+MsgType UserStatistics::type() const
+{
+    return MsgType::msgUserStats;
+}
+
+int UserStatistics::ByteSize() const
+{
+    return protbuf::UserActivityStatistics::ByteSize();
+}
+
+bool UserStatistics::SerializeToArray(void *data, int size) const
+{
+    return protbuf::UserActivityStatistics::SerializeToArray(data,size);
+}
+
+bool UserStatistics::ParseFromArray(const void *data, int size)
+{
+    return protbuf::UserActivityStatistics::ParseFromArray(data,size);
+}

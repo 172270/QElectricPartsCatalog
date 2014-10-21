@@ -33,14 +33,14 @@ QCatalogServerThread::~QCatalogServerThread()
     exit(0);
 }
 
-void QCatalogServerThread::send(const QByteArray &ba){
+void QCatalogServerThread::send(const QByteArray &ba)
+{
     bytesWritten += socket->sendBinaryMessage(ba);
 }
 
 void QCatalogServerThread::disconnected()
 {
     socket->deleteLater();
-
 }
 
 void QCatalogServerThread::run()

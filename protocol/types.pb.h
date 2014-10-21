@@ -38,6 +38,7 @@ enum MsgType {
   resAddUser = -80,
   msgItem = 100,
   msgUser = 110,
+  msgUserStats = 111,
   msgGroup = 120,
   msgContainer = 130,
   msgCapsule = 131,

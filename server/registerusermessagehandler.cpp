@@ -20,34 +20,34 @@ QValidator::State EmailValidator::validate(QString &text, int &pos) const
     return Invalid;
 }
 
-RegisterUserMessageHandler::RegisterUserMessageHandler(QString dbName):
-    database(dbName)
+RegisterUserMessageHandler::RegisterUserMessageHandler(WorkerCache *cache):
+    MessageHandlerInterface(cache)
 {
 }
 
-RegisterUserMessageHandler::RegisterUserMessageHandler(QSqlDatabase db):
-    database(db.connectionName())
-{
-}
-
-void RegisterUserMessageHandler::setData(QByteArray &&d)
+bool RegisterUserMessageHandler::parseData(const QByteArray &ba)
 {
     req.Clear();
-    req.ParseFromArray(d.data(),d.size());
-    if(!req.IsInitialized()){
-        qDebug()<<" message is not initialized!";
-    }
+    return req.ParseFromArray(ba.data(),ba.size());
 }
 
-void RegisterUserMessageHandler::processData()
+bool RegisterUserMessageHandler::parseData(QByteArray &&ba)
 {
-    EmailValidator validator;
-    QString email = QString::fromStdString(req.email());
-    QString name = QString::fromStdString(req.name());
-    int pos = 0;
-    QValidator::State state = validator.validate(email,pos);
+    req.Clear();
+    return req.ParseFromArray(ba.data(),ba.size());
+}
 
+bool RegisterUserMessageHandler::clearCacheData()
+{
+    m_cache.getUserData()->Clear();
+    m_cache.getUserStats()->Clear();
+    return true;
+}
+
+bool RegisterUserMessageHandler::checkName()
+{
     bool hasErrors = false;
+
     if(req.name().size()>34){
         qDebug()<<"user name to long";
         res.add_replay(protbuf::Replay::UserNameToLong);
@@ -60,6 +60,16 @@ void RegisterUserMessageHandler::processData()
         hasErrors = true;
     }
 
+    return hasErrors;
+}
+
+bool RegisterUserMessageHandler::checkEmail()
+{
+    EmailValidator validator;
+    QString email = QString::fromStdString(req.email());
+    int pos = 0;
+    QValidator::State state = validator.validate(email,pos);
+    bool hasErrors = false;
     if(req.email().size()>255){
         qDebug()<<"user email to long";
         res.add_replay(protbuf::Replay::EmailAddressToLong);
@@ -71,6 +81,18 @@ void RegisterUserMessageHandler::processData()
         res.add_replay(protbuf::Replay::EmailNotValidate);
         hasErrors = true;
     }
+
+    return hasErrors;
+}
+
+bool RegisterUserMessageHandler::processData()
+{
+    QString name = QString::fromStdString(req.name());
+    QString email = QString::fromStdString(req.email());
+    bool hasErrors = false;
+
+    hasErrors += checkName();
+    hasErrors += checkEmail();
 
     if(req.password().size()==0){
         qDebug()<<"user has no password";
@@ -91,7 +113,7 @@ void RegisterUserMessageHandler::processData()
     }
 
     if (hasErrors)
-        return;
+        return false;
 
     User u;
     u.set_name(req.name());
@@ -113,12 +135,16 @@ void RegisterUserMessageHandler::processData()
     catch(UserError e){
         qDebug()<<e.text();
     }
+    return true;
 }
 
-QByteArray RegisterUserMessageHandler::getResponse()
+bool RegisterUserMessageHandler::moveResponseToCache()
 {
-    QByteArray ba;
-    ba.resize(res.ByteSize());
-    res.SerializePartialToArray(ba.data(), ba.size() );
-    return ba;
+    int size = res.ByteSize();
+    if (!res.IsInitialized())
+        return false;
+    QByteArray *ba = new QByteArray(size,'\0');
+    res.SerializeToArray(ba->data(), size );
+    m_cache.responseMessage()->addMessage(MsgType::resAddUser, ba);
+    return true;
 }

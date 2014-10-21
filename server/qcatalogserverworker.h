@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QDateTime>
 
+#include "workercache.h"
+
 #include "messages/messagescontainer.h"
 #include "loginmessagehandler.h"
 #include "registerusermessagehandler.h"
@@ -15,6 +17,7 @@ class QCatalogServerWorker : public QObject
     Q_OBJECT
 public:
     explicit QCatalogServerWorker(QSqlDatabase db, QObject *parent = 0);
+    ~QCatalogServerWorker();
 
 signals:
     void responseAvalible(QByteArray res);
@@ -25,9 +28,8 @@ public slots:
     void readyRead(const QByteArray &ba);
 
 private:
-    MessagesContainer responseMessage;
-    RegisterUserMessageHandler userRegisterHandler;
-    LoginMessageHandler loginHandler;
+    QMap<MsgType, MessageHandlerInterface*> *handlers;
+    WorkerCache *workerCache;
 };
 
 #endif // QCATALOGSERVERWORKER_H

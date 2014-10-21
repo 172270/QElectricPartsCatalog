@@ -1,20 +1,47 @@
 #pragma once
-#include <QObject>
+
+#include <QSqlDatabase>
+#include "pginterface.h"
+#include "workercache.h"
 
 class QByteArray;
 
-class MessageHandlerInterface : public QObject
+class MessageHandlerInterface
 {
-    Q_OBJECT
+
 public:
-    explicit MessageHandlerInterface(QObject *parent = 0);
+    explicit MessageHandlerInterface(WorkerCache *cache):
+        m_cache(*cache),
+        database( m_cache.getDb().connectionName() )
+    {
+        ;
+    }
 
-public slots:
+    virtual ~MessageHandlerInterface(){;}
+    /**
+     * @brief parseData takes byte array containing some message
+     * e.g. MsgType::reqLogin or something else
+     * and return 1 when parse fails (data is corrupted)
+     */
+    virtual bool parseData(const QByteArray &ba) = 0;
+    virtual bool parseData(QByteArray &&ba) = 0;
 
-signals:
-    void responseAvalible();
-    void response(QByteArray);
+    /**
+     * @brief processData: processes data
+     * @return true if processing ends without error
+     */
+    virtual bool processData() = 0;
+    virtual bool moveResponseToCache() = 0;
 
-public slots:
-    void setData(QByteArray );
+protected:
+    WorkerCache &m_cache;
+    PgInterface database;
+
+private:
+    /**
+     * @brief clearCacheData clears data connected to this worker
+     *  in thread cache object linked at creation of this handler
+     * @return true if cache was succesfully cleared
+     */
+    virtual bool clearCacheData() = 0;
 };

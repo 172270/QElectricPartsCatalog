@@ -3,6 +3,11 @@
 #include <QDebug>
 #include <QCryptographicHash>
 
+LoginMessageHandler::LoginMessageHandler(WorkerCache *cache):
+    MessageHandlerInterface(cache)
+{
+}
+
 void LoginMessageHandler::setData(QByteArray &&d)
 {
     req.Clear();
@@ -11,37 +16,9 @@ void LoginMessageHandler::setData(QByteArray &&d)
     req.ParseFromArray( d.data(),d.size() );
 }
 
-void LoginMessageHandler::processData()
+void LoginMessageHandler::getUserData()
 {
-    if(!user->isLogged()){
-        QString userName = QString::fromStdString(req.name());
-
-        QByteArray pass = QCryptographicHash::hash(QByteArray(req.password().data(), req.password().size() ), QCryptographicHash::Sha512);
-        bool loginOk = database.checkUserPassword(userName, pass.toHex() );
-
-        if(loginOk){
-            res.set_replay(protbuf::Replay::LoginPass);
-            user->setIsLogged(true);
-            getUserData();
-            updateLastLogin();
-        }
-        else{
-            res.set_replay(protbuf::Replay::LoginDeny);
-        }
-    }
-    else{
-        res.set_replay(protbuf::Replay::UserAlreadyLogged);
-    }
-}
-
-User *LoginMessageHandler::getUserData()
-{
-    ///TODO get all user data (info about files etc.)
-    user->MergeFrom(database.getUserByName( QString::fromStdString(req.name()) ));
-    ///TODO add getUser method that take pointer to user, and pass user to that function instead
-    /// marging data from other user
-
-    return user;
+    m_cache.getUserData()->MergeFrom(database.getUserByName( QString::fromStdString(req.name()) ));
 }
 
 QByteArray LoginMessageHandler::getResponse()
@@ -52,17 +29,60 @@ QByteArray LoginMessageHandler::getResponse()
     return ba;
 }
 
-bool LoginMessageHandler::loginOk(){
-    return res.replay()==protbuf::Replay::LoginPass;
-}
-
 void LoginMessageHandler::updateLastLogin()
 {
-    if(user->IsInitialized()){
-        database.updateLastLogin(*user);
+    if(m_cache.getUserData()->IsInitialized()){
+        database.updateLastLogin(*m_cache.getUserData());
     }
-    if(user->id() == 0){
-        user->MergeFrom(database.getUserByName(user->getName()));
-        database.updateLastLogin(*user);
+    if(m_cache.getUserData()->id() == 0){
+        m_cache.getUserData()->MergeFrom(database.getUserByName(m_cache.getUserData()->getName()));
+        database.updateLastLogin(*m_cache.getUserData());
     }
+}
+
+bool LoginMessageHandler::clearCacheData()
+{
+    return true;
+}
+
+bool LoginMessageHandler::parseData(const QByteArray &ba)
+{
+    return req.ParseFromArray( ba.data(),ba.size() );
+}
+
+bool LoginMessageHandler::parseData(QByteArray &&ba)
+{
+    return req.ParseFromArray( ba.data(),ba.size() );
+}
+
+bool LoginMessageHandler::processData()
+{
+    if(!m_cache.userStatus()->logged ){
+        QString userName = QString::fromStdString(req.name());
+
+        QByteArray pass = QCryptographicHash::hash(QByteArray(req.password().data(), req.password().size() ), QCryptographicHash::Sha512);
+        bool loginOk = database.checkUserPassword(userName, pass.toHex() );
+
+        if(loginOk){
+            res.set_replay(protbuf::Replay::LoginPass);
+            m_cache.userStatus()->logged = true;
+            getUserData();
+            updateLastLogin();
+        }
+        else{
+            res.set_replay(protbuf::Replay::LoginDeny);
+        }
+    }
+    else{
+        res.set_replay(protbuf::Replay::UserAlreadyLogged);
+    }
+    return true;
+}
+
+bool LoginMessageHandler::moveResponseToCache()
+{
+    QByteArray *ba = new QByteArray(res.ByteSize(),'\0');
+    res.SerializePartialToArray(ba->data(), ba->size() );
+    m_cache.responseMessage()->addMessage(MsgType::resLogin, ba);
+    return true;
 }

@@ -2,42 +2,53 @@
 
 
 QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
-    QObject(parent), userRegisterHandler(db), loginHandler(db)
+    QObject(parent),
+    workerCache(new WorkerCache(db))
 {
+    handlers = new QMap<MsgType, MessageHandlerInterface*>();
+    handlers->insert(MsgType::reqLogin, new LoginMessageHandler(workerCache));
+    handlers->insert(MsgType::addUser, new RegisterUserMessageHandler(workerCache));
+}
+
+QCatalogServerWorker::~QCatalogServerWorker()
+{
+    QList<MsgType> kays = handlers->keys();
+    for(int i =0;i<kays.size();i++){
+        MessageHandlerInterface *h = handlers->value(kays.at(i));
+        handlers->remove(kays.at(i));
+        delete h;
+    }
+    delete handlers;
+    delete workerCache;
 }
 
 void QCatalogServerWorker::readyRead(const QByteArray &ba)
 {
     static QByteArray *buf  = new QByteArray();
-    responseMessage.Clear();
-    MessagesContainer requestMessage;
+    workerCache->responseMessage()->Clear();
+    static MessagesContainer requestMessage;
+    requestMessage.Clear();
+
     if(!requestMessage.fromArray(ba)){
         emit messageCorrupted();
     }
     else{
         for(int i=0;i<requestMessage.capsules().size();i++){
-            if(requestMessage.capsules(i).msgtype()== MsgType::reqLogin){
-                loginHandler.setData( requestMessage.getCapsule(i).getData() );
-                loginHandler.processData();
-                responseMessage.addMessage(MsgType::resLogin, loginHandler.getResponse());
-                if( loginHandler.loginOk() ){
-                    responseMessage.addMessage(MsgType::msgUser, loginHandler.getUserData()->toArray() );
-                }
-            }
-            else if(requestMessage.capsules(i).msgtype()== MsgType::addUser){
-                userRegisterHandler.setData( requestMessage.getCapsule(i).getData() );
-                userRegisterHandler.processData();
-                responseMessage.addMessage(MsgType::resAddUser, userRegisterHandler.getResponse());
-            }
-            else if( requestMessage.capsules(i).msgtype() == MsgType::reqLogout){
+            if(handlers->contains(requestMessage.capsules(i).msgtype())){
+                handlers->value(requestMessage.capsules(i).msgtype())
+                        ->parseData( requestMessage.getCapsule(i).getData());
+                handlers->value(requestMessage.capsules(i).msgtype())
+                        ->processData();
+                handlers->value(requestMessage.capsules(i).msgtype())
+                        ->moveResponseToCache();
             }
             else{
                 emit unknownMessageType(requestMessage.capsules(i).msgtype());
             }
         }
     }
-    if(responseMessage.capsules().size() > 0){
-        responseMessage.toArray(buf);
+    if(workerCache->responseMessage()->capsules().size() > 0){
+        workerCache->responseMessage()->toArray(buf);
         emit responseAvalible( *buf );
     }
 }

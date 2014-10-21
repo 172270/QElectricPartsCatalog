@@ -79,4 +79,19 @@ protected:
     bool ParseFromArray(const void *data, int size);
 };
 
+
+class UserStatistics : public protbuf::UserActivityStatistics , public protocol::Message
+{
+
+
+    // Message interface
+public:
+    MsgType type() const;
+    int ByteSize() const;
+
+protected:
+    bool SerializeToArray(void *data, int size) const;
+    bool ParseFromArray(const void *data, int size);
+};
+
 #endif // USER_H
