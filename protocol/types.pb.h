@@ -33,10 +33,16 @@ void protobuf_ShutdownFile_types_2eproto();
 enum MsgType {
   reqLogin = 1,
   reqLogout = 2,
+  reqGroups = 3,
+  addUser = 80,
+  addParameter = 81,
+  addGroup = 82,
   resLogin = -1,
   resLogout = -2,
-  addUser = 80,
+  resGroups = -3,
   resAddUser = -80,
+  resAddParameter = -81,
+  resAddGroup = -82,
   msgItem = 100,
   msgUser = 110,
   msgUserStats = 111,
@@ -48,7 +54,7 @@ enum MsgType {
   msgStorage = 160
 };
 bool MsgType_IsValid(int value);
-const MsgType MsgType_MIN = resAddUser;
+const MsgType MsgType_MIN = resAddGroup;
 const MsgType MsgType_MAX = msgStorage;
 const int MsgType_ARRAYSIZE = MsgType_MAX + 1;
 

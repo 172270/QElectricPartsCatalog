@@ -22,3 +22,10 @@ message Group{
   optional string description = 9;
   optional uint64 creationDate = 10;
 }
+
+message reqGroups{
+}
+
+message resGroups{
+  repeated Group groups = 1;
+}

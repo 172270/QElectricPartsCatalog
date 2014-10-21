@@ -17,6 +17,8 @@ namespace protbuf {
 void protobuf_ShutdownFile_group_2eproto() {
   delete GroupBasicInformation::default_instance_;
   delete Group::default_instance_;
+  delete reqGroups::default_instance_;
+  delete resGroups::default_instance_;
 }
 
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
@@ -34,8 +36,12 @@ void protobuf_AddDesc_group_2eproto() {
   ::protbuf::protobuf_AddDesc_parameters_2eproto();
   GroupBasicInformation::default_instance_ = new GroupBasicInformation();
   Group::default_instance_ = new Group();
+  reqGroups::default_instance_ = new reqGroups();
+  resGroups::default_instance_ = new resGroups();
   GroupBasicInformation::default_instance_->InitAsDefaultInstance();
   Group::default_instance_->InitAsDefaultInstance();
+  reqGroups::default_instance_->InitAsDefaultInstance();
+  resGroups::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_group_2eproto);
 }
 
@@ -641,6 +647,289 @@ void Group::Swap(Group* other) {
 
 ::std::string Group::GetTypeName() const {
   return "protbuf.Group";
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+#endif  // !_MSC_VER
+
+reqGroups::reqGroups()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void reqGroups::InitAsDefaultInstance() {
+}
+
+reqGroups::reqGroups(const reqGroups& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void reqGroups::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+reqGroups::~reqGroups() {
+  SharedDtor();
+}
+
+void reqGroups::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void reqGroups::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const reqGroups& reqGroups::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_group_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_group_2eproto();
+#endif
+  return *default_instance_;
+}
+
+reqGroups* reqGroups::default_instance_ = NULL;
+
+reqGroups* reqGroups::New() const {
+  return new reqGroups;
+}
+
+void reqGroups::Clear() {
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool reqGroups::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+      return true;
+    }
+    DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+  }
+  return true;
+#undef DO_
+}
+
+void reqGroups::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+}
+
+int reqGroups::ByteSize() const {
+  int total_size = 0;
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void reqGroups::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const reqGroups*>(&from));
+}
+
+void reqGroups::MergeFrom(const reqGroups& from) {
+  GOOGLE_CHECK_NE(&from, this);
+}
+
+void reqGroups::CopyFrom(const reqGroups& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool reqGroups::IsInitialized() const {
+
+  return true;
+}
+
+void reqGroups::Swap(reqGroups* other) {
+  if (other != this) {
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string reqGroups::GetTypeName() const {
+  return "protbuf.reqGroups";
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int resGroups::kGroupsFieldNumber;
+#endif  // !_MSC_VER
+
+resGroups::resGroups()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void resGroups::InitAsDefaultInstance() {
+}
+
+resGroups::resGroups(const resGroups& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void resGroups::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+resGroups::~resGroups() {
+  SharedDtor();
+}
+
+void resGroups::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void resGroups::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const resGroups& resGroups::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_group_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_group_2eproto();
+#endif
+  return *default_instance_;
+}
+
+resGroups* resGroups::default_instance_ = NULL;
+
+resGroups* resGroups::New() const {
+  return new resGroups;
+}
+
+void resGroups::Clear() {
+  groups_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool resGroups::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .protbuf.Group groups = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_groups:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_groups()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(10)) goto parse_groups;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void resGroups::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // repeated .protbuf.Group groups = 1;
+  for (int i = 0; i < this->groups_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+      1, this->groups(i), output);
+  }
+
+}
+
+int resGroups::ByteSize() const {
+  int total_size = 0;
+
+  // repeated .protbuf.Group groups = 1;
+  total_size += 1 * this->groups_size();
+  for (int i = 0; i < this->groups_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->groups(i));
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void resGroups::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const resGroups*>(&from));
+}
+
+void resGroups::MergeFrom(const resGroups& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  groups_.MergeFrom(from.groups_);
+}
+
+void resGroups::CopyFrom(const resGroups& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool resGroups::IsInitialized() const {
+
+  for (int i = 0; i < groups_size(); i++) {
+    if (!this->groups(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void resGroups::Swap(resGroups* other) {
+  if (other != this) {
+    groups_.Swap(&other->groups_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string resGroups::GetTypeName() const {
+  return "protbuf.resGroups";
 }
 
 

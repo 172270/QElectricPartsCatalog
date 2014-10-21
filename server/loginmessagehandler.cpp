@@ -25,11 +25,6 @@ void LoginMessageHandler::updateLastLogin()
     }
 }
 
-bool LoginMessageHandler::clearCacheData()
-{
-    return true;
-}
-
 bool LoginMessageHandler::parseData(const QByteArray &ba)
 {
     return req.ParseFromArray( ba.data(),ba.size() );

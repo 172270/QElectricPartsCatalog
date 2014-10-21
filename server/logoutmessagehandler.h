@@ -40,11 +40,6 @@ public:
     }
 
 private:
-    bool clearCacheData()
-    {
-        return true;
-    }
-
     protbuf::LogoutRequest message;
     protbuf::LogoutResponse resMessage;
 };

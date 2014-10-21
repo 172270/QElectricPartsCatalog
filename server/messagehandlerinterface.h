@@ -41,12 +41,4 @@ public:
 protected:
     WorkerCache &m_cache;
     PgInterface database;
-
-private:
-    /**
-     * @brief clearCacheData clears data connected to this worker
-     *  in thread cache object linked at creation of this handler
-     * @return true if cache was succesfully cleared
-     */
-    virtual bool clearCacheData() = 0;
 };

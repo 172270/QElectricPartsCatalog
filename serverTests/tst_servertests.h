@@ -16,6 +16,7 @@ public:
 
     void waitForSignal(QSignalSpy spy);
     void login(QString name, QString pass);
+    void logout();
 public slots:
 
     void onResponseAvalible(QByteArray ba);
@@ -37,8 +38,9 @@ private Q_SLOTS:
     void loginToServerBadPasswd();
     void loginToServerBadUser();
     void addFullUserToServer();
-
     void loginGetsUserInformation();
+
+    void addGroup_worksOnlyIfUserIsLoged();
 private:
 
     QCatalogServerWorker *worker;

@@ -226,6 +226,19 @@ void tst_ServerWorkerTests::login(QString name, QString pass)
     mc->Clear();
 }
 
+void tst_ServerWorkerTests::logout()
+{
+    LogoutRequest logoutRequest;
+    LoginRequestResponse loginResponse;
+
+    logoutRequest.set_logout(true);
+
+    mc->addMessage( &logoutRequest );
+
+    QByteArray ba = mc->toArray();
+    worker->readyRead(ba);
+}
+
 void tst_ServerWorkerTests::loginGetsUserInformation()
 {
     LoginRequestResponse loginResponse;
@@ -245,4 +258,11 @@ void tst_ServerWorkerTests::loginGetsUserInformation()
     QVERIFY(userData.storagesNumber() == 1);
     QVERIFY(userData.getDefaultStorageId() != 0 );
     ///TODO avatar + last login + registration date;
+
+    logout();
+}
+
+void tst_ServerWorkerTests::addGroup_worksOnlyIfUserIsLoged()
+{
+
 }

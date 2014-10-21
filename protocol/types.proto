@@ -1,17 +1,18 @@
 option optimize_for = LITE_RUNTIME;
 
 enum MsgType{
-	reqLogin = 1; 		// N/A
-	reqLogout = 2; 		// N/A 
+	reqLogin = 1;
+	reqLogout = 2;
+	reqGroups = 3;
 //	reqItem; 		// N/A
 //	reqParameters; 	// N/A
 //	reqCases; 		// N/A
 
-	resLogin = -1;
-	resLogout= -2;
 
-	addUser = 80;	// N/A
-//	addParameter;	// N/A
+
+	addUser = 80;
+	addParameter = 81;
+	addGroup = 82;
 //	addItemToStorage;// N/A
 //	addItemGroup;	// N/A
 //	addItem;		// N/A
@@ -23,8 +24,14 @@ enum MsgType{
 //	addStorage;		// N/A
 //	addSet;			// N/A
 
+	resLogin = -1;
+	resLogout= -2;
+	resGroups = -3;
+	
 	resAddUser = -80;
-
+	resAddParameter = -81;
+	resAddGroup = -82;
+	
 	msgItem 	= 100;
 	msgUser 	= 110;
 	msgUserStats= 111;

@@ -20,7 +20,6 @@ private:
     protbuf::LoginRequest req;
     protbuf::LoginResponse res;
     void updateLastLogin();
-    bool clearCacheData();
     void getUserData();
 };
 

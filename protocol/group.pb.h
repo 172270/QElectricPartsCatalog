@@ -35,6 +35,8 @@ void protobuf_ShutdownFile_group_2eproto();
 
 class GroupBasicInformation;
 class Group;
+class reqGroups;
+class resGroups;
 
 // ===================================================================
 
@@ -284,6 +286,165 @@ class Group : public ::google::protobuf::MessageLite {
 
   void InitAsDefaultInstance();
   static Group* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class reqGroups : public ::google::protobuf::MessageLite {
+ public:
+  reqGroups();
+  virtual ~reqGroups();
+
+  reqGroups(const reqGroups& from);
+
+  inline reqGroups& operator=(const reqGroups& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const reqGroups& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const reqGroups* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(reqGroups* other);
+
+  // implements Message ----------------------------------------------
+
+  reqGroups* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const reqGroups& from);
+  void MergeFrom(const reqGroups& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:protbuf.reqGroups)
+ private:
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_group_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_group_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_group_2eproto();
+  friend void protobuf_ShutdownFile_group_2eproto();
+
+  void InitAsDefaultInstance();
+  static reqGroups* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class resGroups : public ::google::protobuf::MessageLite {
+ public:
+  resGroups();
+  virtual ~resGroups();
+
+  resGroups(const resGroups& from);
+
+  inline resGroups& operator=(const resGroups& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const resGroups& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const resGroups* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(resGroups* other);
+
+  // implements Message ----------------------------------------------
+
+  resGroups* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const resGroups& from);
+  void MergeFrom(const resGroups& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .protbuf.Group groups = 1;
+  inline int groups_size() const;
+  inline void clear_groups();
+  static const int kGroupsFieldNumber = 1;
+  inline const ::protbuf::Group& groups(int index) const;
+  inline ::protbuf::Group* mutable_groups(int index);
+  inline ::protbuf::Group* add_groups();
+  inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Group >&
+      groups() const;
+  inline ::google::protobuf::RepeatedPtrField< ::protbuf::Group >*
+      mutable_groups();
+
+  // @@protoc_insertion_point(class_scope:protbuf.resGroups)
+ private:
+
+  ::google::protobuf::RepeatedPtrField< ::protbuf::Group > groups_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_group_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_group_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_group_2eproto();
+  friend void protobuf_ShutdownFile_group_2eproto();
+
+  void InitAsDefaultInstance();
+  static resGroups* default_instance_;
 };
 // ===================================================================
 
@@ -591,6 +752,39 @@ inline ::google::protobuf::uint64 Group::creationdate() const {
 inline void Group::set_creationdate(::google::protobuf::uint64 value) {
   set_has_creationdate();
   creationdate_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// reqGroups
+
+// -------------------------------------------------------------------
+
+// resGroups
+
+// repeated .protbuf.Group groups = 1;
+inline int resGroups::groups_size() const {
+  return groups_.size();
+}
+inline void resGroups::clear_groups() {
+  groups_.Clear();
+}
+inline const ::protbuf::Group& resGroups::groups(int index) const {
+  return groups_.Get(index);
+}
+inline ::protbuf::Group* resGroups::mutable_groups(int index) {
+  return groups_.Mutable(index);
+}
+inline ::protbuf::Group* resGroups::add_groups() {
+  return groups_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::protbuf::Group >&
+resGroups::groups() const {
+  return groups_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::protbuf::Group >*
+resGroups::mutable_groups() {
+  return &groups_;
 }
 
 
