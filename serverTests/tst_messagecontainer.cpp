@@ -10,9 +10,7 @@ tst_MessageContainer::tst_MessageContainer(QObject *parent) :
 
 void tst_MessageContainer::init()
 {
-//    m_cap.Clear();
     m_con.Clear();
-
 }
 
 QString getRandomData(){
@@ -119,9 +117,31 @@ void tst_MessageContainer::dataStaysAfterDeserialization()
 
 }
 
-void tst_MessageContainer::addMessage_benchmark()
+QString tmessage = getRandomData();
+MsgType ttype = MsgType::addUser;
+QByteArray *tba = new QByteArray();
+QByteArray rba;
+
+void tst_MessageContainer::toArrayByPointer_benchmark()
 {
-    ///TODO create benchmak for addMessage (type, *ba) and try to use std::move to this method
+    QBENCHMARK{
+        m_con.addMessage(ttype, tmessage);
+        m_con.toArray(tba);
+        MessagesContainer mc;
+        mc.fromArray(tba);
+        m_con.Clear();
+    }
+}
+
+void tst_MessageContainer::toArrayByReference_benchmark()
+{
+    QBENCHMARK{
+        m_con.addMessage(ttype, tmessage);
+        rba = m_con.toArray();
+        MessagesContainer mc;
+        mc.fromArray(tba);
+        m_con.Clear();
+    }
 }
 
 #include "messages/userregistrationmessage.h"

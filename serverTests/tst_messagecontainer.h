@@ -25,7 +25,8 @@ private slots:
     void extractCapcule_givesBackData();
     void extractBigCapsule_givesData();
     void dataStaysAfterDeserialization();
-    void addMessage_benchmark();
+    void toArrayByPointer_benchmark();
+    void toArrayByReference_benchmark();
 
     void registerUserMessage();
 private:

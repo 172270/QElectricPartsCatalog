@@ -43,7 +43,6 @@ SOURCES += \
 HEADERS += \
     user.pb.h \
     stats.pb.h \
-    messagetype.h \
     datastreamsource.h \
     storage.pb.h \
     message_conteiner.pb.h \

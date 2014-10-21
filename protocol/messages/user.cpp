@@ -27,7 +27,7 @@ void User::set_email(const QString &value)
 
 void User::set_email(const std::string &email)
 {
-    protbuf::UserData::set_email(email); ///TODO test for trimmed
+    protbuf::UserData::set_email(email);
 }
 
 QString User::getEmail() const

@@ -67,7 +67,7 @@ void AddUserDialog::on_registerNewUser_clicked()
 
     bool hasErrors = false;
 
-    if(ui->name->text().size()<4 || ui->name->text().size() > 33 ) /// TODO: check
+    if(ui->name->text().size()<4 || ui->name->text().size() > 34 )
     {
         ui->name->setStyleSheet("background-color : red;");
         hasErrors = true;

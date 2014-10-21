@@ -16,8 +16,7 @@ QCatalogServerThread::QCatalogServerThread(QWebSocket *s, QObject *parent) :
     db->setPassword("postgres");
 
     if (!db->open()){
-        QString dbNotOpen = "database can't be opened!!";
-        throw dbNotOpen ;
+        throw db->lastError();
     }
 
     worker = new QCatalogServerWorker(*db);

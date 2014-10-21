@@ -32,12 +32,14 @@ void QCatalogServer::incomingConnection()
     if(hasPendingConnections()){
         QWebSocket *ws;
         ws = nextPendingConnection();
-        // We have a new panding connection
-        qDebug() << ws->peerAddress() << " Connecting...";
-
         QCatalogServerThread* thread;
-        thread = new QCatalogServerThread(ws, this);
-
+        try{
+            thread = new QCatalogServerThread(ws, this);
+        }
+        catch(QSqlError e){
+            qDebug()<<e.databaseText()<<e.driverText();
+            ws->close();
+        }
         if (thread){
             connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
             thread->start();
