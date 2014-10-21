@@ -40,6 +40,7 @@ public:
 
     quint32 addGroup(const Group &group);
     Group getGroup(uint id);
+    QList<Group> getGroups();
 
     void linkParameterToGroup(Group &group, const Parameter &parameter);
 

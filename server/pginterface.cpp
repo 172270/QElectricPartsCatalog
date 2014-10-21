@@ -386,6 +386,39 @@ Group PgInterface::getGroup(uint id)
     return g;
 }
 
+QList<Group> PgInterface::getGroups()
+{
+    QList<Group> groups;
+    q.clear();
+    q.append("SELECT "
+             "group_id, "
+             "parent_id, "
+             "name, "
+             "description, "
+             "creationtime, "
+             "allowitems, "
+             "allowrecipe "
+             "FROM "
+             "groups;");
+    if(!query->exec(q)){
+        qDebug()<<query->lastError().text();
+    }
+    while(query->nexy){
+        Group g;
+        g.set_id(query->value("group_id").toUInt());
+        g.set_name(query->value("name").toString());
+        g.set_parentid(query->value("parent_id").toUInt());
+        g.set_description(query->value("description").toString());
+        g.set_creationdate(query->value("creationtime").toDateTime());
+        g.setAllowItems(query->value("allowitems").toBool() );
+        g.setAllowRecipe(query->value("allowrecipe").toBool() );
+
+        saveGroupParametersIDs(g);
+        groups.append(g);
+    }
+    return groups;
+}
+
 void PgInterface::linkParameterToGroup(Group &group, const Parameter &parameter)
 {
     q.clear();

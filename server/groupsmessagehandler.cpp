@@ -17,6 +17,12 @@ bool GroupsMessageHandler::parseData(QByteArray &&ba)
 
 bool GroupsMessageHandler::processData()
 {
+    ///TODO server shoud replay with "not login" message
+    /// when user is not login :)
+
+    if( m_cache.userStatus()->logged ){
+        database.getGroup();
+    }
     return true;
 }
 
