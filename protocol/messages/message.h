@@ -39,7 +39,6 @@ public:
     }
 
     virtual int ByteSize() const = 0;
-
 protected:
     virtual bool SerializeToArray(void* data, int size) const = 0;
     virtual bool ParseFromArray(const void* data, int size) = 0;

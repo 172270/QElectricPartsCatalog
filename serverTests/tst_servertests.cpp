@@ -241,4 +241,8 @@ void tst_ServerWorkerTests::loginGetsUserInformation()
     QVERIFY(userData.phonenumber() == "123456789");
     QVERIFY(userData.description() == "some description");
     QVERIFY(userData.address() == "aaaaaaaaaaaaaaaaaaa");
+    QVERIFY(userData.getStoragesList().size() == 1 );
+    QVERIFY(userData.storagesNumber() == 1);
+    QVERIFY(userData.getDefaultStorageId() != 0 );
+    ///TODO avatar + last login + registration date;
 }

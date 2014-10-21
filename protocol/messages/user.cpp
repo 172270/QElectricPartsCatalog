@@ -1,5 +1,4 @@
 #include "user.h"
-
 User::User()
 {
     set_id(0);
@@ -53,10 +52,9 @@ Storage* User::getStorage()
 
 void User::addStorage(const Storage &s )
 {
-    if (!s.IsInitialized() )
-        throw QString("storage is not initialized!");
     protbuf::Storage *store = add_storages();
     store->CopyFrom(s);
+    setDefaultStorageId(s.id());
 }
 
 void User::addStorages(QList<Storage> st)
@@ -68,10 +66,10 @@ void User::addStorages(QList<Storage> st)
 
 void User::setDefaultStorageId(int id)
 {
-    m_config.insert(QStringLiteral("last_group"), id);
+    setConfigValue(QStringLiteral("last_group"), id);
 }
 
-int User::getDefaultStorageId() const
+quint32 User::getDefaultStorageId() const
 {
     return m_config.value(QStringLiteral("last_group")).toInt();
 }
@@ -103,6 +101,12 @@ void User::set_lastlogin(QDateTime lastlogin){
     protbuf::UserData::set_lastlogin(lastlogin.toMSecsSinceEpoch());
 }
 
+void User::setConfigValue(QString key, QJsonValue val)
+{
+    m_config.insert(key,val);
+    setConfig(QJsonDocument(m_config).toJson());
+}
+
 MsgType User::type() const
 {
     return MsgType::msgUser;
@@ -115,16 +119,19 @@ int User::ByteSize() const
 
 bool User::SerializeToArray(void *data, int size) const
 {
-    return protbuf::UserData::SerializeToArray(data,size);
+    bool serializeOK = protbuf::UserData::SerializeToArray(data,size);
+    return serializeOK;
 }
 
 bool User::ParseFromArray(const void *data, int size)
 {
-    bool parseError = protbuf::UserData::ParseFromArray(data,size);
-    if(!parseError){
-
+    bool parseOk = protbuf::UserData::ParseFromArray(data,size);
+    if(parseOk){
+        auto ba = QByteArray(config().data(),config().size() );
+        auto doc = QJsonDocument::fromJson(ba);
+        m_config = doc.object();
     }
-    return parseError;
+    return parseOk;
 }
 
 void User::set_registrationdate(QDateTime registrationDate)
@@ -139,7 +146,7 @@ QDateTime User::get_registrationdate()
 
 void User::setConfig(QByteArray conf)
 {
-    protbuf::UserData::set_config(QString(conf).toStdString());
+    protbuf::UserData::set_config(conf.data(), conf.size() );
 }
 
 QByteArray User::getDefaultConfig()
@@ -159,7 +166,6 @@ protbuf::UserBasicInformation User::getPBPackage()
     ubi.set_email(email());
     return ubi;
 }
-
 
 QString UserError::text() const
 {

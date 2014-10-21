@@ -40,7 +40,7 @@ public:
     void addStorage(const Storage &s);
     void addStorages(QList<Storage> storages);
     void setDefaultStorageId(int id);
-    int getDefaultStorageId() const;
+    quint32 getDefaultStorageId() const;
     QList<Storage *> getStoragesList();
     int storagesNumber() const;
 
@@ -66,6 +66,7 @@ public:
     void set_lastlogin(QDateTime lastlogin);
 
 private:
+    void setConfigValue(QString key, QJsonValue val);
     QJsonObject m_config;
 public:
     MsgType type() const;

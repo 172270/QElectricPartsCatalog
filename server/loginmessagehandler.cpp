@@ -10,7 +10,8 @@ LoginMessageHandler::LoginMessageHandler(WorkerCache *cache):
 
 void LoginMessageHandler::getUserData()
 {
-    m_cache.getUserData()->MergeFrom(database.getUserByName( QString::fromStdString(req.name()) ));
+    m_cache.getUserData()->Clear();
+    m_cache.getUserData()->CopyFrom(database.getUserByName( QString::fromStdString(req.name()) ));
 }
 
 void LoginMessageHandler::updateLastLogin()

@@ -78,6 +78,8 @@ uint PgInterface::addUser(User &user, QString passwd)
     storage.setID(addStorage(storage));
     linkStorageToUser(user, storage);
     user.addStorage(storage);
+    user.setDefaultStorageId( storage.id() );
+    updateConfig(user);
     return user.id();
 }
 
@@ -114,6 +116,13 @@ void PgInterface::updateLastLogin(User &u)
     query->exec(q);
 }
 
+void PgInterface::updateConfig(User &u)
+{
+    q.clear();
+    q.append("UPDATE users SET config = "+ QString::fromStdString(u.config()) +" WHERE id = "+ QString::number( u.id()) +";");
+    query->exec(q);
+}
+
 User PgInterface::getUserByName(const QString &name)
 {
     User u;
@@ -142,7 +151,6 @@ User PgInterface::getUserByName(const QString &name)
     }
 
     u.addStorages( getUserStorages(u) );
-
     return u;
 }
 

@@ -26,6 +26,7 @@ public:
     bool userNameExists(QString &name);
     bool userEmailExists(QString &email);
     void updateLastLogin(User &u);
+    void updateConfig(User &u);
 
     void deleteUser(User &protbuf);
     bool checkUserPassword(QString protbuf, QString passwd);
