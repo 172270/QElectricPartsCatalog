@@ -10,8 +10,7 @@ class LoginMessageHandler : public MessageHandlerInterface
 public:
     LoginMessageHandler(WorkerCache *cache);
     ~LoginMessageHandler(){;}
-    void setData(QByteArray &&data);
-    QByteArray getResponse();
+
     bool processData();
     bool moveResponseToCache();
     bool parseData(const QByteArray &ba) override;

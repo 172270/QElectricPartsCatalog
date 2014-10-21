@@ -1,5 +1,8 @@
 #include "qcatalogserverworker.h"
 
+#include "loginmessagehandler.h"
+#include "logoutmessagehandler.h"
+#include "registerusermessagehandler.h"
 
 QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
     QObject(parent),
@@ -8,6 +11,7 @@ QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
     handlers = new QMap<MsgType, MessageHandlerInterface*>();
     handlers->insert(MsgType::reqLogin, new LoginMessageHandler(workerCache));
     handlers->insert(MsgType::addUser, new RegisterUserMessageHandler(workerCache));
+    handlers->insert(MsgType::reqLogout, new LogoutMessageHandler(workerCache));
 }
 
 QCatalogServerWorker::~QCatalogServerWorker()
@@ -24,6 +28,7 @@ QCatalogServerWorker::~QCatalogServerWorker()
 
 void QCatalogServerWorker::readyRead(const QByteArray &ba)
 {
+    workerCache->connectionStats()->bytesRead += ba.size();
     static QByteArray *buf  = new QByteArray();
     workerCache->responseMessage()->Clear();
     static MessagesContainer requestMessage;
@@ -35,12 +40,14 @@ void QCatalogServerWorker::readyRead(const QByteArray &ba)
     else{
         for(int i=0;i<requestMessage.capsules().size();i++){
             if(handlers->contains(requestMessage.capsules(i).msgtype())){
-                handlers->value(requestMessage.capsules(i).msgtype())
-                        ->parseData( requestMessage.getCapsule(i).getData());
-                handlers->value(requestMessage.capsules(i).msgtype())
-                        ->processData();
-                handlers->value(requestMessage.capsules(i).msgtype())
-                        ->moveResponseToCache();
+                MessageHandlerInterface *handler = handlers->value(requestMessage.capsules(i).msgtype());
+
+                if (! handler->parseData( requestMessage.getCapsule(i).getData())){
+                    emit messageCorrupted();
+                    continue;
+                }
+                handler->processData();
+                handler->moveResponseToCache();
             }
             else{
                 emit unknownMessageType(requestMessage.capsules(i).msgtype());
@@ -49,6 +56,7 @@ void QCatalogServerWorker::readyRead(const QByteArray &ba)
     }
     if(workerCache->responseMessage()->capsules().size() > 0){
         workerCache->responseMessage()->toArray(buf);
+        workerCache->connectionStats()->bytesWrite += buf->size();
         emit responseAvalible( *buf );
     }
 }

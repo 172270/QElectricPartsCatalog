@@ -39,7 +39,8 @@ public:
     Storage *getStorage();
     void addStorage(const Storage &s);
     void addStorages(QList<Storage> storages);
-    void setDefaultStorageId(quint32 id);
+    void setDefaultStorageId(int id);
+    int getDefaultStorageId() const;
     QList<Storage *> getStoragesList();
     int storagesNumber() const;
 
@@ -65,25 +66,17 @@ public:
     void set_lastlogin(QDateTime lastlogin);
 
 private:
-    quint32 defaultStorageID; ///TODO move functionality to cache
-    bool m_isLogged = false; ///TODO move functionality to cache
-  public:
+    QJsonObject m_config;
+public:
     MsgType type() const;
     int ByteSize() const;
-
-    bool isLogged() const;
-    void setIsLogged(bool isLogged);
-
 protected:
     bool SerializeToArray(void *data, int size) const;
     bool ParseFromArray(const void *data, int size);
 };
 
-
 class UserStatistics : public protbuf::UserActivityStatistics , public protocol::Message
 {
-
-
     // Message interface
 public:
     MsgType type() const;

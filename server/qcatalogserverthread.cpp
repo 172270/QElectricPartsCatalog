@@ -48,6 +48,5 @@ void QCatalogServerThread::run()
     connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
     connect(socket, SIGNAL(binaryMessageReceived(QByteArray)), worker, SLOT(readyRead(QByteArray)), Qt::DirectConnection);
     connect(worker, SIGNAL(responseAvalible(QByteArray)), this, SLOT(send(const QByteArray)));
-
     exec();
 }

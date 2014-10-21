@@ -4,7 +4,8 @@ WorkerCache::WorkerCache(QSqlDatabase dbm):
     m_messageContainer(new MessagesContainer),
     userStats(new UserStatistics ),
     userData(new User),
-    m_userStatus(new UserStatus)
+    m_userStatus(new UserStatus),
+    m_connectionStats(new ConnectionStatistics)
 {
     db = dbm;
     userStatus()->logged=false;
@@ -16,6 +17,7 @@ WorkerCache::~WorkerCache()
     delete m_messageContainer;
     delete userData;
     delete userStats;
+    delete m_connectionStats;
 }
 User *WorkerCache::getUserData() const
 {
@@ -58,9 +60,7 @@ UserStatus *WorkerCache::userStatus() const
 {
     return m_userStatus;
 }
-
-
-
-
-
-
+ConnectionStatistics *WorkerCache::connectionStats() const
+{
+    return m_connectionStats;
+}

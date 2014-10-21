@@ -31,6 +31,11 @@ public:
      * @return true if processing ends without error
      */
     virtual bool processData() = 0;
+
+    /**
+     * @brief moveResponseToCache copy response to response container
+     * @return
+     */
     virtual bool moveResponseToCache() = 0;
 
 protected:

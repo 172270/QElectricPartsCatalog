@@ -8,6 +8,7 @@ enum MsgType{
 //	reqCases; 		// N/A
 
 	resLogin = -1;
+	resLogout= -2;
 
 	addUser = 80;	// N/A
 //	addParameter;	// N/A

@@ -17,6 +17,7 @@ namespace protbuf {
 void protobuf_ShutdownFile_user_2eproto() {
   delete LoginRequest::default_instance_;
   delete LogoutRequest::default_instance_;
+  delete LogoutResponse::default_instance_;
   delete LoginResponse::default_instance_;
   delete Register::default_instance_;
   delete RegisterResponse::default_instance_;
@@ -41,6 +42,7 @@ void protobuf_AddDesc_user_2eproto() {
   ::protobuf_AddDesc_stats_2eproto();
   LoginRequest::default_instance_ = new LoginRequest();
   LogoutRequest::default_instance_ = new LogoutRequest();
+  LogoutResponse::default_instance_ = new LogoutResponse();
   LoginResponse::default_instance_ = new LoginResponse();
   Register::default_instance_ = new Register();
   RegisterResponse::default_instance_ = new RegisterResponse();
@@ -49,6 +51,7 @@ void protobuf_AddDesc_user_2eproto() {
   UserActivityStatistics::default_instance_ = new UserActivityStatistics();
   LoginRequest::default_instance_->InitAsDefaultInstance();
   LogoutRequest::default_instance_->InitAsDefaultInstance();
+  LogoutResponse::default_instance_->InitAsDefaultInstance();
   LoginResponse::default_instance_->InitAsDefaultInstance();
   Register::default_instance_->InitAsDefaultInstance();
   RegisterResponse::default_instance_->InitAsDefaultInstance();
@@ -85,6 +88,7 @@ bool Replay_IsValid(int value) {
     case 13:
     case 14:
     case 21:
+    case 22:
       return true;
     default:
       return false;
@@ -470,6 +474,177 @@ void LogoutRequest::Swap(LogoutRequest* other) {
 
 ::std::string LogoutRequest::GetTypeName() const {
   return "protbuf.LogoutRequest";
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int LogoutResponse::kReplayFieldNumber;
+#endif  // !_MSC_VER
+
+LogoutResponse::LogoutResponse()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void LogoutResponse::InitAsDefaultInstance() {
+}
+
+LogoutResponse::LogoutResponse(const LogoutResponse& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void LogoutResponse::SharedCtor() {
+  _cached_size_ = 0;
+  replay_ = 1;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+LogoutResponse::~LogoutResponse() {
+  SharedDtor();
+}
+
+void LogoutResponse::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void LogoutResponse::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const LogoutResponse& LogoutResponse::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_user_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_user_2eproto();
+#endif
+  return *default_instance_;
+}
+
+LogoutResponse* LogoutResponse::default_instance_ = NULL;
+
+LogoutResponse* LogoutResponse::New() const {
+  return new LogoutResponse;
+}
+
+void LogoutResponse::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    replay_ = 1;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool LogoutResponse::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .protbuf.Replay replay = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::protbuf::Replay_IsValid(value)) {
+            set_replay(static_cast< ::protbuf::Replay >(value));
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void LogoutResponse::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .protbuf.Replay replay = 2;
+  if (has_replay()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->replay(), output);
+  }
+
+}
+
+int LogoutResponse::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .protbuf.Replay replay = 2;
+    if (has_replay()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->replay());
+    }
+
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void LogoutResponse::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const LogoutResponse*>(&from));
+}
+
+void LogoutResponse::MergeFrom(const LogoutResponse& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_replay()) {
+      set_replay(from.replay());
+    }
+  }
+}
+
+void LogoutResponse::CopyFrom(const LogoutResponse& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LogoutResponse::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void LogoutResponse::Swap(LogoutResponse* other) {
+  if (other != this) {
+    std::swap(replay_, other->replay_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string LogoutResponse::GetTypeName() const {
+  return "protbuf.LogoutResponse";
 }
 
 

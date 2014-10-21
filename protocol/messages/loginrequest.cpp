@@ -5,7 +5,17 @@ void LoginRequest::set_name(QString &&name)
     protbuf::LoginRequest::set_name(name.toStdString());
 }
 
+void LoginRequest::set_name(const QString &name)
+{
+    protbuf::LoginRequest::set_name(name.toStdString());
+}
+
 void LoginRequest::set_password(QString &&passwd)
+{
+    protbuf::LoginRequest::set_password(passwd.toStdString());
+}
+
+void LoginRequest::set_password(const QString &passwd)
 {
     protbuf::LoginRequest::set_password(passwd.toStdString());
 }

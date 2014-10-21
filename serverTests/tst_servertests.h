@@ -15,6 +15,7 @@ public:
     tst_ServerWorkerTests();
 
     void waitForSignal(QSignalSpy spy);
+    void login(QString name, QString pass);
 public slots:
 
     void onResponseAvalible(QByteArray ba);
@@ -24,19 +25,20 @@ private Q_SLOTS:
     void cleanupTestCase();
     void cleanup();
 
-    void serverDontRespondToUnknownData();
+    void serverDontRespondToCorruptedMessage();
 
     void addBasicUserToServer();
 
     void loginToServer();
     void loginChangesUserStatus();
     void logoutFromServer();
-    void loginWhileLogged();
+
     void logoutWhileNotLoged();
     void loginToServerBadPasswd();
     void loginToServerBadUser();
+    void addFullUserToServer();
 
-    void userAdd();
+    void loginGetsUserInformation();
 private:
 
     QCatalogServerWorker *worker;

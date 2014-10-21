@@ -12,6 +12,16 @@ struct UserStatus{
     bool logged;
 };
 
+struct ConnectionStatistics{
+    ConnectionStatistics(){
+        bytesRead = 0;
+        bytesWrite = 0;
+    }
+
+    unsigned int bytesRead;
+    unsigned int bytesWrite;
+};
+
 class WorkerCache
 {
 public:
@@ -31,6 +41,7 @@ public:
     void setMessageContainer(MessagesContainer *responseMessage);
 
     UserStatus *userStatus() const;
+    ConnectionStatistics *connectionStats() const;
 
 private:
     QSqlDatabase db;
@@ -39,5 +50,6 @@ private:
     UserStatistics *userStats;
     User *userData;
     UserStatus *m_userStatus;
+    ConnectionStatistics *m_connectionStats;
 };
 

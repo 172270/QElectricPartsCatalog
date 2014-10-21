@@ -36,6 +36,7 @@ void protobuf_ShutdownFile_user_2eproto();
 
 class LoginRequest;
 class LogoutRequest;
+class LogoutResponse;
 class LoginResponse;
 class Register;
 class RegisterResponse;
@@ -54,11 +55,12 @@ enum Replay {
   UserNameToShort = 12,
   UserAlreadyExists = 13,
   UserAddOk = 14,
-  UserAlreadyLogged = 21
+  UserAlreadyLogged = 21,
+  LogoutOk = 22
 };
 bool Replay_IsValid(int value);
 const Replay Replay_MIN = LoginPass;
-const Replay Replay_MAX = UserAlreadyLogged;
+const Replay Replay_MAX = LogoutOk;
 const int Replay_ARRAYSIZE = Replay_MAX + 1;
 
 // ===================================================================
@@ -246,6 +248,89 @@ class LogoutRequest : public ::google::protobuf::MessageLite {
 
   void InitAsDefaultInstance();
   static LogoutRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LogoutResponse : public ::google::protobuf::MessageLite {
+ public:
+  LogoutResponse();
+  virtual ~LogoutResponse();
+
+  LogoutResponse(const LogoutResponse& from);
+
+  inline LogoutResponse& operator=(const LogoutResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const LogoutResponse& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const LogoutResponse* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(LogoutResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  LogoutResponse* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const LogoutResponse& from);
+  void MergeFrom(const LogoutResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .protbuf.Replay replay = 2;
+  inline bool has_replay() const;
+  inline void clear_replay();
+  static const int kReplayFieldNumber = 2;
+  inline ::protbuf::Replay replay() const;
+  inline void set_replay(::protbuf::Replay value);
+
+  // @@protoc_insertion_point(class_scope:protbuf.LogoutResponse)
+ private:
+  inline void set_has_replay();
+  inline void clear_has_replay();
+
+  int replay_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_user_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_user_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_user_2eproto();
+  friend void protobuf_ShutdownFile_user_2eproto();
+
+  void InitAsDefaultInstance();
+  static LogoutResponse* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1242,6 +1327,33 @@ inline bool LogoutRequest::logout() const {
 inline void LogoutRequest::set_logout(bool value) {
   set_has_logout();
   logout_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// LogoutResponse
+
+// required .protbuf.Replay replay = 2;
+inline bool LogoutResponse::has_replay() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void LogoutResponse::set_has_replay() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void LogoutResponse::clear_has_replay() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void LogoutResponse::clear_replay() {
+  replay_ = 1;
+  clear_has_replay();
+}
+inline ::protbuf::Replay LogoutResponse::replay() const {
+  return static_cast< ::protbuf::Replay >(replay_);
+}
+inline void LogoutResponse::set_replay(::protbuf::Replay value) {
+  assert(::protbuf::Replay_IsValid(value));
+  set_has_replay();
+  replay_ = value;
 }
 
 // -------------------------------------------------------------------

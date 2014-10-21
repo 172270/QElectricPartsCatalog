@@ -7,10 +7,7 @@
 #include <QDateTime>
 
 #include "workercache.h"
-
-#include "messages/messagescontainer.h"
-#include "loginmessagehandler.h"
-#include "registerusermessagehandler.h"
+#include "messagehandlerinterface.h"
 
 class QCatalogServerWorker : public QObject
 {

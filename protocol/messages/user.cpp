@@ -1,8 +1,6 @@
 #include "user.h"
 
-User::User():
-    protbuf::UserData(),
-    defaultStorageID(0)
+User::User()
 {
     set_id(0);
     protbuf::UserData::set_config(QString(getDefaultConfig()).toStdString() );
@@ -45,7 +43,7 @@ Storage* User::getStorage()
     }
     QList<Storage*> list = getStoragesList();
     for(int i=0;i<storagesNumber();i++) {
-        if(list.at(i)->getID() == defaultStorageID ){
+        if(list.at(i)->getID() == getDefaultStorageId() ){
             return list.at(i);
         }
     }
@@ -68,9 +66,14 @@ void User::addStorages(QList<Storage> st)
     }
 }
 
-void User::setDefaultStorageId(quint32 id)
+void User::setDefaultStorageId(int id)
 {
-    defaultStorageID = id;
+    m_config.insert(QStringLiteral("last_group"), id);
+}
+
+int User::getDefaultStorageId() const
+{
+    return m_config.value(QStringLiteral("last_group")).toInt();
 }
 
 QList<Storage*> User::getStoragesList()
@@ -82,7 +85,9 @@ QList<Storage*> User::getStoragesList()
     return store;
 }
 
-int User::storagesNumber() const{ return storages_size();}
+int User::storagesNumber() const{
+    return storages_size();
+}
 
 void User::set_phonenumber(const QString &number)
 {
@@ -97,16 +102,6 @@ QString User::getPhoneNumber() const
 void User::set_lastlogin(QDateTime lastlogin){
     protbuf::UserData::set_lastlogin(lastlogin.toMSecsSinceEpoch());
 }
-bool User::isLogged() const
-{
-    return m_isLogged;
-}
-
-void User::setIsLogged(bool isLogged)
-{
-    m_isLogged = isLogged;
-}
-
 
 MsgType User::type() const
 {
@@ -125,7 +120,11 @@ bool User::SerializeToArray(void *data, int size) const
 
 bool User::ParseFromArray(const void *data, int size)
 {
-    return protbuf::UserData::ParseFromArray(data,size);
+    bool parseError = protbuf::UserData::ParseFromArray(data,size);
+    if(!parseError){
+
+    }
+    return parseError;
 }
 
 void User::set_registrationdate(QDateTime registrationDate)

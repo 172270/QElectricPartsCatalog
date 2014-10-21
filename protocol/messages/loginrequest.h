@@ -11,8 +11,9 @@ public:
     LoginRequest();
     virtual ~LoginRequest();
     void set_name(QString &&name);
+    void set_name(const QString &name);
     void set_password(QString &&passwd );
-
+    void set_password(const QString &passwd );
 public:
     MsgType type() const;
 protected:

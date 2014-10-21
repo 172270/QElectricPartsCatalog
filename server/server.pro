@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     registerusermessagehandler.cpp \
     dbcreator.cpp \
     qcatalogserverworker.cpp \
-    workercache.cpp
+    workercache.cpp \
+    logoutmessagehandler.cpp
 
 HEADERS += \
     qcatalogserver.h \
@@ -30,7 +31,8 @@ HEADERS += \
     dbcreator.h \
     qcatalogserverworker.h \
     workercache.h \
-    messagehandlerinterface.h
+    messagehandlerinterface.h \
+    logoutmessagehandler.h
 
 LIBS += -lprotobuf-lite
 

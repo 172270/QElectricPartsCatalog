@@ -34,6 +34,7 @@ enum MsgType {
   reqLogin = 1,
   reqLogout = 2,
   resLogin = -1,
+  resLogout = -2,
   addUser = 80,
   resAddUser = -80,
   msgItem = 100,

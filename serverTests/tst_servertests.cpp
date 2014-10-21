@@ -45,7 +45,7 @@ void tst_ServerWorkerTests::cleanup()
 }
 
 
-void tst_ServerWorkerTests::serverDontRespondToUnknownData()
+void tst_ServerWorkerTests::serverDontRespondToCorruptedMessage()
 {
     QSignalSpy spy(worker, SIGNAL(messageCorrupted() ));
     const QByteArray ba = QByteArray(1000,'\0');
@@ -116,55 +116,129 @@ void tst_ServerWorkerTests::loginChangesUserStatus()
 
 void tst_ServerWorkerTests::logoutFromServer()
 {
-//    socket.write(Protocol::getLogoutPB());
-//    QVERIFY2( socket.waitForBytesWritten(100)!= 0, "can't write data to server");
-//    QVERIFY2( socket.waitForDisconnected(250), "server don't want to disconnect");
-}
+    LogoutRequest logoutRequest;
+    LoginRequestResponse loginResponse;
 
-void tst_ServerWorkerTests::loginWhileLogged()
-{
-//    user::LoginReplay ar ;
-//    Protocol p = Protocol(&socket);
-//    ar = p.login("admin","passwd");
-//    QVERIFY2(ar.replay() == user::LOGIN_OK, "Loggin should be loged!!");
-//    ar = p.login("admin","passwd");
-//    QVERIFY2(ar.replay() == user::USER_ALREADY_LOGGED_IN, "Loggin should be already loged!!");
-//    p.logout();
+    logoutRequest.set_logout(true);
+
+    mc->addMessage( &logoutRequest );
+
+    QByteArray ba = mc->toArray();
+    worker->readyRead(ba);
+
+    mc->Clear();
+    QVERIFY(mc->fromArray(binaryMessage));
+    QVERIFY(loginResponse.fromArray(mc->getCapsule(0).getData()));
+    QVERIFY(loginResponse.replay() == protbuf::Replay::LogoutOk);
 }
 
 void tst_ServerWorkerTests::logoutWhileNotLoged()
 {
-//    user::LoginReplay ar ;
-//    Protocol p = Protocol(&socket);
-//    socket.connectToHost("127.0.0.1",2345);
-//    QVERIFY(socket.waitForConnected(150));
-//    p.logout();
+    LogoutRequest logoutRequest;
+    LoginRequestResponse loginResponse;
+
+    logoutRequest.set_logout(true);
+
+    mc->addMessage( &logoutRequest );
+
+    QByteArray ba = mc->toArray();
+    worker->readyRead(ba);
+
+    mc->Clear();
+    QVERIFY(mc->fromArray(binaryMessage));
+    QVERIFY(loginResponse.fromArray(mc->getCapsule(0).getData()));
+    QVERIFY(loginResponse.replay() == protbuf::Replay::LogoutOk);
 }
 
 void tst_ServerWorkerTests::loginToServerBadPasswd()
 {
-//    user::LoginReplay ar ;
-//    Protocol p = Protocol(&socket);
-//    ar = p.login("admin","bad_pass");
-//    QVERIFY2(ar.replay() == user::BAD_USER_OR_PASSWD, "Loggin should be BAD_PASSWORD!!");
-//    p.logout();
+    LoginRequest loginRequest;
+    LoginRequestResponse loginResponse;
+
+    loginRequest.set_name(QStringLiteral("testuser"));
+    loginRequest.set_password(QStringLiteral("bad_passwd"));
+
+    mc->addMessage( &loginRequest );
+
+    QByteArray ba = mc->toArray();
+    worker->readyRead(ba);
+
+    mc->Clear();
+    QVERIFY(mc->fromArray(binaryMessage));
+    QVERIFY(loginResponse.fromArray(mc->getCapsule(0).getData()));
+    QVERIFY(loginResponse.replay() == protbuf::Replay::LoginDeny);
 }
 
 void tst_ServerWorkerTests::loginToServerBadUser()
 {
-//    user::LoginReplay ar ;
-//    Protocol p = Protocol(&socket);
-//    ar = p.login("bad_user","bad_pass");
-//    QVERIFY2(ar.replay() == user::BAD_USER_OR_PASSWD, "Loggin should be BAD_PASSWORD!!");
-//    p.logout();
+    LoginRequest loginRequest;
+    LoginRequestResponse loginResponse;
+
+    loginRequest.set_name(QStringLiteral("bad_user"));
+    loginRequest.set_password(QStringLiteral("bad_passwd"));
+
+    mc->addMessage( &loginRequest );
+
+    QByteArray ba = mc->toArray();
+    worker->readyRead(ba);
+
+    mc->Clear();
+    QVERIFY(mc->fromArray(binaryMessage));
+    QVERIFY(loginResponse.fromArray(mc->getCapsule(0).getData()));
+    QVERIFY(loginResponse.replay() == protbuf::Replay::LoginDeny);
 }
 
-void tst_ServerWorkerTests::userAdd()
+void tst_ServerWorkerTests::addFullUserToServer()
 {
-//    QByteArray ba = Protocol::getUserAddPB("jakas_nazwa", "jakies_haslo", "cycki@wp.pl","","93248573");
-//    socket.connectToHost("127.0.0.1",2345);
-//    QVERIFY(socket.waitForConnected(150));
-//    socket.write(ba);
-//    socket.waitForBytesWritten(100);
+    UserRegistrationMessage registrationMessage;
+    UserRegistrationMessageReplay registerResponse;
 
+    registrationMessage.set_name(QStringLiteral("testuser2"));
+    registrationMessage.set_password(QStringLiteral("some_password2"));
+    registrationMessage.set_email(QStringLiteral("valid2@email.com"));
+    registrationMessage.set_phonenumber(QStringLiteral("123456789"));
+    registrationMessage.set_description(QStringLiteral("some description"));
+    registrationMessage.set_address(QStringLiteral("aaaaaaaaaaaaaaaaaaa"));
+
+    mc->addMessage(&registrationMessage);
+    QByteArray ba = mc->toArray();
+    worker->readyRead(ba);
+
+    ba.clear();
+    mc->Clear();
+    QVERIFY( mc->fromArray(binaryMessage) );
+
+    ba = QByteArray (mc->getCapsule(0).toArray());
+
+    QVERIFY( registerResponse.fromArray(ba));
+    QVERIFY( registerResponse.replay(0) == protbuf::Replay::UserAddOk );
+}
+
+void tst_ServerWorkerTests::login(QString name, QString pass)
+{
+    LoginRequest loginRequest;
+    loginRequest.set_name(name);
+    loginRequest.set_password(pass);
+
+    mc->addMessage( &loginRequest );
+    QByteArray ba = mc->toArray();
+    worker->readyRead(ba);
+    mc->Clear();
+}
+
+void tst_ServerWorkerTests::loginGetsUserInformation()
+{
+    LoginRequestResponse loginResponse;
+    User userData;
+    login("testuser2", "some_password2");
+
+    QVERIFY(mc->fromArray(binaryMessage));
+    QVERIFY(mc->capsules().size() >= 2);
+    QVERIFY(loginResponse.fromArray(mc->getCapsule(0).getData()));
+    QVERIFY(loginResponse.replay() == protbuf::Replay::LoginPass);
+    QVERIFY(userData.fromArray(mc->getCapsule(1).getData()));
+    QVERIFY(userData.name() == "testuser2");
+    QVERIFY(userData.phonenumber() == "123456789");
+    QVERIFY(userData.description() == "some description");
+    QVERIFY(userData.address() == "aaaaaaaaaaaaaaaaaaa");
 }

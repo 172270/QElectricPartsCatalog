@@ -8,25 +8,9 @@ LoginMessageHandler::LoginMessageHandler(WorkerCache *cache):
 {
 }
 
-void LoginMessageHandler::setData(QByteArray &&d)
-{
-    req.Clear();
-    res.Clear();
-
-    req.ParseFromArray( d.data(),d.size() );
-}
-
 void LoginMessageHandler::getUserData()
 {
     m_cache.getUserData()->MergeFrom(database.getUserByName( QString::fromStdString(req.name()) ));
-}
-
-QByteArray LoginMessageHandler::getResponse()
-{
-    QByteArray ba;
-    ba.resize(res.ByteSize());
-    res.SerializePartialToArray(ba.data(), ba.size() );
-    return ba;
 }
 
 void LoginMessageHandler::updateLastLogin()
@@ -84,5 +68,6 @@ bool LoginMessageHandler::moveResponseToCache()
     QByteArray *ba = new QByteArray(res.ByteSize(),'\0');
     res.SerializePartialToArray(ba->data(), ba->size() );
     m_cache.responseMessage()->addMessage(MsgType::resLogin, ba);
+    m_cache.responseMessage()->addMessage(m_cache.getUserData());
     return true;
 }
