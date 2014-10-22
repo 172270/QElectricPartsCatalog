@@ -39,10 +39,12 @@ int main(int argc, char *argv[])
     MainWindow w;
     LoginDialog *lDialog = new LoginDialog();
     if(lDialog->exec()){
+        w.setSocket(lDialog->socket());
         w.show();
     }
     else{
         QTimer::singleShot(1,&a,SLOT(quit()));
     }
+    delete lDialog;
     return a.exec();
 }

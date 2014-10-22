@@ -131,6 +131,16 @@ void LoginDialog::doLogin()
 
     m_socket->sendBinaryMessage(mc.toArray());
 }
+QWebSocket *LoginDialog::socket() const
+{
+    return m_socket;
+}
+
+void LoginDialog::setSocket(QWebSocket *socket)
+{
+    m_socket = socket;
+}
+
 
 LoginDialog::~LoginDialog()
 {

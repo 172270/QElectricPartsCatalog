@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -28,4 +26,13 @@ void MainWindow::showAddGroup()
 void MainWindow::showAddParameter()
 {
     addParameter->show();
+}
+QWebSocket *MainWindow::getSocket() const
+{
+    return socket;
+}
+
+void MainWindow::setSocket(QWebSocket *ws)
+{
+    socket = ws;
 }

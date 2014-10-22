@@ -33,7 +33,6 @@ HEADERS += \
     dbcreator.h \
     qcatalogserverworker.h \
     workercache.h \
-    messagehandlerinterface.h \
     logoutmessagehandler.h \
     groupsmessagehandler.h \
     parametershandler.h

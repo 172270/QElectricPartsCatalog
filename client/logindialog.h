@@ -20,6 +20,9 @@ public:
     explicit LoginDialog(QWidget *parent = 0);
     ~LoginDialog();
 
+    QWebSocket *socket() const;
+    void setSocket(QWebSocket *socket);
+
 public slots:
     void readyRead(QByteArray msg);
 signals:
