@@ -153,15 +153,17 @@ void tst_dbschema_groups::linkGroupWithParameter_linksGroupWithParameter()
 
     Parameter p1, p2;
     p1.set_name("Parameter1");
+    p1.set_symbol("P1");
     p1.config().setDefaultValue("N/A");
     p1.config().setValueType("String");
 
     p2.set_name("Parameter2");
+    p2.set_symbol("P2");
     p2.config().setDefaultValue(21);
     p2.config().setValueType("int");
 
-    p1.set_id(database->addParameter(p1));
-    p2.set_id(database->addParameter(p2));
+    database->addParameter(p1);
+    database->addParameter(p2);
 
     database->linkParameterToGroup(g, p1);
     database->linkParameterToGroup(g, p2);
@@ -193,23 +195,27 @@ void tst_dbschema_groups::getGroup_getsGroupParameters()
     g.set_id(database->addGroup(g));
 
     Parameter p1, p2, p3, p4;
-    p1.set_name("Parameter1");
+    p1.set_name("Parameter5");
+    p1.set_symbol("P5");
     p1.config().setDefaultValue("N/A");
     p1.config().setValueType("String");
 
-    p2.set_name("Parameter2");
+    p2.set_name("Parameter6");
+    p2.set_symbol("P2");
     p2.config().setDefaultValue(21);
     p2.config().setValueType("int");
     p2.config().setMaxValue(230);
     p2.config().setMinValue(-23);
 
-    p3.set_name("Parameter3");
+    p3.set_name("Parameter7");
+    p3.set_symbol("P3");
     p3.config().setDefaultValue(0.00001);
     p3.config().setValueType("float");
     p3.config().setMaxValue(1e12);
     p3.config().setMinValue(1e-12);
 
-    p4.set_name("Parameter4");
+    p4.set_name("Parameter8");
+    p4.set_symbol("P4");
     p4.config().setDefaultValue(" some custom parameter ");
     p4.config().setValueType("custom parameter");
 

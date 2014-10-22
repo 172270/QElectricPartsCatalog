@@ -202,10 +202,22 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // required bytes configData = 3;
+  // required string symbol = 3;
+  inline bool has_symbol() const;
+  inline void clear_symbol();
+  static const int kSymbolFieldNumber = 3;
+  inline const ::std::string& symbol() const;
+  inline void set_symbol(const ::std::string& value);
+  inline void set_symbol(const char* value);
+  inline void set_symbol(const char* value, size_t size);
+  inline ::std::string* mutable_symbol();
+  inline ::std::string* release_symbol();
+  inline void set_allocated_symbol(::std::string* symbol);
+
+  // required bytes configData = 4;
   inline bool has_configdata() const;
   inline void clear_configdata();
-  static const int kConfigDataFieldNumber = 3;
+  static const int kConfigDataFieldNumber = 4;
   inline const ::std::string& configdata() const;
   inline void set_configdata(const ::std::string& value);
   inline void set_configdata(const char* value);
@@ -220,15 +232,18 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline void clear_has_id();
   inline void set_has_name();
   inline void clear_has_name();
+  inline void set_has_symbol();
+  inline void clear_has_symbol();
   inline void set_has_configdata();
   inline void clear_has_configdata();
 
   ::std::string* name_;
+  ::std::string* symbol_;
   ::std::string* configdata_;
   ::google::protobuf::uint32 id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_parameters_2eproto_impl();
@@ -536,15 +551,85 @@ inline void Parameter::set_allocated_name(::std::string* name) {
   }
 }
 
-// required bytes configData = 3;
-inline bool Parameter::has_configdata() const {
+// required string symbol = 3;
+inline bool Parameter::has_symbol() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Parameter::set_has_configdata() {
+inline void Parameter::set_has_symbol() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Parameter::clear_has_configdata() {
+inline void Parameter::clear_has_symbol() {
   _has_bits_[0] &= ~0x00000004u;
+}
+inline void Parameter::clear_symbol() {
+  if (symbol_ != &::google::protobuf::internal::kEmptyString) {
+    symbol_->clear();
+  }
+  clear_has_symbol();
+}
+inline const ::std::string& Parameter::symbol() const {
+  return *symbol_;
+}
+inline void Parameter::set_symbol(const ::std::string& value) {
+  set_has_symbol();
+  if (symbol_ == &::google::protobuf::internal::kEmptyString) {
+    symbol_ = new ::std::string;
+  }
+  symbol_->assign(value);
+}
+inline void Parameter::set_symbol(const char* value) {
+  set_has_symbol();
+  if (symbol_ == &::google::protobuf::internal::kEmptyString) {
+    symbol_ = new ::std::string;
+  }
+  symbol_->assign(value);
+}
+inline void Parameter::set_symbol(const char* value, size_t size) {
+  set_has_symbol();
+  if (symbol_ == &::google::protobuf::internal::kEmptyString) {
+    symbol_ = new ::std::string;
+  }
+  symbol_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Parameter::mutable_symbol() {
+  set_has_symbol();
+  if (symbol_ == &::google::protobuf::internal::kEmptyString) {
+    symbol_ = new ::std::string;
+  }
+  return symbol_;
+}
+inline ::std::string* Parameter::release_symbol() {
+  clear_has_symbol();
+  if (symbol_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = symbol_;
+    symbol_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Parameter::set_allocated_symbol(::std::string* symbol) {
+  if (symbol_ != &::google::protobuf::internal::kEmptyString) {
+    delete symbol_;
+  }
+  if (symbol) {
+    set_has_symbol();
+    symbol_ = symbol;
+  } else {
+    clear_has_symbol();
+    symbol_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required bytes configData = 4;
+inline bool Parameter::has_configdata() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Parameter::set_has_configdata() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Parameter::clear_has_configdata() {
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void Parameter::clear_configdata() {
   if (configdata_ != &::google::protobuf::internal::kEmptyString) {

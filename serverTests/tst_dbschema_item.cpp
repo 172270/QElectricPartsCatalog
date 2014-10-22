@@ -55,10 +55,12 @@ void tst_dbschema_item::saveItemWithBasicInfo()
     database->addUser(u1, QStringLiteral("sadasd"));
 
     p1.set_name("Parameter1");
+    p1.set_symbol("P1");
     p1.config().setDefaultValue("N/A");
     p1.config().setValueType("String");
 
     p2.set_name("Parameter2");
+    p2.set_symbol("P2");
     p2.config().setDefaultValue(21);
     p2.config().setValueType("int");
 

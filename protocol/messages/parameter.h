@@ -45,6 +45,7 @@ public:
     ~Parameter();
     void set_name(const QString &name);
     QString getName() const {return QString::fromStdString( name() );}
+    QString getSymbol() const {return QString::fromStdString( symbol() );}
     ParameterConfig &config() const;
     void syncConfig();
 private:

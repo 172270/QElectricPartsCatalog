@@ -224,21 +224,21 @@ void tst_user::addStorage_ShoudAddStorage()
     QVERIFY( user->storagesNumber()  == 1);
 }
 
-void tst_user::addStorage_ShoudThrowExeptionWhenStorageIsNotInitialized()
-{
-    Storage s;
-    QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
-}
+//void tst_user::addStorage_ShoudThrowExeptionWhenStorageIsNotInitialized()
+//{
+//    Storage s;
+//    QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
+//}
 
-void tst_user::addStorage_ShoudThrowExeptionWhenStorageIspartiallyInitialized()
-{
-    Storage s;
-    s.setID(5);
-    QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
-    Storage s2;
-    s2.set_name(QStringLiteral("assas"));
-    QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
-}
+//void tst_user::addStorage_ShoudThrowExeptionWhenStorageIspartiallyInitialized()
+//{
+//    Storage s;
+//    s.setID(5);
+//    QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
+//    Storage s2;
+//    s2.set_name(QStringLiteral("assas"));
+//    QVERIFY_EXCEPTION_THROWN (user->addStorage(s), QString );
+//}
 
 void tst_user::createMsgFromUserWithoutName_throwsException()
 {

@@ -42,6 +42,7 @@ private Q_SLOTS:
 
     void addParameter_worksOnlyIfUserIsOnline();
     void addParameter_addsNewParameter();
+    void addSameParameter_givesError();
 
 private:
 

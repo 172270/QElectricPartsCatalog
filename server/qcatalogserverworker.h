@@ -27,6 +27,7 @@ public slots:
 private:
     QMap<MsgType, MessageHandlerInterface*> *handlers;
     WorkerCache *workerCache;
+        QByteArray *buf;
 };
 
 #endif // QCATALOGSERVERWORKER_H

@@ -33,15 +33,15 @@ int main(int argc, char *argv[])
     db.setUserName("postgres");
     db.setPassword("postgres");
 
-//    addTest(new tst_user);
-//    addTest(new tst_Magazine );
-//    addTest(new tst_dbschema_groups);
-//    addTest(new tst_dbschema_storage );
-//    addTest(new tst_dbschema_user);
+    addTest(new tst_user);
+    addTest(new tst_Magazine );
+    addTest(new tst_dbschema_groups);
+    addTest(new tst_dbschema_storage );
+    addTest(new tst_dbschema_user);
     addTest(new tst_dbschema_item );
-//    addTest(new tst_item);
-//    addTest(new tst_ItemPackage);
-//    addTest(new tst_ParameterConfig );
+    addTest(new tst_item);
+    addTest(new tst_ItemPackage);
+    addTest(new tst_ParameterConfig );
     addTest(new tst_MessageContainer);
     addTest(new tst_ServerWorkerTests);
 

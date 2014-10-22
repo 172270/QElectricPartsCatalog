@@ -58,8 +58,8 @@ private slots:
 
     void user_shoudContainDefaultMagazine();
     void addStorage_ShoudAddStorage();
-    void addStorage_ShoudThrowExeptionWhenStorageIsNotInitialized();
-    void addStorage_ShoudThrowExeptionWhenStorageIspartiallyInitialized();
+//    void addStorage_ShoudThrowExeptionWhenStorageIsNotInitialized();
+//    void addStorage_ShoudThrowExeptionWhenStorageIspartiallyInitialized();
 
     void user_ShoudCreatePbMessage();
     void createMsgFromUserWithoutName_throwsException();

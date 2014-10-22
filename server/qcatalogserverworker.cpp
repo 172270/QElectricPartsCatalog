@@ -9,6 +9,7 @@ QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
     QObject(parent),
     workerCache(new WorkerCache(db))
 {
+    buf  = new QByteArray();
     handlers = new QMap<MsgType, MessageHandlerInterface*>();
     handlers->insert(MsgType::reqLogin, new LoginMessageHandler(workerCache));
     handlers->insert(MsgType::addUser, new RegisterUserMessageHandler(workerCache));
@@ -31,9 +32,8 @@ QCatalogServerWorker::~QCatalogServerWorker()
 void QCatalogServerWorker::readyRead(const QByteArray &ba)
 {
     workerCache->connectionStats()->bytesRead += ba.size();
-    static QByteArray *buf  = new QByteArray();
     workerCache->responseMessage()->Clear();
-    static MessagesContainer requestMessage;
+    MessagesContainer requestMessage;
     requestMessage.Clear();
 
     if(!requestMessage.fromArray(ba)){

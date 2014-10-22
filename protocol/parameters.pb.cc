@@ -241,6 +241,7 @@ void ParameterBasicInformation::Swap(ParameterBasicInformation* other) {
 #ifndef _MSC_VER
 const int Parameter::kIdFieldNumber;
 const int Parameter::kNameFieldNumber;
+const int Parameter::kSymbolFieldNumber;
 const int Parameter::kConfigDataFieldNumber;
 #endif  // !_MSC_VER
 
@@ -262,6 +263,7 @@ void Parameter::SharedCtor() {
   _cached_size_ = 0;
   id_ = 0u;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  symbol_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   configdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -273,6 +275,9 @@ Parameter::~Parameter() {
 void Parameter::SharedDtor() {
   if (name_ != &::google::protobuf::internal::kEmptyString) {
     delete name_;
+  }
+  if (symbol_ != &::google::protobuf::internal::kEmptyString) {
+    delete symbol_;
   }
   if (configdata_ != &::google::protobuf::internal::kEmptyString) {
     delete configdata_;
@@ -311,6 +316,11 @@ void Parameter::Clear() {
     if (has_name()) {
       if (name_ != &::google::protobuf::internal::kEmptyString) {
         name_->clear();
+      }
+    }
+    if (has_symbol()) {
+      if (symbol_ != &::google::protobuf::internal::kEmptyString) {
+        symbol_->clear();
       }
     }
     if (has_configdata()) {
@@ -353,12 +363,26 @@ bool Parameter::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_configData;
+        if (input->ExpectTag(26)) goto parse_symbol;
         break;
       }
 
-      // required bytes configData = 3;
+      // required string symbol = 3;
       case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_symbol:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_symbol()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(34)) goto parse_configData;
+        break;
+      }
+
+      // required bytes configData = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_configData:
@@ -399,10 +423,16 @@ void Parameter::SerializeWithCachedSizes(
       2, this->name(), output);
   }
 
-  // required bytes configData = 3;
+  // required string symbol = 3;
+  if (has_symbol()) {
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->symbol(), output);
+  }
+
+  // required bytes configData = 4;
   if (has_configdata()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      3, this->configdata(), output);
+      4, this->configdata(), output);
   }
 
 }
@@ -425,7 +455,14 @@ int Parameter::ByteSize() const {
           this->name());
     }
 
-    // required bytes configData = 3;
+    // required string symbol = 3;
+    if (has_symbol()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->symbol());
+    }
+
+    // required bytes configData = 4;
     if (has_configdata()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
@@ -453,6 +490,9 @@ void Parameter::MergeFrom(const Parameter& from) {
     if (from.has_name()) {
       set_name(from.name());
     }
+    if (from.has_symbol()) {
+      set_symbol(from.symbol());
+    }
     if (from.has_configdata()) {
       set_configdata(from.configdata());
     }
@@ -466,7 +506,7 @@ void Parameter::CopyFrom(const Parameter& from) {
 }
 
 bool Parameter::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
   return true;
 }
@@ -475,6 +515,7 @@ void Parameter::Swap(Parameter* other) {
   if (other != this) {
     std::swap(id_, other->id_);
     std::swap(name_, other->name_);
+    std::swap(symbol_, other->symbol_);
     std::swap(configdata_, other->configdata_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_cached_size_, other->_cached_size_);

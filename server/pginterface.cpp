@@ -1,5 +1,6 @@
 #include "pginterface.h"
 #include <QDebug>
+#include <QString>
 PgInterface::PgInterface(QString connectionName)
 {
     db = QSqlDatabase::database(connectionName);
@@ -302,10 +303,17 @@ quint32 PgInterface::addParameter(Parameter &parameter)
 {
     if(parameter.IsInitialized()){
         q.clear();
-        q.append("INSERT INTO parameters(name, config) VALUES(:name, :config);");
-        query->prepare(q);
+        q.append("INSERT INTO parameters(name " +
+                 (parameter.has_symbol()? QString(QStringLiteral(", symbol")): QString("")) +
+                 ", config) VALUES(:name "+
+                 (parameter.has_symbol()? QString(QStringLiteral(", :symbol")): QString("")) +
+                 ", :config);");
+        if(!query->prepare(q)){
+            qDebug()<<query->lastError().text();
+        }
         query->bindValue(":name", parameter.getName() );
         query->bindValue(":config", parameter.config().toString() );
+        query->bindValue(":symbol", parameter.getSymbol() );
         if(!query->exec()){
             qDebug()<<query->lastError().text();
         }
