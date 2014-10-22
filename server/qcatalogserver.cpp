@@ -17,7 +17,7 @@ void QCatalogServer::startServer()
 {
     quint16 port = setup.value("listenPort", 6666).toUInt();
      if(!this->listen(QHostAddress::Any, port)){
-         qDebug() << "Could not start server";
+         throw this->error();
      }
      else{
          qDebug() << "Listening to port " << port << "...";

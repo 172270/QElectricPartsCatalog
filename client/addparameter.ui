@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddParameter</class>
+ <widget class="QWidget" name="AddParameter">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>717</width>
+    <height>442</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QFormLayout" name="formLayout">
+       <property name="fieldGrowthPolicy">
+        <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="name_l">
+         <property name="text">
+          <string>Nazwa</string>
+         </property>
+         <property name="buddy">
+          <cstring>name</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="name"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="symbol_l">
+         <property name="text">
+          <string>Symbol</string>
+         </property>
+         <property name="buddy">
+          <cstring>symbol</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="symbol"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="defaultValue_l">
+         <property name="text">
+          <string>Domyslna wartość</string>
+         </property>
+         <property name="buddy">
+          <cstring>defaultValue</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="defaultValue"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="minVal_l">
+         <property name="text">
+          <string>Minimalna watrość</string>
+         </property>
+         <property name="buddy">
+          <cstring>minVal</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QDoubleSpinBox" name="minVal"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="maxVal_l">
+         <property name="text">
+          <string>Maxymalna wartość</string>
+         </property>
+         <property name="buddy">
+          <cstring>maxVal</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QDoubleSpinBox" name="maxVal"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="description_l">
+       <property name="text">
+        <string>Opis</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>description</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="description"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="addParameter">
+       <property name="text">
+        <string>Dodaj parametr</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>All parameters</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTableView" name="parametersView"/>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

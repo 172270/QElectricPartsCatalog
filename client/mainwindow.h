@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "addgroup.h"
+#include "addparameter.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,11 +19,13 @@ public:
 
 public slots:
     void showAddGroup();
+    void showAddParameter();
 
 private:
     Ui::MainWindow *ui;
 
     AddGroup *addGroupWidget;
+    AddParameter *addParameter;
 };
 
 #endif // MAINWINDOW_H

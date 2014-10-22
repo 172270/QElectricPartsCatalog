@@ -18,17 +18,20 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     logindialog.cpp \
     adduserdialog.cpp \
-    addgroup.cpp
+    addgroup.cpp \
+    addparameter.cpp
 
 HEADERS  += mainwindow.h \
     logindialog.h \
     adduserdialog.h \
-    addgroup.h
+    addgroup.h \
+    addparameter.h
 
 FORMS    += mainwindow.ui \
     logindialog.ui \
     adduserdialog.ui \
-    addgroup.ui
+    addgroup.ui \
+    addparameter.ui
 
 unix:!macx: LIBS += -L$$OUT_PWD/../lib/ -lprotocol
 

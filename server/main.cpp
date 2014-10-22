@@ -1,7 +1,7 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QDebug>
-#include <QTcpSocket>
+#include <QAbstractSocket>
 #include "qcatalogserver.h"
 
 
@@ -37,7 +37,13 @@ int keepassx_main_impl(int argc, char *argv[], int (*app_run)() )
     delete msg;
 
     QCatalogServer server;
-    server.startServer();
+    try{
+        server.startServer();
+    }
+    catch(QWebSocketProtocol::CloseCode e){
+        qDebug() << "QWebSocket throw error :" << e << " exiting";
+        exit(1);
+    }
 
     return app_run();
 }

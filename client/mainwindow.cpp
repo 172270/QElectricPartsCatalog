@@ -6,11 +6,13 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    addGroupWidget(new AddGroup)
+    addGroupWidget(new AddGroup),
+    addParameter(new AddParameter)
 {
     ui->setupUi(this);
 
     connect(ui->actionAddGroup, SIGNAL(triggered()), this, SLOT(showAddGroup()));
+    connect(ui->actionAddParameter, SIGNAL(triggered()), this, SLOT(showAddParameter()));
 }
 
 MainWindow::~MainWindow()
@@ -20,7 +22,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::showAddGroup()
 {
-    ///TODO connect not existing "recive message" signals to slots
-    /// e.g. "got new parameters" signal to addGroup Widget
     addGroupWidget->show();
+}
+
+void MainWindow::showAddParameter()
+{
+    addParameter->show();
 }
