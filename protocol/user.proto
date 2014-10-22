@@ -18,6 +18,7 @@ enum Replay{
 
   UserAlreadyLogged = 21;
   LogoutOk = 22;
+  UserNotLogged = 23;
 }
 
 message LoginRequest{

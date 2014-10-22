@@ -1,6 +1,7 @@
 #include "tst_servertests.h"
 
 #include "messages/userregistrationmessage.h"
+#include "messages/parameter.h"
 #include "messages/loginrequest.h"
 
 #include <QSignalSpy>
@@ -135,7 +136,6 @@ void tst_ServerWorkerTests::logoutFromServer()
 void tst_ServerWorkerTests::logoutWhileNotLoged()
 {
     LogoutRequest logoutRequest;
-    LoginRequestResponse loginResponse;
 
     logoutRequest.set_logout(true);
 
@@ -146,8 +146,8 @@ void tst_ServerWorkerTests::logoutWhileNotLoged()
 
     mc->Clear();
     QVERIFY(mc->fromArray(binaryMessage));
-    QVERIFY(loginResponse.fromArray(mc->getCapsule(0).getData()));
-    QVERIFY(loginResponse.replay() == protbuf::Replay::LogoutOk);
+    QVERIFY(mc->capsules().size() == 1);
+    QVERIFY(mc->getCapsule(0).msgtype() == MsgType::msgUserNotLogged );
 }
 
 void tst_ServerWorkerTests::loginToServerBadPasswd()
@@ -228,6 +228,8 @@ void tst_ServerWorkerTests::login(QString name, QString pass)
 
 void tst_ServerWorkerTests::logout()
 {
+    login("testuser2","some_password2");
+
     LogoutRequest logoutRequest;
     LoginRequestResponse loginResponse;
 
@@ -237,6 +239,12 @@ void tst_ServerWorkerTests::logout()
 
     QByteArray ba = mc->toArray();
     worker->readyRead(ba);
+    mc->Clear();
+    QVERIFY(mc->fromArray(binaryMessage));
+    QVERIFY(loginResponse.fromArray(mc->getCapsule(0).getData()));
+    QVERIFY(loginResponse.replay() == protbuf::Replay::LogoutOk);
+    mc->Clear();
+    binaryMessage->clear();
 }
 
 void tst_ServerWorkerTests::loginGetsUserInformation()
@@ -257,12 +265,41 @@ void tst_ServerWorkerTests::loginGetsUserInformation()
     QVERIFY(userData.getStoragesList().size() == 1 );
     QVERIFY(userData.storagesNumber() == 1);
     QVERIFY(userData.getDefaultStorageId() != 0 );
-    ///TODO avatar + last login + registration date;
+    ///TODO last login + registration date;
 
     logout();
 }
 
-void tst_ServerWorkerTests::addGroup_worksOnlyIfUserIsLoged()
+void tst_ServerWorkerTests::addParameter_worksOnlyIfUserIsOnline()
 {
+    logout();
+    QByteArray msg;
+    mc->addMessage(MsgType::reqParameters, msg);
+    worker->readyRead(mc->toArray());
+    mc->Clear();
 
+    QVERIFY(mc->fromArray(binaryMessage));
+    QVERIFY(mc->capsules().size() == 1);
+    QVERIFY(mc->getCapsule(0).msgtype() == MsgType::msgUserNotLogged );
 }
+
+void tst_ServerWorkerTests::addParameter_addsNewParameter()
+{
+    login("testuser2", "some_password2");
+    Parameter param;
+    param.set_name(QStringLiteral("test_parameter_1"));
+    param.config().setMinValue(10);
+    param.config().setMaxValue(20);
+    param.config().setValueType("int");
+    param.syncConfig();
+
+    mc->addMessage(MsgType::addParameter, param.toArray() );
+
+    worker->readyRead(mc->toArray());
+    mc->Clear();
+
+    QVERIFY(mc->fromArray(binaryMessage));
+    QVERIFY(mc->capsules().size() == 1);
+    QVERIFY(mc->getCapsule(0).msgtype() == MsgType::resAddParameter );
+}
+

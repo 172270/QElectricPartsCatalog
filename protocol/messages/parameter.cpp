@@ -10,6 +10,11 @@ ParameterConfig &Parameter::config() const {
     return *m_config;
 }
 
+void Parameter::syncConfig()
+{
+    set_configdata( m_config->toStdString() );
+}
+
 Parameter::Parameter() :
    m_config(new ParameterConfig)
 {
@@ -43,7 +48,7 @@ QString ParameterConfig::toString() const
 
 std::string ParameterConfig::toStdString() const
 {
-    return std::string(toBytes().data());
+    return std::string(toBytes().data(), toBytes().size() );
 }
 
 void ParameterConfig::fromStdString(const std::string &conf)

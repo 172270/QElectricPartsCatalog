@@ -38,19 +38,37 @@ void QCatalogServerWorker::readyRead(const QByteArray &ba)
         emit messageCorrupted();
     }
     else{
-        for(int i=0;i<requestMessage.capsules().size();i++){
-            if(handlers->contains(requestMessage.capsules(i).msgtype())){
-                MessageHandlerInterface *handler = handlers->value(requestMessage.capsules(i).msgtype());
+        if(workerCache->userStatus()->logged){
+            for(int i=0;i<requestMessage.capsules().size();i++){
+                MsgType type = requestMessage.capsules(i).msgtype();
+                if(handlers->contains(type)){
+                    MessageHandlerInterface *handler = handlers->value(requestMessage.capsules(i).msgtype());
 
-                if (! handler->parseData( requestMessage.getCapsule(i).getData())){
+                    if (! handler->parseData( requestMessage.getCapsule(i).getData())){
+                        emit messageCorrupted();
+                        continue;
+                    }
+                    handler->processData();
+                    handler->moveResponseToCache();
+                }
+                else{
+                    emit unknownMessageType(requestMessage.capsules(i).msgtype());
+                }
+            }
+        }
+        else{
+            // user is not logged in
+            MsgType type = requestMessage.capsules(0).msgtype();
+            if(type != MsgType::reqLogin && type != MsgType::addUser ){
+                workerCache->responseMessage()->addMessage(MsgType::msgUserNotLogged, QByteArray() );
+            }
+            else{
+                MessageHandlerInterface *handler = handlers->value(requestMessage.capsules(0).msgtype());
+                if (! handler->parseData( requestMessage.getCapsule(0).getData())){
                     emit messageCorrupted();
-                    continue;
                 }
                 handler->processData();
                 handler->moveResponseToCache();
-            }
-            else{
-                emit unknownMessageType(requestMessage.capsules(i).msgtype());
             }
         }
     }

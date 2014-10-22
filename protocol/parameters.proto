@@ -3,6 +3,10 @@ package protbuf;
 
 /// ptype_ prefix add to avoid names conflicts
 
+enum addParameterReplay{
+	addOk = 1;
+}
+
 message ParameterBasicInformation{
 	required uint32 id = 1;
 }
@@ -16,4 +20,8 @@ message Parameter{
 
 message resParameters{
 	repeated Parameter parameters=1;
+}
+
+message resAddParameter{
+	repeated addParameterReplay replay=1;
 }

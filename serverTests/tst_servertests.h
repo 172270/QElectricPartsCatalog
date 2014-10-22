@@ -40,7 +40,9 @@ private Q_SLOTS:
     void addFullUserToServer();
     void loginGetsUserInformation();
 
-    void addGroup_worksOnlyIfUserIsLoged();
+    void addParameter_worksOnlyIfUserIsOnline();
+    void addParameter_addsNewParameter();
+
 private:
 
     QCatalogServerWorker *worker;

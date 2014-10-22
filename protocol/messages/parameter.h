@@ -46,6 +46,7 @@ public:
     void set_name(const QString &name);
     QString getName() const {return QString::fromStdString( name() );}
     ParameterConfig &config() const;
+    void syncConfig();
 private:
     ParameterConfig *m_config;
 
@@ -70,7 +71,7 @@ protected:
     }
 };
 
-class RequestParameters : public protbuf::resParameters , public protocol::Message
+class ResponseParameters : public protbuf::resParameters , public protocol::Message
 {
 public:
     MsgType type() const
@@ -90,6 +91,29 @@ protected:
     bool ParseFromArray(const void *data, int size)
     {
         return protbuf::resParameters::ParseFromArray(data,size);
+    }
+};
+
+class ResponseAddParameter : public protbuf::resAddParameter , public protocol::Message
+{
+public:
+    MsgType type() const
+    {
+        return MsgType::resAddParameter;
+    }
+    int ByteSize() const
+    {
+        return protbuf::resAddParameter::ByteSize();
+    }
+
+protected:
+    bool SerializeToArray(void *data, int size) const
+    {
+        return protbuf::resAddParameter::SerializeToArray(data,size);
+    }
+    bool ParseFromArray(const void *data, int size)
+    {
+        return protbuf::resAddParameter::ParseFromArray(data,size);
     }
 };
 

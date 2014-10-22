@@ -50,6 +50,7 @@ enum MsgType {
   msgItem = 100,
   msgUser = 110,
   msgUserStats = 111,
+  msgUserNotLogged = 112,
   msgGroup = 120,
   msgContainer = 130,
   msgCapsule = 131,

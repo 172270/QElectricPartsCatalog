@@ -89,6 +89,7 @@ bool Replay_IsValid(int value) {
     case 14:
     case 21:
     case 22:
+    case 23:
       return true;
     default:
       return false;

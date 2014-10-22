@@ -18,6 +18,7 @@ void protobuf_ShutdownFile_parameters_2eproto() {
   delete ParameterBasicInformation::default_instance_;
   delete Parameter::default_instance_;
   delete resParameters::default_instance_;
+  delete resAddParameter::default_instance_;
 }
 
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
@@ -35,9 +36,11 @@ void protobuf_AddDesc_parameters_2eproto() {
   ParameterBasicInformation::default_instance_ = new ParameterBasicInformation();
   Parameter::default_instance_ = new Parameter();
   resParameters::default_instance_ = new resParameters();
+  resAddParameter::default_instance_ = new resAddParameter();
   ParameterBasicInformation::default_instance_->InitAsDefaultInstance();
   Parameter::default_instance_->InitAsDefaultInstance();
   resParameters::default_instance_->InitAsDefaultInstance();
+  resAddParameter::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_parameters_2eproto);
 }
 
@@ -55,6 +58,15 @@ struct StaticDescriptorInitializer_parameters_2eproto {
   }
 } static_descriptor_initializer_parameters_2eproto_;
 #endif
+bool addParameterReplay_IsValid(int value) {
+  switch(value) {
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 // ===================================================================
 
@@ -634,6 +646,180 @@ void resParameters::Swap(resParameters* other) {
 
 ::std::string resParameters::GetTypeName() const {
   return "protbuf.resParameters";
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int resAddParameter::kReplayFieldNumber;
+#endif  // !_MSC_VER
+
+resAddParameter::resAddParameter()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void resAddParameter::InitAsDefaultInstance() {
+}
+
+resAddParameter::resAddParameter(const resAddParameter& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void resAddParameter::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+resAddParameter::~resAddParameter() {
+  SharedDtor();
+}
+
+void resAddParameter::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void resAddParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const resAddParameter& resAddParameter::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_parameters_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_parameters_2eproto();
+#endif
+  return *default_instance_;
+}
+
+resAddParameter* resAddParameter::default_instance_ = NULL;
+
+resAddParameter* resAddParameter::New() const {
+  return new resAddParameter;
+}
+
+void resAddParameter::Clear() {
+  replay_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool resAddParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .protbuf.addParameterReplay replay = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_replay:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::protbuf::addParameterReplay_IsValid(value)) {
+            add_replay(static_cast< ::protbuf::addParameterReplay >(value));
+          }
+        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
+                   == ::google::protobuf::internal::WireFormatLite::
+                      WIRETYPE_LENGTH_DELIMITED) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedEnumNoInline(
+                 input,
+                 &::protbuf::addParameterReplay_IsValid,
+                 this->mutable_replay())));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(8)) goto parse_replay;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void resAddParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // repeated .protbuf.addParameterReplay replay = 1;
+  for (int i = 0; i < this->replay_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->replay(i), output);
+  }
+
+}
+
+int resAddParameter::ByteSize() const {
+  int total_size = 0;
+
+  // repeated .protbuf.addParameterReplay replay = 1;
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->replay_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::EnumSize(
+        this->replay(i));
+    }
+    total_size += 1 * this->replay_size() + data_size;
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void resAddParameter::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const resAddParameter*>(&from));
+}
+
+void resAddParameter::MergeFrom(const resAddParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  replay_.MergeFrom(from.replay_);
+}
+
+void resAddParameter::CopyFrom(const resAddParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool resAddParameter::IsInitialized() const {
+
+  return true;
+}
+
+void resAddParameter::Swap(resAddParameter* other) {
+  if (other != this) {
+    replay_.Swap(&other->replay_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string resAddParameter::GetTypeName() const {
+  return "protbuf.resAddParameter";
 }
 
 

@@ -125,7 +125,6 @@ bool RegisterUserMessageHandler::processData()
         u.set_description( req.description() );
     if(req.has_phonenumber())
         u.set_phonenumber(req.phonenumber());
-    if(req.has_avatar()){} ///TODO implement AVATAR
 
     QByteArray pass = QCryptographicHash::hash(QByteArray(req.password().data(), req.password().size() ), QCryptographicHash::Sha512);
     try{

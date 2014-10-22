@@ -56,11 +56,12 @@ enum Replay {
   UserAlreadyExists = 13,
   UserAddOk = 14,
   UserAlreadyLogged = 21,
-  LogoutOk = 22
+  LogoutOk = 22,
+  UserNotLogged = 23
 };
 bool Replay_IsValid(int value);
 const Replay Replay_MIN = LoginPass;
-const Replay Replay_MAX = LogoutOk;
+const Replay Replay_MAX = UserNotLogged;
 const int Replay_ARRAYSIZE = Replay_MAX + 1;
 
 // ===================================================================
