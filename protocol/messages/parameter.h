@@ -67,7 +67,9 @@ protected:
     }
     bool ParseFromArray(const void *data, int size)
     {
-        return protbuf::Parameter::ParseFromArray(data,size);
+        bool ret = protbuf::Parameter::ParseFromArray(data,size);
+        config().fromStdString(configdata());
+        return ret;
     }
 };
 

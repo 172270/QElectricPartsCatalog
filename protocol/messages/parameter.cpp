@@ -12,7 +12,9 @@ ParameterConfig &Parameter::config() const {
 
 void Parameter::syncConfig()
 {
-    set_configdata( m_config->toStdString() );
+    QString s = m_config->toString();
+    std::string str = s.toStdString();
+    set_configdata( str);
 }
 
 Parameter::Parameter() :

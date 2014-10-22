@@ -3,6 +3,7 @@
 #include "loginmessagehandler.h"
 #include "logoutmessagehandler.h"
 #include "registerusermessagehandler.h"
+#include "parametershandler.h"
 
 QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
     QObject(parent),
@@ -12,6 +13,7 @@ QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
     handlers->insert(MsgType::reqLogin, new LoginMessageHandler(workerCache));
     handlers->insert(MsgType::addUser, new RegisterUserMessageHandler(workerCache));
     handlers->insert(MsgType::reqLogout, new LogoutMessageHandler(workerCache));
+    handlers->insert(MsgType::addParameter, new AddParameterHandler(workerCache));
 }
 
 QCatalogServerWorker::~QCatalogServerWorker()

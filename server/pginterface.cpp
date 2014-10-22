@@ -309,7 +309,6 @@ quint32 PgInterface::addParameter(Parameter &parameter)
         if(!query->exec()){
             qDebug()<<query->lastError().text();
         }
-
         parameter.set_id(query->lastInsertId().toUInt());
         return parameter.id();
     }

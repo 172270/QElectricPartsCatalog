@@ -13,6 +13,7 @@ class MessagesContainer : public protbuf::MessageContainer, public protocol::Mes
 {
 public:
     MessagesContainer();
+    void addMessage(const protocol::Message &msg);
     void addMessage(protocol::Message *msg);
     void addMessage(MsgType type, const QByteArray &ba);
     void addMessage(MsgType type, QByteArray &&ba);

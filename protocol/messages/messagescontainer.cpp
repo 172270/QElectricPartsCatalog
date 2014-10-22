@@ -5,12 +5,22 @@ MessagesContainer::MessagesContainer()
 {
 }
 
+void MessagesContainer::addMessage(const protocol::Message &msg)
+{
+    static QByteArray *ba = new QByteArray();
+    protbuf::MessageCapsule *mc = add_capsules();
+    mc->set_msgtype(msg.type());
+    msg.toArray(ba);
+    mc->set_data(ba->data(), ba->size());
+}
+
 void MessagesContainer::addMessage(protocol::Message *msg)
 {
+    static QByteArray *ba = new QByteArray();
     protbuf::MessageCapsule *mc = add_capsules();
     mc->set_msgtype(msg->type());
-    QByteArray ba = msg->toArray();
-    mc->set_data(ba.data(), ba.size());
+    msg->toArray(ba);
+    mc->set_data(ba->data(), ba->size());
 }
 
 void MessagesContainer::addMessage(MsgType type, const QByteArray &ba)

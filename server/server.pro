@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     qcatalogserverworker.cpp \
     workercache.cpp \
     logoutmessagehandler.cpp \
-    groupsmessagehandler.cpp
+    groupsmessagehandler.cpp \
+    parametershandler.cpp
 
 HEADERS += \
     qcatalogserver.h \
@@ -34,7 +35,8 @@ HEADERS += \
     workercache.h \
     messagehandlerinterface.h \
     logoutmessagehandler.h \
-    groupsmessagehandler.h
+    groupsmessagehandler.h \
+    parametershandler.h
 
 LIBS += -lprotobuf-lite
 
