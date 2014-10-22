@@ -18,6 +18,7 @@ message Parameter{
   required string symbol=3;
   // config :JSON data containing info about MIN / MAX values and other usefull stuff
   required bytes configData = 4; 
+  optional string description=5;
 }
 
 message resParameters{

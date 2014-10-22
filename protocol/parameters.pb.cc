@@ -244,6 +244,7 @@ const int Parameter::kIdFieldNumber;
 const int Parameter::kNameFieldNumber;
 const int Parameter::kSymbolFieldNumber;
 const int Parameter::kConfigDataFieldNumber;
+const int Parameter::kDescriptionFieldNumber;
 #endif  // !_MSC_VER
 
 Parameter::Parameter()
@@ -266,6 +267,7 @@ void Parameter::SharedCtor() {
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   symbol_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   configdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -282,6 +284,9 @@ void Parameter::SharedDtor() {
   }
   if (configdata_ != &::google::protobuf::internal::kEmptyString) {
     delete configdata_;
+  }
+  if (description_ != &::google::protobuf::internal::kEmptyString) {
+    delete description_;
   }
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   if (this != &default_instance()) {
@@ -327,6 +332,11 @@ void Parameter::Clear() {
     if (has_configdata()) {
       if (configdata_ != &::google::protobuf::internal::kEmptyString) {
         configdata_->clear();
+      }
+    }
+    if (has_description()) {
+      if (description_ != &::google::protobuf::internal::kEmptyString) {
+        description_->clear();
       }
     }
   }
@@ -392,6 +402,20 @@ bool Parameter::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(42)) goto parse_description;
+        break;
+      }
+
+      // optional string description = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_description:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_description()));
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -436,6 +460,12 @@ void Parameter::SerializeWithCachedSizes(
       4, this->configdata(), output);
   }
 
+  // optional string description = 5;
+  if (has_description()) {
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      5, this->description(), output);
+  }
+
 }
 
 int Parameter::ByteSize() const {
@@ -470,6 +500,13 @@ int Parameter::ByteSize() const {
           this->configdata());
     }
 
+    // optional string description = 5;
+    if (has_description()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->description());
+    }
+
   }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
@@ -497,6 +534,9 @@ void Parameter::MergeFrom(const Parameter& from) {
     if (from.has_configdata()) {
       set_configdata(from.configdata());
     }
+    if (from.has_description()) {
+      set_description(from.description());
+    }
   }
 }
 
@@ -518,6 +558,7 @@ void Parameter::Swap(Parameter* other) {
     std::swap(name_, other->name_);
     std::swap(symbol_, other->symbol_);
     std::swap(configdata_, other->configdata_);
+    std::swap(description_, other->description_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_cached_size_, other->_cached_size_);
   }

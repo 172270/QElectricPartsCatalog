@@ -5,12 +5,18 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     addGroupWidget(new AddGroup),
-    addParameter(new AddParameter)
+    addParameter(new AddParameter),
+    handler(new MessaheHandler(this))
 {
     ui->setupUi(this);
 
     connect(ui->actionAddGroup, SIGNAL(triggered()), this, SLOT(showAddGroup()));
     connect(ui->actionAddParameter, SIGNAL(triggered()), this, SLOT(showAddParameter()));
+
+    connect(addParameter, SIGNAL(messageAvalible(MsgType,QByteArray)),
+            handler, SLOT(sendBinaryMessage(MsgType,QByteArray)));
+    connect(handler, SIGNAL(recived_resAddParameter(QByteArray)),
+            addParameter, SLOT(responseRecived(QByteArray)));
 }
 
 MainWindow::~MainWindow()
@@ -27,12 +33,13 @@ void MainWindow::showAddParameter()
 {
     addParameter->show();
 }
+
 QWebSocket *MainWindow::getSocket() const
 {
-    return socket;
+    return handler->getSocket();
 }
 
 void MainWindow::setSocket(QWebSocket *ws)
 {
-    socket = ws;
+    handler->setSocket(ws);
 }

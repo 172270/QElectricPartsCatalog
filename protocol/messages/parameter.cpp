@@ -6,6 +6,16 @@ void Parameter::set_name(const QString &name)
     protbuf::Parameter::set_name( name.toStdString() );
 }
 
+void Parameter::set_symbol(const QString &symbol)
+{
+    protbuf::Parameter::set_symbol(symbol.toStdString());
+}
+
+void Parameter::set_description(const QString &desc)
+{
+    protbuf::Parameter::set_description(desc.toStdString());
+}
+
 ParameterConfig &Parameter::config() const {
     return *m_config;
 }

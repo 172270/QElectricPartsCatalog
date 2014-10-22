@@ -305,13 +305,16 @@ quint32 PgInterface::addParameter(Parameter &parameter)
         q.clear();
         q.append("INSERT INTO parameters(name " +
                  (parameter.has_symbol()? QString(QStringLiteral(", symbol")): QString("")) +
+                 (parameter.has_description() ? QString(QStringLiteral(", description")): QString(""))+
                  ", config) VALUES(:name "+
                  (parameter.has_symbol()? QString(QStringLiteral(", :symbol")): QString("")) +
+                 (parameter.has_description() ? QString(QStringLiteral(", :desc")): QString(""))+
                  ", :config);");
         query->prepare(q);
         query->bindValue(":name", parameter.getName() );
         query->bindValue(":config", parameter.config().toString() );
         query->bindValue(":symbol", parameter.getSymbol() );
+        query->bindValue(":desc", parameter.getDescription() );
         if(!query->exec()){
             throw query->lastError();
         }

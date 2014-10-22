@@ -19,13 +19,15 @@ SOURCES += main.cpp\
     logindialog.cpp \
     adduserdialog.cpp \
     addgroup.cpp \
-    addparameter.cpp
+    addparameter.cpp \
+    messahehandler.cpp
 
 HEADERS  += mainwindow.h \
     logindialog.h \
     adduserdialog.h \
     addgroup.h \
-    addparameter.h
+    addparameter.h \
+    messahehandler.h
 
 FORMS    += mainwindow.ui \
     logindialog.ui \

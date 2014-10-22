@@ -2,10 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QWebSocket>
 
 #include "addgroup.h"
 #include "addparameter.h"
+#include "messahehandler.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,11 +26,10 @@ public slots:
     void showAddParameter();
 
 private:
-    QWebSocket *socket;
     Ui::MainWindow *ui;
-
     AddGroup *addGroupWidget;
     AddParameter *addParameter;
+    MessaheHandler *handler;
 };
 
 #endif // MAINWINDOW_H

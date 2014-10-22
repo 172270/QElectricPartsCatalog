@@ -227,6 +227,18 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline ::std::string* release_configdata();
   inline void set_allocated_configdata(::std::string* configdata);
 
+  // optional string description = 5;
+  inline bool has_description() const;
+  inline void clear_description();
+  static const int kDescriptionFieldNumber = 5;
+  inline const ::std::string& description() const;
+  inline void set_description(const ::std::string& value);
+  inline void set_description(const char* value);
+  inline void set_description(const char* value, size_t size);
+  inline ::std::string* mutable_description();
+  inline ::std::string* release_description();
+  inline void set_allocated_description(::std::string* description);
+
   // @@protoc_insertion_point(class_scope:protbuf.Parameter)
  private:
   inline void set_has_id();
@@ -237,14 +249,17 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline void clear_has_symbol();
   inline void set_has_configdata();
   inline void clear_has_configdata();
+  inline void set_has_description();
+  inline void clear_has_description();
 
   ::std::string* name_;
   ::std::string* symbol_;
   ::std::string* configdata_;
+  ::std::string* description_;
   ::google::protobuf::uint32 id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_parameters_2eproto_impl();
@@ -689,6 +704,76 @@ inline void Parameter::set_allocated_configdata(::std::string* configdata) {
   } else {
     clear_has_configdata();
     configdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string description = 5;
+inline bool Parameter::has_description() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void Parameter::set_has_description() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void Parameter::clear_has_description() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void Parameter::clear_description() {
+  if (description_ != &::google::protobuf::internal::kEmptyString) {
+    description_->clear();
+  }
+  clear_has_description();
+}
+inline const ::std::string& Parameter::description() const {
+  return *description_;
+}
+inline void Parameter::set_description(const ::std::string& value) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(value);
+}
+inline void Parameter::set_description(const char* value) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(value);
+}
+inline void Parameter::set_description(const char* value, size_t size) {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  description_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Parameter::mutable_description() {
+  set_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    description_ = new ::std::string;
+  }
+  return description_;
+}
+inline ::std::string* Parameter::release_description() {
+  clear_has_description();
+  if (description_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = description_;
+    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Parameter::set_allocated_description(::std::string* description) {
+  if (description_ != &::google::protobuf::internal::kEmptyString) {
+    delete description_;
+  }
+  if (description) {
+    set_has_description();
+    description_ = description;
+  } else {
+    clear_has_description();
+    description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 

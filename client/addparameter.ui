@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>717</width>
-    <height>442</height>
+    <width>769</width>
+    <height>508</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -60,7 +60,7 @@
        <item row="2" column="1">
         <widget class="QLineEdit" name="defaultValue"/>
        </item>
-       <item row="3" column="0">
+       <item row="4" column="0">
         <widget class="QLabel" name="minVal_l">
          <property name="text">
           <string>Minimalna watrość</string>
@@ -70,10 +70,20 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
-        <widget class="QDoubleSpinBox" name="minVal"/>
+       <item row="4" column="1">
+        <widget class="QDoubleSpinBox" name="minVal">
+         <property name="decimals">
+          <number>12</number>
+         </property>
+         <property name="minimum">
+          <double>-999999999.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>999999999.000000000000000</double>
+         </property>
+        </widget>
        </item>
-       <item row="4" column="0">
+       <item row="5" column="0">
         <widget class="QLabel" name="maxVal_l">
          <property name="text">
           <string>Maxymalna wartość</string>
@@ -83,8 +93,91 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QDoubleSpinBox" name="maxVal"/>
+       <item row="5" column="1">
+        <widget class="QDoubleSpinBox" name="maxVal">
+         <property name="decimals">
+          <number>12</number>
+         </property>
+         <property name="minimum">
+          <double>-999999999.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>999999999.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="comboBox">
+         <item>
+          <property name="text">
+           <string>Całkowity ze znakiem</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Całkowity bez znaku</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Typ zmiennoprzecinkowy</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Text</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Data</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Typ</string>
+         </property>
+         <property name="buddy">
+          <cstring>comboBox</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Minimalna długość</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Maxymalna długość</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QSpinBox" name="spinBox">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QSpinBox" name="spinBox_2">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -108,6 +201,13 @@
       <widget class="QPushButton" name="addParameter">
        <property name="text">
         <string>Dodaj parametr</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="status">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>
