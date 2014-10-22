@@ -38,11 +38,12 @@ class resParameters;
 class resAddParameter;
 
 enum addParameterReplay {
-  addOk = 1
+  addOk = 1,
+  parameterExists = 2
 };
 bool addParameterReplay_IsValid(int value);
 const addParameterReplay addParameterReplay_MIN = addOk;
-const addParameterReplay addParameterReplay_MAX = addOk;
+const addParameterReplay addParameterReplay_MAX = parameterExists;
 const int addParameterReplay_ARRAYSIZE = addParameterReplay_MAX + 1;
 
 // ===================================================================

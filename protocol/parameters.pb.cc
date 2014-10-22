@@ -61,6 +61,7 @@ struct StaticDescriptorInitializer_parameters_2eproto {
 bool addParameterReplay_IsValid(int value) {
   switch(value) {
     case 1:
+    case 2:
       return true;
     default:
       return false;

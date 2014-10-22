@@ -5,6 +5,7 @@ package protbuf;
 
 enum addParameterReplay{
 	addOk = 1;
+	parameterExists = 2;
 }
 
 message ParameterBasicInformation{

@@ -312,6 +312,7 @@ void tst_ServerWorkerTests::addSameParameter_givesError()
 {
     login("testuser2", "some_password2");
     Parameter param;
+    ResponseAddParameter resParameter;
     param.set_name(QStringLiteral("test_parameter_1"));
     param.set_symbol("test_p1");
     param.config().setMinValue(10);
@@ -322,6 +323,7 @@ void tst_ServerWorkerTests::addSameParameter_givesError()
     mc->addMessage(MsgType::addParameter, param.toArray() );
 
     worker->readyRead(mc->toArray());
+
     mc->Clear();
 
     QVERIFY(mc->fromArray(binaryMessage));
@@ -329,6 +331,6 @@ void tst_ServerWorkerTests::addSameParameter_givesError()
     QVERIFY(mc->getCapsule(0).msgtype() == MsgType::resAddParameter );
     QVERIFY(resParameter.fromArray( mc->getCapsule(0).getData() ));
     QVERIFY(resParameter.replay().size() == 1);
-    QVERIFY(resParameter.replay(0) == protbuf::addParameterReplay::addOk );
+    QVERIFY(resParameter.replay(0) == protbuf::addParameterReplay::parameterExists );
 }
 
