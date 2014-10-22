@@ -7,12 +7,16 @@ MessageHandlerInterface(cache)
 
 bool GroupsMessageHandler::parseData(const QByteArray &ba)
 {
-    return reqGroups->fromArray(ba);
+    // in this message only msg type is importent, not the content of message
+    Q_UNUSED(ba);
+    return true;
 }
 
 bool GroupsMessageHandler::parseData(QByteArray &&ba)
 {
-    return reqGroups->fromArray(ba);
+    // in this message only msg type is importent, not the content of message
+    Q_UNUSED(ba);
+    return true;
 }
 
 bool GroupsMessageHandler::processData()
@@ -21,7 +25,7 @@ bool GroupsMessageHandler::processData()
     /// when user is not login :)
 
     if( m_cache.userStatus()->logged ){
-        database.getGroup();
+        database.getGroups();
     }
     return true;
 }

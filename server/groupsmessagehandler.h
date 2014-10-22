@@ -16,7 +16,6 @@ public:
     bool moveResponseToCache();
 
 private:
-    RequestGroup *reqGroups;
     ResponseGroup *resGroups;
 };
 

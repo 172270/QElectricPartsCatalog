@@ -23,9 +23,6 @@ message Group{
   optional uint64 creationDate = 10;
 }
 
-message reqGroups{
-}
-
 message resGroups{
   repeated Group groups = 1;
 }

@@ -4,8 +4,8 @@ enum MsgType{
 	reqLogin = 1;
 	reqLogout = 2;
 	reqGroups = 3;
-//	reqItem; 		// N/A
-//	reqParameters; 	// N/A
+	reqItem =4;
+	reqParameters =5;
 //	reqCases; 		// N/A
 
 
@@ -27,6 +27,8 @@ enum MsgType{
 	resLogin = -1;
 	resLogout= -2;
 	resGroups = -3;
+	resItem = -4;
+	resParameters = -5;
 	
 	resAddUser = -80;
 	resAddParameter = -81;

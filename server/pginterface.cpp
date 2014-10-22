@@ -403,7 +403,7 @@ QList<Group> PgInterface::getGroups()
     if(!query->exec(q)){
         qDebug()<<query->lastError().text();
     }
-    while(query->nexy){
+    while(query->next()){
         Group g;
         g.set_id(query->value("group_id").toUInt());
         g.set_name(query->value("name").toString());

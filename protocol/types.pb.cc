@@ -49,12 +49,16 @@ bool MsgType_IsValid(int value) {
     case -82:
     case -81:
     case -80:
+    case -5:
+    case -4:
     case -3:
     case -2:
     case -1:
     case 1:
     case 2:
     case 3:
+    case 4:
+    case 5:
     case 80:
     case 81:
     case 82:

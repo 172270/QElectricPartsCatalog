@@ -13,3 +13,7 @@ message Parameter{
   // config :JSON data containing info about MIN / MAX values and other usefull stuff
   required bytes configData = 3; 
 }
+
+message resParameters{
+	repeated Parameter parameters=1;
+}

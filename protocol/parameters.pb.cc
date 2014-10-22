@@ -17,6 +17,7 @@ namespace protbuf {
 void protobuf_ShutdownFile_parameters_2eproto() {
   delete ParameterBasicInformation::default_instance_;
   delete Parameter::default_instance_;
+  delete resParameters::default_instance_;
 }
 
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
@@ -33,8 +34,10 @@ void protobuf_AddDesc_parameters_2eproto() {
 #endif
   ParameterBasicInformation::default_instance_ = new ParameterBasicInformation();
   Parameter::default_instance_ = new Parameter();
+  resParameters::default_instance_ = new resParameters();
   ParameterBasicInformation::default_instance_->InitAsDefaultInstance();
   Parameter::default_instance_->InitAsDefaultInstance();
+  resParameters::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_parameters_2eproto);
 }
 
@@ -468,6 +471,169 @@ void Parameter::Swap(Parameter* other) {
 
 ::std::string Parameter::GetTypeName() const {
   return "protbuf.Parameter";
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int resParameters::kParametersFieldNumber;
+#endif  // !_MSC_VER
+
+resParameters::resParameters()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void resParameters::InitAsDefaultInstance() {
+}
+
+resParameters::resParameters(const resParameters& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void resParameters::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+resParameters::~resParameters() {
+  SharedDtor();
+}
+
+void resParameters::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void resParameters::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const resParameters& resParameters::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_parameters_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_parameters_2eproto();
+#endif
+  return *default_instance_;
+}
+
+resParameters* resParameters::default_instance_ = NULL;
+
+resParameters* resParameters::New() const {
+  return new resParameters;
+}
+
+void resParameters::Clear() {
+  parameters_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool resParameters::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .protbuf.Parameter parameters = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_parameters:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_parameters()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(10)) goto parse_parameters;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void resParameters::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // repeated .protbuf.Parameter parameters = 1;
+  for (int i = 0; i < this->parameters_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+      1, this->parameters(i), output);
+  }
+
+}
+
+int resParameters::ByteSize() const {
+  int total_size = 0;
+
+  // repeated .protbuf.Parameter parameters = 1;
+  total_size += 1 * this->parameters_size();
+  for (int i = 0; i < this->parameters_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->parameters(i));
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void resParameters::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const resParameters*>(&from));
+}
+
+void resParameters::MergeFrom(const resParameters& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  parameters_.MergeFrom(from.parameters_);
+}
+
+void resParameters::CopyFrom(const resParameters& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool resParameters::IsInitialized() const {
+
+  for (int i = 0; i < parameters_size(); i++) {
+    if (!this->parameters(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void resParameters::Swap(resParameters* other) {
+  if (other != this) {
+    parameters_.Swap(&other->parameters_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string resParameters::GetTypeName() const {
+  return "protbuf.resParameters";
 }
 
 

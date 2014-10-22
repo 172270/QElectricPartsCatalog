@@ -62,31 +62,6 @@ protected:
     }
 };
 
-
-class RequestGroup : public protbuf::reqGroups, public protocol::Message
-{
-    // Message interface
-public:
-    MsgType type() const
-    {
-        return MsgType::reqGroups;
-    }
-    int ByteSize() const
-    {
-        return protbuf::reqGroups::ByteSize();
-    }
-
-protected:
-    bool SerializeToArray(void *data, int size) const
-    {
-        return protbuf::reqGroups::SerializeToArray(data,size);
-    }
-    bool ParseFromArray(const void *data, int size)
-    {
-        return protbuf::reqGroups::ParseFromArray(data,size);
-    }
-};
-
 class ResponseGroup : public protbuf::resGroups, public protocol::Message
 {
     // Message interface

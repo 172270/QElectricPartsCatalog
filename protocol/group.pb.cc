@@ -17,7 +17,6 @@ namespace protbuf {
 void protobuf_ShutdownFile_group_2eproto() {
   delete GroupBasicInformation::default_instance_;
   delete Group::default_instance_;
-  delete reqGroups::default_instance_;
   delete resGroups::default_instance_;
 }
 
@@ -36,11 +35,9 @@ void protobuf_AddDesc_group_2eproto() {
   ::protbuf::protobuf_AddDesc_parameters_2eproto();
   GroupBasicInformation::default_instance_ = new GroupBasicInformation();
   Group::default_instance_ = new Group();
-  reqGroups::default_instance_ = new reqGroups();
   resGroups::default_instance_ = new resGroups();
   GroupBasicInformation::default_instance_->InitAsDefaultInstance();
   Group::default_instance_->InitAsDefaultInstance();
-  reqGroups::default_instance_->InitAsDefaultInstance();
   resGroups::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_group_2eproto);
 }
@@ -647,126 +644,6 @@ void Group::Swap(Group* other) {
 
 ::std::string Group::GetTypeName() const {
   return "protbuf.Group";
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-#endif  // !_MSC_VER
-
-reqGroups::reqGroups()
-  : ::google::protobuf::MessageLite() {
-  SharedCtor();
-}
-
-void reqGroups::InitAsDefaultInstance() {
-}
-
-reqGroups::reqGroups(const reqGroups& from)
-  : ::google::protobuf::MessageLite() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void reqGroups::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-reqGroups::~reqGroups() {
-  SharedDtor();
-}
-
-void reqGroups::SharedDtor() {
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  if (this != &default_instance()) {
-  #else
-  if (this != default_instance_) {
-  #endif
-  }
-}
-
-void reqGroups::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const reqGroups& reqGroups::default_instance() {
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  protobuf_AddDesc_group_2eproto();
-#else
-  if (default_instance_ == NULL) protobuf_AddDesc_group_2eproto();
-#endif
-  return *default_instance_;
-}
-
-reqGroups* reqGroups::default_instance_ = NULL;
-
-reqGroups* reqGroups::New() const {
-  return new reqGroups;
-}
-
-void reqGroups::Clear() {
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-bool reqGroups::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      return true;
-    }
-    DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-  }
-  return true;
-#undef DO_
-}
-
-void reqGroups::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-}
-
-int reqGroups::ByteSize() const {
-  int total_size = 0;
-
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void reqGroups::CheckTypeAndMergeFrom(
-    const ::google::protobuf::MessageLite& from) {
-  MergeFrom(*::google::protobuf::down_cast<const reqGroups*>(&from));
-}
-
-void reqGroups::MergeFrom(const reqGroups& from) {
-  GOOGLE_CHECK_NE(&from, this);
-}
-
-void reqGroups::CopyFrom(const reqGroups& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool reqGroups::IsInitialized() const {
-
-  return true;
-}
-
-void reqGroups::Swap(reqGroups* other) {
-  if (other != this) {
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::std::string reqGroups::GetTypeName() const {
-  return "protbuf.reqGroups";
 }
 
 

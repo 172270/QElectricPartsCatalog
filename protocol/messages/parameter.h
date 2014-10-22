@@ -70,4 +70,27 @@ protected:
     }
 };
 
+class RequestParameters : public protbuf::resParameters , public protocol::Message
+{
+public:
+    MsgType type() const
+    {
+        return MsgType::resParameters;
+    }
+    int ByteSize() const
+    {
+        return protbuf::resParameters::ByteSize();
+    }
+
+protected:
+    bool SerializeToArray(void *data, int size) const
+    {
+        return protbuf::resParameters::SerializeToArray(data,size);
+    }
+    bool ParseFromArray(const void *data, int size)
+    {
+        return protbuf::resParameters::ParseFromArray(data,size);
+    }
+};
+
 #endif // PARAMETER_H
