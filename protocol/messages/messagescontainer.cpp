@@ -3,40 +3,37 @@
 #include <QDebug>
 MessagesContainer::MessagesContainer()
 {
+    ba = new QByteArray();
 }
 
 void MessagesContainer::addMessage(const protocol::Message &msg)
 {
-    QByteArray *ba = new QByteArray();
     protbuf::MessageCapsule *mc = add_capsules();
     mc->set_msgtype(msg.type());
     msg.toArray(ba);
     mc->set_data(ba->data(), ba->size());
-    delete ba;
 }
 
 void MessagesContainer::addMessage(protocol::Message *msg)
 {
-    QByteArray *ba = new QByteArray();
     protbuf::MessageCapsule *mc = add_capsules();
     mc->set_msgtype(msg->type());
     msg->toArray(ba);
     mc->set_data(ba->data(), ba->size());
-    delete ba;
 }
 
-void MessagesContainer::addMessage(MsgType type, const QByteArray &ba)
+void MessagesContainer::addMessage(MsgType type, const QByteArray &data)
 {
     protbuf::MessageCapsule *mc = add_capsules();
     mc->set_msgtype(type);
-    mc->set_data(ba.data(), ba.size());
+    mc->set_data(data.data(), data.size());
 }
 
-void MessagesContainer::addMessage(MsgType type, QByteArray &&ba)
+void MessagesContainer::addMessage(MsgType type, QByteArray &&data)
 {
     protbuf::MessageCapsule *mc = add_capsules();
     mc->set_msgtype(type);
-    mc->set_data(ba.data(), ba.size());
+    mc->set_data(data.data(), data.size());
 }
 
 void MessagesContainer::addMessage(MsgType type, const QString &data)
@@ -52,12 +49,12 @@ void MessagesContainer::addMessage(MsgType type,QString &&data){
     mc->set_data(data.toStdString());
 }
 
-void MessagesContainer::addMessage(MsgType type, QByteArray *ba)
+void MessagesContainer::addMessage(MsgType type, QByteArray *data)
 {
     protbuf::MessageCapsule *mc = add_capsules();
     mc->set_msgtype(type);
-    mc->set_data(ba->data(), ba->size());
-    delete ba;
+    mc->set_data(data->data(), data->size());
+    delete data;
 }
 
 MessageCapsule MessagesContainer::getCapsule(int i)

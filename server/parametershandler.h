@@ -15,8 +15,10 @@ public:
     bool moveResponseToCache();
 
 private:
+    QList<Parameter> parameters;
     Parameter parameter;
-    ResponseAddParameter resParameter;
+    ResponseParameters resParameters;
+    ResponseAddParameter resAddParameter;
 };
 
 #endif // PARAMETERSHANDLER_H

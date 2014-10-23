@@ -324,6 +324,27 @@ quint32 PgInterface::addParameter(Parameter &parameter)
     return 0;
 }
 
+QList<Parameter> PgInterface::getParameters()
+{
+    QList<Parameter> parameters;
+    q.clear();
+    q.append( "SELECT parameter_id, name, symbol, config, description FROM parameters" );
+    if(!query->exec(q)){
+        qDebug()<<query->lastError().text();
+    }
+
+    while(query->next() ){
+        Parameter p;
+        p.set_id(query->value("parameter_id").toInt());
+        p.set_name(query->value("name").toString());
+        p.set_symbol(query->value("symbol").toString());
+        p.set_configdata(query->value("config").toString().toStdString() );
+        p.set_description(query->value("description").toString() );
+        parameters.append(p);
+    }
+    return parameters;
+}
+
 quint32 PgInterface::addGroup(const Group &group)
 {
     if(group.IsInitialized()){

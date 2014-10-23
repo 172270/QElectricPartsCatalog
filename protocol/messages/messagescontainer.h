@@ -15,11 +15,11 @@ public:
     MessagesContainer();
     void addMessage(const protocol::Message &msg);
     void addMessage(protocol::Message *msg);
-    void addMessage(MsgType type, const QByteArray &ba);
-    void addMessage(MsgType type, QByteArray &&ba);
+    void addMessage(MsgType type, const QByteArray &data);
+    void addMessage(MsgType type, QByteArray &&data);
     void addMessage(MsgType type, const QString &data);
     void addMessage(MsgType type, QString &&data);
-    void addMessage(MsgType type, QByteArray *ba);
+    void addMessage(MsgType type, QByteArray *data);
     MessageCapsule getCapsule(int i);
 
     MsgType type() const;
@@ -27,6 +27,8 @@ public:
 protected:
     bool SerializeToArray(void *data, int size) const;
     bool ParseFromArray(const void *data, int size);
+private:
+    QByteArray *ba;
 };
 
 class MessageCapsule : public protbuf::MessageCapsule, public protocol::Message

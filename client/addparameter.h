@@ -16,7 +16,8 @@ public:
     explicit AddParameter(QWidget *parent = 0);
     ~AddParameter();
 public slots:
-    void responseRecived(QByteArray res);
+    void AddResponse(QByteArray res);
+    void SelectResponse(QByteArray res);
 signals:
     void messageAvalible(MsgType, QByteArray ba);
 private slots:

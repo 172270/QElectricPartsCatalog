@@ -1,5 +1,5 @@
 #include "parametershandler.h"
-
+#include <QDebug>
 AddParameterHandler::AddParameterHandler(WorkerCache *cache):
     MessageHandlerInterface(cache)
 {
@@ -7,14 +7,18 @@ AddParameterHandler::AddParameterHandler(WorkerCache *cache):
 
 bool AddParameterHandler::parseData(const QByteArray &ba)
 {
-    resParameter.Clear();
+    resAddParameter.Clear();
+    resParameters.Clear();
     parameter.Clear();
     return parameter.fromArray(ba);
 }
 
 bool AddParameterHandler::parseData(QByteArray &&ba)
 {
-    resParameter.Clear();
+    if(parameters.size())
+        parameters.clear();
+    resAddParameter.Clear();
+    resParameters.Clear();
     parameter.Clear();
     return parameter.fromArray(ba);
 }
@@ -26,10 +30,16 @@ bool AddParameterHandler::processData()
     if(parameter.IsInitialized()){
         try{
             database.addParameter(parameter);
-            resParameter.add_replay( protbuf::addParameterReplay::addOk);
+            resAddParameter.add_replay( protbuf::addParameterReplay::addOk);
+            parameters = database.getParameters();
+            qDebug()<<"read " << parameters.size() << " parameters from database";
+            for(int i=0;i<parameters.size();i++){
+                resParameters.add_parameters()
+                        ->CopyFrom(static_cast<protbuf::Parameter>(parameters[i]));
+            }
         }
         catch (QSqlError){
-            resParameter.add_replay( protbuf::addParameterReplay::parameterExists);
+            resAddParameter.add_replay( protbuf::addParameterReplay::parameterExists);
         }
     }
     else
@@ -39,6 +49,9 @@ bool AddParameterHandler::processData()
 
 bool AddParameterHandler::moveResponseToCache()
 {
-    m_cache.responseMessage()->addMessage(resParameter);
+    m_cache.responseMessage()->addMessage(resAddParameter);
+    if( resParameters.parameters().size() > 0)
+        m_cache.responseMessage()->addMessage(resParameters);
     return true;
+
 }

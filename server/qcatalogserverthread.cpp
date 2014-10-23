@@ -31,9 +31,13 @@ QCatalogServerThread::~QCatalogServerThread()
     QSqlDatabase::removeDatabase(connection);
 }
 
-void QCatalogServerThread::send(const QByteArray &ba)
+void QCatalogServerThread::send(QByteArray ba)
 {
-    bytesWritten += socket->sendBinaryMessage(ba);
+    qDebug() << "Sending " << ba.size() << " bytes";
+//    qDebug() << ba.toHex();
+    if(socket->isValid()){
+        bytesWritten += socket->sendBinaryMessage(ba);
+    }
 }
 
 void QCatalogServerThread::disconnected()
@@ -46,6 +50,6 @@ void QCatalogServerThread::run()
 {
     connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
     connect(socket, SIGNAL(binaryMessageReceived(QByteArray)), worker, SLOT(readyRead(QByteArray)), Qt::DirectConnection);
-    connect(worker, SIGNAL(responseAvalible(QByteArray)), this, SLOT(send(const QByteArray)));
+    connect(worker, SIGNAL(responseAvalible(QByteArray)), this, SLOT(send(QByteArray)));
     exec();
 }

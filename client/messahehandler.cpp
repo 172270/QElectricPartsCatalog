@@ -22,8 +22,13 @@ void MessaheHandler::messageRecived(QByteArray ba){
     MessagesContainer mc;
     mc.fromArray(ba);
     qDebug()<< mc.getCapsule(0).msgtype() << mc.capsules().size();
-    if(mc.getCapsule(0).msgtype() == MsgType::resAddParameter ){
-        emit recived_resAddParameter( mc.getCapsule(0).getData() );
+    for(int i=0;i<mc.capsules_size();i++){
+        if(mc.getCapsule(i).msgtype() == MsgType::resAddParameter ){
+            emit recived_resAddParameter( mc.getCapsule(i).getData() );
+        }
+        else if(mc.getCapsule(i).msgtype() == MsgType::resParameters ){
+            emit recived_resParameters( mc.getCapsule(i).getData() );
+        }
     }
 }
 

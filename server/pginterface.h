@@ -37,6 +37,7 @@ public:
     uint addPackage(Package &package);
 
     quint32 addParameter(Parameter &parameter);
+    QList<Parameter> getParameters();
 
     quint32 addGroup(const Group &group);
     Group getGroup(uint id);

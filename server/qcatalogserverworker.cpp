@@ -27,6 +27,7 @@ QCatalogServerWorker::~QCatalogServerWorker()
     }
     delete handlers;
     delete workerCache;
+    delete buf;
 }
 
 void QCatalogServerWorker::readyRead(const QByteArray &ba)

@@ -20,7 +20,7 @@ public:
     ~QCatalogServerThread();
 
 public slots:
-    void send(const QByteArray &ba);
+    void send(QByteArray ba);
 signals:
     void requestLogin( QByteArray &data );
 

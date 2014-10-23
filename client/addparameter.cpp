@@ -1,12 +1,15 @@
 #include "addparameter.h"
 #include "ui_addparameter.h"
 
+#include <QStandardItemModel>
 
 AddParameter::AddParameter(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AddParameter)
 {
     ui->setupUi(this);
+    QStandardItemModel *model = new QStandardItemModel();
+    ui->parametersView->setModel(model);
 }
 
 AddParameter::~AddParameter()
@@ -14,7 +17,7 @@ AddParameter::~AddParameter()
     delete ui;
 }
 
-void AddParameter::responseRecived(QByteArray res)
+void AddParameter::AddResponse(QByteArray res)
 {
     ResponseAddParameter resp;
     resp.fromArray(res);
@@ -23,6 +26,23 @@ void AddParameter::responseRecived(QByteArray res)
     }
     else{
         ui->status->setText("Parametr już istnieje w bazie danych");
+    }
+}
+
+void AddParameter::SelectResponse(QByteArray res)
+{
+    ResponseParameters param;
+    param.fromArray(res);
+
+    QStandardItemModel *model = dynamic_cast<QStandardItemModel*>(ui->parametersView->model());
+    model->setRowCount(param.parameters_size());
+    model->setColumnCount(1);
+
+    for(int i=0;i<param.parameters_size();i++){
+        Parameter p;
+        p.CopyFrom(param.parameters(i));
+        QStandardItem *it = new QStandardItem(p.getName());
+        model->setItem(i,0,it);
     }
 }
 

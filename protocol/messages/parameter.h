@@ -47,10 +47,10 @@ public:
     QString getName() const {return QString::fromStdString( name() );}
     QString getSymbol() const {return QString::fromStdString( symbol() );}
     QString getDescription() const {return QString::fromStdString( description() );}
-    ParameterConfig &config() const;
+    ParameterConfig &config();
     void syncConfig();
 private:
-    ParameterConfig *m_config;
+    ParameterConfig m_config;
 
 public:
     MsgType type() const

@@ -4,7 +4,7 @@
 #include "types.pb.h"
 
 #include <QByteArray>
-
+#include <QString>
 namespace protocol {
 
 class Message
@@ -14,9 +14,9 @@ public:
     virtual MsgType type() const = 0;
 
     QByteArray toArray() const {
-        QByteArray ba;
-        ba.resize( ByteSize() );
-        SerializeToArray(ba.data(),ba.size());
+        int size = ByteSize();
+        QByteArray ba(size ,'\0');
+        SerializeToArray(ba.data(),size);
         return ba;
     }
 

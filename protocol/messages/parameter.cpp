@@ -16,27 +16,25 @@ void Parameter::set_description(const QString &desc)
     protbuf::Parameter::set_description(desc.toStdString());
 }
 
-ParameterConfig &Parameter::config() const {
-    return *m_config;
+ParameterConfig &Parameter::config() {
+    return m_config;
 }
 
 void Parameter::syncConfig()
 {
-    QString s = m_config->toString();
+    QString s = m_config.toString();
     std::string str = s.toStdString();
     set_configdata( str);
 }
 
-Parameter::Parameter() :
-   m_config(new ParameterConfig)
+Parameter::Parameter()
 {
     set_id(0);
-    set_configdata( m_config->toStdString() );
+    set_configdata( m_config.toStdString() );
 }
 
 Parameter::~Parameter()
 {
-    delete m_config;
 }
 
 ParameterConfig::ParameterConfig()

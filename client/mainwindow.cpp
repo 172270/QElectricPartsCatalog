@@ -16,7 +16,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(addParameter, SIGNAL(messageAvalible(MsgType,QByteArray)),
             handler, SLOT(sendBinaryMessage(MsgType,QByteArray)));
     connect(handler, SIGNAL(recived_resAddParameter(QByteArray)),
-            addParameter, SLOT(responseRecived(QByteArray)));
+            addParameter, SLOT(AddResponse(QByteArray)));
+    connect(handler, SIGNAL(recived_resParameters(QByteArray)),
+            addParameter, SLOT(SelectResponse(QByteArray)));
 }
 
 MainWindow::~MainWindow()
