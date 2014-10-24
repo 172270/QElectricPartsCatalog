@@ -3,6 +3,7 @@
 
 #include "messagehandlerinterface.h"
 #include "messages/user.h"
+#include "messages/loginrequest.h"
 #include "pginterface.h"
 
 class LoginMessageHandler : public MessageHandlerInterface
@@ -17,7 +18,7 @@ public:
     bool parseData(QByteArray &&ba) override;
 
 private:
-    protbuf::LoginRequest req;
+    LoginRequest req;
     protbuf::LoginResponse res;
     void updateLastLogin();
     void getUserData();

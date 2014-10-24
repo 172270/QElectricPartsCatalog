@@ -5,7 +5,7 @@
 #include "user.pb.h"
 #include "message.h"
 
-class UserRegistrationMessage : public protbuf::Register, public protocol::Message
+class UserRegistrationMessage :  public protocol::QMessage<protbuf::Register>
 {
 public:
     UserRegistrationMessage();
@@ -25,17 +25,13 @@ protected:
     bool ParseFromArray(const void *data, int size);
 };
 
-class UserRegistrationMessageReplay : public protbuf::RegisterResponse, public protocol::Message
+class UserRegistrationMessageReplay :  public protocol::QMessage<protbuf::RegisterResponse>
 {
 public:
 
     UserRegistrationMessageReplay(){;}
     MsgType type() const;
 
-protected:
-    int ByteSize() const;
-    bool SerializeToArray(void *data, int size) const;
-    bool ParseFromArray(const void *data, int size);
 };
 
 #endif // USERREGISTRATIONMESSAGE_H

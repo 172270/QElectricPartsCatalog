@@ -16,12 +16,16 @@ public:
     QWebSocket *getSocket() const;
     void setSocket(QWebSocket *value);
 
+    template<class baseClass>
+    void queryMessage(baseClass *msg){
+        outputMessage.addMessage(msg);
+    }
+
 signals:
     void recived_resAddParameter(QByteArray message);
     void recived_resParameters(QByteArray message);
 
 public slots:
-    void queryMessage(protocol::Message *msg);
     void queryMessage(MsgType type, QByteArray data);
     void sendPandingMessages();
     void sendBinaryMessage(MsgType type, QByteArray ba);

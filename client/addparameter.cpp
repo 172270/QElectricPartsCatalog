@@ -58,7 +58,6 @@ void AddParameter::on_addParameter_clicked()
         addMessage.config().setDefaultValue(ui->defaultValue->text());
     addMessage.config().setMaxValue(ui->maxVal->value());
     addMessage.config().setMinValue(ui->minVal->value());
-    addMessage.syncConfig();
 
     emit messageAvalible(MsgType::addParameter, addMessage.toArray() );
 }

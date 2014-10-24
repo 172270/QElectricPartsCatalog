@@ -104,34 +104,12 @@ void User::set_lastlogin(QDateTime lastlogin){
 void User::setConfigValue(QString key, QJsonValue val)
 {
     m_config.insert(key,val);
-    setConfig(QJsonDocument(m_config).toJson());
+    beforeToArray();
 }
 
 MsgType User::type() const
 {
     return MsgType::msgUser;
-}
-
-int User::ByteSize() const
-{
-    return protbuf::UserData::ByteSize();
-}
-
-bool User::SerializeToArray(void *data, int size) const
-{
-    bool serializeOK = protbuf::UserData::SerializeToArray(data,size);
-    return serializeOK;
-}
-
-bool User::ParseFromArray(const void *data, int size)
-{
-    bool parseOk = protbuf::UserData::ParseFromArray(data,size);
-    if(parseOk){
-        auto ba = QByteArray(config().data(),config().size() );
-        auto doc = QJsonDocument::fromJson(ba);
-        m_config = doc.object();
-    }
-    return parseOk;
 }
 
 void User::set_registrationdate(QDateTime registrationDate)
@@ -142,11 +120,6 @@ void User::set_registrationdate(QDateTime registrationDate)
 QDateTime User::get_registrationdate()
 {
     return QDateTime::fromMSecsSinceEpoch(registrationdate());
-}
-
-void User::setConfig(QByteArray conf)
-{
-    protbuf::UserData::set_config(conf.data(), conf.size() );
 }
 
 QByteArray User::getDefaultConfig()
@@ -186,24 +159,7 @@ void UserError::setErrorNumber(int errorNumber)
     m_errorNumber = errorNumber;
 }
 
-
-
 MsgType UserStatistics::type() const
 {
     return MsgType::msgUserStats;
-}
-
-int UserStatistics::ByteSize() const
-{
-    return protbuf::UserActivityStatistics::ByteSize();
-}
-
-bool UserStatistics::SerializeToArray(void *data, int size) const
-{
-    return protbuf::UserActivityStatistics::SerializeToArray(data,size);
-}
-
-bool UserStatistics::ParseFromArray(const void *data, int size)
-{
-    return protbuf::UserActivityStatistics::ParseFromArray(data,size);
 }

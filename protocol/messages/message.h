@@ -2,46 +2,47 @@
 #define MESSAGE_H
 
 #include "types.pb.h"
-
+#include <type_traits>
 #include <QByteArray>
 #include <QString>
 namespace protocol {
 
-class Message
+template <class baseClass>
+class QMessage : public baseClass
 {
 public:
-    Message(){;}
     virtual MsgType type() const = 0;
 
     QByteArray toArray() const {
-        int size = ByteSize();
+        int size = baseClass::ByteSize();
         QByteArray ba(size ,'\0');
-        SerializeToArray(ba.data(),size);
+        baseClass::SerializeToArray(ba.data(),size);
         return ba;
     }
 
-    void toArray(QByteArray *ba) const{
-        int size = ByteSize();
+    template<class data>
+    void toArray(data *ba){
+        beforeToArray();
+        int size = baseClass::ByteSize();
         ba->resize( size );
-        SerializeToArray(ba->data(),ba->size());
+        baseClass::SerializeToArray(ba->data(),ba->size());
     }
 
-    bool fromArray(const QByteArray *ba){
-        return ParseFromArray(ba->constData(), ba->size());
+    template <class array> bool fromArray( array ba){
+        bool ret = baseClass::ParseFromArray(ba.data(), ba.size());
+        afterFromArray();
+        return ret;
     }
 
-    bool fromArray( QByteArray &&ba){
-        return ParseFromArray(ba.constData(), ba.size());
+    template <class array> bool fromArray( array *ba){
+        bool ret = baseClass::ParseFromArray(ba->data(), ba->size());
+        afterFromArray();
+        return ret;
     }
-
-    bool fromArray(const QByteArray &ba ){
-        return ParseFromArray(ba.constData(), ba.size());
-    }
-
-    virtual int ByteSize() const = 0;
-protected:
-    virtual bool SerializeToArray(void* data, int size) const = 0;
-    virtual bool ParseFromArray(const void* data, int size) = 0;
+private:
+    virtual void afterFromArray(){;}
+    virtual void beforeToArray(){;}
 };
+
 }
 #endif // MESSAGE_H

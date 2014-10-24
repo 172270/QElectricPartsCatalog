@@ -10,40 +10,27 @@ public:
     QString toString(){return QString();}
 };
 
-class Package : public protbuf::Package , public protocol::Message
+class Package : public protocol::QMessage<protbuf::Package>
 {
 public:
     Package();
-
+    MsgType type() const;
     protbuf::PackageBasicInformation getPackageBasicInformation();
-
 
     QString getName() const { return QString::fromStdString(name());}
     QString getMountType()const { return QString::fromStdString(mounttype());}
-    PackageConfig& config() {return m_config;}
+    PackageConfig& config() { return m_config; }
 
 private:
     PackageConfig m_config;
 
-    // Message interface
+    // QMessage interface
 public:
-    MsgType type() const
+    void afterFromArray()
     {
-        return MsgType::msgPackage;
     }
-    int ByteSize() const
+    void beforeToArray()
     {
-        return protbuf::Package::ByteSize();
-    }
-
-protected:
-    bool SerializeToArray(void *data, int size) const
-    {
-        return protbuf::Package::SerializeToArray(data,size);
-    }
-    bool ParseFromArray(const void *data, int size)
-    {
-        return protbuf::Package::ParseFromArray(data,size);
     }
 };
 

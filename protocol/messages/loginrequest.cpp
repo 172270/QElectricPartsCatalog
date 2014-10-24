@@ -25,20 +25,12 @@ MsgType LoginRequest::type() const
     return MsgType::reqLogin;
 }
 
-int LoginRequest::ByteSize() const
-{
-    return protbuf::LoginRequest::ByteSize();
-}
-
-LoginRequest::LoginRequest() :
-    protbuf::LoginRequest(),
-    protocol::Message()
+LoginRequest::LoginRequest()
 {
 }
 
 LoginRequest::~LoginRequest()
 {
-
 }
 
 MsgType LoginRequestResponse::type() const

@@ -20,7 +20,19 @@ ParameterConfig &Parameter::config() {
     return m_config;
 }
 
-void Parameter::syncConfig()
+
+
+MsgType Parameter::type() const
+{
+    return MsgType::msgParameter;
+}
+
+void Parameter::afterFromArray()
+{
+    m_config.fromStdString( configdata() );
+}
+
+void Parameter::beforeToArray()
 {
     QString s = m_config.toString();
     std::string str = s.toStdString();
@@ -112,3 +124,21 @@ QVariant ParameterConfig::getMinValue() const
     return object.value(QStringLiteral("minValue")).toString();
 }
 
+
+
+MsgType RequestParameters::type() const
+{
+    return MsgType::reqParameters;
+}
+
+
+MsgType ResponseAddParameter::type() const
+{
+    return MsgType::resAddParameter;
+}
+
+
+MsgType ResponseParameters::type() const
+{
+    return MsgType::resParameters;
+}

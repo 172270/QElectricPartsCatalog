@@ -17,6 +17,7 @@ namespace protbuf {
 void protobuf_ShutdownFile_parameters_2eproto() {
   delete ParameterBasicInformation::default_instance_;
   delete Parameter::default_instance_;
+  delete reqParameters::default_instance_;
   delete resParameters::default_instance_;
   delete resAddParameter::default_instance_;
 }
@@ -35,10 +36,12 @@ void protobuf_AddDesc_parameters_2eproto() {
 #endif
   ParameterBasicInformation::default_instance_ = new ParameterBasicInformation();
   Parameter::default_instance_ = new Parameter();
+  reqParameters::default_instance_ = new reqParameters();
   resParameters::default_instance_ = new resParameters();
   resAddParameter::default_instance_ = new resAddParameter();
   ParameterBasicInformation::default_instance_->InitAsDefaultInstance();
   Parameter::default_instance_->InitAsDefaultInstance();
+  reqParameters::default_instance_->InitAsDefaultInstance();
   resParameters::default_instance_->InitAsDefaultInstance();
   resAddParameter::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_parameters_2eproto);
@@ -566,6 +569,126 @@ void Parameter::Swap(Parameter* other) {
 
 ::std::string Parameter::GetTypeName() const {
   return "protbuf.Parameter";
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+#endif  // !_MSC_VER
+
+reqParameters::reqParameters()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void reqParameters::InitAsDefaultInstance() {
+}
+
+reqParameters::reqParameters(const reqParameters& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void reqParameters::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+reqParameters::~reqParameters() {
+  SharedDtor();
+}
+
+void reqParameters::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void reqParameters::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const reqParameters& reqParameters::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_parameters_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_parameters_2eproto();
+#endif
+  return *default_instance_;
+}
+
+reqParameters* reqParameters::default_instance_ = NULL;
+
+reqParameters* reqParameters::New() const {
+  return new reqParameters;
+}
+
+void reqParameters::Clear() {
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool reqParameters::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+      return true;
+    }
+    DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+  }
+  return true;
+#undef DO_
+}
+
+void reqParameters::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+}
+
+int reqParameters::ByteSize() const {
+  int total_size = 0;
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void reqParameters::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const reqParameters*>(&from));
+}
+
+void reqParameters::MergeFrom(const reqParameters& from) {
+  GOOGLE_CHECK_NE(&from, this);
+}
+
+void reqParameters::CopyFrom(const reqParameters& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool reqParameters::IsInitialized() const {
+
+  return true;
+}
+
+void reqParameters::Swap(reqParameters* other) {
+  if (other != this) {
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string reqParameters::GetTypeName() const {
+  return "protbuf.reqParameters";
 }
 
 

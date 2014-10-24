@@ -27,12 +27,12 @@ void LoginMessageHandler::updateLastLogin()
 
 bool LoginMessageHandler::parseData(const QByteArray &ba)
 {
-    return req.ParseFromArray( ba.data(),ba.size() );
+    return req.fromArray(ba);
 }
 
 bool LoginMessageHandler::parseData(QByteArray &&ba)
 {
-    return req.ParseFromArray( ba.data(),ba.size() );
+    return req.fromArray(ba);
 }
 
 bool LoginMessageHandler::processData()

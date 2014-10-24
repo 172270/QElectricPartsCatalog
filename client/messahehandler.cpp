@@ -32,9 +32,6 @@ void MessaheHandler::messageRecived(QByteArray ba){
     }
 }
 
-void MessaheHandler::queryMessage(protocol::Message *msg){
-    outputMessage.addMessage(msg);
-}
 
 void MessaheHandler::queryMessage(MsgType type, QByteArray data){
     outputMessage.addMessage(type,data);

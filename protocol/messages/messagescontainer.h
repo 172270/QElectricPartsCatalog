@@ -9,12 +9,28 @@
 
 class MessageCapsule;
 
-class MessagesContainer : public protbuf::MessageContainer, public protocol::Message
+class MessagesContainer : public protocol::QMessage<protbuf::MessageContainer>
 {
 public:
     MessagesContainer();
-    void addMessage(const protocol::Message &msg);
-    void addMessage(protocol::Message *msg);
+    template <class baseClass>
+    void addMessage(baseClass msg)
+    {
+        protbuf::MessageCapsule *mc = add_capsules();
+        mc->set_msgtype(msg.type());
+        msg.toArray(ba);
+        mc->set_data(ba->data(), ba->size());
+    }
+
+    template <class baseClass>
+    void addMessage( baseClass *msg)
+    {
+        protbuf::MessageCapsule *mc = add_capsules();
+        mc->set_msgtype(msg->type());
+        msg->toArray(ba);
+        mc->set_data(ba->data(), ba->size());
+    }
+
     void addMessage(MsgType type, const QByteArray &data);
     void addMessage(MsgType type, QByteArray &&data);
     void addMessage(MsgType type, const QString &data);
@@ -23,15 +39,12 @@ public:
     MessageCapsule getCapsule(int i);
 
     MsgType type() const;
-    int ByteSize() const;
-protected:
-    bool SerializeToArray(void *data, int size) const;
-    bool ParseFromArray(const void *data, int size);
+
 private:
     QByteArray *ba;
 };
 
-class MessageCapsule : public protbuf::MessageCapsule, public protocol::Message
+class MessageCapsule : public protocol::QMessage<protbuf::MessageCapsule>
 {
 public:
     MessageCapsule(QByteArray &&capsule);
@@ -39,11 +52,6 @@ public:
 
     QByteArray getData();
     MsgType type() const;
-
-protected:
-    int ByteSize() const;
-    bool SerializeToArray(void *data, int size) const;
-    bool ParseFromArray(const void *data, int size);
 };
 
 #endif // MESSAGESCONTAINER_H

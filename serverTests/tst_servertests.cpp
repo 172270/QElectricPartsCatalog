@@ -293,7 +293,6 @@ void tst_ServerWorkerTests::addParameter_addsNewParameter()
     param.config().setMinValue(10);
     param.config().setMaxValue(20);
     param.config().setValueType("int");
-    param.syncConfig();
 
     mc->addMessage(MsgType::addParameter, param.toArray() );
 
@@ -318,7 +317,6 @@ void tst_ServerWorkerTests::addSameParameter_givesError()
     param.config().setMinValue(10);
     param.config().setMaxValue(20);
     param.config().setValueType("int");
-    param.syncConfig();
 
     mc->addMessage(MsgType::addParameter, param.toArray() );
 

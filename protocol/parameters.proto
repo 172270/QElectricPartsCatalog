@@ -21,6 +21,9 @@ message Parameter{
   optional string description=5;
 }
 
+message reqParameters{
+}
+
 message resParameters{
 	repeated Parameter parameters=1;
 }

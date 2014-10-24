@@ -34,6 +34,7 @@ void protobuf_ShutdownFile_parameters_2eproto();
 
 class ParameterBasicInformation;
 class Parameter;
+class reqParameters;
 class resParameters;
 class resAddParameter;
 
@@ -271,6 +272,79 @@ class Parameter : public ::google::protobuf::MessageLite {
 
   void InitAsDefaultInstance();
   static Parameter* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class reqParameters : public ::google::protobuf::MessageLite {
+ public:
+  reqParameters();
+  virtual ~reqParameters();
+
+  reqParameters(const reqParameters& from);
+
+  inline reqParameters& operator=(const reqParameters& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const reqParameters& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const reqParameters* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(reqParameters* other);
+
+  // implements Message ----------------------------------------------
+
+  reqParameters* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const reqParameters& from);
+  void MergeFrom(const reqParameters& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:protbuf.reqParameters)
+ private:
+
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[1];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_parameters_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_parameters_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_parameters_2eproto();
+  friend void protobuf_ShutdownFile_parameters_2eproto();
+
+  void InitAsDefaultInstance();
+  static reqParameters* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -776,6 +850,10 @@ inline void Parameter::set_allocated_description(::std::string* description) {
     description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
+
+// -------------------------------------------------------------------
+
+// reqParameters
 
 // -------------------------------------------------------------------
 

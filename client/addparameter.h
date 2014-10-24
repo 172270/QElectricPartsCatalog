@@ -15,11 +15,14 @@ class AddParameter : public QWidget
 public:
     explicit AddParameter(QWidget *parent = 0);
     ~AddParameter();
+
 public slots:
     void AddResponse(QByteArray res);
     void SelectResponse(QByteArray res);
+
 signals:
     void messageAvalible(MsgType, QByteArray ba);
+
 private slots:
     void on_addParameter_clicked();
 

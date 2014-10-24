@@ -30,17 +30,3 @@ MsgType UserRegistrationMessageReplay::type() const
     return MsgType::resAddUser;
 }
 
-int UserRegistrationMessageReplay::ByteSize() const
-{
-    return protbuf::RegisterResponse::ByteSize();
-}
-
-bool UserRegistrationMessageReplay::SerializeToArray(void *data, int size) const
-{
-    return protbuf::RegisterResponse::SerializeToArray(data,size);
-}
-
-bool UserRegistrationMessageReplay::ParseFromArray(const void *data, int size)
-{
-    return protbuf::RegisterResponse::ParseFromArray(data,size);
-}

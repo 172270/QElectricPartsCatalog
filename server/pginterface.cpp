@@ -40,7 +40,7 @@ User PgInterface::getUserById(uint id)
         u.set_registrationdate(query->value("registrationdate").toDateTime());
         u.set_lastlogin(query->value("lastlogin").toDateTime());
         u.set_description(query->value("description").toString());
-        u.setConfig(query->value("config").toByteArray() );
+        u.set_config(query->value("config").toString().toStdString() );
     }
     return u;
 }
@@ -148,7 +148,7 @@ User PgInterface::getUserByName(const QString &name)
         u.set_registrationdate(query->value("registrationdate").toDateTime());
         u.set_lastlogin(query->value("lastlogin").toDateTime());
         u.set_description(query->value("description").toString());
-        u.setConfig(query->value("config").toByteArray() );
+        u.set_config(query->value("config").toString().toStdString() );
     }
 
     u.addStorages( getUserStorages(u) );

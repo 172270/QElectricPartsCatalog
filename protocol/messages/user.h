@@ -23,7 +23,7 @@ private:
     int m_errorNumber;
 };
 
-class User : public protbuf::UserData, public protocol::Message
+class User : public protocol::QMessage<protbuf::UserData>
 {
 public:
     User();
@@ -55,7 +55,7 @@ public:
     void set_registrationdate( QDateTime registrationDate );
     QDateTime get_registrationdate();
 
-    void setConfig(QByteArray conf);
+
     QByteArray getDefaultConfig();
 
     protbuf::UserBasicInformation getPBPackage();
@@ -70,22 +70,30 @@ private:
     QJsonObject m_config;
 public:
     MsgType type() const;
-    int ByteSize() const;
-protected:
-    bool SerializeToArray(void *data, int size) const;
-    bool ParseFromArray(const void *data, int size);
+
+
+    // QMessage interface
+private:
+    void afterFromArray()
+    {
+        auto str = config();
+        auto doc = QJsonDocument::fromJson(QString::fromStdString(str).toLatin1());
+        m_config = doc.object();
+    }
+    void beforeToArray()
+    {
+        auto doc = QJsonDocument(m_config);
+        auto str = std::string(doc.toJson().data(), doc.toJson().size() );
+        set_config(str);
+    }
 };
 
-class UserStatistics : public protbuf::UserActivityStatistics , public protocol::Message
+class UserStatistics : public protocol::QMessage<protbuf::UserActivityStatistics>
 {
     // Message interface
 public:
     MsgType type() const;
-    int ByteSize() const;
 
-protected:
-    bool SerializeToArray(void *data, int size) const;
-    bool ParseFromArray(const void *data, int size);
 };
 
 #endif // USER_H

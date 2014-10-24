@@ -8,7 +8,7 @@
 #include "storage.pb.h"
 #include "message.h"
 
-class Storage : public protbuf::Storage, public protocol::Message
+class Storage : public protocol::QMessage<protbuf::Storage>
 {
 public:
     Storage();
@@ -27,20 +27,6 @@ public:
     MsgType type() const
     {
         return MsgType::msgStorage;
-    }
-    int ByteSize() const
-    {
-        return protbuf::Storage::ByteSize();
-    }
-
-protected:
-    bool SerializeToArray(void *data, int size) const
-    {
-        return protbuf::Storage::SerializeToArray(data,size);
-    }
-    bool ParseFromArray(const void *data, int size)
-    {
-        return protbuf::Storage::ParseFromArray(data,size);
     }
 };
 

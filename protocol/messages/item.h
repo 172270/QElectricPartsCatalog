@@ -12,7 +12,7 @@
 #include <QDateTime>
 #include <QString>
 
-class Item : public protbuf::Item, public protocol::Message
+class Item : public protocol::QMessage<protbuf::Item>
 {
 public:
 
@@ -53,20 +53,6 @@ public:
     MsgType type() const
     {
         return MsgType::msgItem;
-    }
-    int ByteSize() const
-    {
-        return protbuf::Item::ByteSize();
-    }
-
-protected:
-    bool SerializeToArray(void *data, int size) const
-    {
-        return protbuf::Item::SerializeToArray(data,size);
-    }
-    bool ParseFromArray(const void *data, int size)
-    {
-        return protbuf::Item::ParseFromArray(data,size);
     }
 };
 

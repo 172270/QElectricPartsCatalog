@@ -11,7 +11,7 @@
 #include "parameter.h"
 #include "message.h"
 
-class Group : public protbuf::Group, public protocol::Message
+class Group : public protocol::QMessage<protbuf::Group>
 {
 public:
     void set_name(const QString &name);
@@ -46,43 +46,15 @@ public:
     {
         return MsgType::msgGroup;
     }
-    int ByteSize() const
-    {
-        return protbuf::Group::ByteSize();
-    }
-
-protected:
-    bool SerializeToArray(void *data, int size) const
-    {
-        return protbuf::Group::SerializeToArray(data,size);
-    }
-    bool ParseFromArray(const void *data, int size)
-    {
-        return protbuf::Group::ParseFromArray(data,size);
-    }
 };
 
-class ResponseGroup : public protbuf::resGroups, public protocol::Message
+class ResponseGroup : public protocol::QMessage<protbuf::resGroups>
 {
     // Message interface
 public:
     MsgType type() const
     {
         return MsgType::resGroups;
-    }
-    int ByteSize() const
-    {
-        return protbuf::resGroups::ByteSize();
-    }
-
-protected:
-    bool SerializeToArray(void *data, int size) const
-    {
-        return protbuf::resGroups::SerializeToArray(data,size);
-    }
-    bool ParseFromArray(const void *data, int size)
-    {
-        return protbuf::resGroups::ParseFromArray(data,size);
     }
 };
 
