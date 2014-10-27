@@ -27,7 +27,8 @@ public:
         resMessage.SerializeToArray(ba->data(), size );
         m_cache.responseMessage()->addMessage(MsgType::resLogout, ba);
         return true;
-     }
+    }
+
     bool parseData(QByteArray &&ba)
     {
         message.Clear();

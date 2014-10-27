@@ -51,7 +51,6 @@ HEADERS += \
     item.pb.h \
     package.pb.h \
     parameters.pb.h \
-    messagehandlerinterface.h \
     messages/loginrequest.h \
     messages/messagescontainer.h \
     messages/userregistrationmessage.h \

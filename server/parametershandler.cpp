@@ -32,7 +32,6 @@ bool AddParameterHandler::processData()
             database.addParameter(parameter);
             resAddParameter.add_replay( protbuf::addParameterReplay::addOk);
             parameters = database.getParameters();
-            qDebug()<<"read " << parameters.size() << " parameters from database";
             for(int i=0;i<parameters.size();i++){
                 resParameters.add_parameters()
                         ->CopyFrom(static_cast<protbuf::Parameter>(parameters[i]));

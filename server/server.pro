@@ -25,6 +25,7 @@ SOURCES += main.cpp \
     parametershandler.cpp
 
 HEADERS += \
+    messagehandlerinterface.h \
     qcatalogserver.h \
     qcatalogserverthread.h \
     loginmessagehandler.h \

@@ -57,13 +57,19 @@ public:
 
 
     QByteArray getDefaultConfig();
+    void setConfig(QString conf){
+        set_config(conf.toStdString());
+        afterFromArray();
+    }
 
     protbuf::UserBasicInformation getPBPackage();
 
     void set_description(QString &&description){ protbuf::UserData::set_description(description.toStdString());}
     void set_description(const ::std::string &adr){protbuf::UserData::set_description(adr);}
     QString getDescription()const{ return QString::fromStdString(description());}
+
     void set_lastlogin(QDateTime lastlogin);
+    void updateConfig(){afterFromArray();}
 
 private:
     void setConfigValue(QString key, QJsonValue val);

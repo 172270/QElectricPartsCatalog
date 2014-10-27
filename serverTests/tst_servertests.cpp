@@ -300,7 +300,7 @@ void tst_ServerWorkerTests::addParameter_addsNewParameter()
     mc->Clear();
 
     QVERIFY(mc->fromArray(binaryMessage));
-    QVERIFY(mc->capsules().size() == 1);
+    QVERIFY(mc->capsules().size() >=1); /// return addParameterOK + list of all parameters
     QVERIFY(mc->getCapsule(0).msgtype() == MsgType::resAddParameter );
     QVERIFY(resParameter.fromArray( mc->getCapsule(0).getData() ));
     QVERIFY(resParameter.replay().size() == 1);

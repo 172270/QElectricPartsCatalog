@@ -12,6 +12,7 @@ void LoginMessageHandler::getUserData()
 {
     m_cache.getUserData()->Clear();
     m_cache.getUserData()->CopyFrom(database.getUserByName( QString::fromStdString(req.name()) ));
+    m_cache.getUserData()->updateConfig();
 }
 
 void LoginMessageHandler::updateLastLogin()
