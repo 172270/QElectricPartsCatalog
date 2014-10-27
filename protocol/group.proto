@@ -8,6 +8,7 @@ import public "parameters.proto";
 // item, full information about group can be send via separate message
 // (only once for a group of items)
 
+
 message GroupBasicInformation{
     required uint32 id = 1;
 }
@@ -25,4 +26,21 @@ message Group{
 
 message resGroups{
   repeated Group groups = 1;
+}
+
+message addGroup{
+  required string name = 3;
+  required uint32 parentID = 5;
+  required bool allowSets = 6;
+  required bool allowItems = 7;
+  repeated ParameterBasicInformation parameters = 8;
+  optional string description = 9;
+}
+
+message resAddGroup{
+  enum addGroupReplay{
+    addOk = 1;
+  }
+
+  repeated addGroupReplay replay=1;
 }

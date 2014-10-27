@@ -4,11 +4,11 @@
 #include "messagehandlerinterface.h"
 #include "messages/group.h"
 
-class GroupsMessageHandler : public MessageHandlerInterface
+class GetGroupsMessageHandler : public MessageHandlerInterface
 {
 public:
-    GroupsMessageHandler(WorkerCache *cache);
-    ~GroupsMessageHandler(){;}
+    GetGroupsMessageHandler(WorkerCache *cache);
+    ~GetGroupsMessageHandler(){;}
 
     bool parseData(const QByteArray &ba) override;
     bool parseData(QByteArray &&ba) override;
@@ -17,6 +17,39 @@ public:
 
 private:
     ResponseGroup *resGroups;
+};
+
+class AddGroupMessageHandler : public MessageHandlerInterface
+{
+public:
+    AddGroupMessageHandler(WorkerCache *cache);
+
+    bool parseData(const QByteArray &ba){
+        requestMsg.Clear();
+        responseMsg.Clear();
+
+        return requestMsg.fromArray(ba);
+    }
+
+    bool parseData(QByteArray &&ba){
+        requestMsg.Clear();
+        responseMsg.Clear();
+
+        return requestMsg.fromArray(ba);
+    }
+
+    bool processData()
+    {
+        return true;
+    }
+    bool moveResponseToCache()
+    {
+        return true;
+    }
+
+private:
+    RequestAddGroup requestMsg;
+    ResponseAddGroup responseMsg;
 };
 
 #endif // GROUPSMESSAGEHANDLER_H

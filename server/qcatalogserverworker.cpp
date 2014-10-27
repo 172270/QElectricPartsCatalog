@@ -1,5 +1,6 @@
 #include "qcatalogserverworker.h"
 
+#include "groupsmessagehandler.h"
 #include "loginmessagehandler.h"
 #include "logoutmessagehandler.h"
 #include "registerusermessagehandler.h"
@@ -15,6 +16,7 @@ QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
     handlers->insert(MsgType::addUser, new RegisterUserMessageHandler(workerCache));
     handlers->insert(MsgType::reqLogout, new LogoutMessageHandler(workerCache));
     handlers->insert(MsgType::addParameter, new AddParameterHandler(workerCache));
+    handlers->insert(MsgType::addGroup, new AddGroupMessageHandler(workerCache));
 }
 
 QCatalogServerWorker::~QCatalogServerWorker()
@@ -79,6 +81,11 @@ void QCatalogServerWorker::readyRead(const QByteArray &ba)
                 }
                 handler->processData();
                 handler->moveResponseToCache();
+                if (workerCache->userStatus()->logged ){
+                    foreach(MessageHandlerInterface* handler, *handlers) {
+                        handler->setActiveUser(workerCache->getUserData()->id());
+                    }
+                }
             }
         }
     }

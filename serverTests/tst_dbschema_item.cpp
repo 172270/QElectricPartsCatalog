@@ -30,6 +30,7 @@ void tst_dbschema_item::initTestCase()
     creator->initialize_database();
 
     database = new PgInterface(db.connectionName());
+    database->setActiveUser(1); // get admin id
 }
 
 void tst_dbschema_item::cleanupTestCase()

@@ -18,13 +18,14 @@ public:
     void initialize_database();
 
     void addGroupRootNode();
+    void addRootUser();
 signals:
 
 public slots:
 
 
 private:
-
+    int adminId = 0;
     QSqlDatabase db;
     QSqlQuery *query;
 };

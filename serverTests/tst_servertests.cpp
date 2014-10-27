@@ -3,6 +3,7 @@
 #include "messages/userregistrationmessage.h"
 #include "messages/parameter.h"
 #include "messages/loginrequest.h"
+#include "messages/group.h"
 
 #include <QSignalSpy>
 
@@ -330,5 +331,26 @@ void tst_ServerWorkerTests::addSameParameter_givesError()
     QVERIFY(resParameter.fromArray( mc->getCapsule(0).getData() ));
     QVERIFY(resParameter.replay().size() == 1);
     QVERIFY(resParameter.replay(0) == protbuf::addParameterReplay::parameterExists );
+    logout();
+}
+
+void tst_ServerWorkerTests::addGroup_addsGroup()
+{
+    login("testuser2", "some_password2");
+
+    RequestAddGroup g;
+    g.set_name("test_group");
+    g.set_parentid(0);
+    g.set_allowsets(true);
+    g.set_allowitems(true);
+
+    mc->addMessage(g);
+    worker->readyRead(mc->toArray());
+
+    mc->Clear();
+    QVERIFY(mc->fromArray(binaryMessage));
+    QVERIFY(mc->capsules().size() == 1);
+
+    logout();
 }
 

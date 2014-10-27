@@ -68,10 +68,7 @@ uint PgInterface::addUser(User &user, QString passwd)
     query->bindValue(":desc", user.getDescription() );
 
     if( !query->exec()){
-        UserError err;
-        err.setErrorNumber(query->lastError().number());
-        err.setText(query->lastError().text());
-        throw err;
+        throw query->lastError();
     }
     user.set_id( query->lastInsertId().toUInt() );
     Storage storage;
@@ -306,15 +303,16 @@ quint32 PgInterface::addParameter(Parameter &parameter)
         q.append("INSERT INTO parameters(name " +
                  (parameter.has_symbol()? QString(QStringLiteral(", symbol")): QString("")) +
                  (parameter.has_description() ? QString(QStringLiteral(", description")): QString(""))+
-                 ", config) VALUES(:name "+
+                 ", config, user_id) VALUES(:name "+
                  (parameter.has_symbol()? QString(QStringLiteral(", :symbol")): QString("")) +
                  (parameter.has_description() ? QString(QStringLiteral(", :desc")): QString(""))+
-                 ", :config);");
+                 ", :config, :owner);");
         query->prepare(q);
         query->bindValue(":name", parameter.getName() );
         query->bindValue(":config", parameter.config().toString() );
         query->bindValue(":symbol", parameter.getSymbol() );
         query->bindValue(":desc", parameter.getDescription() );
+        query->bindValue(":owner", activeUser() );
         if(!query->exec()){
             throw query->lastError();
         }
@@ -347,18 +345,20 @@ QList<Parameter> PgInterface::getParameters()
 
 quint32 PgInterface::addGroup(const Group &group)
 {
+    // check credentials
     if(group.IsInitialized()){
         q.clear();
-        q.append("INSERT INTO groups( parent_id, name, description, allowrecipe, allowitems)"
-                 " VALUES(:pgid, :name, :desc, :allowrecipe, :allowitems);");
+        q.append("INSERT INTO groups( parent_id, name, description, allowrecipe, allowitems, user_id)"
+                 " VALUES(:pgid, :name, :desc, :allowrecipe, :allowitems, :owner);");
         query->prepare(q);
         query->bindValue(":pgid", group.parentid() );
         query->bindValue(":name", group.getName() );
         query->bindValue(":desc", group.getDescription() );
         query->bindValue(":allowrecipe", group.allowsets() );
         query->bindValue(":allowitems", group.allowitems() );
+        query->bindValue(":owner", activeUser() );
         if(!query->exec()){
-            throw QString(query->lastError().text() );
+            throw query->lastError();
         }
 
         return query->lastInsertId().toUInt();
@@ -372,6 +372,7 @@ void PgInterface::saveGroupParametersIDs(Group &g)
     q.append("SELECT parameter_id FROM group_parameter WHERE group_id =" + QString::number(g.id()));
     if(!query->exec(q)){
         qDebug()<<query->lastError().text();
+        throw query->lastError();
     }
     while(query->next()){
         Parameter p;
@@ -379,6 +380,16 @@ void PgInterface::saveGroupParametersIDs(Group &g)
         g.add_parameter(p);
     }
 }
+int PgInterface::activeUser() const
+{
+    return m_activeUser;
+}
+
+void PgInterface::setActiveUser(int activeUser)
+{
+    m_activeUser = activeUser;
+}
+
 
 Group PgInterface::getGroup(uint id)
 {
@@ -398,6 +409,7 @@ Group PgInterface::getGroup(uint id)
              "group_id =" + QString::number(id) );
     if(!query->exec(q)){
         qDebug()<<query->lastError().text();
+        throw query->lastError();
     }
     int size = query->size();
     if(size == 1){
@@ -431,6 +443,7 @@ QList<Group> PgInterface::getGroups()
              "groups;");
     if(!query->exec(q)){
         qDebug()<<query->lastError().text();
+        throw query->lastError();
     }
     while(query->next()){
         Group g;
@@ -457,11 +470,7 @@ void PgInterface::linkParameterToGroup(Group &group, const Parameter &parameter)
     query->bindValue(":gid", group.id() );
 
     if(!query->exec()){
-        UserError err;
-        err.setErrorNumber(query->lastError().number());
-        err.setText(query->lastError().text());
-        qDebug()<<err.text() << query->lastQuery();
-        throw err;
+        throw query->lastError();
     }
 
     group.add_parameter(parameter);
@@ -476,10 +485,10 @@ quint32 PgInterface::addItem(Item &item)
                  ") VALUES (:uid, :cid, :gid, :name, :symbol, :namespace, :parameters, :isRecipe, :isItem, :up"
                  + (item.has_description() ? QString(", :desc") : QString()) + ");");
         if (!query->prepare(q)){
-            qDebug() << query->lastError().text();
+            qDebug() << query->lastError();
         }
 
-        query->bindValue(":uid", item.user().id());
+        query->bindValue(":uid", activeUser() );
         query->bindValue(":cid", item.package().id());
         query->bindValue(":gid", item.group().id());
         query->bindValue(":name", item.getName());
@@ -495,7 +504,7 @@ quint32 PgInterface::addItem(Item &item)
         }
 
         if(!query->exec()){
-            qDebug()<<query->lastError().text();
+            qDebug()<<query->lastError();
         }
         item.set_id(query->lastInsertId().toUInt());
     }

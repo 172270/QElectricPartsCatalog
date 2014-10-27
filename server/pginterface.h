@@ -47,7 +47,12 @@ public:
 
     quint32 addItem(Item &item);
     void saveGroupParametersIDs(Group &g);
+
+    int activeUser() const;
+    void setActiveUser(int activeUser);
+
 private:
+    int m_activeUser = 0;
     QSqlDatabase db;
     QSqlQuery *query;
     QString q;

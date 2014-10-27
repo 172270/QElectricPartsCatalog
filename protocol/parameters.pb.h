@@ -328,12 +328,22 @@ class reqParameters : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
+  // optional bool getDiff = 1;
+  inline bool has_getdiff() const;
+  inline void clear_getdiff();
+  static const int kGetDiffFieldNumber = 1;
+  inline bool getdiff() const;
+  inline void set_getdiff(bool value);
+
   // @@protoc_insertion_point(class_scope:protbuf.reqParameters)
  private:
+  inline void set_has_getdiff();
+  inline void clear_has_getdiff();
 
+  bool getdiff_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_parameters_2eproto_impl();
@@ -854,6 +864,28 @@ inline void Parameter::set_allocated_description(::std::string* description) {
 // -------------------------------------------------------------------
 
 // reqParameters
+
+// optional bool getDiff = 1;
+inline bool reqParameters::has_getdiff() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void reqParameters::set_has_getdiff() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void reqParameters::clear_has_getdiff() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void reqParameters::clear_getdiff() {
+  getdiff_ = false;
+  clear_has_getdiff();
+}
+inline bool reqParameters::getdiff() const {
+  return getdiff_;
+}
+inline void reqParameters::set_getdiff(bool value) {
+  set_has_getdiff();
+  getdiff_ = value;
+}
 
 // -------------------------------------------------------------------
 

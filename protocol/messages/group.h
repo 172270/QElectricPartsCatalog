@@ -48,6 +48,23 @@ public:
     }
 };
 
+class RequestAddGroup : public protocol::QMessage<protbuf::addGroup>
+{
+public:
+    MsgType type() const
+    {
+        return MsgType::addGroup;
+    }
+};
+
+class ResponseAddGroup : public protocol::QMessage<protbuf::resAddGroup>
+{
+  public:
+    MsgType type() const{
+        return MsgType::resAddGroup;
+    }
+};
+
 class ResponseGroup : public protocol::QMessage<protbuf::resGroups>
 {
     // Message interface

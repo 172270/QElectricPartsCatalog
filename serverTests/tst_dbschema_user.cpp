@@ -73,7 +73,7 @@ void tst_dbschema_user::cleanup()
 void tst_dbschema_user::createUserShoudGiveNewId()
 {
     User u;
-    u.set_name(QStringLiteral("admin"));
+    u.set_name(QStringLiteral("zawisza"));
     u.set_email(QStringLiteral("cszawisza@gmail.com"));
 
     QVERIFY(database->addUser(u,"MY NEW PASSWORD! FUCK YEAH") != 0 );
@@ -120,17 +120,17 @@ void tst_dbschema_user::createUserWithSameNameOrEmail_throwaException()
     u1.set_name(QStringLiteral("admin"));
     u1.set_email(QStringLiteral("sdfsdfsdfs@gmail.com"));
     u2.set_name(QStringLiteral("noname"));
-    u2.set_email(QStringLiteral("cszawisza@gmail.com"));
+    u2.set_email(QStringLiteral("b.w@linux.pl"));
 
-    QVERIFY_EXCEPTION_THROWN(database->addUser(u1,"passwordd"), UserError);
-    QVERIFY_EXCEPTION_THROWN(database->addUser(u2,"passwordd"), UserError);
+    QVERIFY_EXCEPTION_THROWN(database->addUser(u1,"passwordd"), QSqlError);
+    QVERIFY_EXCEPTION_THROWN(database->addUser(u2,"passwordd"), QSqlError);
 }
 
 void tst_dbschema_user::createUserWithoutNeededFields_throwsException()
 {
     User u;
     u.set_name( getUniqueName() );
-    QVERIFY_EXCEPTION_THROWN(database->addUser(u,"passwordd"), UserError);
+    QVERIFY_EXCEPTION_THROWN(database->addUser(u,"passwordd"), QSqlError);
 }
 
 void tst_dbschema_user::getUser_getsUser()

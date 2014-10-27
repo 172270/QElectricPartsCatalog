@@ -575,6 +575,7 @@ void Parameter::Swap(Parameter* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int reqParameters::kGetDiffFieldNumber;
 #endif  // !_MSC_VER
 
 reqParameters::reqParameters()
@@ -593,6 +594,7 @@ reqParameters::reqParameters(const reqParameters& from)
 
 void reqParameters::SharedCtor() {
   _cached_size_ = 0;
+  getdiff_ = false;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -630,6 +632,9 @@ reqParameters* reqParameters::New() const {
 }
 
 void reqParameters::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    getdiff_ = false;
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -638,11 +643,32 @@ bool reqParameters::MergePartialFromCodedStream(
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
-    if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      return true;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional bool getDiff = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &getdiff_)));
+          set_has_getdiff();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
     }
-    DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
   }
   return true;
 #undef DO_
@@ -650,11 +676,23 @@ bool reqParameters::MergePartialFromCodedStream(
 
 void reqParameters::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
+  // optional bool getDiff = 1;
+  if (has_getdiff()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->getdiff(), output);
+  }
+
 }
 
 int reqParameters::ByteSize() const {
   int total_size = 0;
 
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional bool getDiff = 1;
+    if (has_getdiff()) {
+      total_size += 1 + 1;
+    }
+
+  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -668,6 +706,11 @@ void reqParameters::CheckTypeAndMergeFrom(
 
 void reqParameters::MergeFrom(const reqParameters& from) {
   GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_getdiff()) {
+      set_getdiff(from.getdiff());
+    }
+  }
 }
 
 void reqParameters::CopyFrom(const reqParameters& from) {
@@ -683,6 +726,8 @@ bool reqParameters::IsInitialized() const {
 
 void reqParameters::Swap(reqParameters* other) {
   if (other != this) {
+    std::swap(getdiff_, other->getdiff_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }

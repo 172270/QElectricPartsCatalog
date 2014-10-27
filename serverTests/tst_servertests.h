@@ -44,6 +44,8 @@ private Q_SLOTS:
     void addParameter_addsNewParameter();
     void addSameParameter_givesError();
 
+    void addGroup_addsGroup();
+
 private:
 
     QCatalogServerWorker *worker;

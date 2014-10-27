@@ -39,6 +39,7 @@ void tst_dbschema_groups::initTestCase()
     creator->initialize_database();
 
     database = new PgInterface(db.connectionName());
+    database->setActiveUser(1); /// TODO get admin ID
 }
 
 void tst_dbschema_groups::cleanupTestCase()
@@ -139,7 +140,7 @@ void tst_dbschema_groups::databaseThrowsExceptionWhenDoubleGroupAdd()
     primaryGroup1.setAllowItems(true);
     primaryGroup1.setAllowRecipe(true);
     primaryGroup1.set_id(database->addGroup(primaryGroup1));
-    QVERIFY_EXCEPTION_THROWN(primaryGroup1.set_id(database->addGroup(primaryGroup1)), QString );
+    QVERIFY_EXCEPTION_THROWN(primaryGroup1.set_id(database->addGroup(primaryGroup1)), QSqlError );
 }
 
 void tst_dbschema_groups::linkGroupWithParameter_linksGroupWithParameter()

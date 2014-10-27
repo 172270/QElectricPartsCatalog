@@ -1,6 +1,7 @@
 #include "dbcreator.h"
 #include <QDebug>
 #include <QFile>
+#include <QCryptographicHash>
 
 DbCreator::DbCreator(QObject *parent) :
     QObject(parent)
@@ -28,15 +29,29 @@ void DbCreator::initialize_database()
         }
     }
 
+    addRootUser();
     addGroupRootNode();
 }
 
 void DbCreator::addGroupRootNode()
 {
     QString q;
-    q.append("insert into groups (parent_id, name, allowRecipe, allowItems, description)"
-             " values(NULL, 'ROOT', false, false, 'The base group for all groups');");
+    q.append("insert into groups (parent_id, name, allowRecipe, allowItems, description, user_id)"
+             " values(NULL, 'ROOT', false, false, 'The base group for all groups', "+ QString::number(adminId) +");");
     if (!query->exec(q)){
         qDebug()<<query->lastError().text();
     }
+}
+
+void DbCreator::addRootUser()
+{
+    QString q;
+    QByteArray pass = QCryptographicHash::hash(QByteArray("qdmin"), QCryptographicHash::Sha512);
+
+    q.append("INSERT INTO users( name, password, email, config) "
+             " VALUES ( 'admin', '" + pass +"', 'b.w@linux.pl', '{}');");
+    if (!query->exec(q)){
+        qDebug()<<query->lastError().text();
+    }
+    adminId = query->lastInsertId().toInt();
 }

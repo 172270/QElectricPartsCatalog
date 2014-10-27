@@ -17,6 +17,9 @@ public:
         ;
     }
 
+    virtual bool checkPermission(){
+        return true;
+    }
     virtual ~MessageHandlerInterface(){;}
     /**
      * @brief parseData takes byte array containing some message
@@ -38,7 +41,20 @@ public:
      */
     virtual bool moveResponseToCache() = 0;
 
+    WorkerCache &cache() const {
+        return m_cache;
+    }
+
+    void setActiveUser(int activeUser)
+    {
+        database.setActiveUser(activeUser);
+    }
+
 protected:
     WorkerCache &m_cache;
     PgInterface database;
+private:
+
 };
+
+
