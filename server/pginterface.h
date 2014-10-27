@@ -13,6 +13,7 @@
 #include "messages/storage.h"
 #include "messages/file.h"
 #include "messages/item.h"
+#include "messages/loginrequest.h"
 
 class PgInterface
 {
@@ -20,16 +21,16 @@ public:
     PgInterface(QString connectionName);
     ~PgInterface();
 
-    User getUserById(uint id);
     User getUserByName(const QString &name);
     uint addUser(User &protbuf, QString passwd);
     bool userNameExists(QString &name);
     bool userEmailExists(QString &email);
-    void updateLastLogin(User &u);
+    void updateLastLogin();
     void updateConfig(User &u);
-
     void deleteUser(User &protbuf);
-    bool checkUserPassword(QString protbuf, QString passwd);
+    bool checkUserPassword(LoginRequest &user, QString passwd);
+    bool checkUserPassword(User &user, QString passwd);
+
     void linkStorageToUser(const User &protbuf, const Storage &storage);
     QList<Storage> getUserStorages(User &protbuf);
 

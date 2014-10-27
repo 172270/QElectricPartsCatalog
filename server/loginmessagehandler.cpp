@@ -10,19 +10,20 @@ LoginMessageHandler::LoginMessageHandler(WorkerCache *cache):
 
 void LoginMessageHandler::getUserData()
 {
-    m_cache.getUserData()->Clear();
-    m_cache.getUserData()->CopyFrom(database.getUserByName( QString::fromStdString(req.name()) ));
-    m_cache.getUserData()->updateConfig();
+    cache().getUserData()->Clear();
+    cache().getUserData()->CopyFrom(database.getUserByName( QString::fromStdString(req.name()) ));
+    cache().getUserData()->updateConfig();
 }
 
 void LoginMessageHandler::updateLastLogin()
 {
-    if(m_cache.getUserData()->IsInitialized()){
-        database.updateLastLogin(*m_cache.getUserData());
+    if(cache().getUserData()->IsInitialized()){
+        database.updateLastLogin(); // active user in database shoud be updated
     }
-    if(m_cache.getUserData()->id() == 0){
-        m_cache.getUserData()->MergeFrom(database.getUserByName(m_cache.getUserData()->getName()));
-        database.updateLastLogin(*m_cache.getUserData());
+    if(cache().getUserData()->id() == 0){
+        cache().getUserData()->MergeFrom(database.getUserByName(m_cache.getUserData()->getName()));
+        cache().getUserData()->updateConfig();
+        database.updateLastLogin();
     }
 }
 
@@ -39,14 +40,13 @@ bool LoginMessageHandler::parseData(QByteArray &&ba)
 bool LoginMessageHandler::processData()
 {
     if(!m_cache.userStatus()->logged ){
-        QString userName = QString::fromStdString(req.name());
-
         QByteArray pass = QCryptographicHash::hash(QByteArray(req.password().data(), req.password().size() ), QCryptographicHash::Sha512);
-        bool loginOk = database.checkUserPassword(userName, pass.toHex() );
+        bool loginOk = database.checkUserPassword(req, pass.toHex() );
 
         if(loginOk){
             res.set_replay(protbuf::Replay::LoginPass);
             m_cache.userStatus()->logged = true;
+            database.setActiveUser(cache().getUserData()->id());
             getUserData();
             updateLastLogin();
         }

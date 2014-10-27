@@ -16,34 +16,6 @@ PgInterface::~PgInterface()
     delete query;
 }
 
-User PgInterface::getUserById(uint id)
-{
-    User u;
-    q.clear();
-    q.append("SELECT * FROM users WHERE id=:id");
-    query->prepare(q);
-    query->bindValue(":id", id );
-
-    if( !query->exec()){
-        UserError err;
-        err.setErrorNumber(query->lastError().number());
-        err.setText(query->lastError().text());
-        throw err;
-    }
-    u.set_id(id);
-    if(query->size() == 1){
-        query->first();
-        u.set_name(query->value("name").toString());
-        u.set_email(query->value("email").toString());
-        u.set_address(query->value("address").toString());
-        u.set_phonenumber(query->value("phonenumber").toString().trimmed() ); // char field has constant size
-        u.set_registrationdate(query->value("registrationdate").toDateTime());
-        u.set_lastlogin(query->value("lastlogin").toDateTime());
-        u.set_description(query->value("description").toString());
-        u.setConfig(query->value("config").toString());
-    }
-    return u;
-}
 
 uint PgInterface::addUser(User &user, QString passwd)
 {
@@ -107,10 +79,10 @@ bool PgInterface::userEmailExists(QString &email)
     return query->value(0).toBool();
 }
 
-void PgInterface::updateLastLogin(User &u)
+void PgInterface::updateLastLogin()
 {
     q.clear();
-    q.append("UPDATE users SET lastlogin = now() WHERE id = "+ QString::number( u.id()) +";");
+    q.append("UPDATE users SET lastlogin = now() WHERE id = "+ QString::number( activeUser() ) +";");
     query->exec(q);
 }
 
@@ -167,17 +139,32 @@ void PgInterface::deleteUser(User &user)
     }
 }
 
-bool PgInterface::checkUserPassword(QString user, QString passwd)
+bool PgInterface::checkUserPassword(LoginRequest &user, QString passwd)
 {
     q.clear();
     q.append("select password from users WHERE name=:name");
     query->prepare(q);
-    query->bindValue(":name", user);
+    query->bindValue(":name", user.getName());
     if(!query->exec()){
-        UserError err;
-        err.setErrorNumber(query->lastError().number());
-        err.setText(query->lastError().text());
-        throw err;
+        throw query->lastError();
+    }
+    if(query->size() != 1){
+        return false;
+    }
+    query->first();
+    QString result = query->value("password").toString().trimmed();
+    return (result == passwd)? true : false;
+}
+
+
+bool PgInterface::checkUserPassword(User &user, QString passwd)
+{
+    q.clear();
+    q.append("select password from users WHERE name=:name");
+    query->prepare(q);
+    query->bindValue(":name", user.getName());
+    if(!query->exec()){
+        throw query->lastError();
     }
     if(query->size() != 1){
         return false;

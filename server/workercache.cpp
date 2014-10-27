@@ -5,9 +5,9 @@ WorkerCache::WorkerCache(QSqlDatabase dbm):
     userStats(new UserStatistics ),
     userData(new User),
     m_userStatus(new UserStatus),
-    m_connectionStats(new ConnectionStatistics)
+    m_connectionStats(new ConnectionStatistics),
+    database(dbm.connectionName())
 {
-    db = dbm;
     userStatus()->logged=false;
 }
 
@@ -37,15 +37,7 @@ void WorkerCache::setUserStats(UserStatistics *value)
 {
     userStats = value;
 }
-const QSqlDatabase &WorkerCache::getDb()
-{
-    return db;
-}
 
-void WorkerCache::setDb(const QSqlDatabase &value)
-{
-    db = value;
-}
 MessagesContainer *WorkerCache::responseMessage()
 {
     return m_messageContainer;
@@ -64,3 +56,8 @@ ConnectionStatistics *WorkerCache::connectionStats() const
 {
     return m_connectionStats;
 }
+PgInterface &WorkerCache::getDatabase()
+{
+    return database;
+}
+

@@ -6,7 +6,7 @@
  */
 #include "messages/user.h"
 #include "messages/messagescontainer.h"
-#include "QSqlDatabase"
+#include "pginterface.h"
 
 struct UserStatus{
     bool logged;
@@ -43,13 +43,14 @@ public:
     UserStatus *userStatus() const;
     ConnectionStatistics *connectionStats() const;
 
+    PgInterface& getDatabase();
 private:
-    QSqlDatabase db;
 
     MessagesContainer *m_messageContainer;
     UserStatistics *userStats;
     User *userData;
     UserStatus *m_userStatus;
     ConnectionStatistics *m_connectionStats;
+    PgInterface database;
 };
 

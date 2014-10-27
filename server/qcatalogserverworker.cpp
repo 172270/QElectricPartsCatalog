@@ -81,11 +81,6 @@ void QCatalogServerWorker::readyRead(const QByteArray &ba)
                 }
                 handler->processData();
                 handler->moveResponseToCache();
-                if (workerCache->userStatus()->logged ){
-                    foreach(MessageHandlerInterface* handler, *handlers) {
-                        handler->setActiveUser(workerCache->getUserData()->id());
-                    }
-                }
             }
         }
     }

@@ -12,7 +12,7 @@ class MessageHandlerInterface
 public:
     explicit MessageHandlerInterface(WorkerCache *cache):
         m_cache(*cache),
-        database( m_cache.getDb().connectionName() )
+        database(m_cache.getDatabase())
     {
         ;
     }
@@ -52,7 +52,7 @@ public:
 
 protected:
     WorkerCache &m_cache;
-    PgInterface database;
+    PgInterface &database;
 private:
 
 };
