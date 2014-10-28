@@ -17,6 +17,7 @@ QCatalogServerWorker::QCatalogServerWorker(QSqlDatabase db, QObject *parent) :
     handlers->insert(MsgType::reqLogout, new LogoutMessageHandler(workerCache));
     handlers->insert(MsgType::addParameter, new AddParameterHandler(workerCache));
     handlers->insert(MsgType::addGroup, new AddGroupMessageHandler(workerCache));
+    handlers->insert(MsgType::reqParameters, new ParametersHandler(workerCache));
 }
 
 QCatalogServerWorker::~QCatalogServerWorker()

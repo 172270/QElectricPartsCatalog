@@ -46,8 +46,8 @@ bool LoginMessageHandler::processData()
         if(loginOk){
             res.set_replay(protbuf::Replay::LoginPass);
             m_cache.userStatus()->logged = true;
-            database.setActiveUser(cache().getUserData()->id());
             getUserData();
+            cache().getDatabase().setActiveUser(cache().getUserData()->id() );
             updateLastLogin();
         }
         else{

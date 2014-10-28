@@ -11,9 +11,11 @@
 #include "parameter.h"
 #include "message.h"
 
+class RequestAddGroup;
 class Group : public protocol::QMessage<protbuf::Group>
 {
 public:
+    Group();
     void set_name(const QString &name);
     QString getName() const;
 
@@ -37,7 +39,6 @@ public:
     QList<protbuf::ParameterBasicInformation> getParameters() const;
 
     protbuf::GroupBasicInformation getGroupBasicInfoPB();
-    Group();
 private:
 
     // Message interface
@@ -51,6 +52,10 @@ public:
 class RequestAddGroup : public protocol::QMessage<protbuf::addGroup>
 {
 public:
+
+    QString getName() const { return QString::fromStdString(name());}
+    QString getDescription() const { return QString::fromStdString(description()); }
+
     MsgType type() const
     {
         return MsgType::addGroup;

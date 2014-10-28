@@ -20,14 +20,18 @@ SOURCES += main.cpp\
     adduserdialog.cpp \
     addgroup.cpp \
     addparameter.cpp \
-    messahehandler.cpp
+    messahehandler.cpp \
+    qsciencespinbox.cpp \
+    qengineerspinbox.cpp
 
 HEADERS  += mainwindow.h \
     logindialog.h \
     adduserdialog.h \
     addgroup.h \
     addparameter.h \
-    messahehandler.h
+    messahehandler.h \
+    qsciencespinbox.h \
+    qengineerspinbox.h
 
 FORMS    += mainwindow.ui \
     logindialog.ui \

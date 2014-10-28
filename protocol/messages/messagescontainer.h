@@ -13,6 +13,10 @@ class MessagesContainer : public protocol::QMessage<protbuf::MessageContainer>
 {
 public:
     MessagesContainer();
+    ~MessagesContainer(){
+        delete ba;
+    }
+
     template <class baseClass>
     void addMessage(baseClass msg)
     {

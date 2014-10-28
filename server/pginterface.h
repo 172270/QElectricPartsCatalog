@@ -34,17 +34,17 @@ public:
     void linkStorageToUser(const User &protbuf, const Storage &storage);
     QList<Storage> getUserStorages(User &protbuf);
 
-    uint addStorage(const Storage &storage);
+    uint addStorage(Storage &storage);
     uint addPackage(Package &package);
 
     quint32 addParameter(Parameter &parameter);
     QList<Parameter> getParameters();
 
-    quint32 addGroup(const Group &group);
+    quint32 addGroup(Group &group);
     Group getGroup(uint id);
     QList<Group> getGroups();
 
-    void linkParameterToGroup(Group &group, const Parameter &parameter);
+
 
     quint32 addItem(Item &item);
     void saveGroupParametersIDs(Group &g);
@@ -57,6 +57,8 @@ private:
     QSqlDatabase db;
     QSqlQuery *query;
     QString q;
+
+    void linkParametersToGroup(Group &group);
 };
 
 #endif // PGINTERFACE_H

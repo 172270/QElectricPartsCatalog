@@ -49,6 +49,7 @@ void AddParameter::SelectResponse(QByteArray res)
 void AddParameter::on_addParameter_clicked()
 {
     Parameter addMessage;
+    RequestParameters reqParameters;
 
     addMessage.set_name(ui->name->text());
     addMessage.set_symbol(ui->symbol->text());
@@ -59,5 +60,7 @@ void AddParameter::on_addParameter_clicked()
     addMessage.config().setMaxValue(ui->maxVal->value());
     addMessage.config().setMinValue(ui->minVal->value());
 
-    emit messageAvalible(MsgType::addParameter, addMessage.toArray() );
+    emit requestAvalible(MsgType::addParameter, addMessage.toArray() );
+    emit requestAvalible(MsgType::reqParameters, reqParameters.toArray() );
+    emit requestReady();
 }

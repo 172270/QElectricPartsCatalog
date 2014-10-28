@@ -43,6 +43,7 @@ uint PgInterface::addUser(User &user, QString passwd)
         throw query->lastError();
     }
     user.set_id( query->lastInsertId().toUInt() );
+    setActiveUser( user.id() );
     Storage storage;
     storage.set_name(user.getName() + QString("_default"));
     storage.setID(addStorage(storage));
@@ -237,7 +238,7 @@ QList<Storage> PgInterface::getUserStorages(User &user)
 //    return QList<File>();
 //}
 
-uint PgInterface::addStorage(const Storage &storage)
+uint PgInterface::addStorage(Storage &storage)
 {
     if(storage.IsInitialized() ){
         q.clear();
@@ -330,7 +331,7 @@ QList<Parameter> PgInterface::getParameters()
     return parameters;
 }
 
-quint32 PgInterface::addGroup(const Group &group)
+quint32 PgInterface::addGroup(Group &group)
 {
     // check credentials
     if(group.IsInitialized()){
@@ -347,8 +348,9 @@ quint32 PgInterface::addGroup(const Group &group)
         if(!query->exec()){
             throw query->lastError();
         }
-
-        return query->lastInsertId().toUInt();
+        group.set_id(query->lastInsertId().toUInt());
+        linkParametersToGroup(group);
+        return group.id();
     }
     return 0;
 }
@@ -448,19 +450,22 @@ QList<Group> PgInterface::getGroups()
     return groups;
 }
 
-void PgInterface::linkParameterToGroup(Group &group, const Parameter &parameter)
+void PgInterface::linkParametersToGroup(Group &group)
 {
+    QVariantList parameters, groupId;
+    foreach (protbuf::ParameterBasicInformation p, group.getParameters()) {
+        parameters.append(p.id() );
+        groupId.append(group.id() );
+    }
     q.clear();
-    q.append("insert into group_parameter(parameter_id, group_id) values (:pid, :gid)");
+    q.append("insert into group_parameter(parameter_id, group_id) values (?,?)");
     query->prepare(q);
-    query->bindValue(":pid", parameter.id() );
-    query->bindValue(":gid", group.id() );
+    query->addBindValue( parameters );
+    query->addBindValue( groupId );
 
-    if(!query->exec()){
+    if(!query->execBatch()){
         throw query->lastError();
     }
-
-    group.add_parameter(parameter);
 }
 
 quint32 PgInterface::addItem(Item &item)

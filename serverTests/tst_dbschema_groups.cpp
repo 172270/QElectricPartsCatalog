@@ -145,12 +145,7 @@ void tst_dbschema_groups::databaseThrowsExceptionWhenDoubleGroupAdd()
 
 void tst_dbschema_groups::linkGroupWithParameter_linksGroupWithParameter()
 {
-    Group g;
-    g.set_parentid(1);
-    g.set_name("Parameter_test");
-    g.setAllowItems(true);
-    g.setAllowRecipe(true);
-    g.set_id(database->addGroup(g));
+
 
     Parameter p1, p2;
     p1.set_name("Parameter1");
@@ -166,8 +161,14 @@ void tst_dbschema_groups::linkGroupWithParameter_linksGroupWithParameter()
     database->addParameter(p1);
     database->addParameter(p2);
 
-    database->linkParameterToGroup(g, p1);
-    database->linkParameterToGroup(g, p2);
+    Group g;
+    g.set_parentid(1);
+    g.set_name("Parameter_test");
+    g.setAllowItems(true);
+    g.setAllowRecipe(true);
+    g.set_id(database->addGroup(g));
+    g.add_parameter(p1);
+    g.add_parameter(p2);
 
     QVERIFY(g.getParameters().size() == 2);
 }
@@ -188,12 +189,7 @@ void tst_dbschema_groups::getGroup_getsGroupInfo()
 
 void tst_dbschema_groups::getGroup_getsGroupParameters()
 {
-    Group g;
-    g.set_parentid(1);
-    g.set_name("group_test");
-    g.setAllowItems(true);
-    g.setAllowRecipe(true);
-    g.set_id(database->addGroup(g));
+
 
     Parameter p1, p2, p3, p4;
     p1.set_name("Parameter5");
@@ -225,10 +221,16 @@ void tst_dbschema_groups::getGroup_getsGroupParameters()
     database->addParameter(p3);
     database->addParameter(p4);
 
-    database->linkParameterToGroup(g, p1);
-    database->linkParameterToGroup(g, p2);
-    database->linkParameterToGroup(g, p3);
-    database->linkParameterToGroup(g, p4);
+    Group g;
+    g.set_parentid(1);
+    g.set_name("group_test");
+    g.setAllowItems(true);
+    g.setAllowRecipe(true);
+    g.add_parameter(p1);
+    g.add_parameter(p2);
+    g.add_parameter(p3);
+    g.add_parameter(p4);
+    database->addGroup(g);
 
     Group g2;
     g2.MergeFrom(database->getGroup( g.id() ));

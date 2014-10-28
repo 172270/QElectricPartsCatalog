@@ -8,36 +8,26 @@ AddParameterHandler::AddParameterHandler(WorkerCache *cache):
 bool AddParameterHandler::parseData(const QByteArray &ba)
 {
     resAddParameter.Clear();
-    resParameters.Clear();
     parameter.Clear();
     return parameter.fromArray(ba);
 }
 
 bool AddParameterHandler::parseData(QByteArray &&ba)
 {
-    if(parameters.size())
-        parameters.clear();
     resAddParameter.Clear();
-    resParameters.Clear();
     parameter.Clear();
     return parameter.fromArray(ba);
 }
 
 bool AddParameterHandler::processData()
 {
-    // add parameter
-
     if(parameter.IsInitialized()){
         try{
             database.addParameter(parameter);
             resAddParameter.add_replay( protbuf::addParameterReplay::addOk);
-            parameters = database.getParameters();
-            for(int i=0;i<parameters.size();i++){
-                resParameters.add_parameters()
-                        ->CopyFrom(static_cast<protbuf::Parameter>(parameters[i]));
-            }
         }
-        catch (QSqlError){
+        catch (QSqlError e){
+            qDebug()<<e.text();
             resAddParameter.add_replay( protbuf::addParameterReplay::parameterExists);
         }
     }
@@ -49,8 +39,42 @@ bool AddParameterHandler::processData()
 bool AddParameterHandler::moveResponseToCache()
 {
     m_cache.responseMessage()->addMessage(resAddParameter);
-    if( resParameters.parameters().size() > 0)
-        m_cache.responseMessage()->addMessage(resParameters);
     return true;
+}
 
+
+ParametersHandler::ParametersHandler(WorkerCache *cache):
+    MessageHandlerInterface(cache)
+{
+
+}
+
+bool ParametersHandler::parseData(const QByteArray &ba)
+{
+    reqParameters.Clear();
+    resParameters.Clear();
+    return reqParameters.fromArray(ba);
+}
+
+bool ParametersHandler::parseData(QByteArray &&ba)
+{
+    reqParameters.Clear();
+    resParameters.Clear();
+    return reqParameters.fromArray(ba);
+}
+
+bool ParametersHandler::processData()
+{
+    parameters = database.getParameters();
+    for(int i=0;i<parameters.size();i++){
+        resParameters.add_parameters()
+                ->CopyFrom(static_cast<protbuf::Parameter>(parameters[i]));
+    }
+    return true;
+}
+
+bool ParametersHandler::moveResponseToCache()
+{
+    cache().responseMessage()->addMessage(resParameters);
+    return true;
 }

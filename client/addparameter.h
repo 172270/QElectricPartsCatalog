@@ -21,7 +21,8 @@ public slots:
     void SelectResponse(QByteArray res);
 
 signals:
-    void messageAvalible(MsgType, QByteArray ba);
+    void requestAvalible(MsgType, QByteArray ba);
+    void requestReady();
 
 private slots:
     void on_addParameter_clicked();

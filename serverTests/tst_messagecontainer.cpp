@@ -117,7 +117,7 @@ void tst_MessageContainer::dataStaysAfterDeserialization()
 
 }
 
-QString tmessage = getRandomData();
+QByteArray tmessage = getRandomData().toLatin1();
 MsgType ttype = MsgType::addUser;
 QByteArray *tba = new QByteArray();
 QByteArray rba;

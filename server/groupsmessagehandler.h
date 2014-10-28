@@ -4,6 +4,8 @@
 #include "messagehandlerinterface.h"
 #include "messages/group.h"
 
+#include <QDebug>
+
 class GetGroupsMessageHandler : public MessageHandlerInterface
 {
 public:
@@ -40,10 +42,29 @@ public:
 
     bool processData()
     {
+        Group group;
+        group.set_name(requestMsg.getName());
+        group.set_parentid(requestMsg.parentid());
+        group.set_allowitems(requestMsg.allowitems());
+        group.set_allowsets(requestMsg.allowsets());
+        for(int i=0;i<requestMsg.parameters().size();i++){
+            group.add_parameters()->CopyFrom(requestMsg.parameters(i));
+        }
+        try{
+            database.addGroup(group);
+            if(group.id() != 0){
+                responseMsg.add_replay(protbuf::resAddGroup::addOk);
+            }
+        }
+        catch (QSqlError e){
+            qDebug()<<e.text();
+        }
+
         return true;
     }
     bool moveResponseToCache()
     {
+        cache().responseMessage()->addMessage(responseMsg);
         return true;
     }
 

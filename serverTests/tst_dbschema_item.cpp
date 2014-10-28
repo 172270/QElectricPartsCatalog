@@ -73,6 +73,7 @@ void tst_dbschema_item::saveItemWithBasicInfo()
     primaryGroup1.set_description("description for primary 1");
     primaryGroup1.setAllowItems(true);
     primaryGroup1.setAllowRecipe(false);
+    primaryGroup1.add_parameter(p1);
     primaryGroup1.set_id(database->addGroup(primaryGroup1));
 
     primaryGroup2.set_parentid(1);
@@ -80,6 +81,8 @@ void tst_dbschema_item::saveItemWithBasicInfo()
     primaryGroup2.set_description("description for primary 2");
     primaryGroup2.setAllowItems(true);
     primaryGroup2.setAllowRecipe(false);
+    primaryGroup2.add_parameter(p2);
+    primaryGroup2.add_parameter(p1);
     primaryGroup2.set_id(database->addGroup(primaryGroup2));
 
     child1.set_parentid(primaryGroup1.id() );
@@ -93,10 +96,6 @@ void tst_dbschema_item::saveItemWithBasicInfo()
     child2.setAllowItems(true);
     child2.setAllowRecipe(true);
     child2.set_id(database->addGroup(child2));
-
-    database->linkParameterToGroup(primaryGroup1, p1);
-    database->linkParameterToGroup(primaryGroup2, p2);
-    database->linkParameterToGroup(primaryGroup2, p1);
 
     Item i1;
     i1.set_name("Name1");

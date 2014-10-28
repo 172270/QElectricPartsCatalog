@@ -15,10 +15,22 @@ public:
     bool moveResponseToCache();
 
 private:
-    QList<Parameter> parameters;
     Parameter parameter;
-    ResponseParameters resParameters;
     ResponseAddParameter resAddParameter;
+};
+
+class ParametersHandler : public MessageHandlerInterface
+{
+public:
+    ParametersHandler(WorkerCache *cache);
+    bool parseData(const QByteArray &ba) override;
+    bool parseData(QByteArray &&ba) override;
+    bool processData();
+    bool moveResponseToCache();
+private:
+    QList<Parameter> parameters;
+    RequestParameters reqParameters;
+    ResponseParameters resParameters;
 };
 
 #endif // PARAMETERSHANDLER_H

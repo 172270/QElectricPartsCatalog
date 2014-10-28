@@ -6,6 +6,8 @@
 #include "addgroup.h"
 #include "addparameter.h"
 #include "messahehandler.h"
+#include "qsciencespinbox.h"
+#include "qengineerspinbox.h"
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +32,8 @@ private:
     AddGroup *addGroupWidget;
     AddParameter *addParameter;
     MessaheHandler *handler;
+    QScienceSpinBox *spinbox;
+    QEngineerSpinBox *eSpinBox;
 };
 
 #endif // MAINWINDOW_H

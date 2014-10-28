@@ -339,15 +339,31 @@ void tst_ServerWorkerTests::addGroup_addsGroup()
     login("testuser2", "some_password2");
 
     RequestAddGroup g;
+    RequestParameters rp;
+    ResponseParameters resParameters;
+
     g.set_name("test_group");
-    g.set_parentid(0);
+    g.set_parentid(1);
     g.set_allowsets(true);
     g.set_allowitems(true);
 
-    mc->addMessage(g);
+    mc->addMessage(rp);
     worker->readyRead(mc->toArray());
 
     mc->Clear();
+    QVERIFY(mc->fromArray(binaryMessage));
+    QVERIFY(mc->capsules().size() == 1);
+    QVERIFY(resParameters.fromArray(mc->getCapsule(0).getData() ));
+
+    for(int i=0;i<resParameters.parameters_size();i++){
+            g.add_parameters()->set_id(resParameters.parameters(i).id());
+    }
+
+    mc->Clear();
+    mc->addMessage(g);
+    worker->readyRead(mc->toArray());
+    mc->Clear();
+
     QVERIFY(mc->fromArray(binaryMessage));
     QVERIFY(mc->capsules().size() == 1);
 
