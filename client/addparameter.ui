@@ -71,7 +71,7 @@
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QDoubleSpinBox" name="minVal">
+        <widget class="QEngineerSpinBox" name="minVal">
          <property name="decimals">
           <number>12</number>
          </property>
@@ -94,7 +94,7 @@
         </widget>
        </item>
        <item row="5" column="1">
-        <widget class="QDoubleSpinBox" name="maxVal">
+        <widget class="QEngineerSpinBox" name="maxVal">
          <property name="decimals">
           <number>12</number>
          </property>
@@ -229,6 +229,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QEngineerSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>qengineerspinbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

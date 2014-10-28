@@ -22,6 +22,7 @@ public slots:
 
 signals:
     void requestAvalible(MsgType, QByteArray ba);
+
     void requestReady();
 
 private slots:

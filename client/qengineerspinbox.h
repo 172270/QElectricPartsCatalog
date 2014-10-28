@@ -23,7 +23,8 @@ public:
 private:
     int dispDecimals;
 
-public slots:
-    void stepDown();
-    void stepUp();
+    // QAbstractSpinBox interface
+public:
+    void stepBy(int steps);
+    int getExponent(double val);
 };

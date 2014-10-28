@@ -48,12 +48,10 @@ double stringToEngineer(QString val)
 
 QString engineerToString(double value, int digits)
 {
-    int expof10;
     static QString result;
-
+    auto valueCopy = value;
     if (value < 0.)
     {
-        result.append('-');
         value = -value;
     }
     if ( qFuzzyCompare(value,0))
@@ -61,7 +59,7 @@ QString engineerToString(double value, int digits)
         result = "0.0"; ///TODO decimal sign
         return result;
     }
-
+    int expof10;
     expof10 = static_cast<int> (log10(value));
     if(expof10 > 0)
         expof10 = (expof10/3)*3;
@@ -83,6 +81,9 @@ QString engineerToString(double value, int digits)
         result.sprintf("%.*fe%d", digits-1, value, expof10);
     else
         result.sprintf("%.*f%s", digits-1, value, prefixes[(expof10-PREFIX_START)/3].toStdString().data());
+
+    if(valueCopy<0)
+        result.push_front("-");
     return result;
 }
 
@@ -107,7 +108,7 @@ public:
 
         for(int i = 0; i<val.size();i++){
             auto c = val.at(i);
-            if( !prefixes.contains(QString(c)) && !c.isNumber() && c!=',' && c != '.')
+            if( !prefixes.contains(QString(c)) && !c.isNumber() && c!=',' && c != '.' && c != '-')
                 return QValidator::Invalid;
         }
 
@@ -122,7 +123,7 @@ public:
         //remove chars that are not prefixes
         for(int i = 0; i<val.size();i++){
             auto c = val.at(i);
-            if(!prefixes.contains(QString(c)) && !c.isNumber()&& c!=',' && c != '.')
+            if(!prefixes.contains(QString(c)) && !c.isNumber()&& c!=',' && c != '.' && c != '-')
                 copy.remove(c);
         }
         val = copy;
@@ -130,10 +131,10 @@ public:
         bool hasPrefix = false;
         for(int i = 0; i<val.size();i++){
             auto c = val.at(i);
-            if(!prefixes.contains(QString(c)) && !c.isNumber()&& c!=',' && c != '.')
+            if(!prefixes.contains(QString(c)) && !c.isNumber()&& c!=',' && c != '.' && c != '-')
                 if(hasPrefix)
                     copy.remove(i,1);
-                hasPrefix=true;
+            hasPrefix=true;
         }
 
         val = copy;
@@ -164,25 +165,12 @@ void QEngineerSpinBox::setDecimals(int value)
     dispDecimals = value;
 }
 
-void QEngineerSpinBox::stepDown()
-{
-    QSBDEBUG() << "stepDown()";
-    setValue(value()/10.0);
-}
-
-void QEngineerSpinBox::stepUp()
-{
-    QSBDEBUG() << "stepUp()";
-    setValue(value()*10.0);
-}
-
 /*!
  *  text to be displayed in spinbox
  */
 QString QEngineerSpinBox::textFromValue(double value) const
 {
     QString str = engineerToString(value,3);
-    qDebug()<<" value "<<value << "changed to: "<< str << "and back to: " << stringToEngineer(str);
     return str;
 }
 
@@ -197,4 +185,49 @@ QValidator::State QEngineerSpinBox::validate(QString &, int &) const
     QValidator::State state;
     state = QValidator::Acceptable;
     return state;
+}
+
+int QEngineerSpinBox::getExponent(double val)
+{
+    int expof10;
+    if( qFuzzyCompare(val,0))
+        expof10 = 0;
+    else{
+        expof10 = static_cast<int>(log10(val));
+        if(expof10 < 0)
+            expof10 = (-expof10)/1*(-1);
+    }
+    return expof10;
+}
+
+void QEngineerSpinBox::stepBy(int steps)
+{
+    double val = this->value();
+    bool belov0 = value()<0?true:false;
+    double val2=0;
+
+    if(qAbs(val)<1){
+        val2=1 + val;
+    }
+    else if (!belov0 && steps<0 ){
+        int expof10 = getExponent(qAbs(val));
+        val2 = value()+steps*pow(10,expof10)/10;
+        int absA = getExponent(val2);
+        int absB = getExponent(val);
+        if (absA < absB)
+            val2 = value()+steps*pow(10,expof10)/100;
+    }
+    else if(belov0 && steps>0){
+        int expof10 = getExponent(qAbs(val));
+        val2 = value()+steps*pow(10,expof10)/10;
+        int absA = getExponent(qAbs(val2));
+        int absB = getExponent(qAbs(val));
+        if (absA < absB)
+            val2 = value()+steps*pow(10,expof10)/100;
+    }
+    else{
+        int expof10 = getExponent(qAbs(val));
+        val2 = value()+steps*pow(10,expof10)/10;
+    }
+    setValue(val2);
 }

@@ -13,7 +13,8 @@ class QMessage : public baseClass
 public:
     virtual MsgType type() const = 0;
 
-    QByteArray toArray() const {
+    QByteArray toArray(){
+        beforeToArray();
         int size = baseClass::ByteSize();
         QByteArray ba(size ,'\0');
         baseClass::SerializeToArray(ba.data(),size);
