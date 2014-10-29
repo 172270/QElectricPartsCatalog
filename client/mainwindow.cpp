@@ -12,18 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    spinbox = new QScienceSpinBox();
-    eSpinBox = new QEngineerSpinBox();
-    spinbox->setValue(0);
-    auto doubleSpinBox = new QDoubleSpinBox();
-    auto doubleSpinBox2 = new QDoubleSpinBox();
-    doubleSpinBox->setDecimals(20);
-    doubleSpinBox->setMaximum(99999999999999999999999.0);
-    doubleSpinBox->setMinimum(-99999999999999999999999.0);
-    doubleSpinBox2->setDecimals(20);
-    doubleSpinBox2->setMaximum(99999999999999999999999.0);
-    doubleSpinBox2->setMinimum(-99999999999999999999999.0);
-
     connect(ui->actionAddGroup, SIGNAL(triggered()), this, SLOT(showAddGroup()));
     connect(ui->actionAddParameter, SIGNAL(triggered()), this, SLOT(showAddParameter()));
 
@@ -37,19 +25,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(handler, SIGNAL(recived_resParameters(QByteArray)),
             addParameter, SLOT(SelectResponse(QByteArray)));
 
-    connect(spinbox, SIGNAL(valueChanged(double)),
-            doubleSpinBox, SLOT(setValue(double)));
-    connect(doubleSpinBox, SIGNAL(valueChanged(double)),
-            spinbox, SLOT(setValue(double)));
-    connect(doubleSpinBox, SIGNAL(valueChanged(double)),
-            eSpinBox, SLOT(setValue(double)));
-    connect(eSpinBox, SIGNAL(valueChanged(double)),
-            doubleSpinBox2, SLOT(setValue(double)));
-
-    ui->layout->addWidget(spinbox);
-    ui->layout->addWidget(doubleSpinBox);
-    ui->layout->addWidget(eSpinBox);
-    ui->layout->addWidget(doubleSpinBox2);
 }
 
 MainWindow::~MainWindow()
@@ -75,4 +50,7 @@ QWebSocket *MainWindow::getSocket() const
 void MainWindow::setSocket(QWebSocket *ws)
 {
     handler->setSocket(ws);
+    addParameter->requestParameters();
+
+    handler->sendPandingMessages();
 }

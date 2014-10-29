@@ -110,6 +110,15 @@ int ParameterConfig::minTextLength() const
     return v.toInt();
 }
 
+bool ParameterConfig::hasMinTextLength() const
+{
+    return object.contains("minTextLength");
+}
+bool ParameterConfig::hasMaxTextLength() const
+{
+        return object.contains("maxTextLength");
+}
+
 QVariant ParameterConfig::defaultValue()
 {
     QVariant v(object.value(QStringLiteral("defaultValue")).toVariant());
@@ -137,6 +146,11 @@ double ParameterConfig::getMaxValue() const
     return object.value(QStringLiteral("maxValue")).toDouble();
 }
 
+bool ParameterConfig::hasMaxValue() const
+{
+    return object.contains("maxValue");
+}
+
 void ParameterConfig::setMinValue(double minValue)
 {
     auto val = QJsonValue(minValue);
@@ -146,6 +160,12 @@ void ParameterConfig::setMinValue(double minValue)
 double ParameterConfig::getMinValue() const
 {
     return object.value(QStringLiteral("minValue")).toDouble();
+}
+
+
+bool ParameterConfig::hasMinValue() const
+{
+        return object.contains(QStringLiteral("minValue"));
 }
 
 MsgType RequestParameters::type() const

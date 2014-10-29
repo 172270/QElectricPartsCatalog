@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     addparameter.cpp \
     messahehandler.cpp \
     qsciencespinbox.cpp \
-    qengineerspinbox.cpp
+    qengineerspinbox.cpp \
+    parametersmodel.cpp
 
 HEADERS  += mainwindow.h \
     logindialog.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     addparameter.h \
     messahehandler.h \
     qsciencespinbox.h \
-    qengineerspinbox.h
+    qengineerspinbox.h \
+    parametersmodel.h
 
 FORMS    += mainwindow.ui \
     logindialog.ui \

@@ -14,6 +14,7 @@ class AddParameter : public QWidget
 
 public:
     explicit AddParameter(QWidget *parent = 0);
+    void requestParameters();
     ~AddParameter();
 
 public slots:

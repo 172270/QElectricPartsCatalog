@@ -31,14 +31,19 @@ public:
 
     void setMaxValue(double maxVal);
     double getMaxValue() const;
+    bool hasMaxValue() const;
 
     void setMinValue(double minValue);
     double getMinValue() const;
+    bool hasMinValue()const;
 
-    void setMaxTextLength(int value);
     void setMinTextLength(int value);
     int minTextLength() const;
+    bool hasMinTextLength() const;
+
+    void setMaxTextLength(int value);
     int maxTextLength() const;
+    bool hasMaxTextLength() const;
 private:
     QJsonObject object;
 };
@@ -58,6 +63,7 @@ public:
     ParameterConfig &config();
 
     MsgType type() const;
+    void ParametersModel(){ afterFromArray(); }
 private:
     ParameterConfig m_config;
     void afterFromArray();

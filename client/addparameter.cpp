@@ -3,13 +3,14 @@
 
 #include <QStandardItemModel>
 #include "float.h"
+#include "parametersmodel.h"
 
 AddParameter::AddParameter(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AddParameter)
 {
     ui->setupUi(this);
-    QStandardItemModel *model = new QStandardItemModel();
+    ParametersModel *model = new ParametersModel();
     ui->parametersView->setModel(model);
     ui->minLength->setMinimum(0);
     ui->maxLength->setMinimum(0);
@@ -29,6 +30,12 @@ AddParameter::AddParameter(QWidget *parent) :
     type->insertItem(type->count(),tr("Textowy","string"), QVariant("string"));
     type->insertItem(type->count(),tr("Temperatura","Temperature"), QVariant("temperature"));
     type->insertItem(type->count(),tr("Data","calendar date"), QVariant("cal"));
+}
+
+void AddParameter::requestParameters()
+{
+    RequestParameters reqParameters;
+    emit requestAvalible(MsgType::reqParameters, reqParameters.toArray() );
 }
 
 AddParameter::~AddParameter()
@@ -53,23 +60,20 @@ void AddParameter::SelectResponse(QByteArray res)
     ResponseParameters param;
     param.fromArray(res);
 
-    QStandardItemModel *model = dynamic_cast<QStandardItemModel*>(ui->parametersView->model());
-    model->setRowCount(param.parameters_size());
-    model->setColumnCount(1);
-
+    ParametersModel *model = dynamic_cast<ParametersModel*>(ui->parametersView->model());
+    model->res();
     for(int i=0;i<param.parameters_size();i++){
-        Parameter p;
-        p.CopyFrom(param.parameters(i));
-        QStandardItem *it = new QStandardItem(p.getName());
-        model->setItem(i,0,it);
+        Parameter *p = new Parameter();
+        p->CopyFrom(param.parameters(i));
+        p->ParametersModel();
+        model->add(p);
     }
+    model->resModel();
 }
 
 void AddParameter::on_addParameter_clicked()
 {
     Parameter addMessage;
-    RequestParameters reqParameters;
-
     addMessage.set_name(ui->name->text());
     addMessage.set_symbol(ui->symbol->text());
 
@@ -86,11 +90,12 @@ void AddParameter::on_addParameter_clicked()
         addMessage.config().setMaxTextLength(ui->maxLength->value());
         addMessage.config().setMinTextLength(ui->minLength->value());
     }
+    addMessage.config().setValueType(ui->parameterType->currentData().toString() );
     qDebug()<< addMessage.config().toString();
 
-//    emit requestAvalible(MsgType::addParameter, addMessage.toArray() );
-//    emit requestAvalible(MsgType::reqParameters, reqParameters.toArray() );
-//    emit requestReady();
+    emit requestAvalible(MsgType::addParameter, addMessage.toArray() );
+    requestParameters();
+    emit requestReady();
 }
 
 void AddParameter::enableLayout(QLayout *layout, bool enable){

@@ -36,11 +36,12 @@ int main(int argc, char *argv[])
     delete prog;
     delete msg;
 
-    MainWindow w;
+    MainWindow *w;
     LoginDialog *lDialog = new LoginDialog();
     if(lDialog->exec()){
-        w.setSocket(lDialog->socket());
-        w.show();
+        w = new MainWindow();
+        w->setSocket(lDialog->socket());
+        w->show();
     }
     else{
         QTimer::singleShot(1,&a,SLOT(quit()));
