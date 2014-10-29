@@ -27,4 +27,8 @@ private:
 public:
     void stepBy(int steps);
     int getExponent(double val);
+
+    // QAbstractSpinBox interface
+public:
+    void fixup(QString &input) const;
 };

@@ -180,10 +180,15 @@ double QEngineerSpinBox::valueFromText(const QString &text) const
 }
 
 // overwritten virtual function of QAbstractSpinBox
-QValidator::State QEngineerSpinBox::validate(QString &, int &) const
+QValidator::State QEngineerSpinBox::validate(QString &val, int &) const
 {
     QValidator::State state;
     state = QValidator::Acceptable;
+
+    if(stringToEngineer(val) < minimum() )
+        state = QValidator::Invalid;
+    if(stringToEngineer(val) > maximum() )
+        state = QValidator::Invalid;
     return state;
 }
 
@@ -198,6 +203,14 @@ int QEngineerSpinBox::getExponent(double val)
             expof10 = (-expof10)/1*(-1);
     }
     return expof10;
+}
+
+void QEngineerSpinBox::fixup(QString &input) const
+{
+    if(stringToEngineer(input) < minimum() )
+        input = engineerToString(minimum(), this->decimals());
+    if(stringToEngineer(input) > maximum() )
+        input = engineerToString(maximum(), this->decimals());
 }
 
 void QEngineerSpinBox::stepBy(int steps)

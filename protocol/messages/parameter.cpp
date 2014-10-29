@@ -86,6 +86,30 @@ void ParameterConfig::setDefaultValue(QVariant value)
     object.insert(QStringLiteral("defaultValue"), val);
 }
 
+void ParameterConfig::setMaxTextLength(int value)
+{
+    auto val = QJsonValue(value);
+    object.insert(QStringLiteral("maxTextLength"), val);
+}
+
+void ParameterConfig::setMinTextLength(int value)
+{
+    auto val = QJsonValue(value);
+    object.insert(QStringLiteral("minTextLength"), val);
+}
+
+int ParameterConfig::maxTextLength() const
+{
+    QVariant v(object.value(QStringLiteral("maxTextLength")).toVariant());
+    return v.toInt();
+}
+
+int ParameterConfig::minTextLength() const
+{
+    QVariant v(object.value(QStringLiteral("minTextLength")).toVariant());
+    return v.toInt();
+}
+
 QVariant ParameterConfig::defaultValue()
 {
     QVariant v(object.value(QStringLiteral("defaultValue")).toVariant());
@@ -97,34 +121,32 @@ void ParameterConfig::setValueType(QString type)
     object.insert(QStringLiteral("valueType"), type);
 }
 
-QString ParameterConfig::getValueType()
+QString ParameterConfig::valueType()
 {
     return object.value(QStringLiteral("valueType")).toString();
 }
 
-void ParameterConfig::setMaxValue(QVariant maxVal)
+void ParameterConfig::setMaxValue(double maxVal)
 {
-    QJsonValue val = QJsonValue::fromVariant(maxVal);
+    auto val = QJsonValue(maxVal);
     object.insert(QStringLiteral("maxValue"), val);
 }
 
-QVariant ParameterConfig::getMaxValue() const
+double ParameterConfig::getMaxValue() const
 {
-    return object.value(QStringLiteral("maxValue")).toString();
+    return object.value(QStringLiteral("maxValue")).toDouble();
 }
 
-void ParameterConfig::setMinValue(QVariant minValue)
+void ParameterConfig::setMinValue(double minValue)
 {
-    QJsonValue val = QJsonValue::fromVariant(minValue);
+    auto val = QJsonValue(minValue);
     object.insert(QStringLiteral("minValue"), val);
 }
 
-QVariant ParameterConfig::getMinValue() const
+double ParameterConfig::getMinValue() const
 {
-    return object.value(QStringLiteral("minValue")).toString();
+    return object.value(QStringLiteral("minValue")).toDouble();
 }
-
-
 
 MsgType RequestParameters::type() const
 {

@@ -28,8 +28,12 @@ signals:
 private slots:
     void on_addParameter_clicked();
 
+    void on_parameterType_currentIndexChanged(int);
+
 private:
     Ui::AddParameter *ui;
+    void disableAll();
+    void enableLayout(QLayout *layout, bool enable = true);
 };
 
 #endif // ADDPARAMETER_H

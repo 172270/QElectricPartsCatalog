@@ -61,7 +61,7 @@ void tst_ParameterConfig::readData_setsValues()
     std::string def = "{\"defaultValue\":\"DEFAULT_VALUE\",\"valueType\":\"QString\"}";
     conf.fromStdString(def);
 
-    QVERIFY(conf.getValueType() == "QString" );
+    QVERIFY(conf.valueType() == "QString" );
     QVERIFY(conf.defaultValue() == "DEFAULT_VALUE");
 }
 

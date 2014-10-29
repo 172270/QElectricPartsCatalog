@@ -27,13 +27,18 @@ public:
     QVariant defaultValue();
 
     void setValueType( QString type);
-    QString getValueType();
+    QString valueType();
 
-    void setMaxValue(QVariant maxVal);
-    QVariant getMaxValue() const;
+    void setMaxValue(double maxVal);
+    double getMaxValue() const;
 
-    void setMinValue(QVariant minValue);
-    QVariant getMinValue() const;
+    void setMinValue(double minValue);
+    double getMinValue() const;
+
+    void setMaxTextLength(int value);
+    void setMinTextLength(int value);
+    int minTextLength() const;
+    int maxTextLength() const;
 private:
     QJsonObject object;
 };
