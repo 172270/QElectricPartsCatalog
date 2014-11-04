@@ -80,23 +80,23 @@ public:
             }
             else if(index.column() == 1){
                 // return type
-                return QString(p->config().valueType() );
+                return QString::number(p->config().valueType() ); ///TODO add method that will return a string with parameter name
             }
             else if(index.column() == 2){
                 // zakresy
                 QString  str, ret;
 
-                if (p->config().hasMinValue() && p->config().hasMaxValue() ){
+                if (p->config().has_minvalue() && p->config().has_maxvalue() ){
                     str.append("Zakres zmiennej (%1, %2)");
-                    ret = str.arg(p->config().getMinValue()).arg(p->config().getMaxValue());
+                    ret = str.arg(p->config().minvalue()).arg(p->config().maxvalue());
                 }
-                if (p->config().hasMaxTextLength() && p->config().hasMinTextLength() ){
+                if (p->config().has_minlength() && p->config().has_maxlength() ){
                     str.clear();
                     if(ret.size()>0){
                         str.append("oraz ");
                     }
                     str.append("długość textu zmiennej (%1, %2)");
-                    ret.append(str.arg(p->config().minTextLength()).arg(p->config().maxTextLength()));
+                    ret.append(str.arg(p->config().minlength()).arg(p->config().maxlength()));
                 }
                 return ret;
             }
@@ -110,6 +110,24 @@ public:
 
 private:
     QList<Parameter*> m_data;
+
+    // QAbstractItemModel interface
+public:
+    QMap<int, QVariant> itemData(const QModelIndex &index) const
+    {
+        QMap<int, QVariant> data;
+        int row = index.row();
+
+        Parameter *p = m_data.at(row);
+
+        data.insert(p->kIdFieldNumber, p->getName() );
+        data.insert(p->kConfigFieldNumber, p->config().toJSON() );
+        data.insert(p->kDescriptionFieldNumber, p->getDescription());
+        data.insert(p->kNameFieldNumber, p->getName());
+        data.insert(p->kSymbolFieldNumber, p->getSymbol());
+
+        return data;
+    }
 };
 
 #endif // PARAMETERSMODEL_H

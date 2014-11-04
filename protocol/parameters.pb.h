@@ -34,9 +34,23 @@ void protobuf_ShutdownFile_parameters_2eproto();
 
 class ParameterBasicInformation;
 class Parameter;
+class Parameter_Config;
 class reqParameters;
 class resParameters;
 class resAddParameter;
+
+enum Parameter_Config_Type {
+  Parameter_Config_Type_INT = 1,
+  Parameter_Config_Type_UINT = 2,
+  Parameter_Config_Type_DOUBLE = 3,
+  Parameter_Config_Type_STRING = 10,
+  Parameter_Config_Type_TEMPERATURE = 20,
+  Parameter_Config_Type_DATE = 30
+};
+bool Parameter_Config_Type_IsValid(int value);
+const Parameter_Config_Type Parameter_Config_Type_Type_MIN = Parameter_Config_Type_INT;
+const Parameter_Config_Type Parameter_Config_Type_Type_MAX = Parameter_Config_Type_DATE;
+const int Parameter_Config_Type_Type_ARRAYSIZE = Parameter_Config_Type_Type_MAX + 1;
 
 enum addParameterReplay {
   addOk = 1,
@@ -132,6 +146,161 @@ class ParameterBasicInformation : public ::google::protobuf::MessageLite {
 };
 // -------------------------------------------------------------------
 
+class Parameter_Config : public ::google::protobuf::MessageLite {
+ public:
+  Parameter_Config();
+  virtual ~Parameter_Config();
+
+  Parameter_Config(const Parameter_Config& from);
+
+  inline Parameter_Config& operator=(const Parameter_Config& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const Parameter_Config& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const Parameter_Config* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(Parameter_Config* other);
+
+  // implements Message ----------------------------------------------
+
+  Parameter_Config* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const Parameter_Config& from);
+  void MergeFrom(const Parameter_Config& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef Parameter_Config_Type Type;
+  static const Type INT = Parameter_Config_Type_INT;
+  static const Type UINT = Parameter_Config_Type_UINT;
+  static const Type DOUBLE = Parameter_Config_Type_DOUBLE;
+  static const Type STRING = Parameter_Config_Type_STRING;
+  static const Type TEMPERATURE = Parameter_Config_Type_TEMPERATURE;
+  static const Type DATE = Parameter_Config_Type_DATE;
+  static inline bool Type_IsValid(int value) {
+    return Parameter_Config_Type_IsValid(value);
+  }
+  static const Type Type_MIN =
+    Parameter_Config_Type_Type_MIN;
+  static const Type Type_MAX =
+    Parameter_Config_Type_Type_MAX;
+  static const int Type_ARRAYSIZE =
+    Parameter_Config_Type_Type_ARRAYSIZE;
+
+  // accessors -------------------------------------------------------
+
+  // required .protbuf.Parameter.Config.Type type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::protbuf::Parameter_Config_Type type() const;
+  inline void set_type(::protbuf::Parameter_Config_Type value);
+
+  // optional bytes defaultValue = 2;
+  inline bool has_defaultvalue() const;
+  inline void clear_defaultvalue();
+  static const int kDefaultValueFieldNumber = 2;
+  inline const ::std::string& defaultvalue() const;
+  inline void set_defaultvalue(const ::std::string& value);
+  inline void set_defaultvalue(const char* value);
+  inline void set_defaultvalue(const void* value, size_t size);
+  inline ::std::string* mutable_defaultvalue();
+  inline ::std::string* release_defaultvalue();
+  inline void set_allocated_defaultvalue(::std::string* defaultvalue);
+
+  // optional double minValue = 3;
+  inline bool has_minvalue() const;
+  inline void clear_minvalue();
+  static const int kMinValueFieldNumber = 3;
+  inline double minvalue() const;
+  inline void set_minvalue(double value);
+
+  // optional double maxValue = 4;
+  inline bool has_maxvalue() const;
+  inline void clear_maxvalue();
+  static const int kMaxValueFieldNumber = 4;
+  inline double maxvalue() const;
+  inline void set_maxvalue(double value);
+
+  // optional int32 minLength = 5;
+  inline bool has_minlength() const;
+  inline void clear_minlength();
+  static const int kMinLengthFieldNumber = 5;
+  inline ::google::protobuf::int32 minlength() const;
+  inline void set_minlength(::google::protobuf::int32 value);
+
+  // optional int32 maxLength = 6;
+  inline bool has_maxlength() const;
+  inline void clear_maxlength();
+  static const int kMaxLengthFieldNumber = 6;
+  inline ::google::protobuf::int32 maxlength() const;
+  inline void set_maxlength(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:protbuf.Parameter.Config)
+ private:
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_defaultvalue();
+  inline void clear_has_defaultvalue();
+  inline void set_has_minvalue();
+  inline void clear_has_minvalue();
+  inline void set_has_maxvalue();
+  inline void clear_has_maxvalue();
+  inline void set_has_minlength();
+  inline void clear_has_minlength();
+  inline void set_has_maxlength();
+  inline void clear_has_maxlength();
+
+  ::std::string* defaultvalue_;
+  double minvalue_;
+  int type_;
+  ::google::protobuf::int32 minlength_;
+  double maxvalue_;
+  ::google::protobuf::int32 maxlength_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_parameters_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_parameters_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_parameters_2eproto();
+  friend void protobuf_ShutdownFile_parameters_2eproto();
+
+  void InitAsDefaultInstance();
+  static Parameter_Config* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class Parameter : public ::google::protobuf::MessageLite {
  public:
   Parameter();
@@ -183,6 +352,8 @@ class Parameter : public ::google::protobuf::MessageLite {
 
   // nested types ----------------------------------------------------
 
+  typedef Parameter_Config Config;
+
   // accessors -------------------------------------------------------
 
   // required uint32 id = 1;
@@ -216,17 +387,14 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline ::std::string* release_symbol();
   inline void set_allocated_symbol(::std::string* symbol);
 
-  // required bytes configData = 4;
-  inline bool has_configdata() const;
-  inline void clear_configdata();
-  static const int kConfigDataFieldNumber = 4;
-  inline const ::std::string& configdata() const;
-  inline void set_configdata(const ::std::string& value);
-  inline void set_configdata(const char* value);
-  inline void set_configdata(const void* value, size_t size);
-  inline ::std::string* mutable_configdata();
-  inline ::std::string* release_configdata();
-  inline void set_allocated_configdata(::std::string* configdata);
+  // required .protbuf.Parameter.Config config = 4;
+  inline bool has_config() const;
+  inline void clear_config();
+  static const int kConfigFieldNumber = 4;
+  inline const ::protbuf::Parameter_Config& config() const;
+  inline ::protbuf::Parameter_Config* mutable_config();
+  inline ::protbuf::Parameter_Config* release_config();
+  inline void set_allocated_config(::protbuf::Parameter_Config* config);
 
   // optional string description = 5;
   inline bool has_description() const;
@@ -248,14 +416,14 @@ class Parameter : public ::google::protobuf::MessageLite {
   inline void clear_has_name();
   inline void set_has_symbol();
   inline void clear_has_symbol();
-  inline void set_has_configdata();
-  inline void clear_has_configdata();
+  inline void set_has_config();
+  inline void clear_has_config();
   inline void set_has_description();
   inline void clear_has_description();
 
   ::std::string* name_;
   ::std::string* symbol_;
-  ::std::string* configdata_;
+  ::protbuf::Parameter_Config* config_;
   ::std::string* description_;
   ::google::protobuf::uint32 id_;
 
@@ -557,6 +725,191 @@ inline void ParameterBasicInformation::set_id(::google::protobuf::uint32 value) 
 
 // -------------------------------------------------------------------
 
+// Parameter_Config
+
+// required .protbuf.Parameter.Config.Type type = 1;
+inline bool Parameter_Config::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Parameter_Config::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Parameter_Config::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Parameter_Config::clear_type() {
+  type_ = 1;
+  clear_has_type();
+}
+inline ::protbuf::Parameter_Config_Type Parameter_Config::type() const {
+  return static_cast< ::protbuf::Parameter_Config_Type >(type_);
+}
+inline void Parameter_Config::set_type(::protbuf::Parameter_Config_Type value) {
+  assert(::protbuf::Parameter_Config_Type_IsValid(value));
+  set_has_type();
+  type_ = value;
+}
+
+// optional bytes defaultValue = 2;
+inline bool Parameter_Config::has_defaultvalue() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Parameter_Config::set_has_defaultvalue() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Parameter_Config::clear_has_defaultvalue() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Parameter_Config::clear_defaultvalue() {
+  if (defaultvalue_ != &::google::protobuf::internal::kEmptyString) {
+    defaultvalue_->clear();
+  }
+  clear_has_defaultvalue();
+}
+inline const ::std::string& Parameter_Config::defaultvalue() const {
+  return *defaultvalue_;
+}
+inline void Parameter_Config::set_defaultvalue(const ::std::string& value) {
+  set_has_defaultvalue();
+  if (defaultvalue_ == &::google::protobuf::internal::kEmptyString) {
+    defaultvalue_ = new ::std::string;
+  }
+  defaultvalue_->assign(value);
+}
+inline void Parameter_Config::set_defaultvalue(const char* value) {
+  set_has_defaultvalue();
+  if (defaultvalue_ == &::google::protobuf::internal::kEmptyString) {
+    defaultvalue_ = new ::std::string;
+  }
+  defaultvalue_->assign(value);
+}
+inline void Parameter_Config::set_defaultvalue(const void* value, size_t size) {
+  set_has_defaultvalue();
+  if (defaultvalue_ == &::google::protobuf::internal::kEmptyString) {
+    defaultvalue_ = new ::std::string;
+  }
+  defaultvalue_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* Parameter_Config::mutable_defaultvalue() {
+  set_has_defaultvalue();
+  if (defaultvalue_ == &::google::protobuf::internal::kEmptyString) {
+    defaultvalue_ = new ::std::string;
+  }
+  return defaultvalue_;
+}
+inline ::std::string* Parameter_Config::release_defaultvalue() {
+  clear_has_defaultvalue();
+  if (defaultvalue_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = defaultvalue_;
+    defaultvalue_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void Parameter_Config::set_allocated_defaultvalue(::std::string* defaultvalue) {
+  if (defaultvalue_ != &::google::protobuf::internal::kEmptyString) {
+    delete defaultvalue_;
+  }
+  if (defaultvalue) {
+    set_has_defaultvalue();
+    defaultvalue_ = defaultvalue;
+  } else {
+    clear_has_defaultvalue();
+    defaultvalue_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional double minValue = 3;
+inline bool Parameter_Config::has_minvalue() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Parameter_Config::set_has_minvalue() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Parameter_Config::clear_has_minvalue() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void Parameter_Config::clear_minvalue() {
+  minvalue_ = 0;
+  clear_has_minvalue();
+}
+inline double Parameter_Config::minvalue() const {
+  return minvalue_;
+}
+inline void Parameter_Config::set_minvalue(double value) {
+  set_has_minvalue();
+  minvalue_ = value;
+}
+
+// optional double maxValue = 4;
+inline bool Parameter_Config::has_maxvalue() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Parameter_Config::set_has_maxvalue() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Parameter_Config::clear_has_maxvalue() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void Parameter_Config::clear_maxvalue() {
+  maxvalue_ = 0;
+  clear_has_maxvalue();
+}
+inline double Parameter_Config::maxvalue() const {
+  return maxvalue_;
+}
+inline void Parameter_Config::set_maxvalue(double value) {
+  set_has_maxvalue();
+  maxvalue_ = value;
+}
+
+// optional int32 minLength = 5;
+inline bool Parameter_Config::has_minlength() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void Parameter_Config::set_has_minlength() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void Parameter_Config::clear_has_minlength() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void Parameter_Config::clear_minlength() {
+  minlength_ = 0;
+  clear_has_minlength();
+}
+inline ::google::protobuf::int32 Parameter_Config::minlength() const {
+  return minlength_;
+}
+inline void Parameter_Config::set_minlength(::google::protobuf::int32 value) {
+  set_has_minlength();
+  minlength_ = value;
+}
+
+// optional int32 maxLength = 6;
+inline bool Parameter_Config::has_maxlength() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void Parameter_Config::set_has_maxlength() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void Parameter_Config::clear_has_maxlength() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void Parameter_Config::clear_maxlength() {
+  maxlength_ = 0;
+  clear_has_maxlength();
+}
+inline ::google::protobuf::int32 Parameter_Config::maxlength() const {
+  return maxlength_;
+}
+inline void Parameter_Config::set_maxlength(::google::protobuf::int32 value) {
+  set_has_maxlength();
+  maxlength_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // Parameter
 
 // required uint32 id = 1;
@@ -721,73 +1074,45 @@ inline void Parameter::set_allocated_symbol(::std::string* symbol) {
   }
 }
 
-// required bytes configData = 4;
-inline bool Parameter::has_configdata() const {
+// required .protbuf.Parameter.Config config = 4;
+inline bool Parameter::has_config() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void Parameter::set_has_configdata() {
+inline void Parameter::set_has_config() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void Parameter::clear_has_configdata() {
+inline void Parameter::clear_has_config() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void Parameter::clear_configdata() {
-  if (configdata_ != &::google::protobuf::internal::kEmptyString) {
-    configdata_->clear();
-  }
-  clear_has_configdata();
+inline void Parameter::clear_config() {
+  if (config_ != NULL) config_->::protbuf::Parameter_Config::Clear();
+  clear_has_config();
 }
-inline const ::std::string& Parameter::configdata() const {
-  return *configdata_;
+inline const ::protbuf::Parameter_Config& Parameter::config() const {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  return config_ != NULL ? *config_ : *default_instance().config_;
+#else
+  return config_ != NULL ? *config_ : *default_instance_->config_;
+#endif
 }
-inline void Parameter::set_configdata(const ::std::string& value) {
-  set_has_configdata();
-  if (configdata_ == &::google::protobuf::internal::kEmptyString) {
-    configdata_ = new ::std::string;
-  }
-  configdata_->assign(value);
+inline ::protbuf::Parameter_Config* Parameter::mutable_config() {
+  set_has_config();
+  if (config_ == NULL) config_ = new ::protbuf::Parameter_Config;
+  return config_;
 }
-inline void Parameter::set_configdata(const char* value) {
-  set_has_configdata();
-  if (configdata_ == &::google::protobuf::internal::kEmptyString) {
-    configdata_ = new ::std::string;
-  }
-  configdata_->assign(value);
+inline ::protbuf::Parameter_Config* Parameter::release_config() {
+  clear_has_config();
+  ::protbuf::Parameter_Config* temp = config_;
+  config_ = NULL;
+  return temp;
 }
-inline void Parameter::set_configdata(const void* value, size_t size) {
-  set_has_configdata();
-  if (configdata_ == &::google::protobuf::internal::kEmptyString) {
-    configdata_ = new ::std::string;
-  }
-  configdata_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* Parameter::mutable_configdata() {
-  set_has_configdata();
-  if (configdata_ == &::google::protobuf::internal::kEmptyString) {
-    configdata_ = new ::std::string;
-  }
-  return configdata_;
-}
-inline ::std::string* Parameter::release_configdata() {
-  clear_has_configdata();
-  if (configdata_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
+inline void Parameter::set_allocated_config(::protbuf::Parameter_Config* config) {
+  delete config_;
+  config_ = config;
+  if (config) {
+    set_has_config();
   } else {
-    ::std::string* temp = configdata_;
-    configdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void Parameter::set_allocated_configdata(::std::string* configdata) {
-  if (configdata_ != &::google::protobuf::internal::kEmptyString) {
-    delete configdata_;
-  }
-  if (configdata) {
-    set_has_configdata();
-    configdata_ = configdata;
-  } else {
-    clear_has_configdata();
-    configdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    clear_has_config();
   }
 }
 

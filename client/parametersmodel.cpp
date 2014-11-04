@@ -3,4 +3,5 @@
 ParametersModel::ParametersModel(QObject *parent) :
     QAbstractTableModel(parent)
 {
+
 }

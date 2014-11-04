@@ -16,8 +16,25 @@ message Parameter{
   required uint32 id = 1;
   required string name = 2;
   required string symbol=3;
-  // config :JSON data containing info about MIN / MAX values and other usefull stuff
-  required bytes configData = 4; 
+
+  message Config {
+    enum Type{
+      INT = 1;
+      UINT = 2;
+      DOUBLE = 3;
+      
+      STRING = 10;
+      TEMPERATURE = 20;
+      DATE = 30;
+    }
+    required Type type = 1;
+    optional bytes defaultValue = 2;
+    optional double minValue = 3;
+    optional double maxValue = 4;
+    optional int32 minLength = 5;
+    optional int32 maxLength = 6;
+  }
+  required Config config = 4; 
   optional string description=5;
 }
 

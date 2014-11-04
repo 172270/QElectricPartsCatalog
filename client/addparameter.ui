@@ -19,10 +19,10 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_4" stretch="">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
          <property name="sizeConstraint">
           <enum>QLayout::SetDefaultConstraint</enum>
          </property>
@@ -228,7 +228,17 @@
            <item>
             <widget class="QCheckBox" name="hasDefault">
              <property name="text">
-              <string>wartość domyślna</string>
+              <string>Wartość domyślna</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="default_l">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="buddy">
+              <cstring>defaultValue</cstring>
              </property>
             </widget>
            </item>
@@ -282,7 +292,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QLabel" name="label">

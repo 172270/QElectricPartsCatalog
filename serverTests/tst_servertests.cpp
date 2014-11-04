@@ -291,9 +291,9 @@ void tst_ServerWorkerTests::addParameter_addsNewParameter()
     ResponseAddParameter resParameter;
     param.set_name(QStringLiteral("test_parameter_1"));
     param.set_symbol("test_p1");
-    param.config().setMinValue(10);
-    param.config().setMaxValue(20);
-    param.config().setValueType("int");
+    param.mutable_config()->set_minvalue(10);
+    param.mutable_config()->set_maxvalue(20);
+    param.mutable_config()->set_type(ParameterConfig::INT);
 
     mc->addMessage(MsgType::addParameter, param.toArray() );
 
@@ -315,9 +315,9 @@ void tst_ServerWorkerTests::addSameParameter_givesError()
     ResponseAddParameter resParameter;
     param.set_name(QStringLiteral("test_parameter_1"));
     param.set_symbol("test_p1");
-    param.config().setMinValue(10);
-    param.config().setMaxValue(20);
-    param.config().setValueType("int");
+    param.mutable_config()->set_minvalue(10);
+    param.mutable_config()->set_maxvalue(20);
+    param.mutable_config()->set_type(ParameterConfig::INT);
 
     mc->addMessage(MsgType::addParameter, param.toArray() );
 

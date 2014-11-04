@@ -297,7 +297,7 @@ quint32 PgInterface::addParameter(Parameter &parameter)
                  ", :config, :owner);");
         query->prepare(q);
         query->bindValue(":name", parameter.getName() );
-        query->bindValue(":config", parameter.config().toString() );
+        query->bindValue(":config", parameter.config().toJSON() );
         query->bindValue(":symbol", parameter.getSymbol() );
         query->bindValue(":desc", parameter.getDescription() );
         query->bindValue(":owner", activeUser() );
@@ -324,7 +324,7 @@ QList<Parameter> PgInterface::getParameters()
         p.set_id(query->value("parameter_id").toInt());
         p.set_name(query->value("name").toString());
         p.set_symbol(query->value("symbol").toString());
-        p.set_configdata(query->value("config").toString().toStdString() );
+        p.mutable_config()->fromJSON( query->value("config").toByteArray() );
         p.set_description(query->value("description").toString() );
         parameters.append(p);
     }
@@ -464,7 +464,9 @@ void PgInterface::linkParametersToGroup(Group &group)
     query->addBindValue( groupId );
 
     if(!query->execBatch()){
-        throw query->lastError();
+        auto e = query->lastError();
+        auto str = e.text();
+        throw e;
     }
 }
 

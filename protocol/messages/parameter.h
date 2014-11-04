@@ -13,39 +13,24 @@
 #include "parameters.pb.h"
 #include "message.h"
 
-class ParameterConfig
+class ParameterConfig : public protocol::QMessage<protbuf::Parameter_Config>
 {
 public:
     ParameterConfig();
-    void clear();
-    QByteArray toBytes() const;
-    QString toString() const;
-    std::string toStdString() const ;
-    void fromStdString(const std::string &conf);
+    QString toJSON() const;
+    void fromJSON(QByteArray &&json);
 
-    void setDefaultValue(QVariant value);
-    QVariant defaultValue();
+    QString defaultvalue() const{
+        return QString::fromStdString(protbuf::Parameter_Config::defaultvalue());
+    }
+    protbuf::Parameter_Config::Type valueType() const {
+        return protbuf::Parameter_Config::type();
+    }
 
-    void setValueType( QString type);
-    QString valueType();
-
-    void setMaxValue(double maxVal);
-    double getMaxValue() const;
-    bool hasMaxValue() const;
-
-    void setMinValue(double minValue);
-    double getMinValue() const;
-    bool hasMinValue()const;
-
-    void setMinTextLength(int value);
-    int minTextLength() const;
-    bool hasMinTextLength() const;
-
-    void setMaxTextLength(int value);
-    int maxTextLength() const;
-    bool hasMaxTextLength() const;
-private:
-    QJsonObject object;
+    MsgType type() const
+    {
+        return MsgType::msgParameterConfig;
+    }
 };
 
 class Parameter : public protocol::QMessage<protbuf::Parameter>
@@ -54,20 +39,24 @@ public:
     Parameter();
     ~Parameter();
     void set_symbol(const QString &symbol);
+    QString getSymbol() const {return QString::fromStdString( symbol() );}
+
     void set_name(const QString &name);
     QString getName() const {return QString::fromStdString( name() );}
-    QString getSymbol() const {return QString::fromStdString( symbol() );}
+
     void set_description(const QString &desc);
     QString getDescription() const {return QString::fromStdString( description() );}
 
-    ParameterConfig &config();
-
     MsgType type() const;
-    void ParametersModel(){ afterFromArray(); }
-private:
-    ParameterConfig m_config;
-    void afterFromArray();
-    void beforeToArray();
+
+    ParameterConfig *mutable_config(){
+        return static_cast<ParameterConfig*>(protbuf::Parameter::mutable_config()) ;
+    }
+
+    const ParameterConfig &config() const {
+        return static_cast<const ParameterConfig&>(protbuf::Parameter::config()) ;
+    }
+
 };
 
 class ResponseParameters : public protocol::QMessage<protbuf::resParameters>

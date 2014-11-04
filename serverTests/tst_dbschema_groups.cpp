@@ -150,13 +150,15 @@ void tst_dbschema_groups::linkGroupWithParameter_linksGroupWithParameter()
     Parameter p1, p2;
     p1.set_name("Parameter1");
     p1.set_symbol("P1");
-    p1.config().setDefaultValue("N/A");
-    p1.config().setValueType("String");
+    p1.mutable_config()->set_type(ParameterConfig::STRING );
+    if(p1.IsInitialized() ){
+        qDebug()<< "is initialized";
+    }
 
     p2.set_name("Parameter2");
     p2.set_symbol("P2");
-    p2.config().setDefaultValue(21);
-    p2.config().setValueType("int");
+    p2.mutable_config()->set_defaultvalue( QString::number(21).toStdString() );
+    p2.mutable_config()->set_type(ParameterConfig::INT);
 
     database->addParameter(p1);
     database->addParameter(p2);
@@ -194,27 +196,26 @@ void tst_dbschema_groups::getGroup_getsGroupParameters()
     Parameter p1, p2, p3, p4;
     p1.set_name("Parameter5");
     p1.set_symbol("P5");
-    p1.config().setDefaultValue("N/A");
-    p1.config().setValueType("String");
+    p1.mutable_config()->set_type(ParameterConfig::STRING);
 
     p2.set_name("Parameter6");
     p2.set_symbol("P2");
-    p2.config().setDefaultValue(21);
-    p2.config().setValueType("int");
-    p2.config().setMaxValue(230);
-    p2.config().setMinValue(-23);
+    p2.mutable_config()->set_defaultvalue( QString::number(21).toStdString() );
+    p2.mutable_config()->set_type(ParameterConfig::INT);
+    p2.mutable_config()->set_maxvalue(230);
+    p2.mutable_config()->set_minvalue(-23);
 
     p3.set_name("Parameter7");
     p3.set_symbol("P3");
-    p3.config().setDefaultValue(0.00001);
-    p3.config().setValueType("float");
-    p3.config().setMaxValue(1e12);
-    p3.config().setMinValue(1e-12);
+    p3.mutable_config()->set_defaultvalue(QString::number(0.00001).toStdString() );
+    p3.mutable_config()->set_type(ParameterConfig::DOUBLE );
+    p3.mutable_config()->set_maxvalue(1e12);
+    p3.mutable_config()->set_minvalue(1e-12);
 
     p4.set_name("Parameter8");
     p4.set_symbol("P4");
-    p4.config().setDefaultValue(" some custom parameter ");
-    p4.config().setValueType("custom parameter");
+    p4.mutable_config()->set_defaultvalue(" some custom parameter ");
+    p4.mutable_config()->set_type(ParameterConfig::STRING);
 
     database->addParameter(p1);
     database->addParameter(p2);

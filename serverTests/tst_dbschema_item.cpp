@@ -57,13 +57,12 @@ void tst_dbschema_item::saveItemWithBasicInfo()
 
     p1.set_name("Parameter1");
     p1.set_symbol("P1");
-    p1.config().setDefaultValue("N/A");
-    p1.config().setValueType("String");
+    p1.mutable_config()->set_type(ParameterConfig::STRING);
 
     p2.set_name("Parameter2");
     p2.set_symbol("P2");
-    p2.config().setDefaultValue(21);
-    p2.config().setValueType("int");
+    p2.mutable_config()->set_defaultvalue( QString::number(21).toStdString() );
+    p2.mutable_config()->set_type(ParameterConfig::INT);
 
     p1.set_id(database->addParameter(p1));
     p2.set_id(database->addParameter(p2));

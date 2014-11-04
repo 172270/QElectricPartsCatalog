@@ -16,33 +16,16 @@ void Parameter::set_description(const QString &desc)
     protbuf::Parameter::set_description(desc.toStdString());
 }
 
-ParameterConfig &Parameter::config() {
-    return m_config;
-}
-
-
-
 MsgType Parameter::type() const
 {
     return MsgType::msgParameter;
 }
 
-void Parameter::afterFromArray()
-{
-    m_config.fromStdString( configdata() );
-}
-
-void Parameter::beforeToArray()
-{
-    QString s = m_config.toString();
-    std::string str = s.toStdString();
-    set_configdata( str);
-}
 
 Parameter::Parameter()
 {
     set_id(0);
-    set_configdata( m_config.toStdString() );
+//    set_configdata( m_config.toStdString() );
 }
 
 Parameter::~Parameter()
@@ -53,119 +36,43 @@ ParameterConfig::ParameterConfig()
 {
 }
 
-void ParameterConfig::clear()
+QString ParameterConfig::toJSON() const
 {
-    object = QJsonObject();
+    QJsonObject obj;
+    QString ret;
+    if(has_defaultvalue())
+        obj.insert("def_val", defaultvalue() );
+    if(has_maxlength())
+        obj.insert("max_len", maxlength() );
+    if(has_minlength())
+        obj.insert("min_len", minlength() );
+    if(has_maxvalue())
+        obj.insert("max_val", maxvalue() );
+    if(has_minvalue())
+        obj.insert("min_val", minvalue() );
+    if(has_type())
+        obj.insert("type", protbuf::Parameter_Config::type() );
+
+    ret = QString::fromLatin1(QJsonDocument(obj).toJson(QJsonDocument::Compact));
+    return ret;
 }
 
-QByteArray ParameterConfig::toBytes() const
+void ParameterConfig::fromJSON(QByteArray &&json)
 {
-    return QJsonDocument(object).toJson(QJsonDocument::Compact);
-}
+    auto obj = QJsonDocument::fromJson(json).object();
 
-QString ParameterConfig::toString() const
-{
-    return QString::fromStdString(toStdString());
-}
-
-std::string ParameterConfig::toStdString() const
-{
-    return std::string(toBytes().data(), toBytes().size() );
-}
-
-void ParameterConfig::fromStdString(const std::string &conf)
-{
-    QByteArray ba = QByteArray( conf.data(), conf.size());
-    QJsonDocument doc = QJsonDocument::fromJson( ba );
-    object = doc.object();
-}
-
-void ParameterConfig::setDefaultValue(QVariant value)
-{
-    QJsonValue val = QJsonValue::fromVariant(value);
-    object.insert(QStringLiteral("defaultValue"), val);
-}
-
-void ParameterConfig::setMaxTextLength(int value)
-{
-    auto val = QJsonValue(value);
-    object.insert(QStringLiteral("maxTextLength"), val);
-}
-
-void ParameterConfig::setMinTextLength(int value)
-{
-    auto val = QJsonValue(value);
-    object.insert(QStringLiteral("minTextLength"), val);
-}
-
-int ParameterConfig::maxTextLength() const
-{
-    QVariant v(object.value(QStringLiteral("maxTextLength")).toVariant());
-    return v.toInt();
-}
-
-int ParameterConfig::minTextLength() const
-{
-    QVariant v(object.value(QStringLiteral("minTextLength")).toVariant());
-    return v.toInt();
-}
-
-bool ParameterConfig::hasMinTextLength() const
-{
-    return object.contains("minTextLength");
-}
-bool ParameterConfig::hasMaxTextLength() const
-{
-        return object.contains("maxTextLength");
-}
-
-QVariant ParameterConfig::defaultValue()
-{
-    QVariant v(object.value(QStringLiteral("defaultValue")).toVariant());
-    return v;
-}
-
-void ParameterConfig::setValueType(QString type)
-{
-    object.insert(QStringLiteral("valueType"), type);
-}
-
-QString ParameterConfig::valueType()
-{
-    return object.value(QStringLiteral("valueType")).toString();
-}
-
-void ParameterConfig::setMaxValue(double maxVal)
-{
-    auto val = QJsonValue(maxVal);
-    object.insert(QStringLiteral("maxValue"), val);
-}
-
-double ParameterConfig::getMaxValue() const
-{
-    return object.value(QStringLiteral("maxValue")).toDouble();
-}
-
-bool ParameterConfig::hasMaxValue() const
-{
-    return object.contains("maxValue");
-}
-
-void ParameterConfig::setMinValue(double minValue)
-{
-    auto val = QJsonValue(minValue);
-    object.insert(QStringLiteral("minValue"), val);
-}
-
-double ParameterConfig::getMinValue() const
-{
-    return object.value(QStringLiteral("minValue")).toDouble();
-}
-
-
-bool ParameterConfig::hasMinValue() const
-{
-        return object.contains(QStringLiteral("minValue"));
+    if(obj.contains("def_val"))
+        set_defaultvalue(obj.value("def_val").toString().toStdString() );
+    if(obj.contains("max_len"))
+        set_maxlength(obj.value("max_len").toInt( ));
+    if(obj.contains("min_len"))
+        set_minlength(obj.value("min_len").toInt());
+    if(obj.contains("max_val"))
+        set_maxvalue(obj.value("max_val").toInt());
+    if(obj.contains("min_val"))
+        set_minvalue(obj.value("min_val").toInt());
+    if(obj.contains("type"))
+        protbuf::Parameter_Config::set_type(static_cast<protbuf::Parameter_Config_Type>(obj.value("type").toInt()));
 }
 
 MsgType RequestParameters::type() const

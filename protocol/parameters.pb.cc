@@ -17,6 +17,7 @@ namespace protbuf {
 void protobuf_ShutdownFile_parameters_2eproto() {
   delete ParameterBasicInformation::default_instance_;
   delete Parameter::default_instance_;
+  delete Parameter_Config::default_instance_;
   delete reqParameters::default_instance_;
   delete resParameters::default_instance_;
   delete resAddParameter::default_instance_;
@@ -36,11 +37,13 @@ void protobuf_AddDesc_parameters_2eproto() {
 #endif
   ParameterBasicInformation::default_instance_ = new ParameterBasicInformation();
   Parameter::default_instance_ = new Parameter();
+  Parameter_Config::default_instance_ = new Parameter_Config();
   reqParameters::default_instance_ = new reqParameters();
   resParameters::default_instance_ = new resParameters();
   resAddParameter::default_instance_ = new resAddParameter();
   ParameterBasicInformation::default_instance_->InitAsDefaultInstance();
   Parameter::default_instance_->InitAsDefaultInstance();
+  Parameter_Config::default_instance_->InitAsDefaultInstance();
   reqParameters::default_instance_->InitAsDefaultInstance();
   resParameters::default_instance_->InitAsDefaultInstance();
   resAddParameter::default_instance_->InitAsDefaultInstance();
@@ -242,11 +245,384 @@ void ParameterBasicInformation::Swap(ParameterBasicInformation* other) {
 
 // ===================================================================
 
+bool Parameter_Config_Type_IsValid(int value) {
+  switch(value) {
+    case 1:
+    case 2:
+    case 3:
+    case 10:
+    case 20:
+    case 30:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const Parameter_Config_Type Parameter_Config::INT;
+const Parameter_Config_Type Parameter_Config::UINT;
+const Parameter_Config_Type Parameter_Config::DOUBLE;
+const Parameter_Config_Type Parameter_Config::STRING;
+const Parameter_Config_Type Parameter_Config::TEMPERATURE;
+const Parameter_Config_Type Parameter_Config::DATE;
+const Parameter_Config_Type Parameter_Config::Type_MIN;
+const Parameter_Config_Type Parameter_Config::Type_MAX;
+const int Parameter_Config::Type_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int Parameter_Config::kTypeFieldNumber;
+const int Parameter_Config::kDefaultValueFieldNumber;
+const int Parameter_Config::kMinValueFieldNumber;
+const int Parameter_Config::kMaxValueFieldNumber;
+const int Parameter_Config::kMinLengthFieldNumber;
+const int Parameter_Config::kMaxLengthFieldNumber;
+#endif  // !_MSC_VER
+
+Parameter_Config::Parameter_Config()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void Parameter_Config::InitAsDefaultInstance() {
+}
+
+Parameter_Config::Parameter_Config(const Parameter_Config& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void Parameter_Config::SharedCtor() {
+  _cached_size_ = 0;
+  type_ = 1;
+  defaultvalue_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  minvalue_ = 0;
+  maxvalue_ = 0;
+  minlength_ = 0;
+  maxlength_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+Parameter_Config::~Parameter_Config() {
+  SharedDtor();
+}
+
+void Parameter_Config::SharedDtor() {
+  if (defaultvalue_ != &::google::protobuf::internal::kEmptyString) {
+    delete defaultvalue_;
+  }
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void Parameter_Config::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const Parameter_Config& Parameter_Config::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_parameters_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_parameters_2eproto();
+#endif
+  return *default_instance_;
+}
+
+Parameter_Config* Parameter_Config::default_instance_ = NULL;
+
+Parameter_Config* Parameter_Config::New() const {
+  return new Parameter_Config;
+}
+
+void Parameter_Config::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    type_ = 1;
+    if (has_defaultvalue()) {
+      if (defaultvalue_ != &::google::protobuf::internal::kEmptyString) {
+        defaultvalue_->clear();
+      }
+    }
+    minvalue_ = 0;
+    maxvalue_ = 0;
+    minlength_ = 0;
+    maxlength_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool Parameter_Config::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .protbuf.Parameter.Config.Type type = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::protbuf::Parameter_Config_Type_IsValid(value)) {
+            set_type(static_cast< ::protbuf::Parameter_Config_Type >(value));
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_defaultValue;
+        break;
+      }
+
+      // optional bytes defaultValue = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_defaultValue:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_defaultvalue()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(25)) goto parse_minValue;
+        break;
+      }
+
+      // optional double minValue = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
+         parse_minValue:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &minvalue_)));
+          set_has_minvalue();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(33)) goto parse_maxValue;
+        break;
+      }
+
+      // optional double maxValue = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
+         parse_maxValue:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &maxvalue_)));
+          set_has_maxvalue();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(40)) goto parse_minLength;
+        break;
+      }
+
+      // optional int32 minLength = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_minLength:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &minlength_)));
+          set_has_minlength();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(48)) goto parse_maxLength;
+        break;
+      }
+
+      // optional int32 maxLength = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_maxLength:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &maxlength_)));
+          set_has_maxlength();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void Parameter_Config::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .protbuf.Parameter.Config.Type type = 1;
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->type(), output);
+  }
+
+  // optional bytes defaultValue = 2;
+  if (has_defaultvalue()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      2, this->defaultvalue(), output);
+  }
+
+  // optional double minValue = 3;
+  if (has_minvalue()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->minvalue(), output);
+  }
+
+  // optional double maxValue = 4;
+  if (has_maxvalue()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->maxvalue(), output);
+  }
+
+  // optional int32 minLength = 5;
+  if (has_minlength()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->minlength(), output);
+  }
+
+  // optional int32 maxLength = 6;
+  if (has_maxlength()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->maxlength(), output);
+  }
+
+}
+
+int Parameter_Config::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .protbuf.Parameter.Config.Type type = 1;
+    if (has_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
+    }
+
+    // optional bytes defaultValue = 2;
+    if (has_defaultvalue()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->defaultvalue());
+    }
+
+    // optional double minValue = 3;
+    if (has_minvalue()) {
+      total_size += 1 + 8;
+    }
+
+    // optional double maxValue = 4;
+    if (has_maxvalue()) {
+      total_size += 1 + 8;
+    }
+
+    // optional int32 minLength = 5;
+    if (has_minlength()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->minlength());
+    }
+
+    // optional int32 maxLength = 6;
+    if (has_maxlength()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->maxlength());
+    }
+
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Parameter_Config::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const Parameter_Config*>(&from));
+}
+
+void Parameter_Config::MergeFrom(const Parameter_Config& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_type()) {
+      set_type(from.type());
+    }
+    if (from.has_defaultvalue()) {
+      set_defaultvalue(from.defaultvalue());
+    }
+    if (from.has_minvalue()) {
+      set_minvalue(from.minvalue());
+    }
+    if (from.has_maxvalue()) {
+      set_maxvalue(from.maxvalue());
+    }
+    if (from.has_minlength()) {
+      set_minlength(from.minlength());
+    }
+    if (from.has_maxlength()) {
+      set_maxlength(from.maxlength());
+    }
+  }
+}
+
+void Parameter_Config::CopyFrom(const Parameter_Config& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Parameter_Config::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void Parameter_Config::Swap(Parameter_Config* other) {
+  if (other != this) {
+    std::swap(type_, other->type_);
+    std::swap(defaultvalue_, other->defaultvalue_);
+    std::swap(minvalue_, other->minvalue_);
+    std::swap(maxvalue_, other->maxvalue_);
+    std::swap(minlength_, other->minlength_);
+    std::swap(maxlength_, other->maxlength_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string Parameter_Config::GetTypeName() const {
+  return "protbuf.Parameter.Config";
+}
+
+
+// -------------------------------------------------------------------
+
 #ifndef _MSC_VER
 const int Parameter::kIdFieldNumber;
 const int Parameter::kNameFieldNumber;
 const int Parameter::kSymbolFieldNumber;
-const int Parameter::kConfigDataFieldNumber;
+const int Parameter::kConfigFieldNumber;
 const int Parameter::kDescriptionFieldNumber;
 #endif  // !_MSC_VER
 
@@ -256,6 +632,12 @@ Parameter::Parameter()
 }
 
 void Parameter::InitAsDefaultInstance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  config_ = const_cast< ::protbuf::Parameter_Config*>(
+      ::protbuf::Parameter_Config::internal_default_instance());
+#else
+  config_ = const_cast< ::protbuf::Parameter_Config*>(&::protbuf::Parameter_Config::default_instance());
+#endif
 }
 
 Parameter::Parameter(const Parameter& from)
@@ -269,7 +651,7 @@ void Parameter::SharedCtor() {
   id_ = 0u;
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   symbol_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  configdata_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  config_ = NULL;
   description_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -285,9 +667,6 @@ void Parameter::SharedDtor() {
   if (symbol_ != &::google::protobuf::internal::kEmptyString) {
     delete symbol_;
   }
-  if (configdata_ != &::google::protobuf::internal::kEmptyString) {
-    delete configdata_;
-  }
   if (description_ != &::google::protobuf::internal::kEmptyString) {
     delete description_;
   }
@@ -296,6 +675,7 @@ void Parameter::SharedDtor() {
   #else
   if (this != default_instance_) {
   #endif
+    delete config_;
   }
 }
 
@@ -332,10 +712,8 @@ void Parameter::Clear() {
         symbol_->clear();
       }
     }
-    if (has_configdata()) {
-      if (configdata_ != &::google::protobuf::internal::kEmptyString) {
-        configdata_->clear();
-      }
+    if (has_config()) {
+      if (config_ != NULL) config_->::protbuf::Parameter_Config::Clear();
     }
     if (has_description()) {
       if (description_ != &::google::protobuf::internal::kEmptyString) {
@@ -391,17 +769,17 @@ bool Parameter::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(34)) goto parse_configData;
+        if (input->ExpectTag(34)) goto parse_config;
         break;
       }
 
-      // required bytes configData = 4;
+      // required .protbuf.Parameter.Config config = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_configData:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_configdata()));
+         parse_config:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_config()));
         } else {
           goto handle_uninterpreted;
         }
@@ -457,10 +835,10 @@ void Parameter::SerializeWithCachedSizes(
       3, this->symbol(), output);
   }
 
-  // required bytes configData = 4;
-  if (has_configdata()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      4, this->configdata(), output);
+  // required .protbuf.Parameter.Config config = 4;
+  if (has_config()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+      4, this->config(), output);
   }
 
   // optional string description = 5;
@@ -496,11 +874,11 @@ int Parameter::ByteSize() const {
           this->symbol());
     }
 
-    // required bytes configData = 4;
-    if (has_configdata()) {
+    // required .protbuf.Parameter.Config config = 4;
+    if (has_config()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->configdata());
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->config());
     }
 
     // optional string description = 5;
@@ -534,8 +912,8 @@ void Parameter::MergeFrom(const Parameter& from) {
     if (from.has_symbol()) {
       set_symbol(from.symbol());
     }
-    if (from.has_configdata()) {
-      set_configdata(from.configdata());
+    if (from.has_config()) {
+      mutable_config()->::protbuf::Parameter_Config::MergeFrom(from.config());
     }
     if (from.has_description()) {
       set_description(from.description());
@@ -552,6 +930,9 @@ void Parameter::CopyFrom(const Parameter& from) {
 bool Parameter::IsInitialized() const {
   if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
+  if (has_config()) {
+    if (!this->config().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -560,7 +941,7 @@ void Parameter::Swap(Parameter* other) {
     std::swap(id_, other->id_);
     std::swap(name_, other->name_);
     std::swap(symbol_, other->symbol_);
-    std::swap(configdata_, other->configdata_);
+    std::swap(config_, other->config_);
     std::swap(description_, other->description_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_cached_size_, other->_cached_size_);

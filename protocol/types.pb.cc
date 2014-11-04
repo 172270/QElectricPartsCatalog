@@ -71,6 +71,7 @@ bool MsgType_IsValid(int value) {
     case 131:
     case 140:
     case 150:
+    case 151:
     case 160:
       return true;
     default:

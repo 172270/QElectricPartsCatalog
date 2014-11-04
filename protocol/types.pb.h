@@ -56,6 +56,7 @@ enum MsgType {
   msgCapsule = 131,
   msgPackage = 140,
   msgParameter = 150,
+  msgParameterConfig = 151,
   msgStorage = 160
 };
 bool MsgType_IsValid(int value);

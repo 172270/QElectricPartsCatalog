@@ -2,6 +2,7 @@
 #define ADDPARAMETER_H
 
 #include <QWidget>
+#include <QLabel>
 #include "messages/parameter.h"
 
 namespace Ui {
@@ -28,13 +29,16 @@ signals:
 
 private slots:
     void on_addParameter_clicked();
+    void on_parameterType_currentIndexChanged(int i);
 
-    void on_parameterType_currentIndexChanged(int);
+    void on_parametersView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::AddParameter *ui;
     void disableAll();
     void enableLayout(QLayout *layout, bool enable = true);
+    void disableLabelWithBuddy(QLabel *l, bool disable = true);
+    void enableLabelWithBuddy(QLabel *l, bool enable = true);
 };
 
 #endif // ADDPARAMETER_H
