@@ -44,4 +44,6 @@ private:
     void enableLayout(QLayout *layout, bool enable = true);
     void disableLabelWithBuddy(QLabel *l, bool disable = true);
     void enableLabelWithBuddy(QLabel *l, bool enable = true);
+
+    int id = 0;
 };

@@ -20,6 +20,7 @@ AddParameterDialog::AddParameterDialog(QWidget *parent) :
     connect(ui->minLength, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), [=](int val){
        ui->maxLength->setMinimum(val);
     });
+
     connect(ui->minVal, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [=](double val){
        ui->maxVal->setMinimum(val);
     });
@@ -27,10 +28,12 @@ AddParameterDialog::AddParameterDialog(QWidget *parent) :
     connect(ui->hasDefault, static_cast<void (QAbstractButton::*)(bool)>(&QAbstractButton::toggled),[=](bool enabled){
         enableLabelWithBuddy(ui->default_l, enabled);
     });
+
     connect(ui->hasLimitedLength, static_cast<void (QAbstractButton::*)(bool)>(&QAbstractButton::toggled),[=](bool enabled){
         enableLabelWithBuddy(ui->minLength_l, enabled);
         enableLabelWithBuddy(ui->maxLength_l, enabled);
     });
+
     connect(ui->hasLimitedValue, static_cast<void (QAbstractButton::*)(bool)>(&QAbstractButton::toggled),[=](bool enabled){
         enableLabelWithBuddy(ui->minVal_l, enabled);
         enableLabelWithBuddy(ui->maxVal_l, enabled);
@@ -107,8 +110,14 @@ void AddParameterDialog::requestAddParameter()
     }
     parameter.mutable_config()->set_type( static_cast<protbuf::Parameter_Config_Type>(ui->parameterType->currentData().toInt()));
 
+    if(ui->addParameter->text().contains("Zaktualizuj")){
+        parameter.set_id( id );
+        addMsg.set_mode(protbuf::addParameter_AddMode_update);
+    }
+    else
+        addMsg.set_mode(protbuf::addParameter_AddMode_insert);
+
     addMsg.mutable_parameter()->CopyFrom(parameter);
-    addMsg.set_mode(protbuf::addParameter_AddMode_insert);
     emitRequest(addMsg);
 }
 
@@ -189,7 +198,9 @@ void AddParameterDialog::on_parametersView_doubleClicked(const QModelIndex &inde
 
     auto data = ui->parametersView->model()->itemData(index);
     Parameter p;
+    id = data.value(p.kIdFieldNumber).toInt();
     ParameterConfig pc;
+
     pc.fromJSON(data.value(p.kConfigFieldNumber, "{}").toByteArray() );
 
     for(int i=0;i<ui->parameterType->count();i++){
@@ -223,4 +234,6 @@ void AddParameterDialog::on_parametersView_doubleClicked(const QModelIndex &inde
     enableLabelWithBuddy(ui->minVal_l, ui->hasLimitedValue->isChecked() );
     enableLabelWithBuddy(ui->maxVal_l, ui->hasLimitedValue->isChecked() );
     ui->minVal->setMinimum(0.0);
+
+    ui->addParameter->setText("Zaktualizuj parametr");
 }

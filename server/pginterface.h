@@ -44,8 +44,6 @@ public:
     Group getGroup(uint id);
     QList<Group> getGroups();
 
-
-
     quint32 addItem(Item &item);
     void saveGroupParametersIDs(Group &g);
 

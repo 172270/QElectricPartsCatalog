@@ -120,7 +120,7 @@ public:
 
         Parameter *p = m_data.at(row);
 
-        data.insert(p->kIdFieldNumber, p->getName() );
+        data.insert(p->kIdFieldNumber, p->id());
         data.insert(p->kConfigFieldNumber, p->config().toJSON() );
         data.insert(p->kDescriptionFieldNumber, p->getDescription());
         data.insert(p->kNameFieldNumber, p->getName());

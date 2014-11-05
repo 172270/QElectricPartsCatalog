@@ -291,22 +291,21 @@ quint32 PgInterface::addParameter(Parameter *parameter){
 bool PgInterface::updateParameter(const Parameter &parameter){
     if(parameter.IsInitialized() && parameter.id() > 0){
         q.clear();
-//        UPDATE parameters
-//           SET parameter_id=?, name=?, symbol=?, user_id=?, config=?, description=?
-//         WHERE <condition>;
+        bool hasSymb = parameter.has_symbol();
+        bool hasDesc = parameter.has_description();
 
-        q.append("UPDATE parameters SET name=:name" +
-                 (parameter.has_symbol()      ? QString(", symbol=:symbol"): QString()) +
-                 ", user_id=:uid, config=:conf"+
-                 (parameter.has_description() ? QString(", description=:desc"): QString()) +
-                 " WHERE parameter_id == "+ QString::number(parameter.id()) + ";");
+        q.append("UPDATE parameters SET name=?, symbol=?, user_id=?, config=?, description=?"
+                 " WHERE parameter_id = ?;");
         query->prepare(q);
-        query->bindValue(":name", parameter.getName() );
-        query->bindValue(":symbol", parameter.getSymbol() );
-        query->bindValue(":config", parameter.config().toJSON() );
-        query->bindValue(":desc", parameter.getDescription() );
-        query->bindValue(":uid", activeUser() );
+        query->bindValue(0, parameter.getName() );
+        query->bindValue(1, parameter.getSymbol() );
+        query->bindValue(2, activeUser());
+        query->bindValue(3, parameter.config().toJSON());
+        query->bindValue(4, (hasDesc? parameter.getDescription():QString() ));
+        query->bindValue(5, parameter.id() );
+
         if(!query->exec()){
+            qDebug() << query->lastQuery();
             throw query->lastError();
         }
         return parameter.id();

@@ -14,12 +14,10 @@ struct UserStatus{
 
 struct ConnectionStatistics{
     ConnectionStatistics(){
-        bytesRead = 0;
-        bytesWrite = 0;
     }
 
-    unsigned int bytesRead;
-    unsigned int bytesWrite;
+    unsigned int bytesRead = 0;
+    unsigned int bytesWrite = 0;
 };
 
 class WorkerCache
@@ -33,9 +31,6 @@ public:
 
     UserStatistics *getUserStats() const;
     void setUserStats(UserStatistics *value);
-
-    const QSqlDatabase &getDb();
-    void setDb(const QSqlDatabase &value);
 
     MessagesContainer *responseMessage();
     void setMessageContainer(MessagesContainer *responseMessage);
