@@ -27,7 +27,6 @@ public:
      * and return 1 when parse fails (data is corrupted)
      */
     virtual bool parseData(const QByteArray &ba) = 0;
-    virtual bool parseData(QByteArray &&ba) = 0;
 
     /**
      * @brief processData: processes data

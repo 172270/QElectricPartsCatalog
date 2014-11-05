@@ -32,11 +32,6 @@ bool LoginMessageHandler::parseData(const QByteArray &ba)
     return req.fromArray(ba);
 }
 
-bool LoginMessageHandler::parseData(QByteArray &&ba)
-{
-    return req.fromArray(ba);
-}
-
 bool LoginMessageHandler::processData()
 {
     if(!m_cache.userStatus()->logged ){

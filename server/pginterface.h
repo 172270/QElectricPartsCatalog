@@ -52,6 +52,8 @@ public:
     int activeUser() const;
     void setActiveUser(int activeUser);
 
+    quint32 addParameter(Parameter *parameter);
+    bool updateParameter(const Parameter &parameter);
 private:
     int m_activeUser = 0;
     QSqlDatabase db;

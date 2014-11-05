@@ -284,6 +284,36 @@ uint PgInterface::addPackage(Package &package)
     return 0;
 }
 
+quint32 PgInterface::addParameter(Parameter *parameter){
+    return addParameter(*parameter);
+}
+
+bool PgInterface::updateParameter(const Parameter &parameter){
+    if(parameter.IsInitialized() && parameter.id() > 0){
+        q.clear();
+//        UPDATE parameters
+//           SET parameter_id=?, name=?, symbol=?, user_id=?, config=?, description=?
+//         WHERE <condition>;
+
+        q.append("UPDATE parameters SET name=:name" +
+                 (parameter.has_symbol()      ? QString(", symbol=:symbol"): QString()) +
+                 ", user_id=:uid, config=:conf"+
+                 (parameter.has_description() ? QString(", description=:desc"): QString()) +
+                 " WHERE parameter_id == "+ QString::number(parameter.id()) + ";");
+        query->prepare(q);
+        query->bindValue(":name", parameter.getName() );
+        query->bindValue(":symbol", parameter.getSymbol() );
+        query->bindValue(":config", parameter.config().toJSON() );
+        query->bindValue(":desc", parameter.getDescription() );
+        query->bindValue(":uid", activeUser() );
+        if(!query->exec()){
+            throw query->lastError();
+        }
+        return parameter.id();
+    }
+    return 0;
+}
+
 quint32 PgInterface::addParameter(Parameter &parameter)
 {
     if(parameter.IsInitialized()){
@@ -324,7 +354,7 @@ QList<Parameter> PgInterface::getParameters()
         p.set_id(query->value("parameter_id").toInt());
         p.set_name(query->value("name").toString());
         p.set_symbol(query->value("symbol").toString());
-        p.mutable_config()->fromJSON( query->value("config").toByteArray() );
+        p.set_config(query->value("config").toByteArray());
         p.set_description(query->value("description").toString() );
         parameters.append(p);
     }

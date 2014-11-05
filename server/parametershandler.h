@@ -10,12 +10,13 @@ public:
     AddParameterHandler(WorkerCache *cache);
 
     bool parseData(const QByteArray &ba) override;
-    bool parseData(QByteArray &&ba) override;
-    bool processData();
-    bool moveResponseToCache();
+    bool processData() override;
+    bool moveResponseToCache() override;
 
+    bool addparameter();
+    bool updateParameter();
 private:
-    Parameter parameter;
+    AddParameter addParameter;
     ResponseAddParameter resAddParameter;
 };
 
@@ -24,9 +25,8 @@ class ParametersHandler : public MessageHandlerInterface
 public:
     ParametersHandler(WorkerCache *cache);
     bool parseData(const QByteArray &ba) override;
-    bool parseData(QByteArray &&ba) override;
-    bool processData();
-    bool moveResponseToCache();
+    bool processData() override;
+    bool moveResponseToCache() override;
 private:
     QList<Parameter> parameters;
     RequestParameters reqParameters;

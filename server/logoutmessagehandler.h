@@ -29,11 +29,6 @@ public:
         return true;
     }
 
-    bool parseData(QByteArray &&ba)
-    {
-        message.Clear();
-        return message.ParseFromArray(ba.data(),ba.size());
-    }
     bool parseData(const QByteArray &ba)
     {
         message.Clear();

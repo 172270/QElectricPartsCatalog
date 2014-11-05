@@ -15,7 +15,6 @@ public:
     bool processData();
     bool moveResponseToCache();
     bool parseData(const QByteArray &ba) override;
-    bool parseData(QByteArray &&ba) override;
 
 private:
     LoginRequest req;

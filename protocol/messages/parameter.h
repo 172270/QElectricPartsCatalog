@@ -18,7 +18,7 @@ class ParameterConfig : public protocol::QMessage<protbuf::Parameter_Config>
 public:
     ParameterConfig();
     QString toJSON() const;
-    void fromJSON(QByteArray &&json);
+    void fromJSON(const QByteArray &json);
 
     QString defaultvalue() const{
         return QString::fromStdString(protbuf::Parameter_Config::defaultvalue());
@@ -49,6 +49,10 @@ public:
 
     MsgType type() const;
 
+    void set_config(QByteArray &&conf){
+        mutable_config()->fromJSON(conf);
+    }
+
     ParameterConfig *mutable_config(){
         return static_cast<ParameterConfig*>(protbuf::Parameter::mutable_config()) ;
     }
@@ -57,6 +61,18 @@ public:
         return static_cast<const ParameterConfig&>(protbuf::Parameter::config()) ;
     }
 
+};
+
+class AddParameter : public protocol::QMessage<protbuf::addParameter>
+{
+public:
+    const Parameter &parameter() const { return static_cast<const Parameter&>(protbuf::addParameter::parameter());}
+    Parameter *mutable_parameter() { return static_cast<Parameter*>(protbuf::addParameter::mutable_parameter());}
+
+    MsgType type() const
+    {
+        return MsgType::addParameter;
+    }
 };
 
 class ResponseParameters : public protocol::QMessage<protbuf::resParameters>

@@ -31,12 +31,6 @@ bool RegisterUserMessageHandler::parseData(const QByteArray &ba)
     return req.ParseFromArray(ba.data(),ba.size());
 }
 
-bool RegisterUserMessageHandler::parseData(QByteArray &&ba)
-{
-    req.Clear();
-    return req.ParseFromArray(ba.data(),ba.size());
-}
-
 bool RegisterUserMessageHandler::clearCacheData()
 {
     m_cache.getUserData()->Clear();

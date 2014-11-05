@@ -12,13 +12,6 @@ bool GetGroupsMessageHandler::parseData(const QByteArray &ba)
     return true;
 }
 
-bool GetGroupsMessageHandler::parseData(QByteArray &&ba)
-{
-    // in this message only msg type is importent, not the content of message
-    Q_UNUSED(ba);
-    return true;
-}
-
 bool GetGroupsMessageHandler::processData()
 {
     database.getGroups(); ///TODO finish up

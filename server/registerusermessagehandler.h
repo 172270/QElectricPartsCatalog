@@ -15,7 +15,6 @@ public:
     bool moveResponseToCache();
     bool processData();
     bool parseData(const QByteArray &ba);
-    bool parseData(QByteArray &&ba);
     void checkEmail(bool hasErrors, QValidator::State state);
     bool checkEmail();
 private:

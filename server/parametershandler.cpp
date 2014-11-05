@@ -8,32 +8,47 @@ AddParameterHandler::AddParameterHandler(WorkerCache *cache):
 bool AddParameterHandler::parseData(const QByteArray &ba)
 {
     resAddParameter.Clear();
-    parameter.Clear();
-    return parameter.fromArray(ba);
+    addParameter.Clear();
+    return addParameter.fromArray(ba);
 }
 
-bool AddParameterHandler::parseData(QByteArray &&ba)
+bool AddParameterHandler::addparameter()
 {
-    resAddParameter.Clear();
-    parameter.Clear();
-    return parameter.fromArray(ba);
+    try{
+        database.addParameter(addParameter.mutable_parameter());
+        resAddParameter.add_replay( protbuf::resAddParameter::addOk);
+        return true;
+    }
+    catch (QSqlError e){
+        qDebug()<<e.text();
+        resAddParameter.add_replay( protbuf::resAddParameter::parameterExists);
+        return false;
+    }
+}
+
+bool AddParameterHandler::updateParameter()
+{
+    try{
+        if(database.updateParameter(addParameter.parameter())){
+            resAddParameter.add_replay(protbuf::resAddParameter::updateOk);
+            return true;
+        }
+        resAddParameter.add_replay(protbuf::resAddParameter::updataFailed_noSuchParameterInDatabase );
+    }
+    catch (QSqlError e){
+        qDebug()<<e.text();
+        resAddParameter.add_replay( protbuf::resAddParameter::parameterExists);
+
+    }
+    return false;
 }
 
 bool AddParameterHandler::processData()
 {
-    if(parameter.IsInitialized()){
-        try{
-            database.addParameter(parameter);
-            resAddParameter.add_replay( protbuf::addParameterReplay::addOk);
-        }
-        catch (QSqlError e){
-            qDebug()<<e.text();
-            resAddParameter.add_replay( protbuf::addParameterReplay::parameterExists);
-        }
-    }
+    if (addParameter.mode() == protbuf::addParameter_AddMode_update)
+        return updateParameter();
     else
-        return false;
-    return true;
+        return addparameter();
 }
 
 bool AddParameterHandler::moveResponseToCache()
@@ -42,21 +57,12 @@ bool AddParameterHandler::moveResponseToCache()
     return true;
 }
 
-
 ParametersHandler::ParametersHandler(WorkerCache *cache):
     MessageHandlerInterface(cache)
 {
-
 }
 
 bool ParametersHandler::parseData(const QByteArray &ba)
-{
-    reqParameters.Clear();
-    resParameters.Clear();
-    return reqParameters.fromArray(ba);
-}
-
-bool ParametersHandler::parseData(QByteArray &&ba)
 {
     reqParameters.Clear();
     resParameters.Clear();

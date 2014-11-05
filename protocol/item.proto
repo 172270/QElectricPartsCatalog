@@ -8,7 +8,9 @@ import public "parameters.proto";
 
 message ItemParameters{
   required uint32 id = 1;
-  required bytes value = 2;
+  required bytes value = 2; 
+  //value contains a QVariant of actual value e.g. 
+  // Voltage (id of Voltage parameter is saved in id field) = 400 (QVariant->int)
 }
 
 message Item{

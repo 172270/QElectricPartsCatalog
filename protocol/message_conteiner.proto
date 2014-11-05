@@ -15,7 +15,7 @@ message MessageCapsule{
 	required MsgType msgType = 2;
 	required bytes data = 3;
 }
-
+// items
 message Items{
 	repeated Group groups = 1;
 	repeated UserBasicInformation users =2;

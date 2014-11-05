@@ -5,7 +5,7 @@
 #include "float.h"
 #include "parametersmodel.h"
 
-AddParameter::AddParameter(QWidget *parent) :
+AddParameterDialog::AddParameterDialog(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AddParameter)
 {
@@ -46,22 +46,23 @@ AddParameter::AddParameter(QWidget *parent) :
     type->insertItem(type->count(),tr("Data","calendar date"), QVariant(protbuf::Parameter_Config::DATE));
 }
 
-void AddParameter::requestParameters()
+void AddParameterDialog::requestParameters(bool diffOnly)
 {
     RequestParameters reqParameters;
-    emit requestAvalible(MsgType::reqParameters, reqParameters.toArray() );
+    reqParameters.set_getdiff(diffOnly);
+    emitRequest(reqParameters);
 }
 
-AddParameter::~AddParameter()
+AddParameterDialog::~AddParameterDialog()
 {
     delete ui;
 }
 
-void AddParameter::AddResponse(QByteArray res)
+void AddParameterDialog::AddResponse(QByteArray res)
 {
     ResponseAddParameter resp;
     resp.fromArray(res);
-    if(resp.replay(0) == protbuf::addParameterReplay::addOk){
+    if(resp.replay(0) == protbuf::resAddParameter::addOk){
         ui->status->setText("Parametr "+ ui->name->text() +" dodany pomyslnie");
     }
     else{
@@ -69,7 +70,7 @@ void AddParameter::AddResponse(QByteArray res)
     }
 }
 
-void AddParameter::SelectResponse(QByteArray res)
+void AddParameterDialog::SelectResponse(QByteArray res)
 {
     ResponseParameters param;
     param.fromArray(res);
@@ -84,33 +85,41 @@ void AddParameter::SelectResponse(QByteArray res)
     model->resModel();
 }
 
-void AddParameter::on_addParameter_clicked()
+void AddParameterDialog::requestAddParameter()
 {
-    Parameter addMessage;
-    addMessage.set_name(ui->name->text());
-    addMessage.set_symbol(ui->symbol->text());
+    static AddParameter addMsg;
+    static Parameter parameter;
+    parameter.set_name(ui->name->text());
+    parameter.set_symbol(ui->symbol->text());
 
     if(ui->description->toPlainText().size())
-        addMessage.set_description(ui->description->toHtml());
+        parameter.set_description(ui->description->toHtml());
     if(ui->hasDefault->isChecked() )
-        addMessage.mutable_config()->set_defaultvalue(ui->defaultValue->text().toStdString());
+        parameter.mutable_config()->set_defaultvalue(ui->defaultValue->text().toStdString());
 
     if(ui->hasLimitedValue->isChecked()){
-        addMessage.mutable_config()->set_maxvalue(ui->maxVal->value());
-        addMessage.mutable_config()->set_minvalue(ui->minVal->value());
+        parameter.mutable_config()->set_maxvalue(ui->maxVal->value());
+        parameter.mutable_config()->set_minvalue(ui->minVal->value());
     }
     if(ui->hasLimitedLength->isChecked()){
-        addMessage.mutable_config()->set_maxlength(ui->maxLength->value());
-        addMessage.mutable_config()->set_minlength(ui->minLength->value());
+        parameter.mutable_config()->set_maxlength(ui->maxLength->value());
+        parameter.mutable_config()->set_minlength(ui->minLength->value());
     }
-    addMessage.mutable_config()->set_type(ParameterConfig::INT); ///TODO consolidate index with data
+    parameter.mutable_config()->set_type( static_cast<protbuf::Parameter_Config_Type>(ui->parameterType->currentData().toInt()));
 
-    emit requestAvalible(MsgType::addParameter, addMessage.toArray() );
-    requestParameters();
+    addMsg.mutable_parameter()->CopyFrom(parameter);
+    addMsg.set_mode(protbuf::addParameter_AddMode_insert);
+    emitRequest(addMsg);
+}
+
+void AddParameterDialog::on_addParameter_clicked()
+{
+    requestAddParameter();
+    requestParameters( true );
     emit requestReady();
 }
 
-void AddParameter::enableLayout(QLayout *layout, bool enable){
+void AddParameterDialog::enableLayout(QLayout *layout, bool enable){
     QWidget *child;
     QLayoutItem *item;
     int i = 0;
@@ -124,7 +133,7 @@ void AddParameter::enableLayout(QLayout *layout, bool enable){
     }
 }
 
-void AddParameter::disableAll(){
+void AddParameterDialog::disableAll(){
     enableLayout(ui->default_hl,false);
     enableLayout(ui->value_hl,false);
     enableLayout(ui->length_hl,false);
@@ -133,17 +142,17 @@ void AddParameter::disableAll(){
     ui->maxVal->setMaximum(DBL_MAX);
 }
 
-void AddParameter::disableLabelWithBuddy(QLabel *l, bool disable){
+void AddParameterDialog::disableLabelWithBuddy(QLabel *l, bool disable){
     l->setDisabled(disable);
     if(l->buddy())
         l->buddy()->setDisabled(disable);
 }
 
-void AddParameter::enableLabelWithBuddy(QLabel *l, bool enable){
+void AddParameterDialog::enableLabelWithBuddy(QLabel *l, bool enable){
     disableLabelWithBuddy(l, !enable);
 }
 
-void AddParameter::on_parameterType_currentIndexChanged(int i)
+void AddParameterDialog::on_parameterType_currentIndexChanged(int i)
 {
     auto type = ui->parameterType->itemData(i).toInt();
     disableAll();
@@ -174,7 +183,7 @@ void AddParameter::on_parameterType_currentIndexChanged(int i)
     }
 }
 
-void AddParameter::on_parametersView_doubleClicked(const QModelIndex &index)
+void AddParameterDialog::on_parametersView_doubleClicked(const QModelIndex &index)
 {
     disableAll();
 

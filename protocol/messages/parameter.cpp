@@ -25,7 +25,6 @@ MsgType Parameter::type() const
 Parameter::Parameter()
 {
     set_id(0);
-//    set_configdata( m_config.toStdString() );
 }
 
 Parameter::~Parameter()
@@ -53,11 +52,11 @@ QString ParameterConfig::toJSON() const
     if(has_type())
         obj.insert("type", protbuf::Parameter_Config::type() );
 
-    ret = QString::fromLatin1(QJsonDocument(obj).toJson(QJsonDocument::Compact));
+    ret = QString(QJsonDocument(obj).toJson(QJsonDocument::Compact));
     return ret;
 }
 
-void ParameterConfig::fromJSON(QByteArray &&json)
+void ParameterConfig::fromJSON(const QByteArray &json)
 {
     auto obj = QJsonDocument::fromJson(json).object();
 
@@ -80,12 +79,10 @@ MsgType RequestParameters::type() const
     return MsgType::reqParameters;
 }
 
-
 MsgType ResponseAddParameter::type() const
 {
     return MsgType::resAddParameter;
 }
-
 
 MsgType ResponseParameters::type() const
 {

@@ -1,5 +1,4 @@
-#ifndef ADDPARAMETER_H
-#define ADDPARAMETER_H
+#pragma once
 
 #include <QWidget>
 #include <QLabel>
@@ -9,22 +8,22 @@ namespace Ui {
 class AddParameter;
 }
 
-class AddParameter : public QWidget
+class AddParameterDialog : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit AddParameter(QWidget *parent = 0);
-    void requestParameters();
-    ~AddParameter();
+    explicit AddParameterDialog(QWidget *parent = 0);
+    void requestParameters(bool diffOnly = false);
+    ~AddParameterDialog();
 
+    void requestAddParameter();
 public slots:
     void AddResponse(QByteArray res);
     void SelectResponse(QByteArray res);
 
 signals:
     void requestAvalible(MsgType, QByteArray ba);
-
     void requestReady();
 
 private slots:
@@ -36,9 +35,13 @@ private slots:
 private:
     Ui::AddParameter *ui;
     void disableAll();
+
+    template <class T>
+    void emitRequest( T req ){
+        requestAvalible(req.type(), req.toArray() );
+    }
+
     void enableLayout(QLayout *layout, bool enable = true);
     void disableLabelWithBuddy(QLabel *l, bool disable = true);
     void enableLabelWithBuddy(QLabel *l, bool enable = true);
 };
-
-#endif // ADDPARAMETER_H

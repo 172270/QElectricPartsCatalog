@@ -305,7 +305,7 @@ void tst_ServerWorkerTests::addParameter_addsNewParameter()
     QVERIFY(mc->getCapsule(0).msgtype() == MsgType::resAddParameter );
     QVERIFY(resParameter.fromArray( mc->getCapsule(0).getData() ));
     QVERIFY(resParameter.replay().size() == 1);
-    QVERIFY(resParameter.replay(0) == protbuf::addParameterReplay::addOk );
+    QVERIFY(resParameter.replay(0) == protbuf::resAddParameter::addOk );
 }
 
 void tst_ServerWorkerTests::addSameParameter_givesError()
@@ -330,7 +330,7 @@ void tst_ServerWorkerTests::addSameParameter_givesError()
     QVERIFY(mc->getCapsule(0).msgtype() == MsgType::resAddParameter );
     QVERIFY(resParameter.fromArray( mc->getCapsule(0).getData() ));
     QVERIFY(resParameter.replay().size() == 1);
-    QVERIFY(resParameter.replay(0) == protbuf::addParameterReplay::parameterExists );
+    QVERIFY(resParameter.replay(0) == protbuf::resAddParameter::parameterExists );
     logout();
 }
 

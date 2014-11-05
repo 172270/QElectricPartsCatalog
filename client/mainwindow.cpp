@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     addGroupWidget(new AddGroup),
-    addParameter(new AddParameter),
+    addParameter(new AddParameterDialog),
     handler(new MessaheHandler(this))
 {
     ui->setupUi(this);

@@ -3,11 +3,6 @@ package protbuf;
 
 /// ptype_ prefix add to avoid names conflicts
 
-enum addParameterReplay{
-	addOk = 1;
-	parameterExists = 2;
-}
-
 message ParameterBasicInformation{
 	required uint32 id = 1;
 }
@@ -22,7 +17,7 @@ message Parameter{
       INT = 1;
       UINT = 2;
       DOUBLE = 3;
-      
+
       STRING = 10;
       TEMPERATURE = 20;
       DATE = 30;
@@ -38,14 +33,29 @@ message Parameter{
   optional string description=5;
 }
 
+message addParameter{
+  enum AddMode{
+    insert = 1;
+    update = 2;
+  }
+  required AddMode mode = 1;
+  required Parameter parameter = 2;
+}
+
+message resAddParameter{
+  enum addParameterReplay{
+    addOk = 1;
+    parameterExists = 2;
+    updateOk = 3;
+    updataFailed_noSuchParameterInDatabase = 4;
+  }
+  repeated addParameterReplay replay=1;
+}
+
 message reqParameters{
   optional bool getDiff = 1;
 }
 
 message resParameters{
 	repeated Parameter parameters=1;
-}
-
-message resAddParameter{
-	repeated addParameterReplay replay=1;
 }

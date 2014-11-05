@@ -41,6 +41,5 @@ message resAddGroup{
   enum addGroupReplay{
     addOk = 1;
   }
-
   repeated addGroupReplay replay=1;
 }

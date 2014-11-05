@@ -30,7 +30,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
     AddGroup *addGroupWidget;
-    AddParameter *addParameter;
+    AddParameterDialog *addParameter;
     MessaheHandler *handler;
     QScienceSpinBox *spinbox;
     QEngineerSpinBox *eSpinBox;

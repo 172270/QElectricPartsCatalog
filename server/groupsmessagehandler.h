@@ -13,7 +13,6 @@ public:
     ~GetGroupsMessageHandler(){;}
 
     bool parseData(const QByteArray &ba) override;
-    bool parseData(QByteArray &&ba) override;
     bool processData();
     bool moveResponseToCache();
 

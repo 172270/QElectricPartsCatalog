@@ -35,9 +35,10 @@ void protobuf_ShutdownFile_parameters_2eproto();
 class ParameterBasicInformation;
 class Parameter;
 class Parameter_Config;
+class addParameter;
+class resAddParameter;
 class reqParameters;
 class resParameters;
-class resAddParameter;
 
 enum Parameter_Config_Type {
   Parameter_Config_Type_INT = 1,
@@ -52,14 +53,25 @@ const Parameter_Config_Type Parameter_Config_Type_Type_MIN = Parameter_Config_Ty
 const Parameter_Config_Type Parameter_Config_Type_Type_MAX = Parameter_Config_Type_DATE;
 const int Parameter_Config_Type_Type_ARRAYSIZE = Parameter_Config_Type_Type_MAX + 1;
 
-enum addParameterReplay {
-  addOk = 1,
-  parameterExists = 2
+enum addParameter_AddMode {
+  addParameter_AddMode_insert = 1,
+  addParameter_AddMode_update = 2
 };
-bool addParameterReplay_IsValid(int value);
-const addParameterReplay addParameterReplay_MIN = addOk;
-const addParameterReplay addParameterReplay_MAX = parameterExists;
-const int addParameterReplay_ARRAYSIZE = addParameterReplay_MAX + 1;
+bool addParameter_AddMode_IsValid(int value);
+const addParameter_AddMode addParameter_AddMode_AddMode_MIN = addParameter_AddMode_insert;
+const addParameter_AddMode addParameter_AddMode_AddMode_MAX = addParameter_AddMode_update;
+const int addParameter_AddMode_AddMode_ARRAYSIZE = addParameter_AddMode_AddMode_MAX + 1;
+
+enum resAddParameter_addParameterReplay {
+  resAddParameter_addParameterReplay_addOk = 1,
+  resAddParameter_addParameterReplay_parameterExists = 2,
+  resAddParameter_addParameterReplay_updateOk = 3,
+  resAddParameter_addParameterReplay_updataFailed_noSuchParameterInDatabase = 4
+};
+bool resAddParameter_addParameterReplay_IsValid(int value);
+const resAddParameter_addParameterReplay resAddParameter_addParameterReplay_addParameterReplay_MIN = resAddParameter_addParameterReplay_addOk;
+const resAddParameter_addParameterReplay resAddParameter_addParameterReplay_addParameterReplay_MAX = resAddParameter_addParameterReplay_updataFailed_noSuchParameterInDatabase;
+const int resAddParameter_addParameterReplay_addParameterReplay_ARRAYSIZE = resAddParameter_addParameterReplay_addParameterReplay_MAX + 1;
 
 // ===================================================================
 
@@ -443,6 +455,213 @@ class Parameter : public ::google::protobuf::MessageLite {
 };
 // -------------------------------------------------------------------
 
+class addParameter : public ::google::protobuf::MessageLite {
+ public:
+  addParameter();
+  virtual ~addParameter();
+
+  addParameter(const addParameter& from);
+
+  inline addParameter& operator=(const addParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const addParameter& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const addParameter* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(addParameter* other);
+
+  // implements Message ----------------------------------------------
+
+  addParameter* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const addParameter& from);
+  void MergeFrom(const addParameter& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef addParameter_AddMode AddMode;
+  static const AddMode insert = addParameter_AddMode_insert;
+  static const AddMode update = addParameter_AddMode_update;
+  static inline bool AddMode_IsValid(int value) {
+    return addParameter_AddMode_IsValid(value);
+  }
+  static const AddMode AddMode_MIN =
+    addParameter_AddMode_AddMode_MIN;
+  static const AddMode AddMode_MAX =
+    addParameter_AddMode_AddMode_MAX;
+  static const int AddMode_ARRAYSIZE =
+    addParameter_AddMode_AddMode_ARRAYSIZE;
+
+  // accessors -------------------------------------------------------
+
+  // required .protbuf.addParameter.AddMode mode = 1;
+  inline bool has_mode() const;
+  inline void clear_mode();
+  static const int kModeFieldNumber = 1;
+  inline ::protbuf::addParameter_AddMode mode() const;
+  inline void set_mode(::protbuf::addParameter_AddMode value);
+
+  // required .protbuf.Parameter parameter = 2;
+  inline bool has_parameter() const;
+  inline void clear_parameter();
+  static const int kParameterFieldNumber = 2;
+  inline const ::protbuf::Parameter& parameter() const;
+  inline ::protbuf::Parameter* mutable_parameter();
+  inline ::protbuf::Parameter* release_parameter();
+  inline void set_allocated_parameter(::protbuf::Parameter* parameter);
+
+  // @@protoc_insertion_point(class_scope:protbuf.addParameter)
+ private:
+  inline void set_has_mode();
+  inline void clear_has_mode();
+  inline void set_has_parameter();
+  inline void clear_has_parameter();
+
+  ::protbuf::Parameter* parameter_;
+  int mode_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_parameters_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_parameters_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_parameters_2eproto();
+  friend void protobuf_ShutdownFile_parameters_2eproto();
+
+  void InitAsDefaultInstance();
+  static addParameter* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class resAddParameter : public ::google::protobuf::MessageLite {
+ public:
+  resAddParameter();
+  virtual ~resAddParameter();
+
+  resAddParameter(const resAddParameter& from);
+
+  inline resAddParameter& operator=(const resAddParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const resAddParameter& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const resAddParameter* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(resAddParameter* other);
+
+  // implements Message ----------------------------------------------
+
+  resAddParameter* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const resAddParameter& from);
+  void MergeFrom(const resAddParameter& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef resAddParameter_addParameterReplay addParameterReplay;
+  static const addParameterReplay addOk = resAddParameter_addParameterReplay_addOk;
+  static const addParameterReplay parameterExists = resAddParameter_addParameterReplay_parameterExists;
+  static const addParameterReplay updateOk = resAddParameter_addParameterReplay_updateOk;
+  static const addParameterReplay updataFailed_noSuchParameterInDatabase = resAddParameter_addParameterReplay_updataFailed_noSuchParameterInDatabase;
+  static inline bool addParameterReplay_IsValid(int value) {
+    return resAddParameter_addParameterReplay_IsValid(value);
+  }
+  static const addParameterReplay addParameterReplay_MIN =
+    resAddParameter_addParameterReplay_addParameterReplay_MIN;
+  static const addParameterReplay addParameterReplay_MAX =
+    resAddParameter_addParameterReplay_addParameterReplay_MAX;
+  static const int addParameterReplay_ARRAYSIZE =
+    resAddParameter_addParameterReplay_addParameterReplay_ARRAYSIZE;
+
+  // accessors -------------------------------------------------------
+
+  // repeated .protbuf.resAddParameter.addParameterReplay replay = 1;
+  inline int replay_size() const;
+  inline void clear_replay();
+  static const int kReplayFieldNumber = 1;
+  inline ::protbuf::resAddParameter_addParameterReplay replay(int index) const;
+  inline void set_replay(int index, ::protbuf::resAddParameter_addParameterReplay value);
+  inline void add_replay(::protbuf::resAddParameter_addParameterReplay value);
+  inline const ::google::protobuf::RepeatedField<int>& replay() const;
+  inline ::google::protobuf::RepeatedField<int>* mutable_replay();
+
+  // @@protoc_insertion_point(class_scope:protbuf.resAddParameter)
+ private:
+
+  ::google::protobuf::RepeatedField<int> replay_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_parameters_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_parameters_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_parameters_2eproto();
+  friend void protobuf_ShutdownFile_parameters_2eproto();
+
+  void InitAsDefaultInstance();
+  static resAddParameter* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class reqParameters : public ::google::protobuf::MessageLite {
  public:
   reqParameters();
@@ -609,90 +828,6 @@ class resParameters : public ::google::protobuf::MessageLite {
 
   void InitAsDefaultInstance();
   static resParameters* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class resAddParameter : public ::google::protobuf::MessageLite {
- public:
-  resAddParameter();
-  virtual ~resAddParameter();
-
-  resAddParameter(const resAddParameter& from);
-
-  inline resAddParameter& operator=(const resAddParameter& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const resAddParameter& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const resAddParameter* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
-
-  void Swap(resAddParameter* other);
-
-  // implements Message ----------------------------------------------
-
-  resAddParameter* New() const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
-  void CopyFrom(const resAddParameter& from);
-  void MergeFrom(const resAddParameter& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::std::string GetTypeName() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated .protbuf.addParameterReplay replay = 1;
-  inline int replay_size() const;
-  inline void clear_replay();
-  static const int kReplayFieldNumber = 1;
-  inline ::protbuf::addParameterReplay replay(int index) const;
-  inline void set_replay(int index, ::protbuf::addParameterReplay value);
-  inline void add_replay(::protbuf::addParameterReplay value);
-  inline const ::google::protobuf::RepeatedField<int>& replay() const;
-  inline ::google::protobuf::RepeatedField<int>* mutable_replay();
-
-  // @@protoc_insertion_point(class_scope:protbuf.resAddParameter)
- private:
-
-  ::google::protobuf::RepeatedField<int> replay_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_parameters_2eproto_impl();
-  #else
-  friend void  protobuf_AddDesc_parameters_2eproto();
-  #endif
-  friend void protobuf_AssignDesc_parameters_2eproto();
-  friend void protobuf_ShutdownFile_parameters_2eproto();
-
-  void InitAsDefaultInstance();
-  static resAddParameter* default_instance_;
 };
 // ===================================================================
 
@@ -1188,6 +1323,106 @@ inline void Parameter::set_allocated_description(::std::string* description) {
 
 // -------------------------------------------------------------------
 
+// addParameter
+
+// required .protbuf.addParameter.AddMode mode = 1;
+inline bool addParameter::has_mode() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void addParameter::set_has_mode() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void addParameter::clear_has_mode() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void addParameter::clear_mode() {
+  mode_ = 1;
+  clear_has_mode();
+}
+inline ::protbuf::addParameter_AddMode addParameter::mode() const {
+  return static_cast< ::protbuf::addParameter_AddMode >(mode_);
+}
+inline void addParameter::set_mode(::protbuf::addParameter_AddMode value) {
+  assert(::protbuf::addParameter_AddMode_IsValid(value));
+  set_has_mode();
+  mode_ = value;
+}
+
+// required .protbuf.Parameter parameter = 2;
+inline bool addParameter::has_parameter() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void addParameter::set_has_parameter() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void addParameter::clear_has_parameter() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void addParameter::clear_parameter() {
+  if (parameter_ != NULL) parameter_->::protbuf::Parameter::Clear();
+  clear_has_parameter();
+}
+inline const ::protbuf::Parameter& addParameter::parameter() const {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  return parameter_ != NULL ? *parameter_ : *default_instance().parameter_;
+#else
+  return parameter_ != NULL ? *parameter_ : *default_instance_->parameter_;
+#endif
+}
+inline ::protbuf::Parameter* addParameter::mutable_parameter() {
+  set_has_parameter();
+  if (parameter_ == NULL) parameter_ = new ::protbuf::Parameter;
+  return parameter_;
+}
+inline ::protbuf::Parameter* addParameter::release_parameter() {
+  clear_has_parameter();
+  ::protbuf::Parameter* temp = parameter_;
+  parameter_ = NULL;
+  return temp;
+}
+inline void addParameter::set_allocated_parameter(::protbuf::Parameter* parameter) {
+  delete parameter_;
+  parameter_ = parameter;
+  if (parameter) {
+    set_has_parameter();
+  } else {
+    clear_has_parameter();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// resAddParameter
+
+// repeated .protbuf.resAddParameter.addParameterReplay replay = 1;
+inline int resAddParameter::replay_size() const {
+  return replay_.size();
+}
+inline void resAddParameter::clear_replay() {
+  replay_.Clear();
+}
+inline ::protbuf::resAddParameter_addParameterReplay resAddParameter::replay(int index) const {
+  return static_cast< ::protbuf::resAddParameter_addParameterReplay >(replay_.Get(index));
+}
+inline void resAddParameter::set_replay(int index, ::protbuf::resAddParameter_addParameterReplay value) {
+  assert(::protbuf::resAddParameter_addParameterReplay_IsValid(value));
+  replay_.Set(index, value);
+}
+inline void resAddParameter::add_replay(::protbuf::resAddParameter_addParameterReplay value) {
+  assert(::protbuf::resAddParameter_addParameterReplay_IsValid(value));
+  replay_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField<int>&
+resAddParameter::replay() const {
+  return replay_;
+}
+inline ::google::protobuf::RepeatedField<int>*
+resAddParameter::mutable_replay() {
+  return &replay_;
+}
+
+// -------------------------------------------------------------------
+
 // reqParameters
 
 // optional bool getDiff = 1;
@@ -1239,37 +1474,6 @@ resParameters::parameters() const {
 inline ::google::protobuf::RepeatedPtrField< ::protbuf::Parameter >*
 resParameters::mutable_parameters() {
   return &parameters_;
-}
-
-// -------------------------------------------------------------------
-
-// resAddParameter
-
-// repeated .protbuf.addParameterReplay replay = 1;
-inline int resAddParameter::replay_size() const {
-  return replay_.size();
-}
-inline void resAddParameter::clear_replay() {
-  replay_.Clear();
-}
-inline ::protbuf::addParameterReplay resAddParameter::replay(int index) const {
-  return static_cast< ::protbuf::addParameterReplay >(replay_.Get(index));
-}
-inline void resAddParameter::set_replay(int index, ::protbuf::addParameterReplay value) {
-  assert(::protbuf::addParameterReplay_IsValid(value));
-  replay_.Set(index, value);
-}
-inline void resAddParameter::add_replay(::protbuf::addParameterReplay value) {
-  assert(::protbuf::addParameterReplay_IsValid(value));
-  replay_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField<int>&
-resAddParameter::replay() const {
-  return replay_;
-}
-inline ::google::protobuf::RepeatedField<int>*
-resAddParameter::mutable_replay() {
-  return &replay_;
 }
 
 
